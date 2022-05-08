@@ -4,6 +4,7 @@ import java.util.Set;
 
 import javax.validation.constraints.*;
 
+
 public class SignupRequest {
   @NotBlank
   @Size(min = 3, max = 20)
@@ -31,11 +32,21 @@ public class SignupRequest {
 
   private String imageUrl;
 
+  private boolean isActive = true;
 
+
+  public boolean isActive() {
+    return isActive;
+  }
+
+  public void setActive(boolean active) {
+    isActive = active;
+  }
 
   public String getUsername() {
     return username;
   }
+
 
   public void setUsername(String username) {
     this.username = username;

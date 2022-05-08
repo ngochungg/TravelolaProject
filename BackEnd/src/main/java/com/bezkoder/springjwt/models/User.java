@@ -47,7 +47,7 @@ public class User {
   @Size(max = 300)
   private String imageUrl;
 
-  private Boolean enabled = true;
+  private Boolean isActive = true;
 
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -61,7 +61,7 @@ public class User {
 
 
 
-  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl) {
+  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl,boolean isActive) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -69,6 +69,7 @@ public class User {
     this.lastName = lastName;
     this.phone = phone;
     this.imageUrl = imageUrl;
+    this.isActive = isActive;
   }
 
   public Long getId() {
@@ -142,11 +143,11 @@ public class User {
     this.imageUrl = imageUrl;
   }
 
-  public Boolean getEnabled() {
-    return enabled;
+  public Boolean getIsActive() {
+    return isActive;
   }
 
-  public void setEnabled(Boolean enabled) {
-    this.enabled = enabled;
+  public void setIsActive(Boolean isActive) {
+    this.isActive = isActive;
   }
 }
