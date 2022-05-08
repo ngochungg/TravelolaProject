@@ -1,5 +1,7 @@
 package com.bezkoder.springjwt.models;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -46,6 +48,7 @@ public class User {
 
   @Size(max = 300)
   private String imageUrl;
+
 
   private Boolean isActive = true;
 

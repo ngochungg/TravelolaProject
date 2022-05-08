@@ -1,5 +1,7 @@
 package com.bezkoder.springjwt.payload.request;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import java.util.Set;
 
 import javax.validation.constraints.*;
@@ -31,9 +33,17 @@ public class SignupRequest {
   private String phone;
 
   private String imageUrl;
+  private MultipartFile image;
 
   private boolean isActive = true;
 
+  public MultipartFile getImage() {
+    return image;
+  }
+
+  public void setImage(MultipartFile image) {
+    this.image = image;
+  }
 
   public boolean isActive() {
     return isActive;
