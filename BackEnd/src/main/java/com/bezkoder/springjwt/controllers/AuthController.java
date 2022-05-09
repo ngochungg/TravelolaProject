@@ -92,7 +92,13 @@ public class AuthController {
         }
 
         // Create new user's account
-        String imageUrl = storageService.storeFile(signUpRequest.getImage());
+        String imageUrl;
+        if(signUpRequest.getImage() != null) {
+            imageUrl = storageService.storeFile(signUpRequest.getImage());
+        }else{
+            imageUrl = null;
+        }
+
 
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
