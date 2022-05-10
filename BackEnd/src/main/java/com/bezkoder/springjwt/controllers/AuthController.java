@@ -78,7 +78,7 @@ public class AuthController {
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerUser(@Valid @ModelAttribute SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity
                     .badRequest()
@@ -92,14 +92,6 @@ public class AuthController {
         }
 
         // Create new user's account
-        String imageUrl;
-        if(signUpRequest.getImage() != null) {
-            imageUrl = storageService.storeFile(signUpRequest.getImage());
-        }else{
-            imageUrl = null;
-        }
-
-
         User user = new User(signUpRequest.getUsername(),
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
@@ -135,7 +127,7 @@ public class AuthController {
                 }
             });
         }
-        user.setImageUrl(imageUrl);
+
         user.setRoles(roles);
         userRepository.save(user);
 
