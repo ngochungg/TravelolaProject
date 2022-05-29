@@ -2,6 +2,7 @@ package com.bezkoder.springjwt.controllers;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -28,6 +29,7 @@ import com.bezkoder.springjwt.repository.RoleRepository;
 import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
+import org.springframework.web.multipart.MultipartFile;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -133,4 +135,15 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+    @PutMapping("/uploadImage/{id}")
+    public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
+            String generatedFileName = storageService.storeFile(file);
+            User updateImage = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+            updateImage.setImageUrl(generatedFileName);
+            userRepository.save(updateImage);
+            return ResponseEntity.ok(new MessageResponse("User updated image successfully!"));
+    }
+    
+
+
 }
