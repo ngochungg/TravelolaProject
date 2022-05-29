@@ -7,12 +7,19 @@
     <p>
         <strong>Token:</strong> {{ currentUser.accessToken.substring(0, 20) }} ... {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
     </p>
+    <img [src]="currentUser.imageUrl" alt="" class="avatar">
     <p>
         <strong>Email:</strong> {{ currentUser.email }}
     </p>
+    <p>
+        <strong>Fullname:</strong> {{ currentUser.firstName + " " + currentUser.lastName }}
+    </p>
+    <p>
+        <strong>Phone:</strong> {{ currentUser.phone }}
+    </p>
     <strong>Roles:</strong>
     <ul>
-        <li *ngFor="let role of currentUser.roles">
+        <li *ngFor="let role of currentUser.roles ">
             {{ role }}
         </li>
     </ul>

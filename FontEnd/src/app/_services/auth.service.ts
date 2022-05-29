@@ -13,6 +13,7 @@ export class AuthService {
   getTest(): Observable<any> {
     return this.http.get(AUTH_API + 'test123', { responseType: 'text' });
   }
+  
   login(username: string, password: string): Observable<any> {
     return this.http.post(AUTH_API + 'signin', {
       username,

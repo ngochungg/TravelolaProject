@@ -10,6 +10,7 @@ import javax.validation.Valid;
 
 import com.bezkoder.springjwt.security.services.IStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -30,6 +31,7 @@ import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -135,13 +137,26 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-    @PutMapping("/uploadImage/{id}")
+    @PostMapping("/uploadImage/{id}")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
             String generatedFileName = storageService.storeFile(file);
             User updateImage = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
             updateImage.setImageUrl(generatedFileName);
             userRepository.save(updateImage);
             return ResponseEntity.ok(new MessageResponse("User updated image successfully!"));
+    }
+    //get image's url
+    @GetMapping("/getImage/{fileName:.+}")
+    public ResponseEntity<byte[]> readDetailFile(@PathVariable String fileName) {
+        try {
+            byte[] bytes = storageService.readFileContent(fileName);
+            return ResponseEntity
+                    .ok()
+                    .contentType(MediaType.IMAGE_JPEG)
+                    .body(bytes);
+        }catch (Exception exception) {
+            return ResponseEntity.noContent().build();
+        }
     }
     
 
