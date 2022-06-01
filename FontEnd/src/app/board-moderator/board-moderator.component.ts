@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-board-moderator',
@@ -9,7 +11,7 @@ import { UserService } from '../_services/user.service';
 export class BoardModeratorComponent implements OnInit {
   content?: string;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
 
   ngOnInit(): void {
     this.userService.getModeratorBoard().subscribe({
@@ -17,7 +19,8 @@ export class BoardModeratorComponent implements OnInit {
         this.content = data;
       },
       error: err => {
-        this.content = JSON.parse(err.error).message;
+        console.log("err");
+        this.router.navigate(['/home']);
       }
     });
   }

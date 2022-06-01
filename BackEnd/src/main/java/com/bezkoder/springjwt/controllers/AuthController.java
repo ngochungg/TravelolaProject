@@ -68,6 +68,11 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
+        if(userDetails.getIsActive() == false) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username disabled!"));
+        }
 
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
