@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bezkoder.springjwt.payload.request.PasswordRequest;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -83,6 +84,7 @@ public class AuthController {
                 userDetails.getPhone(),
                 userDetails.getImageUrl(),
                 userDetails.getIsActive(),
+                userDetails.getHotelId(),
                 roles));
     }
 
@@ -105,7 +107,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive());
+                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive(),signUpRequest.getHotelId());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -163,7 +165,17 @@ public class AuthController {
             return ResponseEntity.noContent().build();
         }
     }
-    
+
+    @PostMapping("/updatePassword/{id}")
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordRequest passwordRequest, @PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        if (!encoder.matches(passwordRequest.getOldPassword(), user.getPassword())) {
+            return ResponseEntity.ok(new MessageResponse("Old password is not correct!"));
+        }
+        user.setPassword(encoder.encode(passwordRequest.getNewPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+    }
 
 
 }

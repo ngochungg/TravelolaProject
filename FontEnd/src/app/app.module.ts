@@ -14,12 +14,10 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
 
-import { SocialLoginModule, SocialAuthServiceConfig } from 'angularx-social-login';
-import {
-  GoogleLoginProvider,
-  FacebookLoginProvider
-} from 'angularx-social-login';
+
+
 
 @NgModule({
   declarations: [
@@ -48,7 +46,7 @@ import {
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '88963283983-urmbcpfkhn1ajd6ikk90vhsm1oq87up8.apps.googleusercontent.com'
+              '88963283983-kk5249stbilakt3fusc7ikrsiis1pfs6.apps.googleusercontent.com'
             )
           },
           {
