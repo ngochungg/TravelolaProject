@@ -217,5 +217,11 @@ public class AuthController {
         userRepository.delete(user);
         return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
     }
+    //get all user
+    @GetMapping("/getAllUser")
+    public ResponseEntity<?> getAllUser() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
+    }
 
 }
