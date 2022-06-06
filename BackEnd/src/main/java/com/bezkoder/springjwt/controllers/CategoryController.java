@@ -88,6 +88,4 @@ public class CategoryController {
         categoriesRepository.delete(category);
         return ResponseEntity.ok(new MessageResponse("Category deleted successfully!"));
     }
-
-
 }
