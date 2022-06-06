@@ -1,6 +1,11 @@
+
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
+
+
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -15,7 +20,27 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private authServiceSocial: SocialAuthService) { }
+  
+  signInWithGoogle(): void {
+    this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID).then(
+      data=>{
+        console.log(data);
+      }
+    );
+  }
+
+  signInWithFB(): void {
+    this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID).then(
+      data=>{
+        console.log(data);
+      }
+    );
+  }
+  // signOut(): void {
+  //   this.authServiceSocial.signOut();
+  // }
+  
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;

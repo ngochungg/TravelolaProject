@@ -8,6 +8,8 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bezkoder.springjwt.payload.request.PasswordRequest;
+import com.bezkoder.springjwt.payload.request.UpdateRequest;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
@@ -54,7 +56,7 @@ public class AuthController {
 
     @Autowired
     IStorageService storageService;
-
+    //login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -83,9 +85,10 @@ public class AuthController {
                 userDetails.getPhone(),
                 userDetails.getImageUrl(),
                 userDetails.getIsActive(),
+                userDetails.getHotelId(),
                 roles));
     }
-
+    //Register
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -105,7 +108,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive());
+                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive(),signUpRequest.getHotelId());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -142,6 +145,7 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
+    //upload image
     @PostMapping("/uploadImage/{id}")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
             String generatedFileName = storageService.storeFile(file);
@@ -163,7 +167,61 @@ public class AuthController {
             return ResponseEntity.noContent().build();
         }
     }
-    
-
+    //Change password
+    @PostMapping("/updatePassword/{id}")
+    public ResponseEntity<?> updatePassword(@RequestBody PasswordRequest passwordRequest, @PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        if (!encoder.matches(passwordRequest.getOldPassword(), user.getPassword())) {
+            return ResponseEntity.ok(new MessageResponse("Old password is not correct!"));
+        }
+        user.setPassword(encoder.encode(passwordRequest.getNewPassword()));
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
+    }
+    //update user
+    @PostMapping("/updateUser/{id}")
+    public ResponseEntity<?> updateUser(@RequestBody UpdateRequest UpdateRequest, @PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        if (userRepository.existsByEmail(UpdateRequest.getEmail())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Email is already in use!"));
+        }
+        user.setFirstName(UpdateRequest.getFirstName());
+        user.setLastName(UpdateRequest.getLastName());
+        user.setEmail(UpdateRequest.getEmail());
+        user.setPhone(UpdateRequest.getPhone());
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
+    }
+    //lock user
+    @PostMapping("/lockUser/{id}")
+    public ResponseEntity<?> lockUser(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        user.setIsActive(false);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User locked successfully!"));
+    }
+    //unlock user
+    @PostMapping("/unlockUser/{id}")
+    public ResponseEntity<?> unlockUser(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        user.setIsActive(true);
+        userRepository.save(user);
+        return ResponseEntity.ok(new MessageResponse("User unlocked successfully!"));
+    }
+    //delete user
+    @DeleteMapping("/deleteUser/{id}")
+    public ResponseEntity<?> deleteUser(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        userRepository.delete(user);
+        return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
+    }
+    //get all user
+    @GetMapping("/getAllUser")
+    public ResponseEntity<?> getAllUser() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
+    }
 
 }
