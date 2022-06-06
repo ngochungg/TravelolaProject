@@ -14,7 +14,8 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } from '@abacritt/angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule  } from 'angularx-social-login';
+
 
 
 
@@ -34,7 +35,8 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } f
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+  SocialLoginModule
   ],
   providers:
   [[authInterceptorProviders],[
@@ -46,17 +48,14 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig } f
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '88963283983-kk5249stbilakt3fusc7ikrsiis1pfs6.apps.googleusercontent.com'
+              '471845796701-7qqs9lca7rqremri19b19dlg7mqfplf9.apps.googleusercontent.com'
             )
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider('129176942572264')
           }
-        ],
-        onError: (err) => {
-          console.error(err);
-        }
+        ]
       } as SocialAuthServiceConfig,
     }
   ]

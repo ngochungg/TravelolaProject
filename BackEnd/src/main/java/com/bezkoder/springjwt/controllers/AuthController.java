@@ -11,6 +11,7 @@ import javax.validation.Valid;
 import com.bezkoder.springjwt.payload.request.PasswordRequest;
 import com.bezkoder.springjwt.payload.request.UpdateRequest;
 import com.bezkoder.springjwt.security.services.IStorageService;
+import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -56,6 +57,10 @@ public class AuthController {
 
     @Autowired
     IStorageService storageService;
+
+    @Autowired
+    EmailSenderService emailSenderService;
+
     //login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -224,4 +229,19 @@ public class AuthController {
         return ResponseEntity.ok(users);
     }
 
+    //Forgot password
+    @PostMapping("/forgotPassword/{email}")
+    public ResponseEntity<?> forgotPassword(@PathVariable String email) {
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            return ResponseEntity.ok(new MessageResponse("Error: User not found."));
+        }
+        String newPassword = emailSenderService.randomString();
+        user.setPassword(encoder.encode(newPassword));
+        userRepository.save(user);
+        emailSenderService.sendEmail(user.getEmail(),
+                "New Password",
+                "Your new password is <h3 style=\"border: 1px solid; display: inline; padding: 2px;\">" + newPassword + "</h3>");
+        return ResponseEntity.ok(new MessageResponse("New password sent to your email!"));
+    }
 }

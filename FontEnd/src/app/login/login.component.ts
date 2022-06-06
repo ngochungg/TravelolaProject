@@ -1,6 +1,7 @@
 
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from '@abacritt/angularx-social-login';
+
 import { Component, OnInit } from '@angular/core';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
 
 
 import { AuthService } from '../_services/auth.service';
