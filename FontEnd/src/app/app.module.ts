@@ -14,7 +14,8 @@ import { BoardModeratorComponent } from './board-moderator/board-moderator.compo
 import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule  } from 'angularx-social-login';
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+
 
 
 
@@ -36,7 +37,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     AppRoutingModule,
     FormsModule,
     HttpClientModule,
-  SocialLoginModule
+    SocialLoginModule
   ],
   providers:
   [[authInterceptorProviders],[
@@ -48,14 +49,21 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
           {
             id: GoogleLoginProvider.PROVIDER_ID,
             provider: new GoogleLoginProvider(
-              '471845796701-7qqs9lca7rqremri19b19dlg7mqfplf9.apps.googleusercontent.com'
+              '122183237481-du4r7jloea4l4ibqcictc8kc9cqf45r7.apps.googleusercontent.com',
+              {
+                scope: 'email',
+                plugin_name: 'travelola'
+              }
             )
           },
           {
             id: FacebookLoginProvider.PROVIDER_ID,
             provider: new FacebookLoginProvider('129176942572264')
           }
-        ]
+        ],
+        onError: (err) => {
+          console.error(err);
+        }
       } as SocialAuthServiceConfig,
     }
   ]

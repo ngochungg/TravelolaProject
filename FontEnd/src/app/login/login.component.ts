@@ -1,7 +1,8 @@
 
 
+import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService } from 'angularx-social-login';
+
 
 
 import { AuthService } from '../_services/auth.service';
@@ -13,6 +14,10 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  socialUser!: SocialUser;
+  userLogged!: SocialUser;
+  isLoggedInSocial!: boolean;
+  
   form: any = {
     username: null,
     password: null
@@ -21,12 +26,27 @@ export class LoginComponent implements OnInit {
   isLoginFailed = false;
   errorMessage = '';
   roles: string[] = [];
+
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private authServiceSocial: SocialAuthService) { }
-  
+  ngOnInit(): void {
+    if (this.tokenStorage.getToken()) {
+      this.isLoggedIn = true;
+      this.roles = this.tokenStorage.getUser().roles;
+    }
+    this.authServiceSocial.authState.subscribe(
+      data => {
+        this.userLogged = data;
+        this.isLoggedInSocial = (this.userLogged != null);
+      }
+    )
+  }
   signInWithGoogle(): void {
     this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data=>{
         console.log(data);
+        this.socialUser = data;
+        this.isLoggedInSocial = true;
       }
     );
   }
@@ -42,12 +62,7 @@ export class LoginComponent implements OnInit {
   //   this.authServiceSocial.signOut();
   // }
   
-  ngOnInit(): void {
-    if (this.tokenStorage.getToken()) {
-      this.isLoggedIn = true;
-      this.roles = this.tokenStorage.getUser().roles;
-    }
-  }
+
   onSubmit(): void {
     const { username, password } = this.form;
     this.authService.login(username, password).subscribe({
