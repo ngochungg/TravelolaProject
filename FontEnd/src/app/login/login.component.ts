@@ -38,6 +38,16 @@ export class LoginComponent implements OnInit {
     this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data=>{
         console.log(data);
+        this.authService.loginGoogle(data.id,data.email,data.firstName,data.lastName,data.photoUrl).subscribe({
+          next: data => {
+            this.tokenStorage.saveToken(data.accessToken);
+            this.tokenStorage.saveUser(data);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getUser().roles;
+            this.reloadPage();
+          }
+        });
       }
     );
   }

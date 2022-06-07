@@ -1,6 +1,6 @@
 package com.bezkoder.springjwt.payload.request;
 
-public class LoginFacebookRequest {
+public class LoginSocialRequest {
     private String id;
     private String email;
     private String firstName;

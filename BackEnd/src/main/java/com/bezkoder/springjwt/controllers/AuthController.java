@@ -28,7 +28,6 @@ import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -239,18 +238,18 @@ public class AuthController {
     }
     //login facebook
     @PostMapping("/loginFacebook")
-    public ResponseEntity<?> loginFacebook( @RequestBody LoginFacebookRequest loginFacebookRequest) {
-        User user = userRepository.findByEmail(loginFacebookRequest.getEmail());
+    public ResponseEntity<?> loginFacebook( @RequestBody LoginSocialRequest loginSocialRequest) {
+        User user = userRepository.findByEmail(loginSocialRequest.getEmail());
         if (user == null) {
             //create new user
             user = new User();
-            user.setEmail(loginFacebookRequest.getEmail());
-            user.setFirstName(loginFacebookRequest.getFirstName());
-            user.setLastName(loginFacebookRequest.getLastName());
-            user.setPassword(encoder.encode(loginFacebookRequest.getId()));
-            user.setImageUrl(loginFacebookRequest.getPhotoUrl());
+            user.setEmail(loginSocialRequest.getEmail());
+            user.setFirstName(loginSocialRequest.getFirstName());
+            user.setLastName(loginSocialRequest.getLastName());
+            user.setPassword(encoder.encode(loginSocialRequest.getId()));
+            user.setImageUrl(loginSocialRequest.getPhotoUrl());
             user.setIsActive(true);
-            user.setUsername("Facebook"+loginFacebookRequest.getId());
+            user.setUsername("Facebook"+ loginSocialRequest.getId());
             user.setPhone("Null");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -265,7 +264,6 @@ public class AuthController {
                 new UsernamePasswordAuthenticationToken(Username, Password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
         String jwt = jwtUtils.generateJwtToken(authentication);
-
         UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
@@ -275,7 +273,55 @@ public class AuthController {
                     .badRequest()
                     .body(new MessageResponse("Error: Username disabled!"));
         }
-
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                userDetails.getLastName(),
+                userDetails.getFirstName(),
+                userDetails.getPhone(),
+                userDetails.getImageUrl(),
+                userDetails.getIsActive(),
+                userDetails.getHotelId(),
+                roles));
+    }
+    //login google
+    @PostMapping("/loginGoogle")
+    public ResponseEntity<?> loginGoogle( @RequestBody LoginSocialRequest loginSocialRequest) {
+User user = userRepository.findByEmail(loginSocialRequest.getEmail());
+        if (user == null) {
+            //create new user
+            user = new User();
+            user.setEmail(loginSocialRequest.getEmail());
+            user.setFirstName(loginSocialRequest.getFirstName());
+            user.setLastName(loginSocialRequest.getLastName());
+            user.setPassword(encoder.encode(loginSocialRequest.getId()));
+            user.setImageUrl(loginSocialRequest.getPhotoUrl());
+            user.setIsActive(true);
+            user.setUsername("Google"+ loginSocialRequest.getId());
+            user.setPhone("Null");
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            user.setRoles(Collections.singleton(userRole));
+            userRepository.save(user);
+        }
+        String Username = user.getUsername();
+        //cut 8 characters first of username
+        String Password = Username.substring(6);
+        //login
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(Username, Password));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+        if(userDetails.getIsActive() == false) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username disabled!"));
+        }
         return ResponseEntity.ok(new JwtResponse(jwt,
                 userDetails.getId(),
                 userDetails.getUsername(),

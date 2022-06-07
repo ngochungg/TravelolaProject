@@ -41,4 +41,13 @@ export class AuthService {
       photoUrl
     }, httpOptions);
   }
+  loginGoogle(id : string,email: string, firstName: string,lastName: string, photoUrl: string): Observable<any> {
+    return this.http.post(AUTH_API + 'loginGoogle', {
+      id,
+      email,
+      firstName,
+      lastName,
+      photoUrl
+    }, httpOptions);
+  }
 }
