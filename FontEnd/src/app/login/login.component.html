@@ -46,9 +46,9 @@
             </div>
         </form>
         <!-- login Social  -->
-        <button class="btn btn-outline-danger btn-lg btn-block" (click)="signInWithGoogle()">
+        <button class="btn btn-outline-danger btn-lg btn-block" (click)="signInWithGoogle()" *ngIf="isLoggedIn == false">
                       <i class="fab fa-google"></i> Login Google</button>
-        <button class="btn btn-outline-primary btn-lg btn-block" (click)="signInWithFB()">
+        <button class="btn btn-outline-primary btn-lg btn-block" (click)="signInWithFB()" *ngIf="isLoggedIn == false">
                       <i class="fab fa-facebook"></i> Login Facebook</button>
 
         <div class="alert alert-success" *ngIf="isLoggedIn">

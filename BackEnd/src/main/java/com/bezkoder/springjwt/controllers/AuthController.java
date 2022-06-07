@@ -1,15 +1,11 @@
 package com.bezkoder.springjwt.controllers;
 
-import java.util.HashSet;
-import java.util.List;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.bezkoder.springjwt.payload.request.PasswordRequest;
-import com.bezkoder.springjwt.payload.request.UpdateRequest;
+import com.bezkoder.springjwt.payload.request.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,8 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import com.bezkoder.springjwt.models.ERole;
 import com.bezkoder.springjwt.models.Role;
 import com.bezkoder.springjwt.models.User;
-import com.bezkoder.springjwt.payload.request.LoginRequest;
-import com.bezkoder.springjwt.payload.request.SignupRequest;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
 import com.bezkoder.springjwt.repository.RoleRepository;
@@ -228,7 +222,6 @@ public class AuthController {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
-
     //Forgot password
     @PostMapping("/forgotPassword/{email}")
     public ResponseEntity<?> forgotPassword(@PathVariable String email) {
@@ -243,5 +236,56 @@ public class AuthController {
                 "New Password",
                 "Your new password is <h3 style=\"border: 1px solid; display: inline; padding: 2px;\">" + newPassword + "</h3>");
         return ResponseEntity.ok(new MessageResponse("New password sent to your email!"));
+    }
+    //login facebook
+    @PostMapping("/loginFacebook")
+    public ResponseEntity<?> loginFacebook( @RequestBody LoginFacebookRequest loginFacebookRequest) {
+        User user = userRepository.findByEmail(loginFacebookRequest.getEmail());
+        if (user == null) {
+            //create new user
+            user = new User();
+            user.setEmail(loginFacebookRequest.getEmail());
+            user.setFirstName(loginFacebookRequest.getFirstName());
+            user.setLastName(loginFacebookRequest.getLastName());
+            user.setPassword(encoder.encode(loginFacebookRequest.getId()));
+            user.setImageUrl(loginFacebookRequest.getPhotoUrl());
+            user.setIsActive(true);
+            user.setUsername("Facebook"+loginFacebookRequest.getId());
+            user.setPhone("Null");
+            Role userRole = roleRepository.findByName(ERole.ROLE_USER)
+                    .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
+            user.setRoles(Collections.singleton(userRole));
+            userRepository.save(user);
+        }
+        String Username = user.getUsername();
+        //cut 8 characters first of username
+        String Password = Username.substring(8);
+        //login
+        Authentication authentication = authenticationManager.authenticate(
+                new UsernamePasswordAuthenticationToken(Username, Password));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+        String jwt = jwtUtils.generateJwtToken(authentication);
+
+        UserDetailsImpl userDetails = (UserDetailsImpl) authentication.getPrincipal();
+        List<String> roles = userDetails.getAuthorities().stream()
+                .map(item -> item.getAuthority())
+                .collect(Collectors.toList());
+        if(userDetails.getIsActive() == false) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Username disabled!"));
+        }
+
+        return ResponseEntity.ok(new JwtResponse(jwt,
+                userDetails.getId(),
+                userDetails.getUsername(),
+                userDetails.getEmail(),
+                userDetails.getLastName(),
+                userDetails.getFirstName(),
+                userDetails.getPhone(),
+                userDetails.getImageUrl(),
+                userDetails.getIsActive(),
+                userDetails.getHotelId(),
+                roles));
     }
 }

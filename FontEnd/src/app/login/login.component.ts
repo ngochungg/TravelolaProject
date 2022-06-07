@@ -14,9 +14,6 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  socialUser!: SocialUser;
-  userLogged!: SocialUser;
-  isLoggedInSocial!: boolean;
   
   form: any = {
     username: null,
@@ -28,25 +25,19 @@ export class LoginComponent implements OnInit {
   roles: string[] = [];
 
 
+
+
   constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private authServiceSocial: SocialAuthService) { }
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
       this.roles = this.tokenStorage.getUser().roles;
     }
-    this.authServiceSocial.authState.subscribe(
-      data => {
-        this.userLogged = data;
-        this.isLoggedInSocial = (this.userLogged != null);
-      }
-    )
   }
   signInWithGoogle(): void {
     this.authServiceSocial.signIn(GoogleLoginProvider.PROVIDER_ID).then(
       data=>{
         console.log(data);
-        this.socialUser = data;
-        this.isLoggedInSocial = true;
       }
     );
   }
@@ -55,7 +46,18 @@ export class LoginComponent implements OnInit {
     this.authServiceSocial.signIn(FacebookLoginProvider.PROVIDER_ID).then(
       data=>{
         console.log(data);
-      }
+        this.authService.loginFacebook(data.id,data.email,data.firstName,data.lastName,data.photoUrl).subscribe({
+          next: data => {
+            this.tokenStorage.saveToken(data.accessToken);
+            this.tokenStorage.saveUser(data);
+            this.isLoginFailed = false;
+            this.isLoggedIn = true;
+            this.roles = this.tokenStorage.getUser().roles;
+            this.reloadPage();
+          }
+        });
+      },
+      
     );
   }
   // signOut(): void {

@@ -13,10 +13,14 @@ export class ProfileComponent implements OnInit {
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
     console.log(this.currentUser);
-    if(this.currentUser.imageUrl != null){
-    this.currentUser.imageUrl = 'http://localhost:8080/api/auth/' + 'getImage/' + this.currentUser.imageUrl;
-    }else{
+    if(this.currentUser.imageUrl == null){
       this.currentUser.imageUrl = 'http://localhost:8080/api/auth/' + 'getImage/' + 'default.png';
+    }else if((this.currentUser.imageUrl).substring(0,8) == "https://"){
+      this.currentUser.imageUrl = this.currentUser.imageUrl;
     }
+    else{
+      this.currentUser.imageUrl = 'http://localhost:8080/api/auth/' + 'getImage/' + this.currentUser.imageUrl;
+    }
+
   }
 }

@@ -32,4 +32,13 @@ export class AuthService {
 
     }, httpOptions);
   }
+  loginFacebook(id : string,email: string, firstName: string,lastName: string, photoUrl: string): Observable<any> {
+    return this.http.post(AUTH_API + 'loginFacebook', {
+      id,
+      email,
+      firstName,
+      lastName,
+      photoUrl
+    }, httpOptions);
+  }
 }
