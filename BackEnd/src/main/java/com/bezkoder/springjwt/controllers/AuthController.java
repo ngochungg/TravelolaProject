@@ -288,7 +288,7 @@ public class AuthController {
     //login google
     @PostMapping("/loginGoogle")
     public ResponseEntity<?> loginGoogle( @RequestBody LoginSocialRequest loginSocialRequest) {
-User user = userRepository.findByEmail(loginSocialRequest.getEmail());
+    User user = userRepository.findByEmail(loginSocialRequest.getEmail());
         if (user == null) {
             //create new user
             user = new User();
