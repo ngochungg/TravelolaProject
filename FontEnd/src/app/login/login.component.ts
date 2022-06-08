@@ -47,9 +47,11 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveUser(data);
             this.isLoginFailed = false;
             this.isLoggedIn = true;
-            this.router.navigate(['/home']);
             this.roles = this.tokenStorage.getUser().roles;
-            // this.reloadPage();
+            this.router.navigate(['/home'])
+            .then(() => {
+              this.reloadPage();
+            });
           }
         });
       }
@@ -66,9 +68,11 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveUser(data);
             this.isLoginFailed = false;
             this.isLoggedIn = true;
-            this.router.navigate(['/home']);
             this.roles = this.tokenStorage.getUser().roles;
-            // this.reloadPage();
+            this.router.navigate(['/home'])
+            .then(() => {
+              this.reloadPage();
+            });
           }
         });
       },
@@ -89,8 +93,12 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.router.navigate(['/home']);
-        // this.reloadPage();
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+
+
       },
       error: err => {
         this.errorMessage = err.error.message;
