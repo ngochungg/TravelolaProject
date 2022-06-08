@@ -33,9 +33,10 @@ label {
   border-radius: 50%;
 }
 .hello{
-  background-color: rgba(219, 49, 49, 0.87);
+  background-color: rgba(238, 27, 27, 0.700);
   Color: #fff;
-  height:600px;
+  height:auto;
+  border-radius: 5%;
 
 }
 .sig-up{
@@ -52,7 +53,21 @@ label {
 .background-img{
   margin-top: 0px;
   width: 100%;
-  height: 100%;
+  height: 63%;
   margin-left: -21%;
   position: absolute;
+}
+.div-errors{
+  float: right;
+  display: block;
+  margin-top: -65px;
+  color: red;
+}
+.go-to-login{
+  display: block;
+  text-align: center;
+}
+.in-main{
+  height: 100%;
+  margin-bottom:300px;
 }

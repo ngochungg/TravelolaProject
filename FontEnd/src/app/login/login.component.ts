@@ -2,6 +2,8 @@
 
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+
 
 
 
@@ -27,7 +29,8 @@ export class LoginComponent implements OnInit {
 
 
 
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, private authServiceSocial: SocialAuthService) { }
+  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, 
+    private authServiceSocial: SocialAuthService,  private router: Router) { }
   ngOnInit(): void {
     if (this.tokenStorage.getToken()) {
       this.isLoggedIn = true;
@@ -44,8 +47,9 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveUser(data);
             this.isLoginFailed = false;
             this.isLoggedIn = true;
+            this.router.navigate(['/home']);
             this.roles = this.tokenStorage.getUser().roles;
-            this.reloadPage();
+            // this.reloadPage();
           }
         });
       }
@@ -62,8 +66,9 @@ export class LoginComponent implements OnInit {
             this.tokenStorage.saveUser(data);
             this.isLoginFailed = false;
             this.isLoggedIn = true;
+            this.router.navigate(['/home']);
             this.roles = this.tokenStorage.getUser().roles;
-            this.reloadPage();
+            // this.reloadPage();
           }
         });
       },
@@ -84,7 +89,8 @@ export class LoginComponent implements OnInit {
         this.isLoginFailed = false;
         this.isLoggedIn = true;
         this.roles = this.tokenStorage.getUser().roles;
-        this.reloadPage();
+        this.router.navigate(['/home']);
+        // this.reloadPage();
       },
       error: err => {
         this.errorMessage = err.error.message;

@@ -15,6 +15,10 @@ import { BoardUserComponent } from './board-user/board-user.component';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
+import { AboutComponent } from './about/about.component';
+import { ContacComponent } from './contac/contac.component';
+
+
 
 
 
@@ -30,7 +34,10 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
     ProfileComponent,
     BoardAdminComponent,
     BoardModeratorComponent,
-    BoardUserComponent
+    BoardUserComponent,
+    AboutComponent,
+    ContacComponent,
+ 
   ],
   imports: [
     BrowserModule,

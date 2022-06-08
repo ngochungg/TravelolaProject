@@ -7,7 +7,7 @@ label {
   max-width: 650px !important;
   max-height:auto !important;
   padding: 40px 40px;
-  margin-top: 0px;
+  margin-top: 20px;
   border:none !important;
   box-shadow: 2px 3px 10px 2px white;
 }
@@ -15,7 +15,7 @@ label {
 .card {
   margin-top:200px;
   /* background: rgba(255, 255, 255, 0.75); */
-  background: rgba(255, 255, 255, 0);
+  background: rgb(255, 255, 255,0);
   height: auto;
   padding: 20px 25px 30px;
   margin: 0 auto 25px;
@@ -36,6 +36,7 @@ label {
   -moz-border-radius: 50%;
   -webkit-border-radius: 50%;
   border-radius: 50%;
+  background-repeat: no-repeat;
 }
 .login-img {
   width: 100%;
@@ -56,10 +57,27 @@ label {
   text-align: center;
   font-size: 46px;
   color: white;
-  text-transform: uppercase;
+  
 } 
 .return-sigup{
   text-align: center;
   font-size: 18px;
  margin-left: -55px;
+}
+.in-main{
+  height: 100%;
+  margin-bottom: 180px;
+}
+.css-btn-login-gg{
+  width: 48%;
+  float: left;
+}
+.css-btn-login-fb{
+  width: 48%;
+  float: right;
+  margin-top: 0%;
+}
+.login-bot{
+
+  text-align: center;
 }

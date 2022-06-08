@@ -8,6 +8,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardUserComponent } from './board-user/board-user.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
+import { AboutComponent } from './about/about.component';
+import { ContacComponent } from './contac/contac.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -17,6 +19,9 @@ const routes: Routes = [
   { path: 'user', component: BoardUserComponent },
   { path: 'mod', component: BoardModeratorComponent },
   { path: 'admin', component: BoardAdminComponent },
+  { path: 'about', component: AboutComponent },
+  { path: 'contac', component: ContacComponent },
+
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
