@@ -52,7 +52,10 @@ class _HomeState extends State<Home> {
                         IconButton(
                           icon: Icon(Icons.menu),
                           color: Colors.black,
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (_) => Home()));
+                          },
                         ),
                         if (user["accessToken"] == null)
                           IconButton(
@@ -73,7 +76,7 @@ class _HomeState extends State<Home> {
                         else
                           FlatButton(
                             child: Text(
-                              'Hello, ${user["username"]}',
+                              'Hello, ${user["firstName"]}',
                               style: GoogleFonts.montserrat(
                                 fontSize: 20,
                                 fontWeight: FontWeight.w200,

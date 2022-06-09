@@ -3,7 +3,9 @@ import 'dart:convert';
 import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart' as http;
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 import 'register.dart';
 
@@ -22,6 +24,34 @@ class _LoginState extends State<Login> {
   final _passwordController = TextEditingController();
   String url = "http://localhost:8080/api/auth/signin";
 
+  Future googleLogin() async {
+    var errorMessage;
+    final GoogleSignIn _googleSignin = GoogleSignIn();
+    var result = await _googleSignin.signIn();
+    if (result != null) {
+      var string = result.displayName;
+      final first = string!.split(' ').first;
+      final last = string.split(' ').last;
+      var json = jsonEncode({
+        "id": result.id,
+        "firstName": first,
+        "lastName": last,
+        "email": result.email,
+        "photoUrl": result.photoUrl,
+      });
+
+      String googleUrl = "http://localhost:8080/api/auth/loginGoogle";
+      var response = await http.post(Uri.parse(googleUrl),
+          body: json, headers: {"Content-Type": "application/json"});
+      Navigator.pushNamed(context, Home.routeName, arguments: response.body);
+    } else {
+      errorMessage = "Cancalled";
+      return print(errorMessage);
+    }
+  }
+
+  Future fbLogin() async {}
+
   Future login() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
@@ -32,7 +62,6 @@ class _LoginState extends State<Login> {
     final response = await http.post(Uri.parse(url), body: body, headers: {
       "Content-Type": "application/json",
     });
-    print(response.statusCode);
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.green,
@@ -167,6 +196,15 @@ class _LoginState extends State<Login> {
                 ]),
               ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            SignInButton(Buttons.Google, onPressed: () {
+              googleLogin();
+            }),
+            SignInButton(Buttons.Facebook, onPressed: () {
+              fbLogin();
+            }),
             SizedBox(
               height: 20,
             ),

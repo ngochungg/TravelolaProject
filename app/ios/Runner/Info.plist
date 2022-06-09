@@ -43,5 +43,41 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<!-- login social -->
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.612968931910-sfvqk56it6ajq6c4np38f6ek8djqsnm2</string>
+			</array>
+		</dict>
+	</array>
+
+
+	<key>CFBundleURLTypes</key>
+	<array>
+		<dict>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>fb1176380339570832</string>
+			</array>
+		</dict>
+	</array>
+	<!-- <key>FacebookAppID</key>
+	<string>1176380339570832</string>
+	<key>FacebookClientToken</key>
+	<string>e4322f083e8d86d33ce97937c7519c85</string>
+	<key>FacebookDisplayName</key>
+	<string>travelolafblogin</string>
+
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>fbapi</string>
+		<string>fb-messenger-share-api</string>
+	</array> -->
 </dict>
 </plist>
