@@ -4,6 +4,7 @@ import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_signin_button/flutter_signin_button.dart';
 
@@ -25,7 +26,6 @@ class _LoginState extends State<Login> {
   String url = "http://localhost:8080/api/auth/signin";
 
   Future googleLogin() async {
-    var errorMessage;
     final GoogleSignIn _googleSignin = GoogleSignIn();
     var result = await _googleSignin.signIn();
     if (result != null) {
@@ -45,12 +45,30 @@ class _LoginState extends State<Login> {
           body: json, headers: {"Content-Type": "application/json"});
       Navigator.pushNamed(context, Home.routeName, arguments: response.body);
     } else {
-      errorMessage = "Cancalled";
-      return print(errorMessage);
+      return print("Cancalled");
     }
   }
 
-  Future fbLogin() async {}
+  Future fbLogin() async {
+    final result = await FacebookAuth.i.login();
+    final requestData = await FacebookAuth.i.getUserData();
+    var string = requestData["name"];
+    final first = string!.split(' ').first;
+    final last = string.split(' ').last;
+    var json = jsonEncode({
+      "id": requestData["id"],
+      "firstName": first,
+      "lastName": last,
+      "email": requestData["email"],
+      "photoUrl": requestData["picture"]["data"]["url"],
+    });
+
+    String fbUrl = "http://localhost:8080/api/auth/loginFacebook";
+    var response = await http.post(Uri.parse(fbUrl),
+        body: json, headers: {"Content-Type": "application/json"});
+    Navigator.pushNamed(context, Home.routeName, arguments: response.body);
+    print(response.statusCode);
+  }
 
   Future login() async {
     String username = _usernameController.text;
