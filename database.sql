@@ -1,4 +1,7 @@
-use testdb;
+INSERT INTO roles(name) VALUES('ROLE_USER');
+INSERT INTO roles(name) VALUES('ROLE_MODERATOR');
+INSERT INTO roles(name) VALUES('ROLE_ADMIN');
+
 INSERT INTO province (id, name, code) VALUES
 (1, N'Hồ Chí Minh', N'SG'),
 (2, N'Hà Nội', N'HN'),
