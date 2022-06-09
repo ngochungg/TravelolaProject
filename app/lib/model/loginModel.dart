@@ -1,7 +1,7 @@
-import 'package:app/login.dart';
+import 'package:app/screens/login.dart';
 
 class LoginModel {
-  String LoginModelname;
-  String password;
-  LoginModel(this.LoginModelname, this.password);
+  final String username;
+  final String password;
+  LoginModel(this.username, this.password);
 }

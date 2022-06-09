@@ -1,13 +1,16 @@
-import 'package:app/register.dart';
-import 'package:app/model/loginModel.dart';
+import 'dart:convert';
+
+import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 
-import 'dashboard.dart';
+import 'register.dart';
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
+
+  static const routeName = '/login';
 
   @override
   State<StatefulWidget> createState() => _LoginState();
@@ -22,17 +25,22 @@ class _LoginState extends State<Login> {
   Future login() async {
     String username = _usernameController.text;
     String password = _passwordController.text;
-    final response = await http.post(Uri.parse(url),
-        body: {"username": username, "password": password});
+    var body = jsonEncode({
+      "username": username,
+      "password": password,
+    });
+    final response = await http.post(Uri.parse(url), body: body, headers: {
+      "Content-Type": "application/json",
+    });
+    print(response.statusCode);
     if (response.statusCode == 200) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
         backgroundColor: Colors.green,
         content: Text("Login succescfull"),
       ));
-      Navigator.push(
-        context,
-        MaterialPageRoute(builder: (context) => Dashboard()),
-      );
+      final String user = response.body;
+      // print(user);
+      Navigator.pushNamed(context, Home.routeName, arguments: user);
     }
     if (response.statusCode == 401) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(

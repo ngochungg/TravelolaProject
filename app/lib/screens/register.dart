@@ -1,22 +1,21 @@
 import 'dart:convert';
-import 'dart:io';
 
-import 'package:app/login.dart';
 import 'package:app/model/registerModel.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
-import 'package:image_picker/image_picker.dart';
+
+import 'login.dart';
 
 class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
 
   @override
-  State<StatefulWidget> createState() => _RegisterState();
+  State<StatefulWidget> createState() => _LoginState();
 }
 
-class _RegisterState extends State<Register> {
+class _LoginState extends State<Register> {
   final _formKey = GlobalKey<FormState>();
 
   final _firstnameController = TextEditingController();
@@ -27,19 +26,6 @@ class _RegisterState extends State<Register> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   final String url = "http://localhost:8080/api/auth/signup";
-
-  var image;
-
-  /// Get from gallery
-  void _uploadImage() async {
-    final _picker = ImagePicker();
-
-    var _pickedImage = await _picker.getImage(source: ImageSource.gallery);
-
-    setState(() {
-      image = _pickedImage?.path;
-    });
-  }
 
   Future save() async {
     var res = await http.post(Uri.parse(url),
@@ -110,18 +96,6 @@ class _RegisterState extends State<Register> {
                   SizedBox(
                     height: 30,
                   ),
-
-                  //image
-                  Container(
-                    child: Center(
-                      child: image != null ? Image.file(File(image)) : null
-                    ),
-                    floatingActionButton: FloatingActionButton(
-        onPressed: _uploadImage,
-        tooltip: 'Upload image',
-        child: Icon(Icons.image),
-      ),
-                  )
 
                   //firstname
                   Align(
@@ -354,6 +328,31 @@ class _RegisterState extends State<Register> {
                     color: Color.fromRGBO(255, 255, 255, 0.4),
                   ),
                   SizedBox(height: 10),
+
+                  // //image
+                  // Align(
+                  //   alignment: Alignment.topLeft,
+                  //   child: Text(
+                  //     "Image",
+                  //     style: GoogleFonts.roboto(
+                  //       // fontWeight: FontWeight.bold,
+                  //       fontSize: 20,
+                  //       color: Color.fromRGBO(255, 255, 255, 0.8),
+                  //     ),
+                  //   ),
+                  // ),
+                  // TextFormField(
+                  //   controller: _phoneController,
+                  //   style: TextStyle(fontSize: 20, color: Colors.white),
+                  //   decoration: InputDecoration(
+                  //       border:
+                  //           OutlineInputBorder(borderSide: BorderSide.none)),
+                  // ),
+                  // Container(
+                  //   height: 8,
+                  //   color: Color.fromRGBO(255, 255, 255, 0.4),
+                  // ),
+                  // SizedBox(height: 10),
 
                   //button
                   Center(
