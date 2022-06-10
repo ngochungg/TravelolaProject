@@ -52,7 +52,7 @@ public class User {
 
   private Boolean isActive = true;
 
-  private String HotelId;
+
 
 
   @ManyToMany(fetch = FetchType.LAZY)
@@ -66,7 +66,7 @@ public class User {
 
 
 
-  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl,boolean isActive, String hotelId) {
+  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl,boolean isActive) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -75,7 +75,6 @@ public class User {
     this.phone = phone;
     this.imageUrl = imageUrl;
     this.isActive = isActive;
-    this.HotelId = hotelId;
   }
 
   public Long getId() {
@@ -157,11 +156,4 @@ public class User {
     this.isActive = isActive;
   }
 
-  public String getHotelId() {
-    return HotelId;
-  }
-
-  public void setHotelId(String hotelId) {
-    HotelId = hotelId;
-  }
 }

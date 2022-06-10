@@ -83,7 +83,6 @@ public class AuthController {
                 userDetails.getPhone(),
                 userDetails.getImageUrl(),
                 userDetails.getIsActive(),
-                userDetails.getHotelId(),
                 roles));
     }
     //Register
@@ -106,7 +105,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive(),signUpRequest.getHotelId());
+                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -282,7 +281,6 @@ public class AuthController {
                 userDetails.getPhone(),
                 userDetails.getImageUrl(),
                 userDetails.getIsActive(),
-                userDetails.getHotelId(),
                 roles));
     }
     //login google
@@ -331,7 +329,6 @@ public class AuthController {
                 userDetails.getPhone(),
                 userDetails.getImageUrl(),
                 userDetails.getIsActive(),
-                userDetails.getHotelId(),
                 roles));
     }
 }

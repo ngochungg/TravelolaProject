@@ -36,8 +36,6 @@ public class SignupRequest {
 
   private boolean isActive = true;
 
-  private String hotelId;
-
   public boolean isActive() {
     return isActive;
   }
@@ -110,10 +108,5 @@ public class SignupRequest {
     this.imageUrl = imageUrl;
   }
 
-  public String getHotelId() {
-    return hotelId;
-  }
-  public void setHotelId(String hotelId) {
-    this.hotelId = hotelId;
-  }
+
 }

@@ -31,12 +31,11 @@ public class UserDetailsImpl implements UserDetails {
   private String phone;
   private String imageUrl;
   private boolean isActive;
-  private String hotelId;
 
   private Collection<? extends GrantedAuthority> authorities;
 
   public UserDetailsImpl(Long id, String username, String email, String password,String firstName,
-                         String lastName,String phone,String imageUrl, boolean isActive,String hotelId,
+                         String lastName,String phone,String imageUrl, boolean isActive,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.username = username;
@@ -48,7 +47,6 @@ public class UserDetailsImpl implements UserDetails {
     this.phone = phone;
     this.imageUrl = imageUrl;
     this.isActive = isActive;
-    this.hotelId = hotelId;
   }
 
   public static UserDetailsImpl build(User user) {
@@ -66,7 +64,6 @@ public class UserDetailsImpl implements UserDetails {
         user.getPhone(),
         user.getImageUrl(),
         user.getIsActive(),
-        user.getHotelId(),
         authorities);
   }
 
@@ -96,7 +93,6 @@ public class UserDetailsImpl implements UserDetails {
   public String getImageUrl() {
     return imageUrl;
   }
-  public String getHotelId(){return hotelId;}
 
   public boolean getIsActive() {
     return isActive;

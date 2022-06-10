@@ -13,11 +13,10 @@ public class JwtResponse {
   private String lastName;
   private String phone;
   private String imageUrl;
-  private String HotelId;
   private boolean isActive;
 
   public JwtResponse(String accessToken, Long id, String username, String email,
-                     String firstName,String lastName,String phone,String imageUrl,boolean isActive,String HotelId ,List<String> roles) {
+                     String firstName,String lastName,String phone,String imageUrl,boolean isActive ,List<String> roles) {
     this.token = accessToken;
     this.id = id;
     this.username = username;
@@ -28,7 +27,7 @@ public class JwtResponse {
     this.imageUrl = imageUrl;
     this.roles = roles;
     this.isActive = isActive;
-    this.HotelId = HotelId;
+
   }
 
   public String getAccessToken() {
@@ -117,10 +116,4 @@ public class JwtResponse {
     isActive = active;
   }
 
-  public String getHotelId() {
-    return HotelId;
-  }
-  public void setHotelId(String HotelId) {
-    this.HotelId = HotelId;
-  }
 }
