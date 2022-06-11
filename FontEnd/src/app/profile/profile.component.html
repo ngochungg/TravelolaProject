@@ -1,35 +1,10 @@
- <!-- <div class="container" *ngIf="currentUser; else loggedOut">
-    <header class="jumbotron">
-        <h3>
-            <strong>{{ currentUser.username }}</strong> Profile
-        </h3>
-    </header>
-    <p>
-        <strong>Token:</strong> {{ currentUser.accessToken.substring(0, 20) }} ... {{ currentUser.accessToken.substr(currentUser.accessToken.length - 20) }}
-    </p>
-    <img [src]="currentUser.imageUrl" alt="" class="avatar">
-    <p>
-        <strong>Email:</strong> {{ currentUser.email }}
-    </p>
-    <p>
-        <strong>Fullname:</strong> {{ currentUser.firstName + " " + currentUser.lastName }}
-    </p>
-    <p>
-        <strong>Phone:</strong> {{ currentUser.phone }}
-    </p>
-    <strong>Roles:</strong>
-    <ul>
-        <li *ngFor="let role of currentUser.roles ">
-            {{ role }}
-        </li>
-    </ul>
-</div> -->
+
 
 <ng-template #loggedOut>
     Please login.
 </ng-template> 
 
-  <body>
+  <body><img src="../../assets/images/banner4.jpg" alt="" class="img-profile">
   <div class="container">
     <div class="card">
       <h2 class="fa fa-user title">  Infomation</h2>
@@ -54,20 +29,47 @@
       </div>
     </div>
     <div class="card card2">
-      <h1 class="fa fa-cog title"> Setting</h1>
-      <div class="bar">
-        <div class="emptybar"></div>
-        <div class="filledbar"></div>
+      <h1 class="fa fa-cog title"> Update Info</h1>
+     
+
+    <div class="row info">
+      <div class="col-sm-4">
+        <p>
+          <Strong>First Name:</Strong>
+        </p>
+        <p>
+         <Strong>Last Name:</Strong>
+       </p>
+         <p>
+             <strong>Email:</strong>
+         </p>
+         <p>
+             <strong>Phone:</strong>
+         </p>
       </div>
+      <div class="col-sm-6">
+        <p>
+          <input type="" value="{{currentUser.firstName}}">
+        </p>
+        <p>
+        <input type="" value="{{currentUser.lastName}}">
+       </p>
+         <p>
+            <input type="text" name="" id="" value="{{ currentUser.email }}">
+         </p>
+         <p>
+             <input type="text" value=" {{ currentUser.phone }}">
+         </p>
+      </div>
+
+
+    </div>
      
     </div>
     <div class="card card3">
       <h3 class="fa fa-edit title "> Update Image</h3>
-      <div class="bar">
-        <div class="emptybar"></div>
-        <div class="filledbar"></div>
-      </div>
-
+      <img [src]="currentUser.imageUrl" alt="avata"  class="img-card3"><br>
+      <div class="div-btn-change"><button class="btn btn-primary btn-change">Update</button></div>
     </div>
     
   </div>

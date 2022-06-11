@@ -54,7 +54,6 @@ label {
   margin-top: 0px;
   width: 100%;
   height: 63%;
-  margin-left: -21%;
   position: absolute;
 }
 .div-errors{
@@ -70,4 +69,12 @@ label {
 .in-main{
   height: 100%;
   margin-bottom:300px;
+}
+.login-form{
+  text-align: center;
+  width: 150px;
+  color: aliceblue;
+  font-size: 22px;
+  font-weight: 300;
+  margin-left: 40;
 }

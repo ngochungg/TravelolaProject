@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-board-admin',
   templateUrl: './board-admin.component.html',
-  styleUrls: ['./board-admin.component.css']
+  styleUrls: ['./board-admin.component.css'],
 })
 export class BoardAdminComponent implements OnInit {
   content?: string;
@@ -24,4 +24,3 @@ export class BoardAdminComponent implements OnInit {
     });
   }
 }
- 

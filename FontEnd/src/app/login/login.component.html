@@ -19,7 +19,7 @@
             <div class="form-group">
                 <label for="username" style="color: white;font-weight: 350; font-size: 26px;">Username</label>
                 <input type="text" class="form-control" name="username" [(ngModel)]="form.username" required
-                    #username="ngModel" />
+                    #username="ngModel" placeholder="Enter username" required/>
                 <div class="alert alert-danger" role="alert" *ngIf="username.errors && f.submitted">
                     Username is required!
                 </div>
@@ -27,7 +27,7 @@
             <div class="form-group">
                 <label for="password" style="color: white;font-weight: 350; font-size: 26px;">Password</label>
                 <input type="password" class="form-control" name="password" [(ngModel)]="form.password" required
-                    minlength="6" #password="ngModel" />
+                    minlength="6" #password="ngModel" placeholder="Enter Password"/>
                 <div class="alert alert-danger" role="alert" *ngIf="password.errors && f.submitted">
                     <div *ngIf="password.errors['required']">Password is required</div>
                     <div *ngIf="password.errors['minlength']">
@@ -48,6 +48,14 @@
             </div>
         </form>
         <!-- login Social  -->
+        
+        <div class="alert alert-success" *ngIf="isLoggedIn">
+            Logged in as {{ roles }}.
+        </div>
+        <div class="return-sigup">
+            Don'have an account? <a href="/register">Sign Up</a>
+        </div>
+
         <div class="container login-bot">
             <button class="btn btn-outline-danger btn-lg btn-block css-btn-login-gg" (click)="signInWithGoogle()"
                 *ngIf="isLoggedIn == false">
@@ -55,12 +63,6 @@
             <button class="btn btn-outline-primary btn-lg btn-block  css-btn-login-fb" (click)="signInWithFB()"
                 *ngIf="isLoggedIn == false">
                 <i class="fa fa-facebook"></i> Login with Facebook</button>
-        </div>
-        <div class="alert alert-success" *ngIf="isLoggedIn">
-            Logged in as {{ roles }}.
-        </div>
-        <div class="return-sigup">
-            Don'have an account? <a href="/register">Sign Up</a>
         </div>
     </div>
 
