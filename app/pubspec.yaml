@@ -45,6 +45,8 @@ dependencies:
   lottie: ^1.2.2
   font_awesome_flutter: ^9.2.0
   flutter_svg: ^1.0.3
+  image_picker: ^0.8.5+3
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

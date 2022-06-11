@@ -1,6 +1,8 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
+// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, unused_local_variable, unnecessary_new
 
 import 'dart:convert';
+import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:app/screens/login.dart';
 import 'package:app/screens/profile.dart';
@@ -9,9 +11,11 @@ import 'package:app/widgets/app_bar.dart';
 import 'package:app/widgets/icon_card.dart';
 import 'package:app/widgets/images_cards.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 
 class Home extends StatefulWidget {
   static const routeName = '/home';
@@ -293,6 +297,7 @@ class MyNoti extends StatelessWidget {
 }
 
 class MyAccount extends StatelessWidget {
+  late File _image;
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -302,7 +307,24 @@ class MyAccount extends StatelessWidget {
     } else {
       retriveString = (data.arguments.toString());
     }
+
     var user = jsonDecode(retriveString);
+
+    Future takePicture() async {
+      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      if (image == null) return;
+      var stream = new http.ByteStream(image.openRead());
+      var length = await image.length();
+      var uri =
+          Uri.parse("http://localhost:8080/api/auth/uploadImage/${user['id']}");
+      var request = new http.MultipartRequest("POST", uri);
+      var multipartFile =
+          new http.MultipartFile('file', stream, length, filename: 'image.jpg');
+      request.files.add(multipartFile);
+      var response = await request.send();
+      print(response.statusCode);
+      Navigator.of(context).pushNamed(Home.routeName, arguments: retriveString);
+    }
 
     return Scaffold(
       appBar: buildAppbar(context),
@@ -418,7 +440,9 @@ class MyAccount extends StatelessWidget {
                                     color: Color(0xFFF5F6F9),
                                     child: SvgPicture.asset(
                                         "images/Camera Icon.svg"),
-                                    onPressed: () {},
+                                    onPressed: () {
+                                      takePicture();
+                                    },
                                   )),
                             ),
                           ],
