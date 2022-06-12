@@ -37,7 +37,7 @@ public class ImageStorageService implements IStorageService{
     @Override
     public String storeFile(MultipartFile file) {
         try {
-            System.out.println("haha");
+            System.out.println("Upload Image");
             if (file.isEmpty()) {
                 throw new RuntimeException("Failed to store empty file.");
             }
@@ -105,8 +105,57 @@ public class ImageStorageService implements IStorageService{
         }
     }
 
+
+
     @Override
     public void deleteAllFiles() {
 
     }
+
+//    @Override
+//    public String storeFiles(MultipartFile[] files) {
+//        try {
+//            System.out.println("Upload MultipartFile");
+//            if (files.length == 0) {
+//                throw new RuntimeException("Failed to store empty file.");
+//            }
+//            //check file is image ?
+//            for (MultipartFile file : files) {
+//                if (!isImageFile(file)) {
+//                    throw new RuntimeException("You can only upload image file");
+//                }
+//            }
+//            //file must be <= 5Mb
+//            for (MultipartFile file : files) {
+//                float fileSizeInMegabytes = file.getSize() / 1_000_000.0f;
+//                if (fileSizeInMegabytes > 5.0f) {
+//                    throw new RuntimeException("File must be <= 5Mb");
+//                }
+//
+//            }
+//            //rename MultipartFile
+//            String fileExtension = "";
+//            String generatedFileName = UUID.randomUUID().toString().replace("-", "");
+//            for (MultipartFile file : files) {
+//                fileExtension = FilenameUtils.getExtension(file.getOriginalFilename());
+//                generatedFileName = generatedFileName+"."+fileExtension;
+//            }
+//            Path destinationFilePath = this.storageFolder.resolve(
+//                            Paths.get(generatedFileName))
+//                    .normalize().toAbsolutePath();
+//            if (!destinationFilePath.getParent().equals(this.storageFolder.toAbsolutePath())) {
+//                throw new RuntimeException(
+//                        "Cannot store file outside current directory.");
+//            }
+//            for (MultipartFile file : files) {
+//                try (InputStream inputStream = file.getInputStream()) {
+//                    Files.copy(inputStream, destinationFilePath, StandardCopyOption.REPLACE_EXISTING);
+//                }
+//            }
+//            // return list file name
+//            return generatedFileName;
+//        } catch (Exception exception) {
+//            throw new RuntimeException("Failed to store file.", exception);
+//        }
+//    }
 }

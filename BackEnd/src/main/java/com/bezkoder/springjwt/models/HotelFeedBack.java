@@ -31,4 +31,15 @@ public class HotelFeedBack {
     @JsonIgnoreProperties("hotelFeedBacks")
     private Hotel hotel;
 
+    public HotelFeedBack(Long id, double rating, String feedback, Boolean retired, User user, Hotel hotel) {
+        this.id = id;
+        this.rating = rating;
+        this.feedback = feedback;
+        this.retired = retired;
+        this.user = user;
+        this.hotel = hotel;
+    }
+
+    public HotelFeedBack() {
+    }
 }

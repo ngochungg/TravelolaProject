@@ -19,4 +19,12 @@ public class HotelBookingDetail {
     @JsonIgnoreProperties("hotelBookingDetail")
     private List<HotelBookingRoom> hotelBookingRooms;
 
+    public HotelBookingDetail() {
+    }
+
+    public HotelBookingDetail(Long id, HotelBooking hotelBooking, List<HotelBookingRoom> hotelBookingRooms) {
+        this.id = id;
+        this.hotelBooking = hotelBooking;
+        this.hotelBookingRooms = hotelBookingRooms;
+    }
 }

@@ -34,15 +34,14 @@ public class User {
   @Size(max = 120)
   private String password;
 
-  @NotBlank
   @Size(max = 120)
   private String firstName;
 
-  @NotBlank
+
   @Size(max = 120)
   private String lastName;
 
-  @NotBlank
+
   @Size(max = 120)
   private String phone;
 

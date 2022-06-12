@@ -8,4 +8,6 @@ public interface IStorageService {
     public Stream<Path> loadAll(); //load all file inside a folder
     public byte[] readFileContent(String fileName);
     public void deleteAllFiles();
+    //upload Multiple file
+//    public String storeFiles(MultipartFile[] files);
 }
