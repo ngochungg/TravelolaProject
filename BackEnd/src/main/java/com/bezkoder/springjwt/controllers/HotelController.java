@@ -2,6 +2,7 @@ package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.HotelRequest;
+import com.bezkoder.springjwt.payload.request.ServicesRequest;
 import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
@@ -77,8 +78,7 @@ public class HotelController {
         Role userRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         user.setRoles(Collections.singleton(userRole));
-        user.setIsActive(Boolean.TRUE);
-
+        user.setIsActive(Boolean.FALSE);
         User resultUser = userRepository.save(user);
 
         //Hotel create
@@ -90,7 +90,6 @@ public class HotelController {
         hotel.setContactName(hotelRequest.getContactName());
         hotel.setLocation(resultLocation);
         hotel.setAccount(resultUser);
-        hotel.setRetired(Boolean.FALSE);
         hotel.setStatus(Boolean.FALSE);
         Hotel resultHotel = hotelRepository.save(hotel);
 
@@ -120,6 +119,12 @@ public class HotelController {
         Hotel hotel = hotelRepository.findById(id).get();
         hotel.setStatus(Boolean.TRUE);
         hotelRepository.save(hotel);
+        //active user
+        String UserId = hotel.getAccount().getId().toString();
+        User user = userRepository.findById(Long.parseLong(UserId)).get();
+        //System.out.println(UserId);
+        user.setIsActive(Boolean.TRUE);
+        userRepository.save(user);
         //mail Confirmation
         Map<String, Object> emailMap = new HashMap<>();
         String email = hotel.getEmail();
@@ -151,12 +156,32 @@ public class HotelController {
         Hotel hotel = hotelRepository.findById(id).get();
         //delete Hotel
         String HotelId = hotel.getLocation().getId().toString();
+        String UserId = hotel.getAccount().getId().toString();
         hotelRepository.deleteById(id);
         //delete Location
         locationRepository.deleteById(Long.parseLong(HotelId));
         //delete User of Hotel
-        userRepository.deleteById(id);
+        userRepository.deleteById(Long.parseLong(UserId));
         return ResponseEntity.ok().body("Hotel refusal successfully");
+    }
+
+    //add services to hotel
+    @PostMapping(value = "/addServices/{id}")
+    public ResponseEntity<?> addServices(@PathVariable("id") Long id, @RequestBody ServicesRequest servicesRequest){
+        //find Hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        //add services
+        hotel.setPaymentAtTheHotel(servicesRequest.getPaymentAtTheHotel());
+        hotel.setWifi(servicesRequest.getWifi());
+        hotel.setFreeParking(servicesRequest.getFreeParking());
+        hotel.setFreeBreakfast(servicesRequest.getFreeBreakfast());
+        hotel.setPetsAllowed(servicesRequest.getPetsAllowed());
+        hotel.setHotTub(servicesRequest.getHotTub());
+        hotel.setSwimmingPool(servicesRequest.getSwimmingPool());
+        hotel.setGym(servicesRequest.getGym());
+
+        hotelRepository.save(hotel);
+        return ResponseEntity.ok().body("Services registration successfully");
     }
 
 

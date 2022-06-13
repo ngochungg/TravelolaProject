@@ -36,13 +36,13 @@ public class Hotel {
     private String description;
     //Service hotel
     @Column(name = "payment_at_the_hotel")
-    private Boolean paymentAtTheHotel;
+    private boolean paymentAtTheHotel;
     @Column(name = "number_of_room",nullable = false)
     private int  numberOfRoom;
     @Column(name = "wifi")
     private boolean  wifi;
-    @Column(name = "restaurant")
-    private boolean  restaurant;
+    @Column(name = "freeBreakfast")
+    private boolean  freeBreakfast;
     @Column(name = "freeParking")
     private boolean  freeParking;
     @Column(name = "pets_allowed")
@@ -58,8 +58,7 @@ public class Hotel {
     @CreationTimestamp
 //    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Instant createdAt;
-    @Column(name = "retired", nullable = true)
-    private Boolean retired;
+
     @Column(name = "status", nullable = true)
     private Boolean status;
 
@@ -87,7 +86,7 @@ public class Hotel {
     @JsonIgnoreProperties("hotel")
     private List<Image> images;
 
-    public Hotel(Long id, String hotelName, String email, String phone, Float hotelRating, String contactName, String description, Boolean paymentAtTheHotel, int numberOfRoom, boolean wifi, boolean restaurant, boolean freeParking, boolean petsAllowed, boolean hotTub, boolean swimmingPool, boolean gym, Instant createdAt, Boolean retired, Location location, User account, List<HotelFeedBack> hotelFeedBacks, List<Room> rooms, List<Image> images) {
+    public Hotel(Long id, String hotelName, String email, String phone, Float hotelRating, String contactName, String description, boolean paymentAtTheHotel, int numberOfRoom, boolean wifi, boolean freeBreakfast, boolean freeParking, boolean petsAllowed, boolean hotTub, boolean swimmingPool, boolean gym, Instant createdAt, Boolean status, Location location, User account, List<HotelFeedBack> hotelFeedBacks, List<Room> rooms, List<Image> images) {
         this.id = id;
         this.hotelName = hotelName;
         this.email = email;
@@ -98,14 +97,14 @@ public class Hotel {
         this.paymentAtTheHotel = paymentAtTheHotel;
         this.numberOfRoom = numberOfRoom;
         this.wifi = wifi;
-        this.restaurant = restaurant;
+        this.freeBreakfast = freeBreakfast;
         this.freeParking = freeParking;
         this.petsAllowed = petsAllowed;
         this.hotTub = hotTub;
         this.swimmingPool = swimmingPool;
         this.gym = gym;
         this.createdAt = createdAt;
-        this.retired = retired;
+        this.status = status;
         this.location = location;
         this.account = account;
         this.hotelFeedBacks = hotelFeedBacks;
