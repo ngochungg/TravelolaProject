@@ -1,8 +1,10 @@
 package com.bezkoder.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 
 
@@ -30,7 +32,7 @@ public class Hotel {
     @Column(name = "contact_name", length = 150)
     private String contactName;
     //description type  is text
-@Column(name = "description", columnDefinition = "text")
+    @Column(name = "description", columnDefinition = "text")
     private String description;
     //Service hotel
     @Column(name = "payment_at_the_hotel")
@@ -51,12 +53,16 @@ public class Hotel {
     private boolean  swimmingPool;
     @Column(name = "gym")
     private boolean  gym;
-    @Column(name = "created_at")
 
-    @CreatedDate
+    @Column(name = "created_at")
+    @CreationTimestamp
+//    @JsonFormat(timezone = "GMT+8", pattern = "yyyy-MM-dd HH:mm:ss")
     private Instant createdAt;
     @Column(name = "retired", nullable = true)
     private Boolean retired;
+    @Column(name = "status", nullable = true)
+    private Boolean status;
+
 
     @ManyToOne
     @JoinColumn(name = "location_id", referencedColumnName = "id")

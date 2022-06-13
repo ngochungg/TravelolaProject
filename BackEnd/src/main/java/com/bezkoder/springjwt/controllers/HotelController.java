@@ -88,10 +88,10 @@ public class HotelController {
         hotel.setEmail(hotelRequest.getEmail());
         hotel.setPhone(hotelRequest.getPhone());
         hotel.setContactName(hotelRequest.getContactName());
-        hotel.setNumberOfRoom(hotelRequest.getNumberOfRoom());
         hotel.setLocation(resultLocation);
         hotel.setAccount(resultUser);
         hotel.setRetired(Boolean.FALSE);
+        hotel.setStatus(Boolean.FALSE);
         Hotel resultHotel = hotelRepository.save(hotel);
 
         //upload images
@@ -114,4 +114,58 @@ public class HotelController {
         emailSenderService.sendTemplateMessage(email, null, "Hello Hotel", templateHtml);
         return ResponseEntity.ok().body("Hotel registration successfully, please wait for confirmation...!");
     }
+    //hotel confirmation
+    @GetMapping(value = "/confirmHotel/{id}")
+    public ResponseEntity<?> confirmHotel(@PathVariable("id") Long id){
+        Hotel hotel = hotelRepository.findById(id).get();
+        hotel.setStatus(Boolean.TRUE);
+        hotelRepository.save(hotel);
+        //mail Confirmation
+        Map<String, Object> emailMap = new HashMap<>();
+        String email = hotel.getEmail();
+        emailMap.put("ContactName", hotel.getContactName());
+        emailMap.put("HotelName", hotel.getHotelName());
+        String templateHtml = emailSenderService.templateResolve("ConfirmHotel", emailMap);
+        emailSenderService.sendTemplateMessage(email, null, "Confirm Hotel", templateHtml);
+        return ResponseEntity.ok().body("Hotel confirmation successfully");
+    }
+
+    //refuse hotel registration
+    @GetMapping(value = "/refuseHotel/{id}")
+    public ResponseEntity<?> refuseHotel(@PathVariable("id") Long id){
+        //mail refuse
+        Map<String, Object> emailMap = new HashMap<>();
+        String email = hotelRepository.findById(id).get().getEmail();
+        emailMap.put("ContactName", hotelRepository.findById(id).get().getContactName());
+        emailMap.put("HotelName", hotelRepository.findById(id).get().getHotelName());
+        String templateHtml = emailSenderService.templateResolve("RefuseHotel", emailMap);
+        emailSenderService.sendTemplateMessage(email, null, "Refuse Hotel", templateHtml);
+
+        //delete images by hotel id
+        List<Image> images = imageRepository.findByHotelId(id);
+        for (Image image : images) {
+            storageService.deleteFileByName(image.getImagePath());
+            imageRepository.delete(image);
+        }
+        //find Hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        //delete Hotel
+        String HotelId = hotel.getLocation().getId().toString();
+        hotelRepository.deleteById(id);
+        //delete Location
+        locationRepository.deleteById(Long.parseLong(HotelId));
+        //delete User of Hotel
+        userRepository.deleteById(id);
+        return ResponseEntity.ok().body("Hotel refusal successfully");
+    }
+
+    //get all hotel
+    @GetMapping(value = "/getAllHotel")
+    public List<Hotel> getAllHotel(){
+        return hotelRepository.findAll();
+    }
+
+    //add room to hotel
+    @PostMapping(value = "/addRoom")
+    
 }

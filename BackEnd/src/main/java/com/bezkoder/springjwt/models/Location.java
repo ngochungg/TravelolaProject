@@ -41,6 +41,7 @@ public class Location {
 
     @Column(name = "retired", nullable = true)
     private Boolean retired;
+
     public Location(Long id, String street, String postalCode, Province province, District district, Ward ward, Boolean retired) {
         this.id = id;
         this.street = street;
