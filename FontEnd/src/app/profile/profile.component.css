@@ -1,158 +1,174 @@
-body {
-  margin-top:0%;
-  background-color: white;
-  font-family: 'Open Sans', sans-serif;
- 
-}
-.img-profile{
-    position: absolute;
-
-    width: 100%;
-    
-
-}
-.container {
-   
-  height: 900px;
-  width: 2000%;
-  top: 60px;
-  /* left: calc(50% - 300px); */
-  display: flex;
-  margin-left: 15%;
-}
-
-.card {
-    border: 1px;
-  display: flex;
-  height: 550px;
-  width: 500px;
-  background-color:orange;
-  border-radius: 15px;
-  box-shadow: rgba(50, 50, 93, 0.25) 20px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
-/*   margin-left: -50px; */
-  transition: 0.4s ease-out;
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,200,300,800);
+@import url(https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css);
+figure.snip0057 {
+  font-family: 'Raleway', Arial, sans-serif;
   position: relative;
-  left: 0px;
-  top: 10%;
-  font-size: 25px;
-}
-.card2 {
-
-    background-color: rgb(231, 69, 69);
-
-} 
-.card3 {
-
-  background-color: aqua;
-
-}
-.card:not(:first-child) {
-    margin-left: -50px;
-}
-
-.card:hover {
-  transform: translateY(-20px);
-  transition: 0.4s ease-out;
-}
-
-.card:hover ~ .card {
-  position: relative;
-  left: 50px;
-  transition: 0.4s ease-out;
-}
-
-.title {
-  color: white;
-  font-weight: 300;
-  position: absolute;
-  left: 20px;
-  top: 15px;
-}
-
-.bar {
-  position: absolute;
-  top: 30%;
-  left: 175px;
-  height: 5px;
-  width: 150px;
-}
-
-.emptybar {
-  background-color: #2e3033;
+  overflow: hidden;
+  margin: 10px;
+  min-width: 800px;
+  max-width: 800px;
   width: 100%;
+  background: #ffffff;
+  color: #000000;
+}
+figure.snip0057 * {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  -webkit-transition: all 0.35s ease-in-out;
+  transition: all 0.35s ease-in-out;
+}
+figure.snip0057 .image {
+  width: 50%;
+
+  overflow: hidden;
+  z-index: 1;
+  -webkit-transform: skewX(-15deg);
+  transform: skewX(-15deg);
+}
+figure.snip0057 .image img {
+  position: relative;
+  display: block;
+  left: -15%;
+  z-index: 1;
+  min-width: 550px;
+  -webkit-transform: skew(15deg);
+  transform: skew(15deg);
+}
+figure.snip0057:before {
+  position: relative;
+  content: '';
+  height: 100%;
+  width: 45%;
+  background: rgba(0, 0, 0, 0.2);
+  -webkit-transform: skewX(-17deg);
+  transform: skewX(-17deg);
+  -webkit-box-shadow: 15px 0px 25px rgba(0, 0, 0, 0.7);
+  box-shadow: 15px 0px 25px rgba(0, 0, 0, 0.7);
+}
+figure.snip0057 figcaption {
+  padding: 20px 30px 20px 20px;
+  position: absolute;
+  right: 0;
+  bottom: 10px;
+  width: 50%;
+  height: 400px;
+}
+figure.snip0057 figcaption h2,
+figure.snip0057 figcaption p {
+  margin: 0;
+  text-align: right;
+  padding: 10px 0;
+  width: 100%;
+}
+figure.snip0057 figcaption h2 {
+  font-size: 1.3em;
+  font-weight: 300;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+figure.snip0057 figcaption h2 span {
+  font-weight: 800;
+}
+figure.snip0057 figcaption p {
+  font-size: 0.9em;
+  opacity: 0.8;
+}
+figure.snip0057 figcaption .icons {
+  width: 100%;
+  text-align: right;
+}
+figure.snip0057 figcaption .icons i {
+  font-size: 26px;
+  padding: 5px;
+  top: 50%;
+  color: #000000;
+  opacity: 0;
+}
+figure.snip0057 figcaption a {
+  opacity: 0.3;
+}
+figure.snip0057 figcaption a:hover {
+  opacity: 0.8;
+}
+figure.snip0057 .position {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: right;
+  padding: 15px 30px;
+  font-size: 0.9em;
+  opacity: 1;
+  font-style: italic;
+  color: #ffffff;
+  background: #000000;
+}
+figure.snip0057.blue .position {
+  background: #20638f;
+}
+figure.snip0057.red .position {
+  background: #962d22;
+}
+figure.snip0057.yellow .position {
+  background: #bf6516;
+}
+figure.snip0057:hover figcaption,
+figure.snip0057.hover figcaption {
+  bottom: 40px;
+}
+figure.snip0057:hover .icons i,
+figure.snip0057.hover .icons i {
+  opacity: 1;
+  -webkit-transition-delay: 0.2s;
+  transition-delay: 0.2s;
+}
+figure.snip0057:hover:before,
+figure.snip0057.hover:before {
+  -webkit-animation: shadow 0.6s ease-in-out;
+  animation: shadow 0.6s ease-in-out;
+}
+@-webkit-keyframes shadow {
+  0% {
+    left: 0px;
+  }
+  50% {
+    left: -5px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@keyframes shadow {
+  0% {
+    left: 0px;
+  }
+  50% {
+    left: -5px;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+
+/* Demo purposes only */
+html {
   height: 100%;
 }
+body {
+ background-color: #fff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: wrap;
+  margin: 0;
+  height: 700px;
+}
+.btn-change{
+  background-color: #962d22;
+  /* font-size: 18px; */
+}
+.position :hover{
+  color: aquamarine;
 
-.filledbar {
-  position: absolute;
-  top: 0px;
-  z-index: 3;
-  width: 0px;
-  height: 100%;
-  background: rgb(0,154,217);
-  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
-  transition: 0.6s ease-out;
-}
-
-.card:hover .filledbar {
-  width: 120px;
-  transition: 0.4s ease-out;
-}
-
-.circle {
-  position: absolute;
-  top: 10%;
-
-  width: 100px;
-  max-height: 100px;
-  width: auto;
-  border-radius: 50%;
-  
-  text-align: center;
-  margin-left:50% ;
-  
-}
-.info{
-    top: 40%;
-    margin-top: 60%;
-    margin-left: 5%;
-    color: white;
-}
-.info p{
-    color: cornsilk;
-    font-size: 18px;
-} 
- .info p strong{
-  color: rgb(255, 236, 220);
-
-}
-
-
-.stroke {
-  stroke: rgb(231, 69, 69);
-  stroke-dasharray: 360;
-  stroke-dashoffset: 360;
-  transition: 0.6s ease-out;
-}
-
-svg {
-  fill: #17141d;
-  stroke-width: 2px;
-}
-
-.card:hover .stroke {
-  stroke-dashoffset: 100;
-  transition: 0.6s ease-out;
-}
-.img-card3{
-  max-height: 450px;
-  width: auto;
-}
-.div-btn-change{
-  text-align: center;
-}
-.div-btn-change button:hover{
-  background-color: green;
-  color: white;
-  border: none;
+  border: blue;
 }
