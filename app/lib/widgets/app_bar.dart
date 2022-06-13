@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 
 import '../screens/home.dart';
 
-AppBar buildAppbar(BuildContext context) {
+AppBar buildAppbar(BuildContext context, String text) {
   return AppBar(
     backgroundColor: Colors.pinkAccent,
     elevation: 0,
@@ -11,7 +11,10 @@ AppBar buildAppbar(BuildContext context) {
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        Text('travelola',
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.12,
+        ),
+        Text(text,
             style: GoogleFonts.lato(
                 fontSize: 21,
                 fontWeight: FontWeight.w400,

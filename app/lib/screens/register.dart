@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
 import 'package:lottie/lottie.dart';
 
+import '../controller/apiController.dart';
 import 'login.dart';
 
 class Register extends StatefulWidget {
@@ -28,10 +29,9 @@ class _LoginState extends State<Register> {
   final _phoneController = TextEditingController();
   final _emailController = TextEditingController();
   String image = "default.png";
-  final String url = "http://localhost:8080/api/auth/signup";
 
   Future save() async {
-    var res = await http.post(Uri.parse(url),
+    var res = await http.post(Uri.parse(urlSingup),
         headers: {'Content-Type': 'application/json'},
         body: json.encode({
           'firstName': _firstnameController.text,

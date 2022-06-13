@@ -1,9 +1,10 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors
 
+import 'package:app/screens/home.dart';
+import 'package:app/widgets/bottomNav/bottom_navigation.dart';
+import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
-import 'home.dart';
 
 class Dashboard extends StatefulWidget {
   Dashboard({Key? key}) : super(key: key);
@@ -82,7 +83,7 @@ class _dashboardState extends State<Dashboard> {
                       onTap: () {
                         Navigator.of(context).push(
                           MaterialPageRoute(
-                            builder: (context) => Home(),
+                            builder: (context) => BottomNav(),
                           ),
                         );
                       },
