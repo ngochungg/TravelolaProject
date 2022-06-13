@@ -230,9 +230,12 @@ public class AuthController {
         String newPassword = emailSenderService.randomString();
         user.setPassword(encoder.encode(newPassword));
         userRepository.save(user);
-        emailSenderService.sendEmail(user.getEmail(),
-                "New Password",
-                "Your new password is <h3 style=\"border: 1px solid; display: inline; padding: 2px;\">" + newPassword + "</h3>");
+        Map<String, Object> emailMap = new HashMap<>();
+        emailMap.put("newPassword", newPassword);
+        emailMap.put("name", user.getFirstName()+" "+user.getLastName());
+        String templateHtml = emailSenderService.templateResolve("NewPassword", emailMap);
+        emailSenderService.sendTemplateMessage(email, null, "New Password", templateHtml);
+
         return ResponseEntity.ok(new MessageResponse("New password sent to your email!"));
     }
     //login facebook

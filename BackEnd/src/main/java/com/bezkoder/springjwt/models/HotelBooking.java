@@ -55,4 +55,23 @@ public class HotelBooking {
     @JoinColumn(name = "user_id",referencedColumnName = "id")
     @JsonIgnoreProperties("hotelBooking")
     private User user;
+
+    public HotelBooking() {
+    }
+
+    public HotelBooking(Long id, String bookingCode, int numOfGuest, boolean status, Date checkInDate, Date checkOutDate, Float totalPrice, Instant createdAt, Instant updateAt, String paymentMethod, boolean retired, HotelBookingDetail hotelBookingDetail, User user) {
+        this.id = id;
+        this.bookingCode = bookingCode;
+        this.numOfGuest = numOfGuest;
+        this.status = status;
+        this.checkInDate = checkInDate;
+        this.checkOutDate = checkOutDate;
+        this.totalPrice = totalPrice;
+        this.createdAt = createdAt;
+        this.updateAt = updateAt;
+        this.paymentMethod = paymentMethod;
+        this.retired = retired;
+        this.hotelBookingDetail = hotelBookingDetail;
+        this.user = user;
+    }
 }

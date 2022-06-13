@@ -44,6 +44,11 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 
+	<!--Image picker-->
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Photo Library Access Warning</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Camera Access Warning</string>
 	<!-- login social -->
 	<key>CFBundleURLTypes</key>
 	<array>

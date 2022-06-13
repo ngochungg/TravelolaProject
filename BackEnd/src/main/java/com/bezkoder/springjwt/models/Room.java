@@ -53,6 +53,21 @@ public class Room {
     @JsonIgnoreProperties("room")
     private List<Image> images;
 
+    public Room() {
+    }
 
-
+    public Room(Long id, int roomNumber, Date availableTime, String roomType, double price, int maxAdult, int maxChildren, Boolean roomStatus, Boolean retired, Hotel hotel, HotelBookingRoom hotelBookingRoom, List<Image> images) {
+        this.id = id;
+        this.roomNumber = roomNumber;
+        this.availableTime = availableTime;
+        this.roomType = roomType;
+        this.price = price;
+        this.maxAdult = maxAdult;
+        this.maxChildren = maxChildren;
+        this.roomStatus = roomStatus;
+        this.retired = retired;
+        this.hotel = hotel;
+        this.hotelBookingRoom = hotelBookingRoom;
+        this.images = images;
+    }
 }
