@@ -334,4 +334,10 @@ public class AuthController {
                 userDetails.getIsActive(),
                 roles));
     }
+    //view profile by id
+    @GetMapping("/viewProfile/{id}")
+    public ResponseEntity<?> viewProfile(@PathVariable Long id) {
+        User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
+        return ResponseEntity.ok(user);
+    }
 }

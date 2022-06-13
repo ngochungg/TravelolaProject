@@ -159,7 +159,7 @@ public class HotelController {
         return ResponseEntity.ok().body("Hotel refusal successfully");
     }
 
-    
+
     //get all hotel
     @GetMapping(value = "/getAllHotel")
     public List<Hotel> getAllHotel(){
