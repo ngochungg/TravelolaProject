@@ -1,12 +1,16 @@
 package com.bezkoder.springjwt.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 @Table(name = "room")
 public class Room {
     @Id
@@ -16,6 +20,10 @@ public class Room {
 
     @Column(name = "room_number")
     private int roomNumber;
+
+    @Column(name = "room_name", length = 150)
+    private String roomName;
+
 
     @Column(name = "available_time",nullable = true)
     private Date availableTime;
@@ -35,8 +43,7 @@ public class Room {
     @Column(name = "room_status")
     private Boolean roomStatus;
 
-    @Column(name = "retired", nullable = true)
-    private Boolean retired;
+
 
     @ManyToOne
     @JoinColumn(name = "hotel_id", referencedColumnName = "id")
@@ -56,16 +63,16 @@ public class Room {
     public Room() {
     }
 
-    public Room(Long id, int roomNumber, Date availableTime, String roomType, double price, int maxAdult, int maxChildren, Boolean roomStatus, Boolean retired, Hotel hotel, HotelBookingRoom hotelBookingRoom, List<Image> images) {
+    public Room(Long id, int roomNumber, String roomName, Date availableTime, String roomType, double price, int maxAdult, int maxChildren, Boolean roomStatus, Hotel hotel, HotelBookingRoom hotelBookingRoom, List<Image> images) {
         this.id = id;
         this.roomNumber = roomNumber;
+        this.roomName = roomName;
         this.availableTime = availableTime;
         this.roomType = roomType;
         this.price = price;
         this.maxAdult = maxAdult;
         this.maxChildren = maxChildren;
         this.roomStatus = roomStatus;
-        this.retired = retired;
         this.hotel = hotel;
         this.hotelBookingRoom = hotelBookingRoom;
         this.images = images;

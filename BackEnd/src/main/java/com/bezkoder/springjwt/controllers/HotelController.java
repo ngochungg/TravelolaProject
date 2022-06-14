@@ -2,6 +2,7 @@ package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.HotelRequest;
+import com.bezkoder.springjwt.payload.request.RoomRequest;
 import com.bezkoder.springjwt.payload.request.ServicesRequest;
 import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
@@ -182,6 +183,40 @@ public class HotelController {
 
         hotelRepository.save(hotel);
         return ResponseEntity.ok().body("Services registration successfully");
+    }
+
+    //add room
+    @PostMapping(value = "/addRoom/{id}")
+    public ResponseEntity<?> addRoom(@PathVariable("id") Long id, RoomRequest roomRequest){
+        //find Hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        Room roomNumber = roomRepository.findByRoomNumber(roomRequest.getRoomNumber());
+        if(roomNumber != null){
+            return ResponseEntity.badRequest().body("Room already exists");
+        }
+        //add room
+        Room room = new Room();
+        room.setRoomName(roomRequest.getRoomName());
+        room.setRoomType(roomRequest.getRoomType());
+        room.setRoomNumber(roomRequest.getRoomNumber());
+        room.setPrice(roomRequest.getPrice());
+        room.setMaxAdult(roomRequest.getMaxAdult());
+        room.setMaxChildren(roomRequest.getMaxChildren());
+        room.setHotel(hotel);
+        Room resultRoom = roomRepository.save(room);
+
+        //upload images
+        for (MultipartFile file : roomRequest.getImages()) {
+            Image image = new Image();
+            String fileName = storageService.storeFile(file);
+            image.setImagePath(fileName);
+            image.setHotel(hotel);
+            image.setRoom(resultRoom);
+            image.imageAlt = "image of "+roomRequest.getRoomName();
+            //save image
+            imageRepository.save(image);
+        }
+        return ResponseEntity.ok().body("Room registration successfully");
     }
 
 
