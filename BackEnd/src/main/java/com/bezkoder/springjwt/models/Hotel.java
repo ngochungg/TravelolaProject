@@ -1,6 +1,7 @@
 package com.bezkoder.springjwt.models;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -79,6 +80,7 @@ public class Hotel {
     @OneToMany
     @JoinColumn(name = "hotel_id", referencedColumnName = "id")
     @JsonIgnoreProperties("hotel")
+    @JsonIgnore
     private List<Room> rooms;
 
     @OneToMany

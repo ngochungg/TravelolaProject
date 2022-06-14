@@ -7,9 +7,7 @@ import com.bezkoder.springjwt.payload.request.ServicesRequest;
 import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
@@ -190,9 +188,8 @@ public class HotelController {
     public ResponseEntity<?> addRoom(@PathVariable("id") Long id, RoomRequest roomRequest){
         //find Hotel by id
         Hotel hotel = hotelRepository.findById(id).get();
-        Room roomNumber = roomRepository.findByRoomNumber(roomRequest.getRoomNumber());
-        if(roomNumber != null){
-            return ResponseEntity.badRequest().body("Room already exists");
+        if(roomRepository.existsByRoomNumber(roomRequest.getRoomNumber())){
+            return ResponseEntity.badRequest().body("Room number already exists");
         }
         //add room
         Room room = new Room();
@@ -204,6 +201,9 @@ public class HotelController {
         room.setMaxChildren(roomRequest.getMaxChildren());
         room.setHotel(hotel);
         Room resultRoom = roomRepository.save(room);
+        int roomToHotel = hotel.getNumberOfRoom()+1;
+        hotel.setNumberOfRoom(roomToHotel);
+        hotelRepository.save(hotel);
 
         //upload images
         for (MultipartFile file : roomRequest.getImages()) {
@@ -225,6 +225,15 @@ public class HotelController {
     public List<Hotel> getAllHotel(){
         return hotelRepository.findAll();
     }
-
+    //get location by hotel id
+    @GetMapping(value = "/getLocation/{id}")
+    public Location getLocation(@PathVariable("id") Long id){
+        //find by hotel id
+        Hotel hotel = hotelRepository.findById(id).get();
+        Long locationId = hotel.getLocation().getId();
+        //find location by hotel id
+        Location location = locationRepository.findById(locationId).get();;
+        return location;
+    }
 
 }
