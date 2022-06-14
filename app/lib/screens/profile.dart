@@ -7,6 +7,7 @@ import 'home.dart';
 import 'login.dart';
 
 class Profile extends StatefulWidget {
+  static const routeName = '/profile';
   Profile({Key? key}) : super(key: key);
 
   @override
@@ -27,96 +28,100 @@ class _ProfileState extends State<Profile> {
     }
 
     var user = jsonDecode(retriveString);
-    return Scaffold(
-        body: SafeArea(
-      child: Container(
-          color: Colors.white,
-          child: Column(
-            children: <Widget>[
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: <Widget>[
-                  IconButton(
-                    icon: Icon(Icons.menu),
-                    color: Colors.black,
-                    onPressed: () {
-                      print(user);
-                    },
-                  ),
-                  if (user["accessToken"] == null)
-                    IconButton(
-                      icon: Icon(
-                        Icons.person_outline,
-                        size: 30,
-                        color: Colors.black,
-                      ),
+    return WillPopScope(
+      onWillPop: () async => false,
+      child: Scaffold(
+          body: SafeArea(
+        child: Container(
+            color: Colors.white,
+            child: Column(
+              children: <Widget>[
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: <Widget>[
+                    BackButton(
                       color: Colors.black,
                       onPressed: () {
-                        Navigator.of(context).push(
-                          MaterialPageRoute(
-                            builder: (context) => Login(),
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
-                    )
-                  else
-                    FlatButton(
-                      child: Text(
-                        'Hello, ${user["username"]}',
-                        style: GoogleFonts.montserrat(
-                          fontSize: 20,
-                          fontWeight: FontWeight.w200,
-                          color: Colors.black,
-                        ),
-                      ),
-                      onPressed: () {},
                     ),
-                ],
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: <Widget>[
+                    if (user["accessToken"] == null)
                       IconButton(
                         icon: Icon(
-                          Icons.home_outlined,
-                          color: Colors.black,
+                          Icons.person_outline,
                           size: 30,
+                          color: Colors.black,
+                        ),
+                        color: Colors.black,
+                        onPressed: () {
+                          Navigator.of(context).push(
+                            MaterialPageRoute(
+                              builder: (context) => Login(),
+                            ),
+                          );
+                        },
+                      )
+                    else
+                      FlatButton(
+                        child: Text(
+                          'Hello, ${user["username"]}',
+                          style: GoogleFonts.montserrat(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w200,
+                            color: Colors.black,
+                          ),
                         ),
                         onPressed: () {
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: ((context) => Home())));
+                          print(user);
                         },
                       ),
-                      IconButton(
+                  ],
+                ),
+                SizedBox(
+                  height: 20,
+                ),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: <Widget>[
+                        IconButton(
                           icon: Icon(
-                            Icons.search,
+                            Icons.home_outlined,
                             color: Colors.black,
                             size: 30,
                           ),
-                          onPressed: () {}),
-                      IconButton(
-                          icon: Icon(
-                            Icons.favorite_border,
-                            color: Colors.black,
-                            size: 30,
-                          ),
-                          onPressed: () {}),
-                      IconButton(
-                          icon: Icon(
-                            Icons.person,
-                            color: Colors.pink,
-                            size: 30,
-                          ),
-                          onPressed: () {}),
-                    ],
-                  )),
-            ],
-          )),
-    ));
+                          onPressed: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: ((context) => Home())));
+                          },
+                        ),
+                        IconButton(
+                            icon: Icon(
+                              Icons.search,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {}),
+                        IconButton(
+                            icon: Icon(
+                              Icons.favorite_border,
+                              color: Colors.black,
+                              size: 30,
+                            ),
+                            onPressed: () {}),
+                        IconButton(
+                            icon: Icon(
+                              Icons.person,
+                              color: Colors.pink,
+                              size: 30,
+                            ),
+                            onPressed: () {}),
+                      ],
+                    )),
+              ],
+            )),
+      )),
+    );
   }
 }

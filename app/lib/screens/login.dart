@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/model/loginModel.dart';
 import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -7,6 +8,13 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../controller/apiController.dart';
+import '../controller/dataController.dart';
+import '../model/user.dart';
+import '../widgets/bottomNav/bottom_navigation.dart';
+import '../widgets/bottomNav/my_home_bottom.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -21,7 +29,6 @@ class _LoginState extends State<Login> {
   final _formKey = GlobalKey<FormState>();
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
-  String url = "http://localhost:8080/api/auth/signin";
 
   Future googleLogin() async {
     final GoogleSignIn _googleSignin = GoogleSignIn();
@@ -38,9 +45,9 @@ class _LoginState extends State<Login> {
         "photoUrl": result.photoUrl,
       });
 
-      String googleUrl = "http://localhost:8080/api/auth/loginGoogle";
       var response = await http.post(Uri.parse(googleUrl),
           body: json, headers: {"Content-Type": "application/json"});
+      storeUserData(response.body);
       Navigator.pushNamed(context, Home.routeName, arguments: response.body);
     } else {
       return print("Cancalled");
@@ -61,11 +68,10 @@ class _LoginState extends State<Login> {
       "photoUrl": requestData["picture"]["data"]["url"],
     });
 
-    String fbUrl = "http://localhost:8080/api/auth/loginFacebook";
     var response = await http.post(Uri.parse(fbUrl),
         body: json, headers: {"Content-Type": "application/json"});
+    storeUserData(response.body);
     Navigator.pushNamed(context, Home.routeName, arguments: response.body);
-    print(response.body);
   }
 
   Future login() async {
@@ -75,21 +81,23 @@ class _LoginState extends State<Login> {
       "username": username,
       "password": password,
     });
-    final response = await http.post(Uri.parse(url), body: body, headers: {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setString('body', body);
+    final response =
+        await http.post(Uri.parse(urlSignin), body: body, headers: {
       "Content-Type": "application/json",
     });
     if (response.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.green,
         content: Text("Login succescfull"),
       ));
       final String user = response.body;
-      // print(user);
+      storeUserData(user);
       Navigator.pushNamed(context, Home.routeName, arguments: user);
-      print(user);
     }
     if (response.statusCode == 401) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.red,
         content: Text("Incorrect username or password"),
       ));
@@ -176,13 +184,13 @@ class _LoginState extends State<Login> {
                             height: 60,
                             child: TextFormField(
                               controller: _usernameController,
-                              decoration: InputDecoration(
-                                  suffix: Icon(
+                              decoration: const InputDecoration(
+                                  suffix: const Icon(
                                     FontAwesomeIcons.envelope,
                                     color: Colors.red,
                                   ),
                                   labelText: "Username",
-                                  border: OutlineInputBorder(
+                                  border: const OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)),
                                   )),
@@ -197,15 +205,15 @@ class _LoginState extends State<Login> {
                             child: TextFormField(
                               controller: _passwordController,
                               obscureText: true,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     FontAwesomeIcons.eyeSlash,
                                     color: Colors.red,
                                   ),
                                   labelText: "Password",
                                   border: OutlineInputBorder(
-                                    borderRadius:
-                                        BorderRadius.all(Radius.circular(8)),
+                                    borderRadius: const BorderRadius.all(
+                                        Radius.circular(8)),
                                   )),
                             ),
                           ),
@@ -242,39 +250,41 @@ class _LoginState extends State<Login> {
                                 ),
                               ),
                               child: Padding(
-                                padding: EdgeInsets.all(1),
+                                padding: const EdgeInsets.all(1),
                                 child: TextButton(
                                   onPressed: () {
                                     if (_usernameController.text.isEmpty &&
                                         _passwordController.text.isEmpty) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text(
+                                        content: const Text(
                                             "Please enter username and password"),
                                       ));
                                       return;
                                     }
                                     if (_usernameController.text.isEmpty) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text("Please enter username"),
+                                        content:
+                                            const Text("Please enter username"),
                                       ));
                                       return;
                                     }
                                     if (_passwordController.text.isEmpty) {
                                       ScaffoldMessenger.of(context)
-                                          .showSnackBar(SnackBar(
+                                          .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: Text("Please enter password"),
+                                        content:
+                                            const Text("Please enter password"),
                                       ));
                                       return;
                                     } else {
                                       login();
                                     }
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Login',
                                     style: TextStyle(
                                         color: Colors.white,
