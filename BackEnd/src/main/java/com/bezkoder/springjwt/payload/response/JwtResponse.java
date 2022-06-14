@@ -13,7 +13,7 @@ public class JwtResponse {
   private String lastName;
   private String phone;
   private String imageUrl;
-  private boolean isActive;
+  private boolean status;
 
   public JwtResponse(String accessToken, Long id, String username, String email,
                      String firstName,String lastName,String phone,String imageUrl,boolean isActive ,List<String> roles) {
@@ -26,7 +26,7 @@ public class JwtResponse {
     this.phone = phone;
     this.imageUrl = imageUrl;
     this.roles = roles;
-    this.isActive = isActive;
+    this.status = isActive;
 
   }
 
@@ -108,12 +108,12 @@ public class JwtResponse {
     this.imageUrl = imageUrl;
   }
 
-  public boolean isActive() {
-    return isActive;
+  public boolean isStatus() {
+    return status;
   }
 
-  public void setActive(boolean active) {
-    isActive = active;
+  public void setStatus(boolean status) {
+    this.status = status;
   }
 
 }

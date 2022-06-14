@@ -77,7 +77,7 @@ public class HotelController {
         Role userRole = roleRepository.findByName(ERole.ROLE_MODERATOR)
                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
         user.setRoles(Collections.singleton(userRole));
-        user.setIsActive(Boolean.FALSE);
+        user.setStatus(Boolean.FALSE);
         User resultUser = userRepository.save(user);
 
         //Hotel create
@@ -122,7 +122,7 @@ public class HotelController {
         String UserId = hotel.getAccount().getId().toString();
         User user = userRepository.findById(Long.parseLong(UserId)).get();
         //System.out.println(UserId);
-        user.setIsActive(Boolean.TRUE);
+        user.setStatus(Boolean.TRUE);
         userRepository.save(user);
         //mail Confirmation
         Map<String, Object> emailMap = new HashMap<>();

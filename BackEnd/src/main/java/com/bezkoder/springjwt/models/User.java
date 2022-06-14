@@ -1,7 +1,5 @@
 package com.bezkoder.springjwt.models;
 
-import org.springframework.web.multipart.MultipartFile;
-
 import java.util.HashSet;
 import java.util.Set;
 
@@ -49,7 +47,7 @@ public class User {
   private String imageUrl;
 
 
-  private Boolean isActive = true;
+  private Boolean status = true;
 
 
 
@@ -65,7 +63,7 @@ public class User {
 
 
 
-  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl,boolean isActive) {
+  public User(String username, String email, String password, String firstName, String lastName, String phone, String imageUrl,boolean status) {
     this.username = username;
     this.email = email;
     this.password = password;
@@ -73,7 +71,7 @@ public class User {
     this.lastName = lastName;
     this.phone = phone;
     this.imageUrl = imageUrl;
-    this.isActive = isActive;
+    this.status = status;
   }
 
   public Long getId() {
@@ -147,12 +145,12 @@ public class User {
     this.imageUrl = imageUrl;
   }
 
-  public Boolean getIsActive() {
-    return isActive;
+  public Boolean getStatus() {
+    return status;
   }
 
-  public void setIsActive(Boolean isActive) {
-    this.isActive = isActive;
+  public void setStatus(Boolean isActive) {
+    this.status = isActive;
   }
 
 }

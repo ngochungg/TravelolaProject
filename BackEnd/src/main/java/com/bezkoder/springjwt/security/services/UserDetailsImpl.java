@@ -12,8 +12,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import com.bezkoder.springjwt.models.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import static org.aspectj.weaver.tools.cache.SimpleCacheFactory.enabled;
-
 public class UserDetailsImpl implements UserDetails {
   private static final long serialVersionUID = 1L;
 
@@ -30,12 +28,12 @@ public class UserDetailsImpl implements UserDetails {
   private String lastName;
   private String phone;
   private String imageUrl;
-  private boolean isActive;
+  private boolean status;
 
   private Collection<? extends GrantedAuthority> authorities;
 
   public UserDetailsImpl(Long id, String username, String email, String password,String firstName,
-                         String lastName,String phone,String imageUrl, boolean isActive,
+                         String lastName,String phone,String imageUrl, boolean status,
       Collection<? extends GrantedAuthority> authorities) {
     this.id = id;
     this.username = username;
@@ -46,7 +44,7 @@ public class UserDetailsImpl implements UserDetails {
     this.lastName = lastName;
     this.phone = phone;
     this.imageUrl = imageUrl;
-    this.isActive = isActive;
+    this.status = status;
   }
 
   public static UserDetailsImpl build(User user) {
@@ -63,7 +61,7 @@ public class UserDetailsImpl implements UserDetails {
         user.getLastName(),
         user.getPhone(),
         user.getImageUrl(),
-        user.getIsActive(),
+        user.getStatus(),
         authorities);
   }
 
@@ -95,7 +93,7 @@ public class UserDetailsImpl implements UserDetails {
   }
 
   public boolean getIsActive() {
-    return isActive;
+    return status;
   }
 
   @Override

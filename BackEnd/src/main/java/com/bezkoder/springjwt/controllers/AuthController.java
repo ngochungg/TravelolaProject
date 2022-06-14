@@ -11,7 +11,6 @@ import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -196,7 +195,7 @@ public class AuthController {
     @PostMapping("/lockUser/{id}")
     public ResponseEntity<?> lockUser(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
-        user.setIsActive(false);
+        user.setStatus(false);
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User locked successfully!"));
     }
@@ -204,7 +203,7 @@ public class AuthController {
     @PostMapping("/unlockUser/{id}")
     public ResponseEntity<?> unlockUser(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
-        user.setIsActive(true);
+        user.setStatus(true);
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User unlocked successfully!"));
     }
@@ -251,7 +250,7 @@ public class AuthController {
             user.setLastName(loginSocialRequest.getLastName());
             user.setPassword(encoder.encode(loginSocialRequest.getId()));
             user.setImageUrl(loginSocialRequest.getPhotoUrl());
-            user.setIsActive(true);
+            user.setStatus(true);
             user.setUsername("Facebook"+ loginSocialRequest.getId());
             user.setPhone("Null");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
@@ -299,7 +298,7 @@ public class AuthController {
             user.setLastName(loginSocialRequest.getLastName());
             user.setPassword(encoder.encode(loginSocialRequest.getId()));
             user.setImageUrl(loginSocialRequest.getPhotoUrl());
-            user.setIsActive(true);
+            user.setStatus(true);
             user.setUsername("Google"+ loginSocialRequest.getId());
             user.setPhone("Null");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
