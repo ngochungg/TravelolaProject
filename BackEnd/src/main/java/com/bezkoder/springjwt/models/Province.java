@@ -8,8 +8,8 @@ import java.util.List;
 
 @Entity
 @Table(name = "province")
-@Getter
-@Setter
+//@Getter
+//@Setter
 public class Province {
     @Id
     @Column(name = "id")

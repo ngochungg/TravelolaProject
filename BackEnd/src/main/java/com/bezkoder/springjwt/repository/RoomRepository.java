@@ -9,4 +9,8 @@ import org.springframework.stereotype.Repository;
 public interface RoomRepository extends JpaRepository<Room, Long>, JpaSpecificationExecutor {
     //find by roomNumber
     Boolean existsByRoomNumber(int roomNumber);
+    //get all room by hotelId
+    Iterable<Room> findByHotelId(Long hotelId);
+
+
 }

@@ -1,6 +1,7 @@
 package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.*;
+import com.bezkoder.springjwt.payload.request.HotelBookingRequest;
 import com.bezkoder.springjwt.payload.request.HotelRequest;
 import com.bezkoder.springjwt.payload.request.RoomRequest;
 import com.bezkoder.springjwt.payload.request.ServicesRequest;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
+import java.util.concurrent.TimeUnit;
 
 @CrossOrigin
 @RestController
@@ -43,6 +45,9 @@ public class HotelController {
     PasswordEncoder encoder;
     @Autowired
     EmailSenderService emailSenderService;
+    @Autowired
+    private BookingRepository hotelBookingRepository;
+
 
 
     //add hotel and MultipartFile image
@@ -235,5 +240,51 @@ public class HotelController {
         Location location = locationRepository.findById(locationId).get();;
         return location;
     }
+    //get ward by id
+    @GetMapping(value = "/getWard/{id}")
+    public Ward getWard(@PathVariable("id") Long id) {
+        return wardRepository.findById(id).get();
+    }
+    //get all room
+    @GetMapping(value = "/getAllRoom")
+    public List<Room> getAllRoom(){
+        return roomRepository.findAll();
+    }
 
+
+    //HotelBooking
+    @PostMapping(value = "/hotelBooking")
+    public ResponseEntity<?> hotelBooking(@RequestBody HotelBookingRequest hotelBookingRequest) {
+        //find room by id
+        Room room = roomRepository.findById(hotelBookingRequest.getRoomId()).get();
+        //find hotel by id
+        Hotel hotel = hotelRepository.findById(room.getHotel().getId()).get();
+        //find user by id
+        User user = userRepository.findById(hotelBookingRequest.getUserId()).get();
+
+        //add hotel booking
+        HotelBooking hotelBooking = new HotelBooking();
+        hotelBooking.setBookingCode(emailSenderService.randomString());
+        //time
+        hotelBooking.setCheckInDate(hotelBookingRequest.getCheckInDate());
+        hotelBooking.setCheckOutDate(hotelBookingRequest.getCheckOutDate());
+        hotelBooking.setNumOfGuest(hotelBookingRequest.getNumOfGuest());
+        hotelBooking.setPaymentMethod(hotelBookingRequest.getPaymentMethod());
+        hotelBooking.setTotalPrice(hotelBookingRequest.getTotalPrice());
+        hotelBooking.setRoom(room);
+        hotelBooking.setUser(user);
+
+        System.out.println("Day:" + getDifferenceDays(hotelBookingRequest.getCheckInDate(), hotelBookingRequest.getCheckOutDate()));
+
+        HotelBooking resultHotelBooking = hotelBookingRepository.save(hotelBooking);
+
+        //return hotel booking
+        return ResponseEntity.ok().body(resultHotelBooking);
+
+
+}
+public static long getDifferenceDays(Date d1, Date d2) {
+        long diff = d2.getTime() - d1.getTime();
+        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+    }
 }

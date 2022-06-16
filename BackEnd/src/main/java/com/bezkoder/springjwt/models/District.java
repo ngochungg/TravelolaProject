@@ -7,8 +7,8 @@ import javax.persistence.*;
 import java.util.List;
 @Entity
 @Table(name = "district")
-@Setter
-@Getter
+//@Setter
+//@Getter
 public class District {
     @Id
     @Column(name = "id")

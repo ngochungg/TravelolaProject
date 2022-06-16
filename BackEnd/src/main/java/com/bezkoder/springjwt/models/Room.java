@@ -52,20 +52,21 @@ public class Room {
     @JsonIgnore
     private Hotel hotel;
 
-    @OneToOne
-    @JoinColumn(name = "booking_room_id", referencedColumnName = "id")
-    @JsonIgnoreProperties("room")
-    private HotelBookingRoom hotelBookingRoom;
 
     @OneToMany
     @JoinColumn(name = "room_id", referencedColumnName = "id")
     @JsonIgnoreProperties("room")
     private List<Image> images;
 
+    @OneToMany
+    @JoinColumn(name = "room_id", referencedColumnName = "id")
+    @JsonIgnoreProperties("room")
+    private List<HotelBooking> hotelBookings;
+
     public Room() {
     }
 
-    public Room(Long id, int roomNumber, String roomName, Date availableTime, String roomType, double price, int maxAdult, int maxChildren, Boolean roomStatus, Hotel hotel, HotelBookingRoom hotelBookingRoom, List<Image> images) {
+    public Room(Long id, int roomNumber, String roomName, Date availableTime, String roomType, double price, int maxAdult, int maxChildren, Boolean roomStatus, Hotel hotel, List<Image> images, List<HotelBooking> hotelBookings) {
         this.id = id;
         this.roomNumber = roomNumber;
         this.roomName = roomName;
@@ -76,7 +77,7 @@ public class Room {
         this.maxChildren = maxChildren;
         this.roomStatus = roomStatus;
         this.hotel = hotel;
-        this.hotelBookingRoom = hotelBookingRoom;
         this.images = images;
+        this.hotelBookings = hotelBookings;
     }
 }

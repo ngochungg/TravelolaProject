@@ -1,17 +1,25 @@
 package com.bezkoder.springjwt.models;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.Getter;
+import lombok.Setter;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.Instant;
 import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import javax.persistence.*;
 
 @Entity
 @EntityListeners(AuditingEntityListener.class)
 @Table(name = "hotel_booking")
+@Setter
+@Getter
 public class HotelBooking {
     @Id
     @Column
@@ -33,9 +41,11 @@ public class HotelBooking {
     private Float totalPrice;
     @Column(name="created_at")
 //    @JsonFormat(pattern="yyyy-MM-dd")
-    @CreatedDate
+//    @CreatedDate
+    @CreationTimestamp
     private Instant createdAt;
-    @LastModifiedDate
+//    @LastModifiedDate
+    @UpdateTimestamp
     @Column(name = "update_at")
 //    @JsonFormat(pattern="yyyy-MM-dd")
     private Instant updateAt;
@@ -46,10 +56,10 @@ public class HotelBooking {
     @Column(name = "retired")
     private boolean retired;
 
-    @OneToOne
-    @JoinColumn(name = "hotel_booking_Detail_id",referencedColumnName = "id")
-    @JsonIgnoreProperties("hotelBooking")
-    private HotelBookingDetail hotelBookingDetail;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private Room room;
+
 
     @OneToOne
     @JoinColumn(name = "user_id",referencedColumnName = "id")
@@ -59,7 +69,7 @@ public class HotelBooking {
     public HotelBooking() {
     }
 
-    public HotelBooking(Long id, String bookingCode, int numOfGuest, boolean status, Date checkInDate, Date checkOutDate, Float totalPrice, Instant createdAt, Instant updateAt, String paymentMethod, boolean retired, HotelBookingDetail hotelBookingDetail, User user) {
+    public HotelBooking(Long id, String bookingCode, int numOfGuest, boolean status, Date checkInDate, Date checkOutDate, Float totalPrice, Instant createdAt, Instant updateAt, String paymentMethod, boolean retired, Room room, User user) {
         this.id = id;
         this.bookingCode = bookingCode;
         this.numOfGuest = numOfGuest;
@@ -71,7 +81,7 @@ public class HotelBooking {
         this.updateAt = updateAt;
         this.paymentMethod = paymentMethod;
         this.retired = retired;
-        this.hotelBookingDetail = hotelBookingDetail;
+        this.room = room;
         this.user = user;
     }
 }
