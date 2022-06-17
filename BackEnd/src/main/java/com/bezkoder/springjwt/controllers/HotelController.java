@@ -261,6 +261,16 @@ public class HotelController {
         Hotel hotel = hotelRepository.findById(room.getHotel().getId()).get();
         //find user by id
         User user = userRepository.findById(hotelBookingRequest.getUserId()).get();
+        System.out.println(hotelBookingRequest.getCheckInDate());
+        System.out.println(hotelBookingRequest.getCheckOutDate());
+        //check check in date before check out date
+        if(hotelBookingRequest.getCheckInDate().after(hotelBookingRequest.getCheckOutDate())){
+            return ResponseEntity.badRequest().body("Check in date must be before check out date");
+        }
+        //check check in date after today
+        if(hotelBookingRequest.getCheckInDate().before(new Date())){
+            return ResponseEntity.badRequest().body("Check in date must be after today");
+        }
 
         //add hotel booking
         HotelBooking hotelBooking = new HotelBooking();
@@ -268,13 +278,14 @@ public class HotelController {
         //time
         hotelBooking.setCheckInDate(hotelBookingRequest.getCheckInDate());
         hotelBooking.setCheckOutDate(hotelBookingRequest.getCheckOutDate());
+
         hotelBooking.setNumOfGuest(hotelBookingRequest.getNumOfGuest());
         hotelBooking.setPaymentMethod(hotelBookingRequest.getPaymentMethod());
         hotelBooking.setTotalPrice(hotelBookingRequest.getTotalPrice());
+
         hotelBooking.setRoom(room);
         hotelBooking.setUser(user);
 
-        System.out.println("Day:" + getDifferenceDays(hotelBookingRequest.getCheckInDate(), hotelBookingRequest.getCheckOutDate()));
 
         HotelBooking resultHotelBooking = hotelBookingRepository.save(hotelBooking);
 
