@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from '../_services/token-storage.service';
 const AUTH_API = 'http://localhost:8080/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -9,7 +10,10 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(private http: HttpClient) { }
+  currentUser: any;
+  
+  constructor(private token: TokenStorageService,private http: HttpClient) { }
+  
   getTest(): Observable<any> {
     return this.http.get(AUTH_API + 'test123', { responseType: 'text' });
   }
@@ -32,9 +36,16 @@ export class AuthService {
 
     }, httpOptions);
   }
+  reloadPro(): Observable<any> {
+    this.currentUser = this.token.getUser();
+    return this.http.get(AUTH_API + 'viewProfile/' + this.currentUser.id);
+  }
+  getAllUsers() {
+    return this.http.get(AUTH_API + 'getAllUser');
+   }
   update( firstName: string,lastName: string,email: string, phone: string): Observable<any> {
-    return this.http.post(AUTH_API + 'update', {
-     
+    this.currentUser = this.token.getUser();
+    return this.http.post(AUTH_API + 'updateUser/'+ this.currentUser.id , {
       firstName,
       lastName,
        email,

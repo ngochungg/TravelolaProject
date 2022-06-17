@@ -12,6 +12,7 @@ import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
 import { UpdateComponent } from './update/update.component';
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'admin', component: BoardAdminComponent },
   { path: 'about', component: AboutComponent },
   { path: 'update', component: UpdateComponent },
+  { path: 'contac', component: ContacComponent },
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }

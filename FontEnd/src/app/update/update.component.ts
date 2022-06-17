@@ -22,18 +22,18 @@ export class UpdateComponent implements OnInit {
   isSuccessful = false;
 
   errorMessage = '';
-  constructor(private authService: AuthService, private tokenStorage: TokenStorageService, 
+  constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService, 
      private router: Router) { }
 
   ngOnInit(): void {
 
   }
   onUpdate(): void {
-    const {  first, last,mail,  phon} = this.form;
-    this.authService.update(first,last,mail,phon).subscribe({
+    this.currentUser = this.token.getUser();
+    const {  firstName, lastName, email,  phone} = this.form;
+    this.authService.update(firstName,lastName,email,phone).subscribe({
       next: data => {
-        this.tokenStorage.saveToken(data.accessToken);
-        this.tokenStorage.saveUser(data);
+        console.log(data);
         this.router.navigate(['/profile'])
         .then(() => {
           this.reloadPage();
@@ -49,4 +49,18 @@ export class UpdateComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
+  // reload(): void{
+  //   this.authService.reloadPro().subscribe({
+  //     next: data => {
+  //       // console.log(data);
+  //       this.viewProfile = data;
+  //       console.log(this.viewProfile);
+  //       // this.reloadPage();
+  //     },
+  //     error: err => {
+  //       this.errorMessage = err.error.message;
+  //     }
+  //   });
+
+  //   }
 }
