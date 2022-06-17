@@ -6,11 +6,11 @@ class User {
   final String lastName;
   final String phone;
   late final String imageUrl;
-  final bool active;
+  final bool status;
   final String accessToken;
 
   User(this.id, this.username, this.email, this.firstName, this.lastName,
-      this.phone, this.imageUrl, this.active, this.accessToken);
+      this.phone, this.imageUrl, this.status, this.accessToken);
 
   User.fromJson(Map<String, dynamic> json)
       : id = json['id'],
@@ -20,7 +20,7 @@ class User {
         lastName = json['lastName'],
         phone = json['phone'],
         imageUrl = json['imageUrl'],
-        active = json['active'],
+        status = json['status'],
         accessToken = json['accessToken'];
   Map<String, dynamic> toJson() => {
         'id': id,
@@ -30,7 +30,7 @@ class User {
         'lastName': lastName,
         'phone': phone,
         'imageUrl': imageUrl,
-        'active': active,
+        'active': status,
         'accessToken': accessToken,
       };
 }

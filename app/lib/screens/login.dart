@@ -12,9 +12,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/apiController.dart';
 import '../controller/dataController.dart';
-import '../model/user.dart';
-import '../widgets/bottomNav/bottom_navigation.dart';
-import '../widgets/bottomNav/my_home_bottom.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -108,9 +105,10 @@ class _LoginState extends State<Login> {
   void click() {}
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SingleChildScrollView(
-        child: Container(
+    return WillPopScope(
+      onWillPop: () async => true,
+      child: Scaffold(
+        body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(

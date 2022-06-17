@@ -1,4 +1,6 @@
+import 'package:app/screens/changePassword.dart';
 import 'package:app/screens/dashboard.dart';
+import 'package:app/screens/editInfo.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login.dart';
 import 'package:app/screens/profile.dart';
@@ -18,6 +20,8 @@ void main() {
       MyHome.routeName: (context) => MyHome(),
       Profile.routeName: (context) => Profile(),
       Home.routeName: (context) => Home(),
+      EditInfo.routeName: (context) => EditInfo(),
+      ChangePassword.routeName: (context) => ChangePassword(),
     },
   ));
 }
