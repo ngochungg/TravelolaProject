@@ -17,6 +17,7 @@ import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
 import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
+import { UpdateComponent } from './update/update.component';
 
 
 
@@ -37,6 +38,7 @@ import { ContacComponent } from './contac/contac.component';
     BoardUserComponent,
     AboutComponent,
     ContacComponent,
+    UpdateComponent,
  
   ],
   imports: [

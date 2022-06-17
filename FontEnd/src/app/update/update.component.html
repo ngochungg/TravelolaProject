@@ -1,0 +1,82 @@
+<div class="container">
+
+
+  <h3>Using CSS to style an HTML Form</h3>
+  <form name="form" (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" novalidate>
+
+
+    <!-- firstname -->
+    <div class="form-group">
+      <label for="firs">First Name</label>
+      <input type="text" class="form-control" name="first" [(ngModel)]="form.firstName" required minlength="1"
+        maxlength="20" #firstName="ngModel" />
+      <div class=" div-errors" *ngIf="firstName.errors && f.submitted">
+        <div *ngIf="firstName.errors['required']">*First Name is required</div>
+        <div *ngIf="firstName.errors['minlength']">
+          *First Name must be at least 1 characters
+        </div>
+        <div *ngIf="firstName.errors['maxlength']">
+          *First Name must be at most 20 characters
+        </div>
+      </div>
+    </div>
+    <!-- lastname -->
+    <div class="form-group">
+      <label for="last">Last Name</label>
+      <input type="text" class="form-control" name="last" [(ngModel)]="form.lastName" required minlength="1"
+        maxlength="20" #lastName="ngModel" />
+      <div class=" div-errors" *ngIf="lastName.errors && f.submitted">
+        <div *ngIf="lastName.errors['required']">*Last Name is required</div>
+        <div *ngIf="lastName.errors['minlength']">
+          *Last Name must be at least 1 characters
+        </div>
+        <div *ngIf="lastName.errors['maxlength']">
+          *LastName must be at most 20 characters
+        </div>
+      </div>
+    </div>
+
+    <!-- email -->
+    <div class="form-group">
+      <label for="mail">Email</label>
+      <input type="email" class="form-control" name="mail" [(ngModel)]="form.email" required email #email="ngModel" />
+      <div class="div-errors" *ngIf="email.errors && f.submitted">
+        <div *ngIf="email.errors['required']">*Email is required</div>
+        <div *ngIf="email.errors['email']">
+          *Email must be a valid email address
+        </div>
+      </div>
+    </div>
+    <!-- phone -->
+    <div class="form-group">
+      <label for="phon">Phone</label>
+      <input type="text" class="form-control" name="phon" [(ngModel)]="form.phone" required minlength="8" maxlength="20"
+        #phone="ngModel" />
+      <div class="div-errors" *ngIf="phone.errors && f.submitted">
+        <div *ngIf="phone.errors['required']">*Phone is required</div>
+        <div *ngIf="phone.errors['minlength']">
+          *Phone must be at least 8 characters
+        </div>
+        <div *ngIf="phone.errors['maxlength']">
+          *Phone must be at most 20 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="position" ><button class="btn btn-danger btn-change"><a href="http://localhost:8080/api/auth/updateUser/{{currentUser.id}}"> Update</a></button></div>
+    </div>
+
+    <div class="alert alert-warning" *ngIf="f.submitted ">s
+      Update failed!<br />
+
+    </div>
+    <div *ngIf="isSuccessful ==true"></div>
+  </form>
+  <hr>
+
+
+
+
+
+</div>
