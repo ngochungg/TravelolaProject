@@ -1,7 +1,9 @@
 package com.bezkoder.springjwt.repository;
 
+import java.util.List;
 import java.util.Optional;
 
+import com.bezkoder.springjwt.models.ERole;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -21,5 +23,6 @@ public interface UserRepository extends JpaRepository<User, Long> {
   User findByEmail(String email);
   //find user by Facebook id
 //  User findByFacebookId(String username);
+
 
 }

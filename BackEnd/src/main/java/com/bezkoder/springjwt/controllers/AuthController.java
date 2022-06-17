@@ -5,7 +5,9 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
+import com.bezkoder.springjwt.models.HotelBooking;
 import com.bezkoder.springjwt.payload.request.*;
+import com.bezkoder.springjwt.repository.BookingRepository;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,6 +55,9 @@ public class AuthController {
 
     @Autowired
     EmailSenderService emailSenderService;
+
+    @Autowired
+    private BookingRepository hotelBookingRepository;
 
     //login
     @PostMapping("/signin")
@@ -340,5 +345,12 @@ public class AuthController {
     public ResponseEntity<?> viewProfile(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
         return ResponseEntity.ok(user);
+    }
+
+    //get booking by user id
+    @GetMapping("/getBooking/{id}")
+    public ResponseEntity<?> getBooking(@PathVariable Long id) {
+        List<HotelBooking> bookings = hotelBookingRepository.findByUserId(id);
+        return ResponseEntity.ok(bookings);
     }
 }

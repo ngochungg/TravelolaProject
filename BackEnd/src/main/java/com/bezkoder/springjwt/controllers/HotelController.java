@@ -263,6 +263,15 @@ public class HotelController {
         User user = userRepository.findById(hotelBookingRequest.getUserId()).get();
         System.out.println(hotelBookingRequest.getCheckInDate());
         System.out.println(hotelBookingRequest.getCheckOutDate());
+        //get roles of user
+        //check if user is ROLE_MODERATOR
+        //get all hotels
+        List<Hotel> hotels = hotelRepository.findAll();
+        for (Hotel hotel1 : hotels) {
+            if (hotel1.getAccount().getId().equals(user.getId())) {
+                return ResponseEntity.badRequest().body("You are Hotel. You can't book a room");
+            }
+        }
         //check check in date before check out date
         if(hotelBookingRequest.getCheckInDate().after(hotelBookingRequest.getCheckOutDate())){
             return ResponseEntity.badRequest().body("Check in date must be before check out date");
@@ -271,31 +280,45 @@ public class HotelController {
         if(hotelBookingRequest.getCheckInDate().before(new Date())){
             return ResponseEntity.badRequest().body("Check in date must be after today");
         }
-
         //add hotel booking
         HotelBooking hotelBooking = new HotelBooking();
         hotelBooking.setBookingCode(emailSenderService.randomString());
         //time
         hotelBooking.setCheckInDate(hotelBookingRequest.getCheckInDate());
         hotelBooking.setCheckOutDate(hotelBookingRequest.getCheckOutDate());
-
         hotelBooking.setNumOfGuest(hotelBookingRequest.getNumOfGuest());
         hotelBooking.setPaymentMethod(hotelBookingRequest.getPaymentMethod());
         hotelBooking.setTotalPrice(hotelBookingRequest.getTotalPrice());
-
         hotelBooking.setRoom(room);
         hotelBooking.setUser(user);
-
-
         HotelBooking resultHotelBooking = hotelBookingRepository.save(hotelBooking);
-
         //return hotel booking
         return ResponseEntity.ok().body(resultHotelBooking);
 
 
 }
-public static long getDifferenceDays(Date d1, Date d2) {
-        long diff = d2.getTime() - d1.getTime();
-        return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+
+    //count day
+    public static long getDifferenceDays(Date d1, Date d2) {
+            long diff = d2.getTime() - d1.getTime();
+            return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
+
+    //get booking by user_id
+//    @GetMapping(value = "/getBookingByUserId/{id}")
+//    public List<HotelBooking> getBookingByUserId(@PathVariable("id") Long id){
+//        //get all hotel booking
+//        List<HotelBooking> hotelBookings = hotelBookingRepository.findByUserId(id);
+//        //list booking by user id
+//        List<HotelBooking> bookingByUserId = new ArrayList<>();
+//        for (HotelBooking hotelBooking : hotelBookings) {
+//            if(hotelBooking.getUser().getId().equals(id)){
+//                bookingByUserId.add(hotelBooking);
+//                System.out.println(bookingByUserId);
+//
+//            }
+//        }
+//
+//        return bookingByUserId;
+//    }
 }
