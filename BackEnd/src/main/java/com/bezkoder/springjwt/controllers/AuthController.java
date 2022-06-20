@@ -5,9 +5,10 @@ import java.util.stream.Collectors;
 
 import javax.validation.Valid;
 
-import com.bezkoder.springjwt.models.HotelBooking;
+import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.*;
 import com.bezkoder.springjwt.repository.BookingRepository;
+import com.bezkoder.springjwt.repository.WardRepository;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +21,6 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import com.bezkoder.springjwt.models.ERole;
-import com.bezkoder.springjwt.models.Role;
-import com.bezkoder.springjwt.models.User;
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
 import com.bezkoder.springjwt.repository.RoleRepository;
@@ -58,6 +56,9 @@ public class AuthController {
 
     @Autowired
     private BookingRepository hotelBookingRepository;
+
+    @Autowired
+    private WardRepository wardRepository;
 
     //login
     @PostMapping("/signin")
@@ -359,5 +360,12 @@ public class AuthController {
     public ResponseEntity<?> getBooking(@PathVariable Long id) {
         List<HotelBooking> bookings = hotelBookingRepository.findByUserId(id);
         return ResponseEntity.ok(bookings);
+    }
+
+    // get all ward
+    @GetMapping("/getAllWard")
+    public ResponseEntity<?> getAllWard() {
+        List<Ward> wards = wardRepository.findAll();
+        return ResponseEntity.ok(wards);
     }
 }
