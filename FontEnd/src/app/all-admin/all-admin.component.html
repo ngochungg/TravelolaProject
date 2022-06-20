@@ -16,8 +16,12 @@
                         <td>{{user.firstName}}</td>
                         <td>{{user.email}}</td>
                         <td>{{user.phone}}</td>
-                        <!-- roles array in json -->
-                        <td>{{user.roles|json}}</td>
+                        <!-- get role to users -->
+                        <td>
+                            <span *ngFor="let role of user.roles">
+                                {{role.name}}
+                            </span>
+                        </td>
                     </tr>
             </table>
 
