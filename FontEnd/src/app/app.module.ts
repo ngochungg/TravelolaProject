@@ -21,6 +21,11 @@ import { UpdateComponent } from './update/update.component';
 import { NavbarComponent } from './navbar/navbar.component';
 import { AllAdminComponent } from './all-admin/all-admin.component';
 import { FooterComponent } from './footer/footer.component';
+import { AllHotelComponent } from './all-hotel/all-hotel.component';
+import { AllUserComponent } from './all-user/all-user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryComponent } from './category/category.component';
+import { RegisterHotelComponent } from './register-hotel/register-hotel.component';
 // import {MatButtonModule} from '@angular/material/button';
 // import {MatIconModule} from '@angular/material/icon';
 // import {MatToolbarModule} from '@angular/material/toolbar';
@@ -49,6 +54,11 @@ import { FooterComponent } from './footer/footer.component';
     NavbarComponent,
     AllAdminComponent,
     FooterComponent,
+    AllHotelComponent,
+    AllUserComponent,
+    DashboardComponent,
+    CategoryComponent,
+    RegisterHotelComponent,
 
  
   ],

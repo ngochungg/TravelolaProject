@@ -12,7 +12,11 @@ import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
 import { UpdateComponent } from './update/update.component';
 import  { AllAdminComponent } from './all-admin/all-admin.component';
-
+import  { AllHotelComponent } from './all-hotel/all-hotel.component';
+import  { AllUserComponent }  from './all-user/all-user.component';
+import  { DashboardComponent } from './dashboard/dashboard.component'; 
+import  { CategoryComponent } from './category/category.component';
+import  { RegisterHotelComponent } from './register-hotel/register-hotel.component';
 
 
 const routes: Routes = [
@@ -27,8 +31,11 @@ const routes: Routes = [
   { path: 'update', component: UpdateComponent },
   { path: 'contac', component: ContacComponent },
   { path: 'alladmin', component: AllAdminComponent },
-
-
+  { path: 'allhotel', component: AllHotelComponent },
+  { path: 'alluser', component: AllUserComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'category', component: CategoryComponent },
+  { path: 'register-hotel', component: RegisterHotelComponent },
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];

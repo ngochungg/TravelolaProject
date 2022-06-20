@@ -4,24 +4,12 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 
 
-// export class User{
-//   constructor(
-//     public id: number,
-//     public username :string,
-//     public firstName :string,
-//     public lastName :string,
-//     public email  :string,
-//     public phone : number
-//   ){}
-// }
-
 @Component({
-  selector: 'app-all-admin',
-  templateUrl: './all-admin.component.html',
-  styleUrls: ['./all-admin.component.css']
+  selector: 'app-all-user',
+  templateUrl: './all-user.component.html',
+  styleUrls: ['./all-user.component.css']
 })
-
-export class AllAdminComponent implements OnInit {
+export class AllUserComponent implements OnInit {
   [x: string]: any;
   currentUser: any;
 
@@ -42,7 +30,7 @@ export class AllAdminComponent implements OnInit {
         for (let i = 0; i < data.length; i++) {
           //get rolename from data
           let role = data[i].roles[0].name;
-          if (role == "ROLE_ADMIN") {
+          if (role == "ROLE_USER") {
             this.users.push(data[i]);
           }
         }
@@ -54,9 +42,5 @@ export class AllAdminComponent implements OnInit {
       }
     });
   }
-
-  // reloadPage(): void {
-  //   window.location.reload();
-  // }
 
 }

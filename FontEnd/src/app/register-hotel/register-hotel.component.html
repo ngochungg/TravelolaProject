@@ -1,0 +1,274 @@
+
+<div class="in-main">
+    <img class="background-img" src="//pbs.twimg.com/media/DNWuPtIVwAAU0OJ.jpg"
+        alt="img" />
+
+    <div class="row">
+
+
+        <div class="row sig-up" style="margin-top: 75px;">
+            <div class="col-sm-2"></div>
+            <div class="col-md-4 hello">
+                <div class="container">
+                    <Div class=""><br /><br /><br /><br /><br /><br /><br /><br
+                            /><br /><br />
+                        <h1 style="text-align: center; font-size: 50px; color:
+                            wheat;">Hello Friend!</h1><br />
+                        <div style="text-align: center;font-size: 20px"> To
+                            register, please fill out the form on the right
+                            hand.
+
+                            <div style="text-align: center;font-size: 20px">Accurate
+                                information will help your hotel get noticed by
+                                more people</div>
+                            <Div>Thanks you!</Div>
+                        </div><br /><br /><br /><br />
+                        <Div style="text-align: center;"> ---Travelola With
+                            Love---</Div>
+                    </Div>
+
+                </div>
+            </div>
+            <div class="col-md-4">
+
+                <div class="card card-container">
+                    <img id="profile-img"
+                        src="//cdn-icons-png.flaticon.com/512/1222/1222178.png?w=360"
+                        alt="img/profile" class="profile-img-card" />
+                    <form *ngIf="!isSuccessful" name="form"
+                        (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm"
+                        novalidate>
+                        <!-- hotelName -->
+                        <div class="form-group">
+                            <label for="hotelName">HotelName</label>
+
+                            <input type="text" class="form-control"
+                                name="hotelName" [(ngModel)]="form.hotelName"
+                                required
+                                minlength="3" maxlength="20"
+                                #hotelName="ngModel" />
+                            <div class="div-errors" *ngIf="hotelName.errors &&
+                                f.submitted">
+                                <div *ngIf="hotelName.errors['required']">*HotelName
+                                    is required</div>
+                                <div *ngIf="hotelName.errors['minlength']">
+                                    *HotelName must be at least 3 characters
+                                </div>
+                                <div *ngIf="hotelName.errors['maxlength']">
+                                    *HotelName must be at most 20 characters
+                                </div>
+                            </div>
+                        </div>
+                        <!-- username -->
+                        <div class="form-group">
+                            <label for="username">UserName</label>
+
+                            <input type="text" class="form-control"
+                                name="username" [(ngModel)]="form.username"
+                                required
+                                minlength="3" maxlength="20" #username="ngModel"
+                                />
+                            <div class="div-errors" *ngIf="username.errors &&
+                                f.submitted">
+                                <div *ngIf="username.errors['required']">*UserName
+                                    is required</div>
+                                <div *ngIf="username.errors['minlength']">
+                                    *UserName must be at least 3 characters
+                                </div>
+                                <div *ngIf="username.errors['maxlength']">
+                                    *UserName must be at most 20 characters
+                                </div>
+                            </div>
+                        </div>
+                        <!-- password -->
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control"
+                                name="password" [(ngModel)]="form.password"
+                                required minlength="8" #password="ngModel" />
+                            <div class="div-errors"*ngIf="password.errors &&
+                                f.submitted">
+                                <div *ngIf="password.errors['required']">*Password
+                                    is required</div>
+                                <div *ngIf="password.errors['minlength']">
+                                    *Password must be at least 8 characters
+                                </div>
+                            </div>
+                        </div>
+                        <!-- email -->
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control"
+                                name="email" [(ngModel)]="form.email" required
+                                email #email="ngModel" />
+                            <div class="div-errors" *ngIf="email.errors &&
+                                f.submitted">
+                                <div *ngIf="email.errors['required']">*Email is
+                                    required</div>
+                                <div *ngIf="email.errors['email']">
+                                    *Email must be a valid email address
+                                </div>
+                            </div>
+                        </div>
+                        <!-- phone -->
+                        <div class="form-group">
+                            <label for="phone">Phone</label>
+                            <input type="text" class="form-control" name="phone"
+                                [(ngModel)]="form.phone" required
+                                minlength="8" maxlength="20" #phone="ngModel" />
+                            <div class="div-errors" *ngIf="phone.errors &&
+                                f.submitted">
+                                <div *ngIf="phone.errors['required']">*Phone is
+                                    required</div>
+                                <div *ngIf="phone.errors['minlength']">
+                                    *Phone must be at least 8 characters
+                                </div>
+                                <div *ngIf="phone.errors['maxlength']">
+                                    *Phone must be at most 20 characters
+                                </div>
+                            </div>
+                        </div>
+                        <!-- contactName -->
+                        <div class="form-group">
+                            <label for="contactName">ContactName</label>
+                            <input type="text" class="form-control"
+                                name="contactName"
+                                [(ngModel)]="form.contactName" required
+                                 #contactName="ngModel" />
+                            <div class="div-errors" *ngIf="contactName.errors &&
+                                f.submitted">
+                                <div *ngIf="contactName.errors['required']">*ContactName
+                                    is required</div>
+                                    <div *ngIf="contactName.errors['minlength']">
+                                        *ContactName must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="contactName.errors['maxlength']">
+                                        *ContactName must be at most 20 characters
+                                    </div>
+                            </div>
+                        </div>
+
+                        <!-- description -->
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="text" class="form-control"
+                                name="description"
+                                [(ngModel)]="form.description" required
+                                 #description="ngModel" />
+                            <div class="div-errors" *ngIf="description.errors &&
+                                f.submitted">
+                                <div *ngIf="description.errors['required']">*Description
+                                    is required</div>
+                                    <div *ngIf="description.errors['minlength']">
+                                        *Description must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="description.errors['maxlength']">
+                                        *Description must be at most 20 characters
+                                    </div>
+                            </div>
+                        </div>
+                         <!-- street -->
+                         <div class="form-group">
+                            <label for="ward">Street</label>
+                            <input type="text" class="form-control"
+                                name="street"
+                                [(ngModel)]="form.street" required
+                                 #street="ngModel" />
+                            <div class="div-errors" *ngIf="street.errors &&
+                                f.submitted">
+                                <div *ngIf="street.errors['required']">*Street
+                                    is required</div>
+                                    <div *ngIf="street.errors['minlength']">
+                                        *street must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="street.errors['maxlength']">
+                                        *street must be at most 20 characters
+                                    </div>
+                            </div>
+                        </div>
+
+                         <!-- ward -->
+                         <div class="form-group">
+                            <label for="ward">Ward</label>
+                            <input type="text" class="form-control"
+                                name="ward"
+                                [(ngModel)]="form.ward" required
+                                 #ward="ngModel" />
+                            <div class="div-errors" *ngIf="ward.errors &&
+                                f.submitted">
+                                <div *ngIf="ward.errors['required']">*ward
+                                    is required</div>
+                                    <div *ngIf="ward.errors['minlength']">
+                                        *ward must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="ward.errors['maxlength']">
+                                        *ward must be at most 20 characters
+                                    </div>
+                            </div>
+                        </div>
+                         <!-- district -->
+                         <div class="form-group">
+                            <label for="district">District</label>
+                            <input type="text" class="form-control"
+                                name="district"
+                                [(ngModel)]="form.district" required
+                                 #district="ngModel" />
+                                 <div *ngIf(district)>asdf</div>
+                            <!-- <div class="div-errors" *ngIf="district.errors &&
+                                f.submitted">
+                                <div *ngIf="district.errors['required']">*district
+                                    is required</div>
+                                    <div *ngIf="district.errors['minlength']">
+                                        *district must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="district.errors['maxlength']">
+                                        *district must be at most 20 characters
+                                    </div>
+                            </div> -->
+                        </div>
+                         <!-- province -->
+                         <div class="form-group">
+                            <label for="province">Province</label>
+                            <input type="text" class="form-control"
+                                name="province"
+                                [(ngModel)]="form.province" required
+                                 #province="ngModel" />
+                            <div class="div-errors" *ngIf="province.errors &&
+                                f.submitted">
+                                <div *ngIf="province.errors['required']">*province
+                                    is required</div>
+                                    <div *ngIf="province.errors['minlength']">
+                                        *province must be at least 3 characters
+                                    </div>
+                                    <div *ngIf="province.errors['maxlength']">
+                                        *province must be at most 20 characters
+                                    </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <button class="btn btn-primary btn-block">Sign Up</button>
+                        </div>
+                        <div class="return-sigup go-to-login">
+                            You have an account? <a href="/login">Login</a>
+                        </div>
+
+
+                        <div class="alert alert-warning" *ngIf="f.submitted &&
+                            isSignUpFailed">
+                            Signup failed!<br />{{ errorMessage }}
+
+                        </div>
+                    </form>
+
+                    <div *ngIf="isSuccessful">
+                        <div class="alert alert-success">Your registration is
+                            successful!</div>
+                        <div class="btn btn-success login-form"><a
+                                href="/login">Login</a> </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

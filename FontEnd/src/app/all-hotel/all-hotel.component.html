@@ -1,0 +1,56 @@
+<div class="row">
+    <app-navbar></app-navbar>
+    <div class="col-sm-8 board-main">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <h1 class="account-header"> All Hotel in TRAVELOLA</h1>
+                <table>
+                    <thead>
+                        <tr class="Col-space">
+                            <th>Name</th>
+                            <th>FirstName</th>
+                            <th>LastName</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>roles</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of users">
+                            <td >{{user.username}}</td>
+                            <td>{{ user.firstName }}</td>
+                            <td>{{user.lastName}}</td>
+                            <td id="form-in4" onclick="myFunction()">{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <!-- get role to users -->
+                            <td>
+                                <span *ngFor="let role of user.roles">
+                                    {{ role.name }}
+                                </span>
+                            </td>
+                            <td>
+                                <button class="btn btn-success btn-in4"
+                                    onclick="morein4()">More</button>
+                                <button class="btn btn-danger btn-in4">More</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<Script> 
+    function morein4(){
+        document.getElementsByClassName( "form-in4" ).style.width="200px";
+    }
+    function myFunction() {
+  document.getElementById("form-in4").innerHTML = "YOU CLICKED ME!";
+}
+    // $(document).on("morein4", function () {
+    //     if ($(morein4).onclick) {
+    //       $("form-in4").AddClass("resiz");
+    //     }
+    //   });
+</Script>

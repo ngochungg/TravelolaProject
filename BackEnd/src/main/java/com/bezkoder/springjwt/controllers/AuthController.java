@@ -292,6 +292,7 @@ public class AuthController {
                 userDetails.getIsActive(),
                 roles));
     }
+
     //login google
     @PostMapping("/loginGoogle")
     public ResponseEntity<?> loginGoogle( @RequestBody LoginSocialRequest loginSocialRequest) {

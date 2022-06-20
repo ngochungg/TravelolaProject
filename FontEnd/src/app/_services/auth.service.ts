@@ -36,6 +36,12 @@ export class AuthService {
 
     }, httpOptions);
   }
+  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, decription:string, street:string,ward:string,district:string,province:string, imageUrl:string): Observable<any>{
+    return this.http.post(AUTH_API + 'addHotel', {
+      hotelName, email,phone, username, password, contactName, decription, street,ward,district,province, imageUrl
+
+    }, httpOptions);
+  }
   reloadPro(): Observable<any> {
     this.currentUser = this.token.getUser();
     return this.http.get(AUTH_API + 'viewProfile/' + this.currentUser.id);

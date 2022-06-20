@@ -54,9 +54,12 @@
     color: #5e5a5a;
 }
 .sidebar-nav li a:hover {
-	
+height: 100%;
+width: 100%;
 	color: #fff;
 	background: #5e5a5a;
+
+   
 }
 
 
@@ -161,4 +164,45 @@ p {
     min-height: 500px;
     max-height: auto;
     
+}
+
+
+.parent-list {
+
+    margin : 0;
+    padding : 0;
+}
+
+.parent-item {
+
+    color : grey;
+  
+    font-family : Arial, sans-serif;
+}
+
+.child-item {
+    display : none;
+    margin-left: 10px;
+}
+
+.parent-item:hover {
+  
+    color : black;
+
+    cursor : pointer;
+}
+
+.parent-item:hover > .child-item {
+    display : inline-block;
+    background-color: none;
+    color: indianred;
+    cursor : pointer;
+}
+.parent-item:hover > .child-item li a {
+    display : inline-block;
+
+    cursor : pointer;
+}
+.parent-item:hover > .child-item li a:hover{
+    background-color: none;
 }

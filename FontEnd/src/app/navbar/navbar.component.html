@@ -2,33 +2,39 @@
 <div class="col-sm-2">
     <div id="wrapper" class="wrapper-content">
       <div id="sidebar-wrapper" style="height: 100%; ">
-        <ul class="sidebar-nav">
+        <ul class="sidebar-nav parent-list">
           <li class="sidebar-brand" routerLinkActive="active">
             <a href="/admin">
               LoLa.com
             </a>
           </li>
-          <li routerLinkActive="active">
-            <a href="/alladmin">All admin</a>
+          
+          <li routerLinkActive="active "class="parent-item">
+            <a href="/admin"  id="demo" onclick="myFunction()">All Accout</a>
+            <ul class="child-item">
+              <li routerLinkActive="active"  > 
+                <a href="/alladmin">Admin</a>
+              </li>
+              <li routerLinkActive="active">
+                <a href="/allhotel" >Hotel</a>
+              </li>
+              <li routerLinkActive="active">
+                <a href="/alluser">User</a>
+              </li>
+            </ul>
           </li>
+         
           <li routerLinkActive="active">
-            <a href="/admin" >ShortCusts</a>
+            <a href="/category">Category</a>
           </li>
+          
           <li routerLinkActive="active">
-            <a href="#">Overview</a>
-          </li>
-          <li routerLinkActive="active">
-            <a href="#">Events</a>
-          </li>
-          <li routerLinkActive="active">
-            <a href="/about">About</a>
-          </li>
-          <li routerLinkActive="active">
-            <a href="#">Services</a>
-          </li>
+            <a href="/dashboard">Dashboard</a>
+            </li>
           <li routerLinkActive="active">
             <a href="/contac">Contact</a>
           </li>
+
         </ul>
       </div>
     </div>

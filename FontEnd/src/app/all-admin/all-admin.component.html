@@ -1,36 +1,43 @@
 <div class="row">
-    <app-navbar></app-navbar>
-    <div class="col-sm-8 board-main">
-        <div class="form-group">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Phone</th>
-                        <th>roles</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let user of users">
-                        <td>{{user.firstName}}</td>
-                        <td>{{user.email}}</td>
-                        <td>{{user.phone}}</td>
-                        <!-- get role to users -->
-                        <td>
-                            <span *ngFor="let role of user.roles">
-                                {{role.name}}
-                            </span>
-                        </td>
-                    </tr>
-            </table>
-
-        </div>
-
-        <div class="position"><button class="btn btn-danger btn-change">showAll</button></div>
-
+  <app-navbar></app-navbar>
+  <div class="col-sm-8 board-main">
+    <div class="form-group">
+      <div class="col-sm-12">
+        <h1 class="account-header">All Admin in TRAVELOLA</h1>
+        <table >
+          <thead >
+            <tr >
+              <th>Name</th>
+              <th>FirstName</th>
+              <th>LastName</th>
+              <th>Email</th>
+              <th>Phone</th>
+              <th>roles</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users">
+                <td>{{user.username}}</td>
+              <td>{{ user.firstName }}</td>
+              <td>{{user.lastName}}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.phone }}</td>
+              <!-- get role to users -->
+              <td>
+                <span *ngFor="let role of user.roles">
+                  {{ role.name }}
+                </span>
+              </td>
+              <td>
+                <button class="btn btn-success btn-in4">More</button> 
+                <button class="btn btn-danger btn-in4">More</button>
+            </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
+  </div>
 </div>
 
-<Script>
-</Script>
+<Script> </Script>
