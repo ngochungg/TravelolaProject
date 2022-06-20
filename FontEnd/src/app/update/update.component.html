@@ -66,7 +66,10 @@
     <div class="form-group">
       <div class="position" ><button class="btn btn-danger btn-change" (click)="onUpdate()">Update</button></div>
     </div>
-    
+    <div class="form-group">
+      <input type="file" id="file-upload" required/>
+    </div>
+    <!-- <img [src]="getLinkPicture()" alt="profile photo" width="150px" height="150px"> -->
 
     <div class="alert alert-warning" *ngIf="f.submitted ">s
       Update failed!<br />
@@ -75,9 +78,12 @@
     <div *ngIf="isSuccessful ==true"></div>
   </form>
   <hr>
-
-
-
-
-
 </div>
+<Script>
+  const fileUpload = document.querySelector("#file-upload");
+  fileUpload.addEventListener("change", (event) => {
+	const { files } = event.target;
+	
+	console.log("files", files)
+})
+</Script>

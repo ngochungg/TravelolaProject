@@ -7,42 +7,10 @@
 
 <div class="container-fluid">
   <div class="row">
-    <div class="col-sm-2">
-      <div id="wrapper" class="wrapper-content">
-        <div id="sidebar-wrapper">
-          <ul class="sidebar-nav">
-            <li class="sidebar-brand" routerLinkActive="active">
-              <a href="/admin">
-                LoLa.com
-              </a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="/admin">Dashboard</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#">Shortcuts</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#">Overview</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#">Events</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="/about">About</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="#">Services</a>
-            </li>
-            <li routerLinkActive="active">
-              <a href="/contac">Contact</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-    </div>
-    <div class="col-sm-8">
+<app-navbar></app-navbar>
+    <div class="col-sm-8 col8">
+     
+    
       <div class="agile_top_w3_grids">
         <ul class="ca-menu">
           <li>
@@ -162,4 +130,10 @@
   function w3_close() {
     document.getElementById("mySidebar").style.display = "none";
   }
+  function ShowShortcuts(){
+    document.getElementsByClassName("col8").style.color= "red";
+   
+  }
+
+
 </script>

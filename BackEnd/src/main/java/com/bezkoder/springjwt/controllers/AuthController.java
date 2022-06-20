@@ -223,6 +223,7 @@ public class AuthController {
     @GetMapping("/getAllUser")
     public ResponseEntity<?> getAllUser() {
         List<User> users = userRepository.findAll();
+
         return ResponseEntity.ok(users);
     }
     //Forgot password
@@ -347,6 +348,11 @@ public class AuthController {
         return ResponseEntity.ok(user);
     }
 
+    @GetMapping("/getAllAdmin")
+    public ResponseEntity<?> getAllAdmin() {
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok(users);
+    }
     //get booking by user id
     @GetMapping("/getBooking/{id}")
     public ResponseEntity<?> getBooking(@PathVariable Long id) {

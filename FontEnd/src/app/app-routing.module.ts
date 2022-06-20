@@ -11,6 +11,8 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
 import { UpdateComponent } from './update/update.component';
+import  { AllAdminComponent } from './all-admin/all-admin.component';
+
 
 
 const routes: Routes = [
@@ -24,6 +26,8 @@ const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'update', component: UpdateComponent },
   { path: 'contac', component: ContacComponent },
+  { path: 'alladmin', component: AllAdminComponent },
+
 
 
   { path: '', redirectTo: 'home', pathMatch: 'full' }

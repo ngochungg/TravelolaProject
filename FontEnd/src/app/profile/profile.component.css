@@ -165,10 +165,14 @@ body {
 }
 .btn-change{
   background-color: #962d22;
+  border: none;
   /* font-size: 18px; */
 }
+.btn-change a{
+  color:aquamarine;
+}
 .position :hover{
-  color: aquamarine;
+  color: aqua;
 
   border: blue;
 }

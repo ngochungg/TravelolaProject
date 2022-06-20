@@ -40,9 +40,14 @@ export class AuthService {
     this.currentUser = this.token.getUser();
     return this.http.get(AUTH_API + 'viewProfile/' + this.currentUser.id);
   }
-  getAllUsers() {
+  getAllUsers() { 
+  
     return this.http.get(AUTH_API + 'getAllUser');
    }
+   allAdmin(): Observable<any> {
+    
+    return this.http.get(AUTH_API + 'viewAdmin/');
+  }
   update( firstName: string,lastName: string,email: string, phone: string): Observable<any> {
     this.currentUser = this.token.getUser();
     return this.http.post(AUTH_API + 'updateUser/'+ this.currentUser.id , {
@@ -50,6 +55,12 @@ export class AuthService {
       lastName,
        email,
       phone,
+    }, httpOptions);
+  }
+  updateIMG( imageUrl: string): Observable<any> {
+    this.currentUser = this.token.getUser();
+    return this.http.post(AUTH_API + 'uploadImage/'+ this.currentUser.id , {
+     imageUrl,
     }, httpOptions);
   }
   loginFacebook(id : string,email: string, firstName: string,lastName: string, photoUrl: string): Observable<any> {

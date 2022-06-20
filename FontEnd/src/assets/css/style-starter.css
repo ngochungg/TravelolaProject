@@ -16944,6 +16944,12 @@ p.count-text {
     width: 20%;
   }
 }
-
+.board-main{
+  padding: 50px;
+  background-color: white;
+  min-height: 1000px;
+  max-height: auto;
+  border: solid 0.5px gainsboro;
+}
 
 /*# sourceMappingURL=style-freedom.css.map */

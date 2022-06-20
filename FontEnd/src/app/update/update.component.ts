@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
-import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser } from '@abacritt/angularx-social-login';
  
 @Component({
   selector: 'app-update',
@@ -11,7 +10,7 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUs
 })
 export class UpdateComponent implements OnInit {
   currentUser: any;
-
+  imageUrl :any;
   form: any = {
     
     firstName: null,
@@ -22,6 +21,8 @@ export class UpdateComponent implements OnInit {
   isSuccessful = false;
 
   errorMessage = '';
+  timeStamp: any;
+  
   constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService, 
      private router: Router) { }
 
@@ -46,8 +47,27 @@ export class UpdateComponent implements OnInit {
       }
     });
   }
+
   reloadPage(): void {
     window.location.reload();
+  }
+  onUpdateIMG(){
+    this.currentUser = this.token.getUser();
+    const { imageUrl} = this.form;
+    this.authService.updateIMG(imageUrl).subscribe({
+      next: data => {
+        console.log(data);
+        this.router.navigate(['/update'])
+        .then(() => {
+          this.reloadPage();
+        });
+      },
+      error: err => {
+        this.errorMessage = err.error.message;
+        console.log(err);
+
+      }
+    });
   }
   // reload(): void{
   //   this.authService.reloadPro().subscribe({

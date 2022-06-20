@@ -18,6 +18,13 @@ import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, So
 import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
 import { UpdateComponent } from './update/update.component';
+import { NavbarComponent } from './navbar/navbar.component';
+import { AllAdminComponent } from './all-admin/all-admin.component';
+import { FooterComponent } from './footer/footer.component';
+// import {MatButtonModule} from '@angular/material/button';
+// import {MatIconModule} from '@angular/material/icon';
+// import {MatToolbarModule} from '@angular/material/toolbar';
+
 
 
 
@@ -39,6 +46,10 @@ import { UpdateComponent } from './update/update.component';
     AboutComponent,
     ContacComponent,
     UpdateComponent,
+    NavbarComponent,
+    AllAdminComponent,
+    FooterComponent,
+
  
   ],
   imports: [

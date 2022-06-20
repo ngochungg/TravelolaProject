@@ -1,0 +1,49 @@
+<div class="row">
+    <app-navbar></app-navbar>
+    <div class="col-sm-8 board-main">
+        <div class="form-group">
+
+          
+            <div class="alert alert-danger" role="alert" *ngIf="currentUser">
+   
+                <div *ngFor="let account of currentUser">{{currentUser.id["1"].firstName}}</div>
+                <!-- <div class='table-responsive'>
+                    <table class='table table-bordered table-sm '>
+                      <thead class="thead-dark">
+                        <tr>
+                          <th>Name</th>
+                          <th>Mail</th>
+                          <th>Skills</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let employee of currentUser;">
+                          <td></td>
+                          <td></td>
+                          <td>
+                            <table class='table table-sm '>
+                              <tbody>
+                                <tr *ngFor="let user of currentUser.username;">
+                                  <td></td>
+                                  <td></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                 
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div> -->
+                </div>
+           
+            </div>
+      
+            <div class="position" ><button class="btn btn-danger btn-change" (click)="showAll()">showAll</button></div>
+          
+          </div>
+    </div>
+
+<Script>
+    
+</Script>
