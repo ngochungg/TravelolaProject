@@ -60,10 +60,6 @@ export class AllAdminComponent implements OnInit {
     });
   }
 
-  showAll(): void {
-
-  }
-
   // reloadPage(): void {
   //   window.location.reload();
   // }
