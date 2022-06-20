@@ -40,8 +40,7 @@ export class AuthService {
     this.currentUser = this.token.getUser();
     return this.http.get(AUTH_API + 'viewProfile/' + this.currentUser.id);
   }
-  getAllUsers() { 
-  
+  getAllUsers():Observable<any> { 
     return this.http.get(AUTH_API + 'getAllUser');
    }
    allAdmin(): Observable<any> {

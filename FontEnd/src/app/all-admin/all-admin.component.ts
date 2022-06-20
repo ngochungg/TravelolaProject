@@ -32,30 +32,28 @@ export class AllAdminComponent implements OnInit {
   showAdminBoard = false;
   showModeratorBoard = false;
   timeStamp: any;
+  //array of users
+  users: any[] = [];
+
 
   constructor(private token: TokenStorageService, private authService: AuthService, private tokenStorage: TokenStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
-  }
-
-  showAll(): void {
-
     this.authService.getAllUsers().subscribe({
       next: data => {
         console.log(data);
-        this['viewAdmin'] = JSON.stringify(data);
-        console.log(this['viewAdmin']);
-        this['decodeJson'] = JSON.parse(this['viewAdmin']);
-        console.log(this['decodeJson']);
-        // this.currentUser.roles =data;
-        
+        this.users = data;
       },
       error: err => {
         this.errorMessage = err.error.message;
         console.log(err);
       }
     });
+  }
+
+  showAll(): void {
+
   }
 
   // reloadPage(): void {
