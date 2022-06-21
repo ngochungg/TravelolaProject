@@ -7,8 +7,7 @@ import javax.validation.Valid;
 
 import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.*;
-import com.bezkoder.springjwt.repository.BookingRepository;
-import com.bezkoder.springjwt.repository.WardRepository;
+import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ import org.springframework.web.bind.annotation.*;
 
 import com.bezkoder.springjwt.payload.response.JwtResponse;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
-import com.bezkoder.springjwt.repository.RoleRepository;
-import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.jwt.JwtUtils;
 import com.bezkoder.springjwt.security.services.UserDetailsImpl;
 import org.springframework.web.multipart.MultipartFile;
@@ -59,6 +56,12 @@ public class AuthController {
 
     @Autowired
     private WardRepository wardRepository;
+
+    @Autowired
+    private ProvinceRepository provinceRepository;
+
+    @Autowired
+    private DistrictRepository districtRepository;
 
     //login
     @PostMapping("/signin")
@@ -367,5 +370,17 @@ public class AuthController {
     public ResponseEntity<?> getAllWard() {
         List<Ward> wards = wardRepository.findAll();
         return ResponseEntity.ok(wards);
+    }
+    // get all district
+    @GetMapping("/getAllDistrict")
+    public ResponseEntity<?> getAllDistrict() {
+        List<District> districts = districtRepository.findAll();
+        return ResponseEntity.ok(districts);
+    }
+    // get all province
+    @GetMapping("/getAllProvince")
+    public ResponseEntity<?> getAllProvince() {
+        List<Province> provinces = provinceRepository.findAll();
+        return ResponseEntity.ok(provinces);
     }
 }
