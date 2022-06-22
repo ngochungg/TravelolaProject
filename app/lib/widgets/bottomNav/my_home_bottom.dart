@@ -1,10 +1,15 @@
 import 'dart:convert';
 
 import 'package:app/controller/dataController.dart';
+import 'package:app/screens/Hotel/home.dart';
+
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../controller/apiController.dart';
 import '../../screens/login.dart';
 import '../../screens/register.dart';
 import '../app_bar.dart';
@@ -23,6 +28,7 @@ class MyHome extends StatelessWidget {
       retriveString = (data.arguments.toString());
     }
     var user = jsonDecode(retriveString);
+
     return WillPopScope(
       onWillPop: () async {
         if (Navigator.of(context).userGestureInProgress) {
@@ -139,11 +145,33 @@ class MyHome extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceAround,
                     children: <Widget>[
-                      IconCard(iconData: Icons.room_outlined, text: 'Booking'),
                       IconCard(
-                          iconData: Icons.directions_bike, text: 'Experiences'),
-                      IconCard(iconData: Icons.directions, text: 'Adventures'),
-                      IconCard(iconData: Icons.flight, text: 'Flights'),
+                        iconData: Icons.room_outlined,
+                        text: 'Hotels',
+                        press: () async {
+                          var hotel = await http.get(Uri.parse(
+                              'http://localhost:8080/api/hotel/getAllHotel'));
+                          var hotelData =
+                              json.decode(utf8.decode(hotel.bodyBytes));
+                          // print(hotelData[0]['images'][0]['imagePath']);
+
+                          Navigator.of(context).pushNamed(
+                              HotelHomePage.routeName,
+                              arguments: hotel.body);
+                        },
+                      ),
+                      IconCard(
+                          iconData: Icons.directions_bike,
+                          text: 'Experiences',
+                          press: () {}),
+                      IconCard(
+                          iconData: Icons.directions,
+                          text: 'Adventures',
+                          press: () {}),
+                      IconCard(
+                          iconData: Icons.flight,
+                          text: 'Flights',
+                          press: () {}),
                     ],
                   ),
                   SizedBox(

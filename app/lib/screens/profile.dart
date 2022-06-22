@@ -24,6 +24,7 @@ class Profile extends StatefulWidget {
 }
 
 class _ProfileState extends State<Profile> {
+  String? _image;
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -35,9 +36,10 @@ class _ProfileState extends State<Profile> {
     }
 
     var user = json.decode(utf8.decode(retriveString.codeUnits));
+    // _image = user['imageUrl'];
 
     Future takePicture() async {
-      final image = await ImagePicker().pickImage(source: ImageSource.gallery);
+      var image = await ImagePicker().pickImage(source: ImageSource.gallery);
       if (image == null) return;
       var stream = http.ByteStream(image.openRead());
       var length = await image.length();
@@ -54,8 +56,11 @@ class _ProfileState extends State<Profile> {
         "Content-Type": "application/json",
       });
       storeUserData(responseImage.body);
-      Navigator.pushReplacementNamed(context, Home.routeName,
-          arguments: responseImage.body);
+      var data = jsonDecode(responseImage.body);
+
+      setState(() {
+        _image = data['imageUrl'];
+      });
     }
 
     return WillPopScope(
@@ -71,7 +76,15 @@ class _ProfileState extends State<Profile> {
               BackButton(
                 color: Colors.white,
                 onPressed: () async {
-                  Navigator.of(context).pop();
+                  SharedPreferences prefs =
+                      await SharedPreferences.getInstance();
+                  final response = await http.post(Uri.parse(urlSignin),
+                      body: prefs.getString('body'),
+                      headers: {
+                        "Content-Type": "application/json",
+                      });
+                  Navigator.of(context)
+                      .pushNamed(Home.routeName, arguments: response.body);
                 },
               ),
             ],
@@ -90,15 +103,18 @@ class _ProfileState extends State<Profile> {
                       if (user["imageUrl"].contains("https"))
                         CircleAvatar(
                           radius: 45,
-                          backgroundImage: NetworkImage(user['imageUrl']),
+                          backgroundImage: _image == null
+                              ? NetworkImage('${user['imageUrl']}')
+                              : NetworkImage('$_image'),
                         )
                       else
                         CircleAvatar(
-                          radius: 45,
-                          backgroundImage: NetworkImage(
-                              "http://localhost:8080/api/auth/getImage/" +
-                                  user['imageUrl']),
-                        ),
+                            radius: 45,
+                            backgroundImage: _image == null
+                                ? NetworkImage(
+                                    "http://localhost:8080/api/auth/getImage/${user['imageUrl']}")
+                                : NetworkImage(
+                                    'http://localhost:8080/api/auth/getImage/$_image')),
                       Positioned(
                         right: -10,
                         bottom: -10,
@@ -136,7 +152,7 @@ class _ProfileState extends State<Profile> {
                                     color: Colors.pinkAccent[100])),
                             TextSpan(
                                 text:
-                                    '\n${user['firstName']} ${user['lastName']}\n',
+                                    '${user['firstName']} ${user['lastName']}\n',
                                 style: TextStyle(
                                     fontSize: 15,
                                     fontWeight: FontWeight.w400,

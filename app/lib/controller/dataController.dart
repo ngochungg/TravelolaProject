@@ -11,7 +11,7 @@ void storeUserData(String data) async {
   User user1 = new User.fromJson(jsonDecode(data));
   // encode / convert object into json string
   String user = jsonEncode(user1);
-  print(user);
+  // print(user);
   //save the data into sharedPreferences using key-value pairs
   prefs.setString('userdata', user);
 }

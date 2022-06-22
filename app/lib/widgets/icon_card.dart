@@ -3,8 +3,14 @@ import 'package:flutter/material.dart';
 class IconCard extends StatelessWidget {
   final IconData iconData;
   final String text;
+  final VoidCallback press;
 
-  IconCard({required this.iconData, required this.text});
+  const IconCard(
+      {Key? key,
+      required this.iconData,
+      required this.text,
+      required this.press})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +28,7 @@ class IconCard extends StatelessWidget {
                   size: 30,
                   color: Colors.pink[400],
                 ),
-                onPressed: () {},
+                onPressed: press,
               )),
           Text(
             text,

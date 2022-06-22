@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:app/model/loginModel.dart';
+import 'package:app/screens/forgetPassword.dart';
 import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
@@ -102,7 +103,6 @@ class _LoginState extends State<Login> {
     }
   }
 
-  void click() {}
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -221,7 +221,12 @@ class _LoginState extends State<Login> {
                               mainAxisAlignment: MainAxisAlignment.end,
                               children: [
                                 TextButton(
-                                  onPressed: click,
+                                  onPressed: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ForgetPassword()));
+                                  },
                                   child: const Text(
                                     "Forget Password",
                                     style: TextStyle(color: Colors.deepOrange),

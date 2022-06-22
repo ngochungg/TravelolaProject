@@ -9,8 +9,8 @@ class User {
   final bool status;
   final String accessToken;
 
-  User(this.id, this.username, this.email, this.firstName, this.lastName,
-      this.phone, this.imageUrl, this.status, this.accessToken);
+  // User(this.id, this.username, this.email, this.firstName, this.lastName,
+  //     this.phone, this.imageUrl, this.status, this.accessToken);
 
   User.fromJson(Map<String, dynamic> json)
       : id = json['id'],

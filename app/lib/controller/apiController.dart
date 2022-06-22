@@ -12,3 +12,5 @@ const String urlSingup = "http://localhost:8080/api/auth/signup";
 const String urlEditInfo = "http://localhost:8080/api/auth/updateUser";
 const String urlChangePassword =
     "http://localhost:8080/api/auth/updatePassword";
+
+const String getAllWard = "http://localhost:8080/api/auth/getAllProvince";

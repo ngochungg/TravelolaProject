@@ -16,7 +16,6 @@ import '../app_bar.dart';
 
 class MyAccount extends StatelessWidget {
   static const routeName = '/myAccount';
-  late File _image;
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -28,10 +27,6 @@ class MyAccount extends StatelessWidget {
     }
 
     var user = jsonDecode(retriveString);
-
-    Future getUser() async {
-      print(user);
-    }
 
     return WillPopScope(
       onWillPop: () async => true,
