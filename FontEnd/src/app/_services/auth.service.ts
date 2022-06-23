@@ -49,6 +49,16 @@ export class AuthService {
   getAllUsers():Observable<any> { 
     return this.http.get(AUTH_API + 'getAllUser');
    }
+  getWards(): Observable<any> {
+    return this.http.get(AUTH_API + 'getAllWard');
+  }
+  getDistrict(): Observable<any> {
+    return this.http.get(AUTH_API + 'getAllDistrict');
+  }
+  getProvince(): Observable<any> {
+    return this.http.get(AUTH_API + 'getAllProvince');
+  }
+
    allAdmin(): Observable<any> {
     
     return this.http.get(AUTH_API + 'viewAdmin/');

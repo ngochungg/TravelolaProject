@@ -78,3 +78,51 @@ label {
     font-weight: 300;
     margin-left: 40;
   }
+  .scroll-form-listWar{
+    height: 300px;
+    width: 300px;
+    overflow: auto;
+
+  }
+  .show-form-scroll :hover> .scroll-form-listWar{
+    display: inline-block;
+  }
+  .parent-list {
+
+    margin : 0;
+    padding : 0;
+}
+
+.parent-item {
+
+    color : grey;
+  
+    font-family : Arial, sans-serif;
+}
+
+.child-item {
+    display : none;
+    margin-left: 10px;
+}
+
+.parent-item:hover {
+  
+    color : black;
+
+    cursor : pointer;
+}
+
+.parent-item:hover > .child-item {
+    display : inline-block;
+    background-color: none;
+    color: indianred;
+    cursor : pointer;
+}
+.parent-item:hover > .child-item li a {
+    display : inline-block;
+
+    cursor : pointer;
+}
+.parent-item:hover > .child-item li a:hover{
+    background-color: none;
+}

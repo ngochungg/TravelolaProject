@@ -17,12 +17,13 @@ export class AllUserComponent implements OnInit {
 
   //array of users
   users: any[] = [];
-
+  search:any[] = [];
 
   constructor(private token: TokenStorageService, private authService: AuthService, private tokenStorage: TokenStorageService,
     private router: Router) { }
 
   ngOnInit(): void {
+
     this.authService.getAllUsers().subscribe({
       next: data => {
 
@@ -41,6 +42,11 @@ export class AllUserComponent implements OnInit {
         console.log(err);
       }
     });
+  }
+  
+  sendData(event :any) {
+    const dataUser =event.target.value;
+  console.log('dataUser',dataUser)
   }
 
 }
