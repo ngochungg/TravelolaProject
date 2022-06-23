@@ -174,8 +174,9 @@
                         <!-- province -->
                         <div class="form-group">
                             <label for="Province">Province</label>
-                                <select name="Province" id="Province"  (change)="changeDistrict($event)">
-                                    <option *ngFor="let pro of provin"  value={{pro.name}} >
+                                <select name="Province" id="Province"  (change)="changeDistrict($event)" class="form-control" required>
+                                    <option value="">--Province--</option>
+                                    <option *ngFor="let pro of provin"  value={{pro.name}}  >
                                         {{ pro.name }}
                                     </option>
                                 </select>                            
@@ -184,10 +185,29 @@
                         <!-- district -->
                         <div class="form-group">
                             <label for="District">District</label>
-                            <select name="District" id="districts" >
+                            <select name="District" id="districts" class="form-control" (change)="changeWard($event)" required>
+                                <option value="">--District--</option>
                                 <option *ngFor="let d of dis" value="{{d}}">
 
                                      {{d}}
+                                    <!-- <p *ngFor="let d of disI">
+                                        {{d.name}}
+                                    </p> -->
+                                    
+                                </option>
+                            </select>                            
+                       
+                        </div>
+
+                        <!-- ward -->
+                        <div class="form-group">
+                            <label for="District">Ward</label>
+                           
+                            <select name="ward" id="ward" class="form-control" required>
+                                <option value="">--Ward--</option>
+                                <option *ngFor="let c of diss" value="{{c}}" >
+
+                                     {{c}}
                                     <!-- <p *ngFor="let d of disI">
                                         {{d.name}}
                                     </p> -->

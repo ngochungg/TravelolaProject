@@ -27,6 +27,7 @@ export class RegisterHotelComponent implements OnInit {
   provin: any[] = [];
   user: any[] = [];
   dis: any[] = [];
+  diss: any[] = [];
   dist: any[] = [];
   ward: any[] = [];
   d:any[] = [];
@@ -42,18 +43,6 @@ export class RegisterHotelComponent implements OnInit {
     this.authService.getDistrict().subscribe({
       next: data => {
         this.dist = data;
-
-
-        // console.log(this.dist.length);
-      // for(let i = 0; i < this.dist.length; i++) {
-      //   if(this.dist[i].province[i].name=== this.provin[0].name){
-      //     const d= this.dist[i].districts;
-
-      //     console.log('day la d',d)
-      //   }
-       
-      // }
-      
         console.log(this.dist);
       }
     });
@@ -95,46 +84,41 @@ export class RegisterHotelComponent implements OnInit {
     const name = event.target.value;
     console.log('event', name);
 
-    // thu xem provin co ton tai ko
-    // console.log('provin',this.provin);
-
     const search = this.provin.filter(a => a.name === name);
     // console.log('search', search[0].districts);
     console.log('search', search);
     if (search && search.length > 0) {
+      this.dis =[];
       for (let i = 0; i < search[0].districts.length; i++) {
-
         this.district = search[0].districts[i].name;
-       
-
-        console.log('district', this.district);
-        this.dis.push(this.district)
-        
-      }
-      // this.disI.push(this.district[0]);
-      // console.log('disI', this.disI); 
+        // console.log('district', this.district);
+        this.dis.push(this.district)  
+      }  
     }
     console.log('dis',this.dis)
   }
 
-}
+  public changeWard(event: any): void {
+
+    //lay ra ten quan/huyen   dc chon
+    const name = event.target.value;
+    console.log('event', name);
+
+    //fill danh sach quan huyen dc tim thay co name = event
+    const search = this.dist.filter(a => a.name === name);
+    // console.log('search', search[0].districts);
+    console.log('search', search);
+
     
-      // this.district=this.provin.find(data=>data.name === name)?.districts  || [];
-    // console.log(this.district);
-  // public changeWard(event: any): void {
-  //   //lay ra ten tinh/thanh pho dc chon
-  //   const name = event.target.value;
-  //   console.log('event', name);
-
-  //   // thu xem provin co ton tai ko
-  //   // console.log('provin',this.provin);
-
-  //   const search = this.dist.filter(b => b.name === name);
-  //   console.log('search', search);
-  //   if (search && search.length > 0) {
-  //     this.war = search[0].wards;
-  //     console.log('districts', this.war);
-  //   }   
-  // this.district=this.provin.find(data=>data.name === name)?.districts  || [];
-  // console.log(this.district);
-  // }
+    if (search && search.length > 0) {
+      this.diss =[];
+      for (let i = 0; i < search[0].wards.length; i++) {
+        this.disI = search[0].wards[i].name;
+        // console.log('district', this.district);
+        this.diss.push(this.disI)  
+      }  
+    }
+    console.log('diss',this.diss)
+  }
+}
+ 
