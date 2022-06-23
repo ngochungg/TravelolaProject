@@ -5,12 +5,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoomRepository extends JpaRepository<Room, Long>, JpaSpecificationExecutor {
     //find by roomNumber
     Boolean existsByRoomNumber(int roomNumber);
-    //get all room by hotelId
-    Iterable<Room> findByHotelId(Long hotelId);
+    //List room by hotelId
+    List<Room> findByHotelId(Long hotelId);
 
 
 }

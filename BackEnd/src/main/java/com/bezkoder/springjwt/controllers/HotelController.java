@@ -250,7 +250,11 @@ public class HotelController {
     public List<Room> getAllRoom(){
         return roomRepository.findAll();
     }
-
+    //get room by hotel id
+    @GetMapping(value = "/getRoom/{id}")
+    public List<Room> getRoom(@PathVariable("id") Long id){
+        return roomRepository.findByHotelId(id);
+    }
 
     //HotelBooking
     @PostMapping(value = "/hotelBooking")
