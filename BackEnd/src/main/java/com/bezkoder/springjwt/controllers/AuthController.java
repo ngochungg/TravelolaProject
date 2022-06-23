@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
+import java.time.LocalDate;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,12 @@ public class AuthController {
 
     @Autowired
     private DistrictRepository districtRepository;
+
+    @Autowired
+    private HotelFeedBackRepository hotelFeedBackRepository;
+
+    @Autowired
+    private HotelRepository hotelRepository;
 
     //login
     @PostMapping("/signin")
@@ -383,4 +390,43 @@ public class AuthController {
         List<Province> provinces = provinceRepository.findAll();
         return ResponseEntity.ok(provinces);
     }
+    //feedback by booking
+    @PostMapping("/feedback")
+    public ResponseEntity<?> feedback(@RequestBody FeedbackRequest feedbackRequest) {
+            HotelBooking hotelBooking = hotelBookingRepository.findById(feedbackRequest.getHotel_booking_id()).get();
+            Hotel hotel = hotelRepository.findById(hotelBooking.getRoom().getHotel().getId()).get();
+            if(hotelBooking.isStatus() == false) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: Booking is not confirmed!"));
+            }
+            //check user check out date
+            if(hotelBooking.getCheckOutDate().before(new Date())) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: User check out date is before today!"));
+            }
+            HotelFeedBack hotelFeedBack = new HotelFeedBack();
+            hotelFeedBack.setFeedback(feedbackRequest.getFeedback());
+            hotelFeedBack.setRating(feedbackRequest.getRating());
+            hotelFeedBack.setHotel(hotelBooking.getRoom().getHotel());
+            hotelFeedBack.setUser(hotelBooking.getUser());
+            hotelFeedBack.setRetired(true);
+            hotelFeedBackRepository.save(hotelFeedBack);
+            //rating hotel
+            //calculate rating
+            double rating = 0;
+            //get list rating hotel
+            List<HotelFeedBack> hotelFeedBacks = hotelFeedBackRepository.findByHotelId(hotel.getId());
+            if (hotelFeedBacks.size() > 0) {
+                for (HotelFeedBack hotelFeedBack1 : hotelFeedBacks) {
+                    rating += hotelFeedBack1.getRating();
+                }
+                rating = rating / hotelFeedBacks.size();
+            }
+            hotel.setHotelRating((float) rating);
+            hotelRepository.save(hotel);
+            return ResponseEntity.ok(new MessageResponse("Feedback success!"));
+    }
+
 }

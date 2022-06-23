@@ -193,9 +193,9 @@ public class HotelController {
     public ResponseEntity<?> addRoom(@PathVariable("id") Long id, RoomRequest roomRequest){
         //find Hotel by id
         Hotel hotel = hotelRepository.findById(id).get();
-        if(roomRepository.existsByRoomNumber(roomRequest.getRoomNumber())){
-            return ResponseEntity.badRequest().body("Room number already exists");
-        }
+//        if(roomRepository.existsByRoomNumber(roomRequest.getRoomNumber())){
+//            return ResponseEntity.badRequest().body("Room number already exists");
+//        }
         //add room
         Room room = new Room();
         room.setRoomName(roomRequest.getRoomName());
@@ -304,21 +304,11 @@ public class HotelController {
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    //get booking by user_id
-//    @GetMapping(value = "/getBookingByUserId/{id}")
-//    public List<HotelBooking> getBookingByUserId(@PathVariable("id") Long id){
-//        //get all hotel booking
-//        List<HotelBooking> hotelBookings = hotelBookingRepository.findByUserId(id);
-//        //list booking by user id
-//        List<HotelBooking> bookingByUserId = new ArrayList<>();
-//        for (HotelBooking hotelBooking : hotelBookings) {
-//            if(hotelBooking.getUser().getId().equals(id)){
-//                bookingByUserId.add(hotelBooking);
-//                System.out.println(bookingByUserId);
-//
-//            }
-//        }
-//
-//        return bookingByUserId;
-//    }
+    //search hotel
+//    @PostMapping(value = "/searchHotel")
+//    public List<Hotel> searchHotel(@RequestBody SearchHotelRequest searchHotelRequest){
+//        //get all hotels
+//        List<Hotel> hotels = hotelRepository.findAll();
+//        //get location by id
+
 }
