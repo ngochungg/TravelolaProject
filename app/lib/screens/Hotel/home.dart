@@ -3,11 +3,14 @@
 import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
+import 'package:app/model/user.dart';
+import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelHomePage extends StatefulWidget {
   static const routeName = '/hotelHome';
@@ -28,6 +31,12 @@ class _HotelHomePageState extends State<HotelHomePage> {
       retriveString = (data.arguments.toString());
     }
     var hotelData = json.decode(utf8.decode(retriveString.codeUnits));
+
+    void hotelDetails() async {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      prefs.setString('hotelData', jsonEncode(hotelData));
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -90,7 +99,23 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             primary: Colors.white,
                             elevation: 0,
                           ),
-                          onPressed: () {},
+                          onPressed: () async {
+                            hotelDetails();
+                            var response = await http.get(Uri.parse(
+                                getRoomOfHotel +
+                                    hotelData[i]['id'].toString()));
+                            var utf = json.decode(utf8
+                                .decode(response.body.toString().codeUnits));
+                            var room = jsonEncode(utf);
+                            var hotel = json.encode(hotelData[i]);
+                            var temps =
+                                json.encode({'room': room, 'hotel': hotel});
+                            Navigator.of(context).pushNamed(
+                                HotelDetail.routeName,
+                                arguments: temps);
+
+                            // print(array);
+                          },
                           child: Row(
                             children: [
                               // ClipRRect(
@@ -160,7 +185,18 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                         ),
                                         WidgetSpan(
                                           child: SizedBox(
-                                            height: 120,
+                                            height: 100,
+                                            width: 10,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                            text:
+                                                'Price/room/night starts from\n',
+                                            style: TextStyle(
+                                                color: Colors.black45,
+                                                fontSize: 12)),
+                                        WidgetSpan(
+                                          child: SizedBox(
                                             width: 10,
                                           ),
                                         ),
@@ -187,7 +223,8 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                           text: 'All charges included',
                                           style: TextStyle(
                                               color: Colors.black38,
-                                              fontSize: 12),
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600),
                                         ),
                                       ],
                                     ),

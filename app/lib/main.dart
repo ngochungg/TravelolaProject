@@ -1,4 +1,5 @@
 import 'package:app/screens/Hotel/home.dart';
+import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/changePassword.dart';
 import 'package:app/screens/dashboard.dart';
 import 'package:app/screens/editInfo.dart';
@@ -24,6 +25,7 @@ void main() {
       EditInfo.routeName: (context) => EditInfo(),
       ChangePassword.routeName: (context) => ChangePassword(),
       HotelHomePage.routeName: (context) => HotelHomePage(),
+      HotelDetail.routeName: (context) => HotelDetail(),
     },
   ));
 }

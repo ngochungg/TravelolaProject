@@ -14,3 +14,5 @@ const String urlChangePassword =
     "http://localhost:8080/api/auth/updatePassword";
 
 const String getAllWard = "http://localhost:8080/api/auth/getAllProvince";
+
+const String getRoomOfHotel = "http://localhost:8080/api/hotel/getRoom/";
