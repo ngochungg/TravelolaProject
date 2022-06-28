@@ -7,6 +7,7 @@ import 'my_noti_bottom.dart';
 import 'my_save_bottom.dart';
 
 class BottomNav extends StatefulWidget {
+  static final routeName = '/bottomNav';
   const BottomNav({Key? key}) : super(key: key);
 
   @override

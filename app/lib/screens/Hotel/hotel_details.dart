@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
+import 'package:app/screens/Hotel/room_details.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -301,203 +302,215 @@ class _HotelDetailState extends State<HotelDetail> {
               children: [
                 Column(
                   children: [
-                    SizedBox(
-                      height: 10,
-                    ),
                     for (int i = 0; i < room.length; i++)
-                      ElevatedButton(
-                        onPressed: () {},
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
+                      Column(
+                        children: [
+                          SizedBox(
+                            height: 10,
                           ),
-                          primary: Colors.white,
-                          elevation: 0,
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 10, right: 10),
-                          child: Column(
-                            children: [
-                              ClipRRect(
-                                borderRadius: BorderRadius.circular(8.0),
-                                child: Image(
-                                  image: NetworkImage(
-                                      "http://localhost:8080/api/auth/getImage/${hotel['images'][0]['imagePath']}"),
-                                  height: 150,
-                                  width: double.infinity,
-                                  fit: BoxFit.cover,
-                                ),
+                          ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pushNamed(
+                                  RoomDetails.routeName,
+                                  arguments: jsonEncode(room[i]));
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(25),
                               ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Column(
+                              primary: Colors.white,
+                              elevation: 0,
+                            ),
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.only(left: 10, right: 10),
+                              child: Column(
                                 children: [
-                                  Container(
-                                    alignment: Alignment.centerLeft,
-                                    child: Text('${room[i]['roomName']}',
-                                        style: TextStyle(
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.black)),
+                                  ClipRRect(
+                                    borderRadius: BorderRadius.circular(8.0),
+                                    child: Image(
+                                      image: NetworkImage(
+                                          "http://localhost:8080/api/auth/getImage/${hotel['images'][0]['imagePath']}"),
+                                      height: 150,
+                                      width: double.infinity,
+                                      fit: BoxFit.cover,
+                                    ),
+                                  ),
+                                  SizedBox(
+                                    height: 10,
+                                  ),
+                                  Column(
+                                    children: [
+                                      Container(
+                                        alignment: Alignment.centerLeft,
+                                        child: Text('${room[i]['roomName']}',
+                                            style: TextStyle(
+                                                fontSize: 20,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black)),
+                                      ),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.spaceBetween,
+                                        children: [
+                                          RichText(
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                // color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              children: [
+                                                WidgetSpan(
+                                                  child: Icon(
+                                                    Icons
+                                                        .people_outline_rounded,
+                                                    color: Colors.black87,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text:
+                                                      ' ${room[i]['maxAdult']} Adult(s), ${room[i]['maxChildren']} Child(ren)',
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.black87,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                          Text('${room[i]['roomType']}',
+                                              style: TextStyle(
+                                                fontSize: 13,
+                                                fontWeight: FontWeight.w400,
+                                                color: Colors.black87,
+                                              )),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                  if (hotel['wifi'] == true)
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: RichText(
+                                              text: TextSpan(
+                                            style: TextStyle(
+                                              // color: Colors.black,
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400,
+                                            ),
+                                            children: [
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.wifi,
+                                                  color: Colors.green,
+                                                  size: 20,
+                                                ),
+                                              ),
+                                              TextSpan(
+                                                text: ' Free Wi-Fi',
+                                                style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: Colors.green,
+                                                ),
+                                              ),
+                                            ],
+                                          )),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('\$${room[i]['price']}',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.orange)),
+                                        ),
+                                      ],
+                                    )
+                                  else
+                                    Row(
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: RichText(
+                                            text: TextSpan(
+                                              style: TextStyle(
+                                                // color: Colors.black,
+                                                fontSize: 15,
+                                                fontWeight: FontWeight.w400,
+                                              ),
+                                              children: [
+                                                WidgetSpan(
+                                                  child: Icon(
+                                                    Icons.wifi_off,
+                                                    color: Colors.red,
+                                                    size: 20,
+                                                  ),
+                                                ),
+                                                TextSpan(
+                                                  text: ' No Free Wi-Fi',
+                                                  style: TextStyle(
+                                                    fontSize: 13,
+                                                    color: Colors.red,
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                          ),
+                                        ),
+                                        Container(
+                                          alignment: Alignment.centerLeft,
+                                          child: Text('\$${room[i]['price']}',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.w400,
+                                                  color: Colors.orange)),
+                                        ),
+                                      ],
+                                    ),
+                                  SizedBox(
+                                    height: 10,
                                   ),
                                   Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
-                                      RichText(
-                                        text: TextSpan(
-                                          style: TextStyle(
-                                            // color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
+                                      SizedBox(),
+                                      ElevatedButton(
+                                          style: ElevatedButton.styleFrom(
+                                            shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(10),
+                                            ),
+                                            primary: Colors.pinkAccent,
+                                            elevation: 0,
                                           ),
-                                          children: [
-                                            WidgetSpan(
-                                              child: Icon(
-                                                Icons.people_outline_rounded,
-                                                color: Colors.black87,
-                                                size: 20,
-                                              ),
+                                          onPressed: () {
+                                            Navigator.of(context).pushNamed(
+                                                RoomDetails.routeName,
+                                                arguments: jsonEncode(room[i]));
+                                          },
+                                          child: Text(
+                                            'Choose',
+                                            style: TextStyle(
+                                              fontSize: 15,
+                                              fontWeight: FontWeight.w400,
                                             ),
-                                            TextSpan(
-                                              text:
-                                                  ' ${room[i]['maxAdult']} Adult(s), ${room[i]['maxChildren']} Child(ren)',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                color: Colors.black87,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      Text('${room[i]['roomType']}',
-                                          style: TextStyle(
-                                            fontSize: 13,
-                                            fontWeight: FontWeight.w400,
-                                            color: Colors.black87,
                                           )),
                                     ],
                                   ),
                                 ],
                               ),
-                              if (hotel['wifi'] == true)
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: RichText(
-                                          text: TextSpan(
-                                        style: TextStyle(
-                                          // color: Colors.black,
-                                          fontSize: 15,
-                                          fontWeight: FontWeight.w400,
-                                        ),
-                                        children: [
-                                          WidgetSpan(
-                                            child: Icon(
-                                              Icons.wifi,
-                                              color: Colors.green,
-                                              size: 20,
-                                            ),
-                                          ),
-                                          TextSpan(
-                                            text: ' Free Wi-Fi',
-                                            style: TextStyle(
-                                              fontSize: 13,
-                                              color: Colors.green,
-                                            ),
-                                          ),
-                                        ],
-                                      )),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text('\$${room[i]['price']}',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.orange)),
-                                    ),
-                                  ],
-                                )
-                              else
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: RichText(
-                                        text: TextSpan(
-                                          style: TextStyle(
-                                            // color: Colors.black,
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                          children: [
-                                            WidgetSpan(
-                                              child: Icon(
-                                                Icons.wifi_off,
-                                                color: Colors.red,
-                                                size: 20,
-                                              ),
-                                            ),
-                                            TextSpan(
-                                              text: ' No Free Wi-Fi',
-                                              style: TextStyle(
-                                                fontSize: 13,
-                                                color: Colors.red,
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ),
-                                    Container(
-                                      alignment: Alignment.centerLeft,
-                                      child: Text('\$${room[i]['price']}',
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              fontWeight: FontWeight.w400,
-                                              color: Colors.orange)),
-                                    ),
-                                  ],
-                                ),
-                              SizedBox(
-                                height: 10,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  SizedBox(),
-                                  ElevatedButton(
-                                      style: ElevatedButton.styleFrom(
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                        ),
-                                        primary: Colors.pinkAccent,
-                                        elevation: 0,
-                                      ),
-                                      onPressed: () {},
-                                      child: Container(
-                                        child: Text(
-                                          'Choose',
-                                          style: TextStyle(
-                                            fontSize: 15,
-                                            fontWeight: FontWeight.w400,
-                                          ),
-                                        ),
-                                      )),
-                                ],
-                              ),
-                            ],
+                            ),
                           ),
-                        ),
+                        ],
                       ),
                   ],
                 ),
@@ -506,19 +519,46 @@ class _HotelDetailState extends State<HotelDetail> {
             Divider(
               color: Colors.grey[200],
             ),
-            Container(
-              child: Row(
-                children: [
-                  Text('feedback'),
-                ],
-              ),
+            Text('feedback'),
+            Divider(
+              color: Colors.grey[200],
             ),
-            Container(
-              child: Row(
-                children: [
-                  Text('description'),
-                ],
-              ),
+            Row(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: RichText(
+                    text: TextSpan(
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                      children: [
+                        TextSpan(
+                          text: 'Description: \n\n',
+                          style: TextStyle(
+                            // fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                        TextSpan(
+                          text: '${hotel['description']}',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            Divider(
+              color: Colors.grey[200],
             ),
             Container(
               child: Row(

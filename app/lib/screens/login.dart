@@ -42,9 +42,13 @@ class _LoginState extends State<Login> {
         "email": result.email,
         "photoUrl": result.photoUrl,
       });
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
       var response = await http.post(Uri.parse(googleUrl),
           body: json, headers: {"Content-Type": "application/json"});
+      var array = jsonDecode(response.body);
+      prefs.setInt('userId', array['id']);
+      prefs.setString('username', array['username']);
+      prefs.setString('phone', array['phone']);
       storeUserData(response.body);
       Navigator.pushNamed(context, Home.routeName, arguments: response.body);
     } else {
@@ -55,21 +59,30 @@ class _LoginState extends State<Login> {
   Future fbLogin() async {
     final result = await FacebookAuth.i.login();
     final requestData = await FacebookAuth.i.getUserData();
-    var string = requestData["name"];
-    final first = string!.split(' ').first;
-    final last = string.split(' ').last;
-    var json = jsonEncode({
-      "id": requestData["id"],
-      "firstName": first,
-      "lastName": last,
-      "email": requestData["email"],
-      "photoUrl": requestData["picture"]["data"]["url"],
-    });
+    if (result != null) {
+      var string = requestData["name"];
+      final first = string!.split(' ').first;
+      final last = string.split(' ').last;
+      var json = jsonEncode({
+        "id": requestData["id"],
+        "firstName": first,
+        "lastName": last,
+        "email": requestData["email"],
+        "photoUrl": requestData["picture"]["data"]["url"],
+      });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var response = await http.post(Uri.parse(fbUrl),
+          body: json, headers: {"Content-Type": "application/json"});
 
-    var response = await http.post(Uri.parse(fbUrl),
-        body: json, headers: {"Content-Type": "application/json"});
-    storeUserData(response.body);
-    Navigator.pushNamed(context, Home.routeName, arguments: response.body);
+      var array = jsonDecode(response.body);
+      prefs.setInt('userId', array['id']);
+      prefs.setString('username', array['username']);
+      prefs.setString('phone', array['phone']);
+      storeUserData(response.body);
+      Navigator.pushNamed(context, Home.routeName, arguments: response.body);
+    } else {
+      return print("Cancalled");
+    }
   }
 
   Future login() async {
@@ -91,6 +104,11 @@ class _LoginState extends State<Login> {
         content: Text("Login succescfull"),
       ));
       final String user = response.body;
+      var array = jsonDecode(user);
+      prefs.setInt('userId', array['id']);
+      prefs.setString('username', array['username']);
+      prefs.setString('phone', array['phone']);
+      prefs.setBool("isLoggedIn", true);
       storeUserData(user);
       Navigator.pushNamed(context, Home.routeName, arguments: user);
     }

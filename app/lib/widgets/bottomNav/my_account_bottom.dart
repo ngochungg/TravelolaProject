@@ -38,7 +38,7 @@ class MyAccount extends StatelessWidget {
               color: Colors.white,
               child: Column(
                 children: <Widget>[
-                  if (user["accessToken"] == null)
+                  if (user["id"] == null)
                     Column(
                       children: <Widget>[
                         Container(

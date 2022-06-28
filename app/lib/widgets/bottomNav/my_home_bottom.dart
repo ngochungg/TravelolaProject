@@ -18,6 +18,7 @@ import '../images_cards.dart';
 
 class MyHome extends StatelessWidget {
   static const routeName = '/myhome';
+
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -44,7 +45,7 @@ class MyHome extends StatelessWidget {
               color: Colors.white,
               child: Column(
                 children: <Widget>[
-                  if (user["accessToken"] == null)
+                  if (user["id"] == null)
                     Column(
                       children: <Widget>[
                         Container(
@@ -163,7 +164,12 @@ class MyHome extends StatelessWidget {
                       IconCard(
                           iconData: Icons.directions_bike,
                           text: 'Experiences',
-                          press: () {}),
+                          press: () async {
+                            SharedPreferences prefs;
+                            prefs = await SharedPreferences.getInstance();
+                            var id = prefs.getInt('userId');
+                            print(id);
+                          }),
                       IconCard(
                           iconData: Icons.directions,
                           text: 'Adventures',
