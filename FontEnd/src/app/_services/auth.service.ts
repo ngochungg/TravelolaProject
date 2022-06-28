@@ -101,13 +101,15 @@ export class AuthService {
     return this.http.post(AUTH_API + 'unlockUser/'+ id, {
     }, httpOptions);
   }
-  //register hotel
-  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, decription:string, street:string,ward:string,district:string,province:string, images:File[]): Observable<any>{
+  //register hotel with Multiple
+  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, 
+    decription:string, street:string,ward:string,district:string,province:string, images:File[]): Observable<any>{
     const formData = new FormData();
-    //add Multiple files to formdata
+    //get Multiple files to API
     for (let i = 0; i < images.length; i++) {
-      formData.append('images', images[i], images[i].name);
+      formData.append('images', images[i]);
     }
+
     formData.append('hotelName', hotelName);
     formData.append('email', email);
     formData.append('phone', phone);

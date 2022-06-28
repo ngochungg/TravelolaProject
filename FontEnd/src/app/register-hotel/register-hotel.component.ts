@@ -41,15 +41,31 @@ export class RegisterHotelComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl } = this.form;
-    this.authService.registerhotel(hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl).subscribe({
-      next: data => {
+    // const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl } = this.form;
+    // this.authService.registerhotel(hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl).subscribe({
+    //   next: data => {
 
-        this.user = data;
-        console.log(this.user);
-        this.isSuccessful = true;
-        this.isSignUpFailed = false;
-      },
+    //     this.user = data;
+    //     console.log(this.user);
+    //     this.isSuccessful = true;
+    //     this.isSignUpFailed = false;
+    //   },
+    //   error: err => {
+    //     this.errorMessage = err.error.message;
+    //     this.isSignUpFailed = true;
+    //   }
+    // });
+    //call api to register hotel have Multiple files images
+    const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  images } = this.form;
+    this.authService.registerhotel(hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  images).subscribe({
+      next: data => {
+          
+          this.user = data;
+          console.log(this.user);
+          this.isSuccessful = true;
+          this.isSignUpFailed = false;
+        }
+      ,
       error: err => {
         this.errorMessage = err.error.message;
         this.isSignUpFailed = true;
@@ -82,7 +98,7 @@ export class RegisterHotelComponent implements OnInit {
     this.authService.getWards(name).subscribe({
       next: data => {
         this.d = data;
-        console.log('diss',this.d);
+        console.log('ward',this.d);
       }
     });
 

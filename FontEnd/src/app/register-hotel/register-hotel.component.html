@@ -30,7 +30,7 @@
 
                 <div class="card card-container">
                     <img id="profile-img" src="//cdn-icons-png.flaticon.com/512/1222/1222178.png?w=360" alt="img/profile" class="profile-img-card" />
-                    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate>
+                    <form *ngIf="!isSuccessful" name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm" novalidate enctype="multipart/form-data">
                         <!-- hotelName -->
                         <div class="form-group">
                             <label for="hotelName">HotelName</label>
@@ -47,6 +47,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- username -->
                         <div class="form-group">
                             <label for="username">UserName</label>
@@ -80,7 +81,7 @@
                             <label for="email">Email</label>
                             <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
                             <div class="div-errors" *ngIf="email.errors &&
-                                f.submitted">
+                                                        f.submitted">
                                 <div *ngIf="email.errors['required']">*Email is required
                                 </div>
                                 <div *ngIf="email.errors['email']">
@@ -199,12 +200,8 @@
 
                         <!-- imgHotel -->
                         <div class="form-group">
-                            <label for="ward">Image</label>
-                            <input type="file" class="form-control" name="street" [(ngModel)]="form.image" required #image="ngModel" />
-                            <div class="div-errors" *ngIf="street.errors &&
-                                f.submitted">
-                                <div *ngIf="street.errors['required']">*Street is required</div>
-                            </div>
+                            <label for="images">Image</label>
+                            <input type="file" class="form-control" name="images" [(ngModel)]="form.images" required #image="ngModel" multiple/>
                         </div>
 
                         <div class="form-group">
