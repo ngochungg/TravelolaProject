@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { RouterModule, Routes } from '@angular/router';
 
 import { RegisterComponent } from './register/register.component';
@@ -17,6 +18,7 @@ import  { AllUserComponent }  from './all-user/all-user.component';
 import  { DashboardComponent } from './dashboard/dashboard.component'; 
 import  { CategoryComponent } from './category/category.component';
 import  { RegisterHotelComponent } from './register-hotel/register-hotel.component';
+import { NgClass } from '@angular/common';
 
 
 const routes: Routes = [

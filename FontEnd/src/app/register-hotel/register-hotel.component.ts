@@ -56,8 +56,8 @@ export class RegisterHotelComponent implements OnInit {
     });
   }
   onSubmit(): void {
-    const { hotelName, email, phone, username, password, contactName, decription, street, ward, district, province, imageUrl } = this.form;
-    this.authService.registerhotel(hotelName, email, phone, username, password, contactName, decription, street, ward, district, province, imageUrl).subscribe({
+    const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl } = this.form;
+    this.authService.registerhotel(hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl).subscribe({
       next: data => {
 
         this.user = data;

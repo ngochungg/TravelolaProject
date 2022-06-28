@@ -4,15 +4,18 @@
       <div class="form-group">
         <div class="col-sm-12">
             <h1 class="account-header"> All User in TRAVELOLA</h1>
-            <input class="form-control" type="text" placeholder="Search User" name="username" (keyup)="ngOnInit()" value="">
-            <div *ngFor="let user of users">
-             
-              
-                    <div>{{user.username}}</div>
 
-             
-            </div>
-            
+              <div  class="search">
+                <input class="form-control search" type="text"  placeholder="Search User" name="username" (keyup)="searchUser($event)">
+              </div>
+
+              <!-- <div *ngFor=" let i=0; i < users.length; i++) ">{
+                
+              } -->
+                <!-- <div *ngIf="this.dataUsers ===users[i].username">
+                  
+                </div> -->
+              </div>      
             <table >
                 <thead >
                   <tr >
@@ -21,25 +24,25 @@
                     <th>LastName</th>
                     <th>Email</th>
                     <th>Phone</th>
-                    <th>roles</th>
+                    <th>Role</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let user of users">
-                      <td>{{user.username}}</td>
-                    <td>{{ user.firstName }}</td>
-                    <td>{{user.lastName}}</td>
-                    <td>{{ user.email }}</td>
-                    <td>{{ user.phone }}</td>
+                  <tr *ngFor="let use of user">
+                      <td >{{use.username}}</td>
+                    <td>{{ use.firstName }}</td>
+                    <td>{{use.lastName}}</td>
+                    <td>{{ use.email }}</td>
+                    <td>{{ use.phone }}</td>
                     <!-- get role to users -->
                     <td>
-                      <span *ngFor="let role of user.roles">
+                      <span *ngFor="let role of use.roles">
                         {{ role.name }}
                       </span>
                     </td>
                     <td>
-                      <button class="btn btn-success btn-in4">More</button> 
-                      <button class="btn btn-danger btn-in4">More</button>
+                      <button class="btn btn-success btn-in4" (click)="showMe(use)"  >Show</button> 
+                      <button class="btn btn-danger btn-in4" (click)="hideMe(use)" >Hide</button>
                   </td>
                   </tr>
                 </tbody>
@@ -47,7 +50,7 @@
         </div>
       </div>
     </div>
-  </div>
+
   
   <Script> </Script>
   
