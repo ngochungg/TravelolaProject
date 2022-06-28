@@ -67,7 +67,7 @@
       <div class="position" ><button class="btn btn-danger btn-change" (click)="onUpdate()">Update</button></div>
     </div>
     <div class="form-group">
-      <input type="file" id="file-upload" required/>
+      <input type="file" id="file-upload" (change)="imageUpload($event)" required/>
     </div>
     <!-- <img [src]="getLinkPicture()" alt="profile photo" width="150px" height="150px"> -->
 
@@ -79,11 +79,3 @@
   </form>
   <hr>
 </div>
-<Script>
-  const fileUpload = document.querySelector("#file-upload");
-  fileUpload.addEventListener("change", (event) => {
-	const { files } = event.target;
-	
-	console.log("files", files)
-})
-</Script>
