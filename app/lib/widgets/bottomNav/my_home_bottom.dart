@@ -1,9 +1,14 @@
+// ignore_for_file: prefer_const_constructors
+
 import 'dart:convert';
 
 import 'package:app/controller/dataController.dart';
 import 'package:app/screens/Hotel/home.dart';
 
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
+import 'package:app/widgets/nofitication.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -16,8 +21,55 @@ import '../app_bar.dart';
 import '../icon_card.dart';
 import '../images_cards.dart';
 
-class MyHome extends StatelessWidget {
+class MyHome extends StatefulWidget {
   static const routeName = '/myhome';
+
+  @override
+  State<MyHome> createState() => _MyHomeState();
+}
+
+class _MyHomeState extends State<MyHome> {
+  @override
+  void initState() {
+    super.initState();
+    AwesomeNotifications().isNotificationAllowed().then(
+      (isAllowed) {
+        if (!isAllowed) {
+          showDialog(
+            context: context,
+            builder: (context) => AlertDialog(
+              title: Text('Allow Notifications'),
+              content: Text('Our app would like to send you notifications'),
+              actions: <Widget>[
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                  child: Text(
+                    'Don\'t Allow',
+                    style: TextStyle(color: Colors.grey, fontSize: 18),
+                  ),
+                ),
+                TextButton(
+                  onPressed: () => AwesomeNotifications()
+                      .requestPermissionToSendNotifications()
+                      .then((_) => Navigator.pop(context)),
+                  child: Text(
+                    'Allow',
+                    style: TextStyle(
+                      color: Colors.teal,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                )
+              ],
+            ),
+          );
+        }
+      },
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -165,10 +217,7 @@ class MyHome extends StatelessWidget {
                           iconData: Icons.directions_bike,
                           text: 'Experiences',
                           press: () async {
-                            SharedPreferences prefs;
-                            prefs = await SharedPreferences.getInstance();
-                            var id = prefs.getInt('userId');
-                            print(id);
+                            notification(title: "Alo", body: "alo");
                           }),
                       IconCard(
                           iconData: Icons.directions,

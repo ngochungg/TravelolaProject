@@ -19,6 +19,7 @@
 		<java.version>1.8</java.version>
 	</properties>
 
+
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -73,7 +74,7 @@
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
-			<version>2.6</version>
+			<version>2.11.0</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -102,6 +103,13 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.google.firebase</groupId>
+			<artifactId>firebase-admin</artifactId>
+			<version>6.9.0</version>
+		  </dependency>
+		
+		
 
 
 	</dependencies>
@@ -114,5 +122,6 @@
 			</plugin>
 		</plugins>
 	</build>
+	
 
 </project>

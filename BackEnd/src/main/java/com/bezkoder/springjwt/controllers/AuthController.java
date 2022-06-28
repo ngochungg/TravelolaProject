@@ -69,6 +69,7 @@ public class AuthController {
 
     @Autowired
     private HotelRepository hotelRepository;
+    
 
 
 

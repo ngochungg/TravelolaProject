@@ -43,10 +43,13 @@ class _LoginState extends State<Login> {
         "email": result.email,
         "photoUrl": result.photoUrl,
       });
+      var username = "Google" + result.id;
+      var body = jsonEncode({"username": username, "password": result.id});
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var response = await http.post(Uri.parse(googleUrl),
           body: json, headers: {"Content-Type": "application/json"});
       var array = jsonDecode(response.body);
+      prefs.setString("body", body);
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);
@@ -71,11 +74,16 @@ class _LoginState extends State<Login> {
         "email": requestData["email"],
         "photoUrl": requestData["picture"]["data"]["url"],
       });
+
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var response = await http.post(Uri.parse(fbUrl),
           body: json, headers: {"Content-Type": "application/json"});
 
+      var username = "Facebook" + requestData["id"];
+      var body =
+          jsonEncode({"username": username, "password": requestData["id"]});
       var array = jsonDecode(response.body);
+      prefs.setString("body", body);
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);

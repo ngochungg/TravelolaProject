@@ -51,7 +51,11 @@ dependencies:
   flutter_picker: ^2.0.3
   carousel_slider: ^4.1.1
   syncfusion_flutter_datepicker: ^20.1.61
+  firebase_analytics: any
   flutter_rating_bar: ^4.0.1
+  firebase_messaging: ^11.4.2
+  firebase_core: ^1.18.0
+  awesome_notifications: ^0.6.21
   
 
 dev_dependencies:

@@ -29,7 +29,7 @@ class _BookingsHistoryState extends State<BookingsHistory> {
     } else {
       retriveString = (data.arguments.toString());
     }
-    var booking = jsonDecode(retriveString);
+    var booking = json.decode(retriveString);
     print(booking.length);
     return Scaffold(
       appBar: AppBar(
@@ -87,27 +87,52 @@ class _BookingsHistoryState extends State<BookingsHistory> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               // crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
-                                SizedBox(
-                                  width: 80.0,
-                                  height: 20.0,
-                                  child: ElevatedButton(
-                                    style: ElevatedButton.styleFrom(
-                                      shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(5),
+                                if (booking[index]['status'] == true)
+                                  SizedBox(
+                                    width: 80.0,
+                                    height: 20.0,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        primary: Colors.greenAccent,
+                                        elevation: 0,
                                       ),
-                                      primary: Colors.pink[100],
-                                      elevation: 0,
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Appeared',
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10,
+                                        ),
+                                      ),
                                     ),
-                                    onPressed: () {},
-                                    child: Text(
-                                      '${booking[index]['status'] == false ? "Not show" : "Appeared"}',
-                                      style: const TextStyle(
-                                        color: Colors.pinkAccent,
-                                        fontSize: 10,
+                                  )
+                                else
+                                  SizedBox(
+                                    width: 80.0,
+                                    height: 20.0,
+                                    child: ElevatedButton(
+                                      style: ElevatedButton.styleFrom(
+                                        shape: RoundedRectangleBorder(
+                                          borderRadius:
+                                              BorderRadius.circular(5),
+                                        ),
+                                        primary: Colors.pinkAccent,
+                                        elevation: 0,
+                                      ),
+                                      onPressed: () {},
+                                      child: Text(
+                                        'Not show',
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontSize: 10,
+                                        ),
                                       ),
                                     ),
                                   ),
-                                ),
                                 const SizedBox(width: 40),
                                 Expanded(
                                   child: Text(

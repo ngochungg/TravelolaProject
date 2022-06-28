@@ -5,8 +5,11 @@ import 'dart:convert';
 import 'package:app/controller/apiController.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Hotel/room_details.dart';
+import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/bottomNav/my_home_bottom.dart';
+import 'package:app/widgets/nofitication.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
@@ -325,10 +328,11 @@ class _BookingCheckState extends State<BookingCheck> {
                             "checkOutDate": end.substring(0, 10),
                             "numOfGuest": jsonData['guest'],
                             "paymentMethod": payment,
-                            "totolPrice": jsonData['price'],
+                            "totalPrice": jsonData['price'],
                             "roomId": jsonData['roomId'],
                             "userId": jsonData['userId'],
                           });
+                          print(body.toString());
                           final response = await http.post(
                               Uri.parse(
                                   "http://localhost:8080/api/hotel/hotelBooking"),
@@ -343,8 +347,21 @@ class _BookingCheckState extends State<BookingCheck> {
                               headers: {
                                 "Content-Type": "application/json",
                               });
-                          Navigator.of(context).pushNamed(BottomNav.routeName,
-                              arguments: login.body);
+                          print(response.statusCode);
+                          if (response.statusCode == 200) {
+                            Navigator.of(context).pushNamed(BottomNav.routeName,
+                                arguments: login.body);
+                            notification(
+                                title:
+                                    "You have successfully booked a room in the hotel!!",
+                                body: "Please check your booking history");
+                          } else {
+                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                              backgroundColor: Colors.red,
+                              content:
+                                  Text("The checkin date must be after today"),
+                            ));
+                          }
                         },
                       ))
                     ],

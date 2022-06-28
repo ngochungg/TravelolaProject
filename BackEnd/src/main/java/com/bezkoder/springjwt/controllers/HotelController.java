@@ -1,15 +1,20 @@
 package com.bezkoder.springjwt.controllers;
 
+import org.springframework.http.HttpStatus;
+
 import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.*;
 import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
@@ -358,6 +363,5 @@ public class HotelController {
 //    public List<Province> getTop10Province(){
 //        return provinceRepository.findTop10ByOrderByHotelCountDesc();
 //    }
-
 
 }

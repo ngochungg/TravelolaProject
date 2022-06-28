@@ -13,29 +13,44 @@ import 'package:app/screens/profile.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/bottomNav/my_account_bottom.dart';
 import 'package:app/widgets/bottomNav/my_home_bottom.dart';
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
-Future main() async {
-  runApp(MaterialApp(
-    debugShowCheckedModeBanner: false,
-    initialRoute: Dashboard.routeName,
-    routes: {
-      BottomNav.routeName: (context) => BottomNav(),
-      Login.routeName: (context) => const Login(),
-      Dashboard.routeName: (context) => Dashboard(),
-      MyAccount.routeName: (context) => MyAccount(),
-      MyHome.routeName: (context) => MyHome(),
-      Profile.routeName: (context) => Profile(),
-      Home.routeName: (context) => Home(),
-      EditInfo.routeName: (context) => EditInfo(),
-      ChangePassword.routeName: (context) => ChangePassword(),
-      HotelHomePage.routeName: (context) => HotelHomePage(),
-      HotelDetail.routeName: (context) => HotelDetail(),
-      RoomDetails.routeName: (context) => RoomDetails(),
-      BookingCheck.routeName: (context) => BookingCheck(),
-      BookingsHistory.routeName: (context) => BookingsHistory(),
-      HistorySub.routeName: (context) => HistorySub(),
-    },
-  ));
+void main() async {
+  AwesomeNotifications().initialize(
+    'resource://drawable/res_notification_app_icon',
+    [
+      NotificationChannel(
+        channelKey: 'basic_channel',
+        channelName: 'Basic Notifications',
+        defaultColor: Colors.teal,
+        importance: NotificationImportance.High,
+        channelShowBadge: true,
+        channelDescription: '',
+      )
+    ],
+  );
+  runApp(
+    MaterialApp(
+      debugShowCheckedModeBanner: false,
+      initialRoute: Dashboard.routeName,
+      routes: {
+        BottomNav.routeName: (context) => BottomNav(),
+        Login.routeName: (context) => const Login(),
+        Dashboard.routeName: (context) => Dashboard(),
+        MyAccount.routeName: (context) => MyAccount(),
+        MyHome.routeName: (context) => MyHome(),
+        Profile.routeName: (context) => Profile(),
+        Home.routeName: (context) => Home(),
+        EditInfo.routeName: (context) => EditInfo(),
+        ChangePassword.routeName: (context) => ChangePassword(),
+        HotelHomePage.routeName: (context) => HotelHomePage(),
+        HotelDetail.routeName: (context) => HotelDetail(),
+        RoomDetails.routeName: (context) => RoomDetails(),
+        BookingCheck.routeName: (context) => BookingCheck(),
+        BookingsHistory.routeName: (context) => BookingsHistory(),
+        HistorySub.routeName: (context) => HistorySub(),
+      },
+    ),
+  );
 }
