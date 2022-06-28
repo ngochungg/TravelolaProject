@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:app/model/loginModel.dart';
 import 'package:app/screens/forgetPassword.dart';
 import 'package:app/screens/home.dart';
+import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -152,7 +153,7 @@ class _LoginState extends State<Login> {
                       child: BackButton(
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.of(context).popAndPushNamed('/home');
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),

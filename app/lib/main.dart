@@ -2,6 +2,8 @@ import 'package:app/screens/Hotel/booking.dart';
 import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Hotel/room_details.dart';
+import 'package:app/screens/booking_history.dart';
+import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/screens/changePassword.dart';
 import 'package:app/screens/dashboard.dart';
 import 'package:app/screens/editInfo.dart';
@@ -32,6 +34,8 @@ Future main() async {
       HotelDetail.routeName: (context) => HotelDetail(),
       RoomDetails.routeName: (context) => RoomDetails(),
       BookingCheck.routeName: (context) => BookingCheck(),
+      BookingsHistory.routeName: (context) => BookingsHistory(),
+      HistorySub.routeName: (context) => HistorySub(),
     },
   ));
 }

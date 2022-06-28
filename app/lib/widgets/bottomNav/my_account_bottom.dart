@@ -31,7 +31,7 @@ class MyAccount extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async => true,
       child: Scaffold(
-        appBar: buildAppbar(context, 'My Account'),
+        appBar: buildAppbar(context, 'travelola'),
         body: SingleChildScrollView(
           child: SafeArea(
             child: Container(

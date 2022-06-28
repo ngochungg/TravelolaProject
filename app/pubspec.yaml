@@ -51,6 +51,7 @@ dependencies:
   flutter_picker: ^2.0.3
   carousel_slider: ^4.1.1
   syncfusion_flutter_datepicker: ^20.1.61
+  flutter_rating_bar: ^4.0.1
   
 
 dev_dependencies:
