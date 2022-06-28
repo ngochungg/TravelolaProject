@@ -14,5 +14,4 @@ public interface RoomRepository extends JpaRepository<Room, Long>, JpaSpecificat
     //List room by hotelId
     List<Room> findByHotelId(Long hotelId);
 
-
 }

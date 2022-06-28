@@ -1,10 +1,7 @@
 package com.bezkoder.springjwt.controllers;
 
 import com.bezkoder.springjwt.models.*;
-import com.bezkoder.springjwt.payload.request.HotelBookingRequest;
-import com.bezkoder.springjwt.payload.request.HotelRequest;
-import com.bezkoder.springjwt.payload.request.RoomRequest;
-import com.bezkoder.springjwt.payload.request.ServicesRequest;
+import com.bezkoder.springjwt.payload.request.*;
 import com.bezkoder.springjwt.repository.*;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
@@ -16,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.*;
 import java.util.concurrent.TimeUnit;
+import java.util.stream.Collectors;
 
 @CrossOrigin
 @RestController
@@ -308,11 +306,46 @@ public class HotelController {
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-    //search hotel
-//    @PostMapping(value = "/searchHotel")
-//    public List<Hotel> searchHotel(@RequestBody SearchHotelRequest searchHotelRequest){
-//        //get all hotels
-//        List<Hotel> hotels = hotelRepository.findAll();
-//        //get location by id
+//    search hotel
+    @PostMapping(value = "/searchHotel")
+    public List<Hotel> searchHotel(@RequestBody SearchHotelRequest searchHotelRequest){
+        //List hotel before search
+        List<Hotel> hotels = hotelRepository.findAll();
+        //list hotel booking
+        List<HotelBooking> hotelBookings = hotelBookingRepository.findAll();
+        //sreach hotel by hotelname
+        if(searchHotelRequest.getHotelName()!=null){
+            hotels = hotels.stream().filter(hotel -> hotel.getHotelName().toLowerCase().contains(searchHotelRequest.getHotelName().toLowerCase())).collect(Collectors.toList());
+        }
+        //search hotel by street
+        if(searchHotelRequest.getStreet()!=null){
+            hotels = hotels.stream().filter(hotel -> hotel.getLocation().getStreet().toLowerCase().contains(searchHotelRequest.getStreet().toLowerCase())).collect(Collectors.toList());
+        }
+        //search hotel by ProvinceId
+        if(searchHotelRequest.getProvinceId()!=null){
+            hotels = hotels.stream().filter(hotel -> hotel.getLocation().getProvince().getId().equals(searchHotelRequest.getProvinceId())).collect(Collectors.toList());
+        }
+        //search hotel by DistrictId
+        if(searchHotelRequest.getDistrictId()!=null){
+            hotels = hotels.stream().filter(hotel -> hotel.getLocation().getDistrict().getId().equals(searchHotelRequest.getDistrictId())).collect(Collectors.toList());
+        }
+        //search hotel by WardId
+        if(searchHotelRequest.getWardId()!=null){
+            hotels = hotels.stream().filter(hotel -> hotel.getLocation().getWard().getId().equals(searchHotelRequest.getWardId())).collect(Collectors.toList());
+        }
+        //search in room by priceFrom and priceTo
+        //search in booking hotel by check in date
+//        if(searchHotelRequest.getCheckIn()!=null){
+//        }
+        //if hotels null return request not found
+        if(hotels.isEmpty()){
+            //return body request not found
+            return null;
+        }
+        //return list hotel after search
+        return hotels;
+    }
+
+    //show feedback of hotel
 
 }
