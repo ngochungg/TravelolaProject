@@ -36,12 +36,7 @@ export class AuthService {
 
     }, httpOptions);
   }
-  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, decription:string, street:string,ward:string,district:string,province:string, imageUrl:string): Observable<any>{
-    return this.http.post(AUTH_API + 'hotel/addHotel', {
-      hotelName, email,phone, username, password, contactName, decription, street,ward,district,province, imageUrl
 
-    }, httpOptions);
-  }
   reloadPro(): Observable<any> {
     this.currentUser = this.token.getUser();
     return this.http.get(AUTH_API + 'viewProfile/' + this.currentUser.id);
@@ -95,6 +90,36 @@ export class AuthService {
       lastName,
       photoUrl
     }, httpOptions);
+  }
+  //lock user
+  lockUser(id: string): Observable<any> {
+    return this.http.post(AUTH_API + 'lockUser/'+ id, {
+    }, httpOptions);
+  }
+  //unlock user
+  unlockUser(id: string): Observable<any> {
+    return this.http.post(AUTH_API + 'unlockUser/'+ id, {
+    }, httpOptions);
+  }
+  //register hotel
+  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, decription:string, street:string,ward:string,district:string,province:string, images:File[]): Observable<any>{
+    const formData = new FormData();
+    //add Multiple files to formdata
+    for (let i = 0; i < images.length; i++) {
+      formData.append('images', images[i], images[i].name);
+    }
+    formData.append('hotelName', hotelName);
+    formData.append('email', email);
+    formData.append('phone', phone);
+    formData.append('username', username);
+    formData.append('password', password);
+    formData.append('contactName', contactName);
+    formData.append('decription', decription);
+    formData.append('street', street);
+    formData.append('ward', ward);
+    formData.append('district', district);
+    formData.append('province', province);
+    return this.http.post('http://localhost:8080/api/hotel/' + 'addHotel', formData);
   }
   
 }

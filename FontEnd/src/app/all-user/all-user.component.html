@@ -1,56 +1,56 @@
 <div class="row">
     <app-navbar></app-navbar>
     <div class="col-sm-8 board-main">
-      <div class="form-group">
-        <div class="col-sm-12">
-            <h1 class="account-header"> All User in TRAVELOLA</h1>
+        <div class="form-group">
+            <div class="col-sm-12">
+                <h1 class="account-header"> All User in TRAVELOLA</h1>
 
-              <div  class="search">
-                <input class="form-control search" type="text"  placeholder="Search User" name="username" (keyup)="searchUser($event)">
-              </div>
+                <div class="search">
+                    <input class="form-control search" type="text" placeholder="Search User" name="username" (keyup)="searchUser($event)">
+                </div>
 
-              <!-- <div *ngFor=" let i=0; i < users.length; i++) ">{
+                <!-- <div *ngFor=" let i=0; i < users.length; i++) ">{
                 
               } -->
                 <!-- <div *ngIf="this.dataUsers ===users[i].username">
                   
                 </div> -->
-              </div>      
-            <table >
-                <thead >
-                  <tr >
-                    <th>Name</th>
-                    <th>FirstName</th>
-                    <th>LastName</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Role</th>
-                  </tr>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>FirstName</th>
+                        <th>LastName</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Role</th>
+                    </tr>
                 </thead>
                 <tbody>
-                  <tr *ngFor="let use of user">
-                      <td >{{use.username}}</td>
-                    <td>{{ use.firstName }}</td>
-                    <td>{{use.lastName}}</td>
-                    <td>{{ use.email }}</td>
-                    <td>{{ use.phone }}</td>
-                    <!-- get role to users -->
-                    <td>
-                      <span *ngFor="let role of use.roles">
+                    <tr *ngFor="let use of user">
+                        <td>{{use.username}}</td>
+                        <td>{{ use.firstName }}</td>
+                        <td>{{use.lastName}}</td>
+                        <td>{{ use.email }}</td>
+                        <td>{{ use.phone }}</td>
+                        <!-- get role to users -->
+                        <td>
+                            <span *ngFor="let role of use.roles">
                         {{ role.name }}
                       </span>
-                    </td>
-                    <td>
-                      <button class="btn btn-success btn-in4" (click)="showMe(use)"  >Show</button> 
-                      <button class="btn btn-danger btn-in4" (click)="hideMe(use)" >Hide</button>
-                  </td>
-                  </tr>
+                        </td>
+                        <td>
+                            <button *ngIf="use.status == true" class="btn btn-success btn-in4" (click)="Look(use)">Look</button>
+                            <button *ngIf="use.status == false" class="btn btn-danger btn-in4" (click)="UnLook(use)">Unlook</button>
+                        </td>
+                    </tr>
                 </tbody>
-              </table>
+            </table>
         </div>
-      </div>
     </div>
+</div>
 
-  
-  <Script> </Script>
-  
+
+<Script>
+</Script>

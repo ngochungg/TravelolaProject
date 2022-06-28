@@ -353,7 +353,11 @@ public class HotelController {
     public List<HotelFeedBack> showFeedback(@PathVariable("id") Long id){
         return hotelFeedBackRepository.findByHotelId(id);
     }
-
+//get 10 province have most hotel
+//    @GetMapping(value = "/getTop10Province")
+//    public List<Province> getTop10Province(){
+//        return provinceRepository.findTop10ByOrderByHotelCountDesc();
+//    }
 
 
 }

@@ -60,28 +60,22 @@ export class AllUserComponent implements OnInit {
   }
   
 
-  hideMe(use: User): void {
-    // console.log(user.id);
-    const index = this.user.findIndex((_user: User) => {
-      return _user.id === use.id;
-    });
+UnLook(use: User): void {
+  
+  this.authService.unlockUser(use.id).subscribe({
+    next: (data) => {
+      this.reloadPage();
+    }
+  });
+}
 
-    this.user[index] = {
-      ...this.user[index],
-      username: '-',
-      firstName: '-',
-      lastName:'-',
-      email:'-',
-      phone:'-',
-      
-    };
-
-  }
-
-  public showMe(use: User): void {
-    const index = this.user.findIndex((_user) => _user.id === use.id);
-    this.user[index] = this._user[index];
-  }
+Look(use: User): void {
+  this.authService.lockUser(use.id).subscribe({
+    next: (data) => {
+      this.reloadPage();
+    }
+  });
+}
 
 
 
@@ -101,5 +95,8 @@ export class AllUserComponent implements OnInit {
         this.user = userFilted;
       }
     }
+  }
+  reloadPage(): void {
+    window.location.reload();
   }
 }
