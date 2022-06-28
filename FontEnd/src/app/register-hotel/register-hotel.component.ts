@@ -39,21 +39,6 @@ export class RegisterHotelComponent implements OnInit {
         console.log(this.provin);
       }
     });
-
-    this.authService.getDistrict().subscribe({
-      next: data => {
-        this.dist = data;
-        console.log(this.dist);
-      }
-    });
-
-    this.authService.getWards().subscribe({
-
-      next: data => {
-        this.ward = data;
-        // console.log(this.ward);
-      }
-    });
   }
   onSubmit(): void {
     const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  imageUrl } = this.form;
@@ -79,46 +64,28 @@ export class RegisterHotelComponent implements OnInit {
 
 
   public changeDistrict(event: any): void {
-
-    //lay ra ten tinh/thanh pho dc chon
+    //get district to province id
     const name = event.target.value;
     console.log('event', name);
-
-    const search = this.provin.filter(a => a.name === name);
-    // console.log('search', search[0].districts);
-    console.log('search', search);
-    if (search && search.length > 0) {
-      this.dis =[];
-      for (let i = 0; i < search[0].districts.length; i++) {
-        this.district = search[0].districts[i].name;
-        // console.log('district', this.district);
-        this.dis.push(this.district)  
-      }  
-    }
-    console.log('dis',this.dis)
+    this.authService.getDistrict(name).subscribe({
+      next: data => {
+        this.dis = data;
+        console.log('district',this.dis);
+      }
+    });
   }
 
   public changeWard(event: any): void {
-
-    //lay ra ten quan/huyen   dc chon
+    //get ward to district id
     const name = event.target.value;
     console.log('event', name);
+    this.authService.getWards(name).subscribe({
+      next: data => {
+        this.d = data;
+        console.log('diss',this.d);
+      }
+    });
 
-    //fill danh sach quan huyen dc tim thay co name = event
-    const search = this.dist.filter(a => a.name === name);
-    // console.log('search', search[0].districts);
-    console.log('search', search);
-
-    
-    if (search && search.length > 0) {
-      this.diss =[];
-      for (let i = 0; i < search[0].wards.length; i++) {
-        this.disI = search[0].wards[i].name;
-        // console.log('district', this.district);
-        this.diss.push(this.disI)  
-      }  
-    }
-    console.log('diss',this.diss)
   }
 }
  

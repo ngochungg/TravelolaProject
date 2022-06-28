@@ -374,16 +374,16 @@ public class AuthController {
         return ResponseEntity.ok(bookings);
     }
 
-    // get all ward
-    @GetMapping("/getAllWard")
-    public ResponseEntity<?> getAllWard() {
-        List<Ward> wards = wardRepository.findAll();
+    // get all ward by district id
+    @GetMapping("/getWard/{id}")
+    public ResponseEntity<?> getWard(@PathVariable Long id) {
+        List<Ward> wards = wardRepository.findByDistrictId(id);
         return ResponseEntity.ok(wards);
     }
-    // get all district
-    @GetMapping("/getAllDistrict")
-    public ResponseEntity<?> getAllDistrict() {
-        List<District> districts = districtRepository.findAll();
+    // get all district by Province id
+    @GetMapping("/getAllDistrict/{id}")
+    public ResponseEntity<?> getAllDistrict(@PathVariable Long id) {
+        List<District> districts = districtRepository.findByProvinceId(id);
         return ResponseEntity.ok(districts);
     }
     // get all province

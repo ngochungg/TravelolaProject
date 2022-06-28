@@ -44,11 +44,11 @@ export class AuthService {
   getAllUsers():Observable<any> { 
     return this.http.get(AUTH_API + 'getAllUser');
    }
-  getWards(): Observable<any> {
-    return this.http.get(AUTH_API + 'getAllWard');
+  getWards(id: string): Observable<any> {
+    return this.http.get(AUTH_API + 'getWard/'+id );
   }
-  getDistrict(): Observable<any> {
-    return this.http.get(AUTH_API + 'getAllDistrict');
+  getDistrict(id: string): Observable<any> {
+    return this.http.get(AUTH_API + 'getAllDistrict/'+ id);
   }
   getProvince(): Observable<any> {
     return this.http.get(AUTH_API + 'getAllProvince');

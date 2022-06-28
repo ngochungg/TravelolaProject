@@ -141,7 +141,7 @@
                             <label for="Province">Province</label>
                             <select name="province" id="Province" (change)="changeDistrict($event)" class="form-control" required>
                                     <option value="">--Province--</option>
-                                    <option *ngFor="let pro of provin"  value={{pro.name}}  >
+                                    <option *ngFor="let pro of provin"  value={{pro.id}}  >
                                         {{ pro.name }}
                                     </option>
                                 </select>
@@ -152,9 +152,9 @@
                             <label for="district">District</label>
                             <select name="District" id="Districts" class="form-control" (change)="changeWard($event)" required>
                                 <option value="">--District--</option>
-                                <option *ngFor="let d of dis" value="{{d}}">
+                                <option *ngFor="let d of dis" value="{{d.id}}">
 
-                                     {{d}}
+                                     {{d.name}}
                                     <!-- <p *ngFor="let d of disI">
                                         {{d.name}}
                                     </p> -->
@@ -170,9 +170,9 @@
 
                             <select name="ward" id="Ward" class="form-control" required>
                                 <option value="">--Ward--</option>
-                                <option *ngFor="let c of diss" value="{{c}}" >
+                                <option *ngFor="let c of d" value="{{c.id}}" >
 
-                                     {{c}}
+                                     {{c.name}}
                                     <!-- <p *ngFor="let d of disI">
                                         {{d.name}}
                                     </p> -->
