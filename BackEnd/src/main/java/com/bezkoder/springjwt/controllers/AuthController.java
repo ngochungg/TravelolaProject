@@ -70,6 +70,8 @@ public class AuthController {
     @Autowired
     private HotelRepository hotelRepository;
 
+
+
     //login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
@@ -428,5 +430,10 @@ public class AuthController {
             hotelRepository.save(hotel);
             return ResponseEntity.ok(new MessageResponse("Feedback success!"));
     }
-
+    //show feedback of user
+    @GetMapping("/showFeedback/{id}")
+    public ResponseEntity<?> showFeedback(@PathVariable Long id) {
+        List<HotelFeedBack> hotelFeedBacks = hotelFeedBackRepository.findByUserId(id);
+        return ResponseEntity.ok(hotelFeedBacks);
+    }
 }

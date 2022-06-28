@@ -45,6 +45,8 @@ public class HotelController {
     EmailSenderService emailSenderService;
     @Autowired
     private BookingRepository hotelBookingRepository;
+    @Autowired
+    private HotelFeedBackRepository hotelFeedBackRepository;
 
 
 
@@ -346,6 +348,12 @@ public class HotelController {
         return hotels;
     }
 
-    //show feedback of hotel
+//show feedback of hotel
+    @GetMapping(value = "/showFeedback/{id}")
+    public List<HotelFeedBack> showFeedback(@PathVariable("id") Long id){
+        return hotelFeedBackRepository.findByHotelId(id);
+    }
+
+
 
 }

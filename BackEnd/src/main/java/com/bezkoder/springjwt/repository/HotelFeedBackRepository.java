@@ -11,4 +11,6 @@ import java.util.List;
 public interface HotelFeedBackRepository extends JpaRepository<HotelFeedBack, Long> {
     //list hotelFeedback by hotel
     List<HotelFeedBack> findByHotelId(Long hotelId);
+    //list hotelFeedback by user
+    List<HotelFeedBack> findByUserId(Long userId);
 }
