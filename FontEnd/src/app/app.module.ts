@@ -26,7 +26,9 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CategoryComponent } from './category/category.component';
 import { RegisterHotelComponent } from './register-hotel/register-hotel.component';
 import { CityComponent } from './city/city.component';
-import { UploadImgComponent } from './upload-img/upload-img.component';
+
+import { UpImageComponent } from './up-image/up-image.component';
+
 // import {MatButtonModule} from '@angular/material/button';
 // import {MatIconModule} from '@angular/material/icon';
 // import {MatToolbarModule} from '@angular/material/toolbar';
@@ -61,7 +63,7 @@ import { UploadImgComponent } from './upload-img/upload-img.component';
     CategoryComponent,
     RegisterHotelComponent,
     CityComponent,
-    UploadImgComponent,
+    UpImageComponent,
 
  
   ],

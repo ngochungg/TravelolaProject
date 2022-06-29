@@ -19,6 +19,7 @@ import  { DashboardComponent } from './dashboard/dashboard.component';
 import  { CategoryComponent } from './category/category.component';
 import  { RegisterHotelComponent } from './register-hotel/register-hotel.component';
 import { CityComponent } from './city/city.component';
+import { UpImageComponent } from './up-image/up-image.component';
 
 
 const routes: Routes = [
@@ -39,6 +40,7 @@ const routes: Routes = [
   { path: 'category', component: CategoryComponent },
   { path: 'register-hotel', component: RegisterHotelComponent },
   { path : 'city', component: CityComponent },
+  { path : 'upImage', component: UpImageComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 
