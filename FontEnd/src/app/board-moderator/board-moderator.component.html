@@ -1,5 +1,32 @@
 <div class="container">
-  <header class="jumbotron">
-    <p>{{ content }}</p>
-  </header>
+  <app-navbar></app-navbar>
+
+
+  <div class="row">
+    <div class="col-sm-12">
+      <div>
+        <h1></h1>
+        <div class="container">
+          <div class="row">
+            <div class="col-sm-2">
+              <section>
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                  <input type="checkbox">sdfdsf
+                  <div *ngFor="let country of countries; let i=index">
+                    
+                    <input type="checkbox" formArrayName="selectedCountries" [value]="country.value" (change)="onCheckboxChange($event)" 
+                     style="border: solid; width: 30px;height: 30px;"/>
+                    {{ country.name}}
+                  </div>
+                  <button type="submit">Submit</button>
+                </form>
+              
+                <p>{{ form.value | json }}</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -3,6 +3,9 @@
     <nav class="navbar navbar-expand-lg stroke">
 
         <h1><a href="#" class="navbar-brand mr-lg-5">Travalola</a></h1>
+     <div id="google_translate_element" class="trans"></div>
+
+       
         <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
       data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false"
       aria-label="Toggle navigation">
@@ -50,14 +53,14 @@
                 <a href class="nav-link" (click)="logout()">LogOut</a>
             </li>
         </ul>
+       
         
     </nav>
-
     <div class="container-fluid">
         <router-outlet></router-outlet>
     </div>
 
-    
+   
 </div>
 <script src="/socket.io/socket.io.js"></script>
   <!--/w3l-footer-29-main-->

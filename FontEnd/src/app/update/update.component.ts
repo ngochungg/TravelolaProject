@@ -4,7 +4,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { HttpClientModule } from '@angular/common/http';
- 
+
 @Component({
   selector: 'app-update',
   templateUrl: './update.component.html',
@@ -14,18 +14,19 @@ export class UpdateComponent implements OnInit {
   currentUser: any;
   imageUrl :any;
   form: any = {
-    
+
     firstName: null,
     lastName: null,
     email:null,
     phone: null,
+    image:File
   };
   isSuccessful = false;
 
   errorMessage = '';
   timeStamp: any;
-  
-  constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService, 
+
+  constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService,
      private router: Router) { }
 
   ngOnInit(): void {
@@ -71,14 +72,14 @@ export class UpdateComponent implements OnInit {
       }
     });
   }
- 
+
   imageUpload(event : any){
     var file= event.target.files[0];
     console.log(file)
     const formData:FormData = new FormData();
-    // quangh inh len 
+    // quangh inh len
     // convert image to Base64
-    
-    
+
+
   }
 }

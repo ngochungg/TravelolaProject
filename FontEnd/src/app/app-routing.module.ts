@@ -18,7 +18,7 @@ import  { AllUserComponent }  from './all-user/all-user.component';
 import  { DashboardComponent } from './dashboard/dashboard.component'; 
 import  { CategoryComponent } from './category/category.component';
 import  { RegisterHotelComponent } from './register-hotel/register-hotel.component';
-import { NgClass } from '@angular/common';
+import { CityComponent } from './city/city.component';
 
 
 const routes: Routes = [
@@ -38,7 +38,7 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'register-hotel', component: RegisterHotelComponent },
-
+  { path : 'city', component: CityComponent },
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

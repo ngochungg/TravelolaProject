@@ -6,6 +6,20 @@ const AUTH_API = 'http://localhost:8080/api/auth/';
 const httpOptions = {
   headers: new HttpHeaders({ 'Content-Type': 'application/json' })
 };
+interface FormType{
+  hotelName: string;
+  email: string;
+  phone:string;
+  username:string;
+  password:string;
+  contactName:string;
+  decription:string;
+  street:string;
+  ward:string;
+  district:string;
+  province:string;
+  images:File
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -102,18 +116,23 @@ export class AuthService {
     }, httpOptions);
   }
   //register hotel with Multiple
-  registerhotel(hotelName:string, email:string,phone:string, username:string, password:string, contactName:string, 
-    decription:string, street:string,ward:string,district:string,province:string, images:File[]): Observable<any>{
+  registerhotel(form:FormType): Observable<any>{
     const formData = new FormData();
     //get Multiple files to API
-    for (let i = 0; i < images.length; i++) {
-      formData.append('images', images[i]);
-    }
+    // for (let i = 0; i < images.length; i++) {
+    //   formData.append('images', images[i]);
+    // }
+    
+    // convert image to Base64 encoded
+    
+    const { hotelName, email, phone, username, password, contactName, decription,province, district, ward, street,  images } = form;
+    console.log('form service',form)
+    formData.append('image', images);
 
     formData.append('hotelName', hotelName);
     formData.append('email', email);
     formData.append('phone', phone);
-    formData.append('username', username);
+    formData.append('username', username); 
     formData.append('password', password);
     formData.append('contactName', contactName);
     formData.append('decription', decription);
@@ -121,6 +140,8 @@ export class AuthService {
     formData.append('ward', ward);
     formData.append('district', district);
     formData.append('province', province);
+
+    
     return this.http.post('http://localhost:8080/api/hotel/' + 'addHotel', formData);
   }
   

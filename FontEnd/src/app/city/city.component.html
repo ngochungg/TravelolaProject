@@ -1,0 +1,38 @@
+<div class="container">
+    <div >
+        <table>
+            <thead>
+                <tr>
+                    <th>Location</th>
+                    <th>HotelName:</th>
+                    <th>Phone</th>
+                    <th>Description</th>
+                    <th>wifi</th>
+                    <th>FreeBreakfast</th>
+                    <th>freeParking</th>
+                    <th>petsAllowed</th>
+                    <th>hotTub</th>
+                    <th>swimmingPool</th>
+                    <th>gym</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr *ngFor="let item of hol">
+                    <td>{{item.location}}</td>
+                    <td>{{item.hotelName}}</td>
+                    <td>{{item.phone}}</td>
+                    <td>{{item.description}}</td>
+                    <td>{{item.wifi}}</td>
+                    <td>{{item.freeBreakfast}}</td>
+                    <td>{{item.freeParking}}</td>
+                    <td>{{item.petsAllowed}}</td>
+                    <td>{{item.hotTub}}</td>
+                    <td>{{item.swimmingPool}}</td>
+                    <td>{{item.gym}}</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

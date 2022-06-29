@@ -124,14 +124,14 @@
                         <!-- description -->
                         <div class="form-group">
                             <label for="description">Description</label>
-                            <input type="text" class="form-control" name="description" [(ngModel)]="form.description" required #description="ngModel" />
-                            <div class="div-errors" *ngIf="description.errors &&
+                            <input type="text" class="form-control" name="decription" [(ngModel)]="form.decription" required #decription="ngModel" />
+                            <div class="div-errors" *ngIf="decription.errors &&
                                 f.submitted">
-                                <div *ngIf="description.errors['required']">*Description is required</div>
-                                <div *ngIf="description.errors['minlength']">
+                                <div *ngIf="decription.errors['required']">*Description is required</div>
+                                <div *ngIf="decription.errors['minlength']">
                                     *Description must be at least 3 characters
                                 </div>
-                                <div *ngIf="description.errors['maxlength']">
+                                <div *ngIf="decription.errors['maxlength']">
                                     *Description must be at most 20 characters
                                 </div>
                             </div>
@@ -151,7 +151,7 @@
                         <!-- district -->
                         <div class="form-group">
                             <label for="district">District</label>
-                            <select name="District" id="Districts" class="form-control" (change)="changeWard($event)" required>
+                            <select name="district" id="Districts" class="form-control" (change)="changeWard($event)" required>
                                 <option value="">--District--</option>
                                 <option *ngFor="let d of dis" value="{{d.id}}">
 
@@ -169,7 +169,7 @@
                         <div class="form-group">
                             <label for="ward">Ward</label>
 
-                            <select name="ward" id="Ward" class="form-control" required>
+                            <select name="ward" id="Ward" class="form-control" required [(ngModel)]="form.ward">
                                 <option value="">--Ward--</option>
                                 <option *ngFor="let c of d" value="{{c.id}}" >
 
@@ -201,11 +201,11 @@
                         <!-- imgHotel -->
                         <div class="form-group">
                             <label for="images">Image</label>
-                            <input type="file" class="form-control" name="images" [(ngModel)]="form.images" required #image="ngModel" multiple/>
+                            <input type="file" class="form-control" name="images" [(ngModel)]="form.images" required #images="ngModel" multiple/>
                         </div>
 
                         <div class="form-group">
-                            <button class="btn btn-primary btn-block">Sign Up</button>
+                            <button class="btn btn-primary btn-block" >Sign Up</button>
                         </div>
                         <div class="return-sigup go-to-login">
                             You have an account? <a href="/login">Login</a>
