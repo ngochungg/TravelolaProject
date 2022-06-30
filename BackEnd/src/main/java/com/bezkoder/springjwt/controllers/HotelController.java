@@ -209,6 +209,7 @@ public class HotelController {
         room.setPrice(roomRequest.getPrice());
         room.setMaxAdult(roomRequest.getMaxAdult());
         room.setMaxChildren(roomRequest.getMaxChildren());
+        room.setRoomStatus(false);
         room.setHotel(hotel);
         Room resultRoom = roomRepository.save(room);
         int roomToHotel = hotel.getNumberOfRoom()+1;
@@ -289,6 +290,13 @@ public class HotelController {
         if(hotelBookingRequest.getCheckInDate().before(new Date())){
             return ResponseEntity.badRequest().body("Check in date must be after today");
         }
+        //check Number of people in room
+        int people = room.getMaxChildren()+room.getMaxAdult();
+        System.out.println(people);
+        if(people < hotelBookingRequest.getNumOfGuest()){
+            return ResponseEntity.badRequest().body("Number of people in room must be less than "+people);
+        }
+
         //add hotel booking
         HotelBooking hotelBooking = new HotelBooking();
         hotelBooking.setBookingCode(emailSenderService.randomString());
@@ -301,6 +309,9 @@ public class HotelController {
         hotelBooking.setRoom(room);
         hotelBooking.setUser(user);
         HotelBooking resultHotelBooking = hotelBookingRepository.save(hotelBooking);
+        //room status = true
+        room.setRoomStatus(true);
+        roomRepository.save(room);
         //return hotel booking
         return ResponseEntity.ok().body(resultHotelBooking);
 
@@ -340,11 +351,12 @@ public class HotelController {
         if(searchHotelRequest.getWardId()!=null){
             hotels = hotels.stream().filter(hotel -> hotel.getLocation().getWard().getId().equals(searchHotelRequest.getWardId())).collect(Collectors.toList());
         }
-        //search in room by priceFrom and priceTo
-        //search in booking hotel by check in date
-//        if(searchHotelRequest.getCheckIn()!=null){
-//        }
-        //if hotels null return request not found
+        //search hotel by check in date
+        if(searchHotelRequest.getCheckIn()!=null || searchHotelRequest.getCheckOut()!=null){
+           //get hotels have room status
+        }
+
+
         if(hotels.isEmpty()){
             //return body request not found
             return null;
@@ -365,11 +377,23 @@ public class HotelController {
         List<Province> result = new ArrayList<>();
         for (Province province : provinces) {
             List<Hotel> hotels = hotelRepository.findByLocation_Province_Id(province.getId());
-            if(hotels.size()>=4){
+            if(hotels.size()>=2){
                 result.add(province);
             }
         }
         return result;
+    }
+
+    //confirmed hotel booking
+    @PutMapping(value = "/confirmedHotelBooking/{id}")
+    public ResponseEntity<HotelBooking> confirmedHotelBooking(@PathVariable("id") Long id){
+        HotelBooking hotelBooking = hotelBookingRepository.findById(id).get();
+        hotelBooking.setStatus(true);
+        HotelBooking result = hotelBookingRepository.save(hotelBooking);
+        Room room = roomRepository.findById(result.getRoom().getId()).get();
+        room.setRoomStatus(false);
+        roomRepository.save(room);
+        return ResponseEntity.ok().body(result);
     }
 
 }
