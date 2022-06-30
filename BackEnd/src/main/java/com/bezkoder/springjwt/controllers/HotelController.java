@@ -353,10 +353,9 @@ public class HotelController {
         }
         //search hotel by check in date
         if(searchHotelRequest.getCheckIn()!=null || searchHotelRequest.getCheckOut()!=null){
-           //get hotels have room status
+           //get hotel have room status = false
+            hotels = hotels.stream().filter(hotel -> hotel.getRooms().stream().anyMatch(room -> room.getRoomStatus() == false)).collect(Collectors.toList());
         }
-
-
         if(hotels.isEmpty()){
             //return body request not found
             return null;
