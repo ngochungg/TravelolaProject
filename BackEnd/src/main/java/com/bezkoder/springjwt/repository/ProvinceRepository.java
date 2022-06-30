@@ -8,6 +8,6 @@ import java.util.List;
 
 @Repository
 public interface ProvinceRepository extends JpaRepository<Province, Long> {
-    //find 4 province have most hotels
-    List<Province> findTop4ByOrderByHotelCountDesc();
+//    //find 4 province have most hotels
+//    List<Province> findTop4ByOrderByHotelCountDesc();
 }
