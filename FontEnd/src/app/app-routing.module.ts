@@ -22,6 +22,7 @@ import { CityComponent } from './city/city.component';
 import { UpImageComponent } from './up-image/up-image.component';
 
 
+
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },

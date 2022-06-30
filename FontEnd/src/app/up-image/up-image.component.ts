@@ -4,6 +4,10 @@ import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-up-image',
@@ -20,16 +24,18 @@ export class UpImageComponent implements OnInit {
   onFileSelected(event: any){
     this.selectedFile=<File>event.target.files[0];
   }
-
+  public email ='';
+  public username ='';
+  public phone ='';
   onUpload(){
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const filedata =new FormData();
     filedata.append('images', this.selectedFile, this.selectedFile.name);
-    filedata.append('hotelName', 'alo');
-    filedata.append('email', 'fff4o32@gamil.com');
-    filedata.append('phone', '09879932321');
-    filedata.append('username', 'longalo'); 
+    filedata.append('hotelName', 'aloola');
+    filedata.append('email', this.email);
+    filedata.append('phone', this.phone);
+    filedata.append('username', this.username); 
     filedata.append('password', '12345678');
     filedata.append('contactName', 'meo3ss2422vn');
     filedata.append('decription', 'aloalo123456');

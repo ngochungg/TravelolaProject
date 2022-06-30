@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { HttpClient } from '@angular/common/http';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { HttpHeaders } from '@angular/common/http';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
+import { AppRoutingModule } from '../app-routing.module';
 @Component({
   selector: 'app-register-hotel',
   templateUrl: './register-hotel.component.html',
@@ -12,34 +16,35 @@ export class RegisterHotelComponent implements OnInit {
 
 
 
- 
-  form: any = {
-    hotelName: null,
-    email: null,
-    phone: null,
-    username: null,
-    password: null,
-    contactName: null,
-    decription: null,
-    street: null,
-    ward: null,
-    district: null,
-    province: null,
-    images :null
-  };
+
+  // form: any = {
+  //   hotelName: null,
+  //   email: null,
+  //   phone: null,
+  //   username: null,
+  //   password:null,
+  //   contactName: null,
+  //   decription: null,
+  //   street: null,
+  //   ward: null,
+  //   district: null,
+  //   province: null,
+  //   images: null
+  // };
 
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';
   provin: any[] = [];
   user: any[] = [];
-  addUser:any = [];
+  addUser: any = [];
   dis: any[] = [];
   diss: any[] = [];
   dist: any[] = [];
-  ward: any[] = [];
-  d:any[] = [];
-  constructor(private authService: AuthService,private http: HttpClient) { }
+  d: any[] = [];
+
+  constructor(private authService: AuthService, private http: HttpClient) { }
+  selectedFile!: File;
   ngOnInit(): void {
     this.authService.getProvince().subscribe({
       next: data => {
@@ -48,36 +53,62 @@ export class RegisterHotelComponent implements OnInit {
       }
     });
   }
-  
+
   onSubmit(): void {
    
-    this.authService.registerhotel(this.form).subscribe({
-      next: data => {
-          
-          this.addUser = data;
-          console.log(this.addUser);
-          this.isSuccessful = true;
-          this.isSignUpFailed = false;
-        }
-
-    });
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = <File>event.target.files[0];
+    console.log('event', this.selectedFile)
+  }
+  // public urlIMG: string[] = [];
+  public hotelName ='';
+  public email ='';
+  public phone ='';
+  public username ='';
+  public password ='';
+  public contactName ='';
+  public decription ='';
+  public street ='';
+  public ward ='';
+  public district ='';
+  public province ='';
+  public images ='';
+  onUpload(){
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const filedata =new FormData();
+    filedata.append('images', this.selectedFile, this.selectedFile.name);
+    filedata.append('hotelName', this.hotelName);
+    filedata.append('email',  this.email);
+    filedata.append('phone',  this.phone);
+    filedata.append('username',  this.username); 
+    filedata.append('password',  this.password);
+    filedata.append('contactName',  this.contactName);
+    filedata.append('decription',  this.decription);
+    filedata.append('street', this.street);
+    filedata.append('ward',  this.ward);
+    filedata.append('district',  this.district);
+    filedata.append('province',  this.province);
+    // console.log('form',)
+
+    this.http.post('http://localhost:8080/api/hotel/addHotel', filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+  }
+
+
+
   
-
-
-
-  public district: string[] = [];
-  public disI:string[] = [];
+  public disI: string[] = [];
   // public war: string[] = [];
   public changeDistrict(event: any): void {
     //get district to province id
     const name = event.target.value;
-    this.form.province=name
+    this.province = name
     this.authService.getDistrict(name).subscribe({
       next: data => {
         this.dis = data;
-        console.log('district',this.dis);
+        console.log('district', this.dis);
       }
     });
   }
@@ -85,8 +116,8 @@ export class RegisterHotelComponent implements OnInit {
   public changeWard(event: any): void {
     //get ward to district id
     const name = event.target.value;
-    this.form.district = name
-   
+    this.district = name
+
     this.authService.getWards(name).subscribe({
       next: data => {
         this.d = data;
@@ -95,4 +126,3 @@ export class RegisterHotelComponent implements OnInit {
 
   }
 }
- 

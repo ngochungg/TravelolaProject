@@ -1,5 +1,9 @@
 
-<form enctype="multipart/form-data">
-    <input type="file" (change)="onFileSelected($event)">
+<form enctype="multipart/form-data" >
+    
+    name<input type="text" [(ngModel)]="username"[ngModelOptions]="{standalone: true}" ><br>
+    email<input type="text" [(ngModel)]="email "  [ngModelOptions]="{standalone: true}"><br>
+    phone<input type="text" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}"  ><br>
+    <input type="file" (change)="onFileSelected($event)"><br>
 <button type="button" (click)="onUpload()">Upload</button>
 </form>
