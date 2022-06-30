@@ -13,5 +13,7 @@ public interface HotelRepository extends JpaRepository<Hotel, Long>, JpaSpecific
     Hotel getByAccountId(Long id);
     Boolean existsByAccount_Id(Long id);
     Hotel getByEmail(String email);
+    //findByLocation_Province_Id
+    List<Hotel> findByLocation_Province_Id(Long id);
 }
 

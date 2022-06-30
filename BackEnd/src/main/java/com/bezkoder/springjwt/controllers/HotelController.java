@@ -358,10 +358,18 @@ public class HotelController {
     public List<HotelFeedBack> showFeedback(@PathVariable("id") Long id){
         return hotelFeedBackRepository.findByHotelId(id);
     }
-//get 10 province have most hotel
-//    @GetMapping(value = "/getTop10Province")
-//    public List<Province> getTop10Province(){
-//        return provinceRepository.findTop10ByOrderByHotelCountDesc();
-//    }
+    //find 4 province have most hotels
+    @GetMapping(value = "/find4ProvinceHaveMostHotel")
+    public List<Province> find4ProvinceHaveMostHotel(){
+        List<Province> provinces = provinceRepository.findAll();
+        List<Province> result = new ArrayList<>();
+        for (Province province : provinces) {
+            List<Hotel> hotels = hotelRepository.findByLocation_Province_Id(province.getId());
+            if(hotels.size()>=4){
+                result.add(province);
+            }
+        }
+        return result;
+    }
 
 }
