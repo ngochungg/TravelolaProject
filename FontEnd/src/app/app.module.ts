@@ -30,6 +30,8 @@ import { CityComponent } from './city/city.component';
 import { UpImageComponent } from './up-image/up-image.component';
 
 
+
+
 // import {MatButtonModule} from '@angular/material/button';
 // import {MatIconModule} from '@angular/material/icon';
 // import {MatToolbarModule} from '@angular/material/toolbar';
@@ -58,6 +60,7 @@ import { UpImageComponent } from './up-image/up-image.component';
     RegisterHotelComponent,
     CityComponent,
     UpImageComponent,
+    
 
  
   ],
@@ -67,7 +70,9 @@ import { UpImageComponent } from './up-image/up-image.component';
     FormsModule,
     HttpClientModule,
     SocialLoginModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+   
+  
   ],
   providers:
   [[authInterceptorProviders],[
