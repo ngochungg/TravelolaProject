@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,4 +39,9 @@ public class Post {
     private String imageUrl;
     @Column(name = "description", columnDefinition = "text")
     private String description;
+    //foreign key user
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @JsonIgnoreProperties(value = {"posts"})
+    private User user;
 }
