@@ -3,6 +3,7 @@ package com.bezkoder.springjwt.services;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.boot.context.properties.bind.DefaultValue;
+import org.springframework.core.io.FileSystemResource;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.mail.javamail.MimeMessagePreparator;
@@ -10,7 +11,9 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.TemplateEngine;
 
 import javax.mail.MessagingException;
+import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
+import java.io.File;
 import java.util.Map;
 import org.thymeleaf.context.Context;
 
@@ -44,6 +47,7 @@ public class EmailSenderService {
             messageHelper.setSubject(subject);
             messageHelper.setText(text, true);
         };
+
         mailSender.send(messagePreparator);
         System.out.printf("An email has been sent to " + to);
     }

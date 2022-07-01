@@ -1,5 +1,13 @@
 package com.bezkoder.springjwt.controllers;
 
+import com.bezkoder.springjwt.security.services.QRCodeService;
+import com.google.zxing.BarcodeFormat;
+import com.google.zxing.WriterException;
+import com.google.zxing.client.j2se.MatrixToImageConfig;
+import com.google.zxing.client.j2se.MatrixToImageWriter;
+import com.google.zxing.common.BitMatrix;
+import com.google.zxing.qrcode.QRCodeWriter;
+import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpStatus;
 
 import com.bezkoder.springjwt.models.*;
@@ -12,10 +20,19 @@ import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletResponse;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -53,7 +70,8 @@ public class HotelController {
     @Autowired
     private HotelFeedBackRepository hotelFeedBackRepository;
 
-
+    @Autowired
+    private QRCodeService qrCodeService;
 
     //add hotel and MultipartFile image
     @PostMapping(value = "/addHotel")
@@ -264,7 +282,7 @@ public class HotelController {
 
     //HotelBooking
     @PostMapping(value = "/hotelBooking")
-    public ResponseEntity<?> hotelBooking(@RequestBody HotelBookingRequest hotelBookingRequest) {
+    public ResponseEntity<?> hotelBooking(@RequestBody HotelBookingRequest hotelBookingRequest, Model model) throws IOException, WriterException {
         //find room by id
         Room room = roomRepository.findById(hotelBookingRequest.getRoomId()).get();
         //find hotel by id
@@ -282,7 +300,7 @@ public class HotelController {
                 return ResponseEntity.badRequest().body("You are Hotel. You can't book a room");
             }
         }
-        //check check in date before check out date
+        //check in date before check out date
         if(hotelBookingRequest.getCheckInDate().after(hotelBookingRequest.getCheckOutDate())){
             return ResponseEntity.badRequest().body("Check in date must be before check out date");
         }
@@ -308,23 +326,64 @@ public class HotelController {
         hotelBooking.setTotalPrice(hotelBookingRequest.getTotalPrice());
         hotelBooking.setRoom(room);
         hotelBooking.setUser(user);
+
         HotelBooking resultHotelBooking = hotelBookingRepository.save(hotelBooking);
         //room status = true
         room.setRoomStatus(true);
         roomRepository.save(room);
+        System.out.println(resultHotelBooking.getBookingCode());
         //return hotel booking
-        return ResponseEntity.ok().body(resultHotelBooking);
 
+        //check booking success if true send mail to user
+        if(resultHotelBooking != null){
+
+            //Qr code information resultHotelBooking
+            String qrCodeInfo = "Booking code: "+resultHotelBooking.getBookingCode()+
+                    "\n"+"Check in date: "+resultHotelBooking.getCheckInDate()+"\n"+
+                    "Check out date: "+resultHotelBooking.getCheckOutDate()+"\n"+
+                    "Number of guest: "+resultHotelBooking.getNumOfGuest()+"\n"+
+                    "Total price: "+resultHotelBooking.getTotalPrice()+"\n"+
+                    "Payment method: "+resultHotelBooking.getPaymentMethod();
+
+            //create qr code
+            generateQRCodeImage(qrCodeInfo,300,300,"uploads/"+emailSenderService.randomString()+".png");
+            //insert qr code to hotel booking
+            resultHotelBooking.setQrCode(emailSenderService.randomString()+".png");
+            hotelBookingRepository.save(resultHotelBooking);
+
+            Map<String, Object> emailMap = new HashMap<>();
+            emailMap.put("hotelBooking", resultHotelBooking);
+            emailMap.put("user", user);
+            emailMap.put("hotel", hotel);
+            emailMap.put("room", room);
+            //address
+            String address = hotel.getLocation().getWard().getName()+", "+hotel.getLocation().getDistrict().getName()+", "+hotel.getLocation().getProvince().getName();
+            emailMap.put("address", address);
+            String templateHtml = emailSenderService.templateResolve("bookingSuccess", emailMap);
+            String path = "uploads/"+emailSenderService.randomString()+".png";
+            emailSenderService.sendTemplateMessage(user.getEmail(), "Booking Success", "bookingSuccess", templateHtml);
+        }
+        return ResponseEntity.ok().body(resultHotelBooking);
+}
+//qr code
+public static void generateQRCodeImage(String text, int width, int height, String filePath)
+        throws WriterException, IOException {
+    QRCodeWriter qrCodeWriter = new QRCodeWriter();
+    BitMatrix bitMatrix = qrCodeWriter.encode(text, BarcodeFormat.QR_CODE, width, height);
+
+    Path path = FileSystems.getDefault().getPath(filePath);
+    MatrixToImageWriter.writeToPath(bitMatrix, "PNG", path);
 
 }
-
     //count day
     public static long getDifferenceDays(Date d1, Date d2) {
             long diff = d2.getTime() - d1.getTime();
             return TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
     }
 
-//    search hotel
+
+
+    //    search hotel
     @PostMapping(value = "/searchHotel")
     public List<Hotel> searchHotel(@RequestBody SearchHotelRequest searchHotelRequest){
         //List hotel before search
