@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.controllers;
 
+import com.bezkoder.springjwt.services.PdfGenerateService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
@@ -21,9 +22,12 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -61,8 +65,8 @@ public class HotelController {
     @Autowired
     private HotelFeedBackRepository hotelFeedBackRepository;
 
-//    @Autowired
-//    private QRCodeService qrCodeService;
+    @Autowired
+    private PdfGenerateService  pdfGenerateService;
 
     //add hotel and MultipartFile image
     @PostMapping(value = "/addHotel")
@@ -446,5 +450,26 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         roomRepository.save(room);
         return ResponseEntity.ok().body(result);
     }
+
+    //report file pdf allRoom
+    @GetMapping(value = "/reportallRoom/{id}")
+    public String reportAllRoom(@PathVariable("id") Long id) throws IOException {
+        //list all room by hotel id
+        List<Room> rooms = roomRepository.findByHotelId(id);
+        //find hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        String address = rooms.get(0).getPrice()+", "+hotel.getLocation().getDistrict().getName()+", "+hotel.getLocation().getProvince().getName();
+        Map<String, Object> pdfMap = new HashMap<>();
+        pdfMap.put("rooms", rooms);
+        pdfMap.put("hotel", hotel);
+        pdfMap.put("address", address);
+        String namePdf = hotel.getHotelName()+"_allRoom_"+LocalDate.now()+".pdf";
+        System.out.println(namePdf);
+        pdfGenerateService.generatePdfFile("rooms", pdfMap, namePdf);
+//        File file = new File(namePdf);
+        //return create file pdf success
+        return namePdf;
+    }
+
 
 }
