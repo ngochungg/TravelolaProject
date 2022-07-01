@@ -53,9 +53,9 @@
       display: block;
       margin: 0 auto !important;
       /* makes it centered */
-      max-width: 580px;
+      max-width: 800px;
       padding: 10px;
-      width: 580px;
+      width: 800px;
     }
 
     /* This should also be a block element, so that it will fill 100% of the .container */
@@ -63,7 +63,7 @@
       box-sizing: border-box;
       display: block;
       margin: 0 auto;
-      max-width: 580px;
+      max-width: 800px;
       padding: 10px;
     }
 
@@ -328,12 +328,13 @@
         border-color: #34495e !important;
       }
       .info th{
-        background-color: #34495e !important;
+        background-color: #b516d0 !important;
         color: #ffffff !important;
       }
         .info td{
             background-color: #ffffff !important;
             color: #34495e !important;
+            border-color: #b516d0 !important;
         }
     }
 
@@ -365,7 +366,7 @@
                   <table class="info">
                       <thead>
                         <tr>
-                          <th colspan="2" style="text-align:center;"><h3>Infomation</h3></th>
+                          <th colspan="2" style="text-align:center;"><h3>Information Booking</h3></th>
                         </tr>
                         </thead>
                     <tbody>
@@ -459,15 +460,13 @@
                           <span th:text="${hotelBooking.getPaymentMethod()}"></span>
                         </td>
                     </tr>
-                    <tr>
-                        <td rowspan="2">
-                            <p>
-                                <img src="../../../../uploads/default.png" >
-                            </p>
-                      </td>
-                    </tr>
+
                     </tbody>
                   </table>
+                  <h3 style="text-align: center;
+    font-weight: 800;">
+                    Click <a th:href="@{{id}(id=${qrCode})}">here</a> get Qr code information Booking
+                  </h3>
                 </td>
               </tr>
 

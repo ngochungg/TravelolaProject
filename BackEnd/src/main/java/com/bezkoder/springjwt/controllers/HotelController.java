@@ -346,9 +346,11 @@ public class HotelController {
                     "Payment method: "+resultHotelBooking.getPaymentMethod();
 
             //create qr code
-            generateQRCodeImage(qrCodeInfo,300,300,"uploads/"+emailSenderService.randomString()+".png");
+            String nameQr = emailSenderService.randomString()+".png";
+            System.out.println("name Qr: "+ nameQr);
+            generateQRCodeImage(qrCodeInfo,300,300,"uploads/"+nameQr);
             //insert qr code to hotel booking
-            resultHotelBooking.setQrCode(emailSenderService.randomString()+".png");
+            resultHotelBooking.setQrCode(nameQr);
             hotelBookingRepository.save(resultHotelBooking);
 
             Map<String, Object> emailMap = new HashMap<>();
@@ -356,11 +358,11 @@ public class HotelController {
             emailMap.put("user", user);
             emailMap.put("hotel", hotel);
             emailMap.put("room", room);
+            emailMap.put("qrCode", "http://localhost:8080/api/auth/getImage/"+nameQr);
             //address
             String address = hotel.getLocation().getWard().getName()+", "+hotel.getLocation().getDistrict().getName()+", "+hotel.getLocation().getProvince().getName();
             emailMap.put("address", address);
             String templateHtml = emailSenderService.templateResolve("bookingSuccess", emailMap);
-            String path = "uploads/"+emailSenderService.randomString()+".png";
             emailSenderService.sendTemplateMessage(user.getEmail(), "Booking Success", "bookingSuccess", templateHtml);
         }
         return ResponseEntity.ok().body(resultHotelBooking);
