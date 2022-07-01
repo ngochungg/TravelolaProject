@@ -1,14 +1,10 @@
 package com.bezkoder.springjwt.controllers;
 
-import com.bezkoder.springjwt.security.services.QRCodeService;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.WriterException;
-import com.google.zxing.client.j2se.MatrixToImageConfig;
 import com.google.zxing.client.j2se.MatrixToImageWriter;
 import com.google.zxing.common.BitMatrix;
 import com.google.zxing.qrcode.QRCodeWriter;
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpStatus;
 
 import com.bezkoder.springjwt.models.*;
 import com.bezkoder.springjwt.payload.request.*;
@@ -25,12 +21,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 
-import javax.imageio.ImageIO;
-import javax.servlet.http.HttpServletResponse;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.*;
@@ -70,8 +61,8 @@ public class HotelController {
     @Autowired
     private HotelFeedBackRepository hotelFeedBackRepository;
 
-    @Autowired
-    private QRCodeService qrCodeService;
+//    @Autowired
+//    private QRCodeService qrCodeService;
 
     //add hotel and MultipartFile image
     @PostMapping(value = "/addHotel")
