@@ -1,4 +1,4 @@
-<div class="container">
+<!-- <div class="container">
     <div >
         <table>
             <thead>
@@ -35,4 +35,90 @@
             </tbody>
         </table>
     </div>
+</div> -->
+<div class="container-fluid">
+    <img src="assets/images/imgroom.jpg" alt="" class="img-room">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div
+                    style="font-weight: 400;text-align: center;font-size: 30px; font-family:Arial, Helvetica, sans-serif;margin-top: 50px;">
+                    Super saving resort combo</div>
+            </div>
+
+            <div class="col-sm-3 col4">
+                <img src="assets/images/avatar_hotline.png" alt="" class="img-hotline">
+
+                <div class="HOT">HOTLINE</div>
+                <div class="hotline">1900 6886</div>
+                <hr style="width: 100%;"><br><br>
+                <ul data-url="sort" class="ul-list-item price-sort-sort price-sort-filter type-price-sort">
+                    <li> <label for="type-sort-1"> <input checked="" data-role="none" type="radio" name="rad_sort"
+                                id="type-sort-1" value="default"> Best variable </label> </li>
+                    <li> <label for="type-sort-2"> <input data-role="none" type="radio" name="rad_sort" id="type-sort-2"
+                                value="star-desc"> Sao class from high to low [5 ... 1] </label> </li>
+                    <li> <label for="type-sort-3"> <input data-role="none" type="radio" name="rad_sort" id="type-sort-3"
+                                value="star-asc"> Sao class from low to high [1 ... 5] </label> </li>
+                    <li> <label for="type-sort-4"> <input data-role="none" type="radio" name="rad_sort" id="type-sort-4"
+                                value="price-asc"> Prices go up </label> </li>
+                    <li> <label for="type-sort-5"> <input data-role="none" type="radio" name="rad_sort" id="type-sort-5"
+                                value="price-desc"> Prices go down </label> </li>
+                </ul>
+
+                <hr style="width: 100%;"><br><br>
+                <h4>CATEGORY</h4>
+                <ul data-url="categories" class="ul-list-item cat-filter type-categories">
+                    <li><label for="type-categories-1"><input type="checkbox" id="type-categories-1" value="1">
+                            Hotel</label></li>
+                    <li><label for="type-categories-2"><input type="checkbox" id="type-categories-2" value="2">
+                            Tour</label></li>
+                    <li><label for="type-categories-3"><input type="checkbox" id="type-categories-3" value="1-1">
+                            Resort</label></li>
+                    <li><label for="type-categories-4"><input type="checkbox" id="type-categories-4" value="1-2">
+                            Villa</label></li>
+                </ul>
+                <hr style="width: 100%;"><br><br>
+                <h4>Voucher</h4>
+                <ul data-url="promo" class="ul-list-item price-promo-filter type-price-promo">
+                    <li><label for="type-price-promo-1">
+                            <input type="radio" name="rad_price_promo" id="type-price-promo-1" value="min-10"> Below 10%
+                        </label>
+                    </li>
+                    <li><label for="type-price-promo-2"><input type="radio" name="rad_price_promo"
+                                id="type-price-promo-2" value="10-20"> 10% - 20%</label></li>
+                    <li><label for="type-price-promo-3"><input type="radio" name="rad_price_promo"
+                                id="type-price-promo-3" value="20-30"> 20% - 30%</label></li>
+                    <li><label for="type-price-promo-4"><input type="radio" name="rad_price_promo"
+                                id="type-price-promo-4" value="30-40"> 30% - 40%</label></li>
+                    <li><label for="type-price-promo-5"><input type="radio" name="rad_price_promo"
+                                id="type-price-promo-5" value="40-max"> Above 40%</label></li>
+                </ul>
+                <hr style="width: 100%;"><br><br>
+            </div>
+
+
+            <div class="col-sm-8 col8" style="margin-left:2%">
+                <div class="row">
+               <label  *ngFor="let item of city " class="lable">
+               <div class="col-sm-12">
+                <img [src]="'http://localhost:8080/api/auth/getImage/'+ item.images[0].imagePath" alt="avata"
+                    class="img-city" >
+                    <h4 class="hotel-city text "> {{item.location.province.name}}</h4>
+                    <h5> {{item.description}}</h5>
+                    
+                    
+                     <h5 class="hotel-id-name text-left">Hotel Name: {{ item.hotelName }}</h5>
+                    </div>  
+
+                   
+                
+                
+                
+                </label>
+            </div>
+            </div>
+
+        </div>
+    </div>
 </div>
+<app-footer></app-footer>

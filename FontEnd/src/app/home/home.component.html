@@ -1,32 +1,31 @@
 <body>
+<img src="assets/images/background.jpg" alt="">
 
-  <!--banner-slider-->
-  <!-- main-slider -->
-
-
-  <!-- /main-slider -->
-  <!-- //banner-slider-->
-
-  <!--/grids-->
-
-
+<div class="container-fluid bckcolor">
   <div class="container " style="min-height: 500px;">
-    <div class="title-content text-left mb-lg-5 mb-4">
+    <div class="title-content text-left mb-lg-5 mb-4"><br>
       <h6 class="sub-title">Visit</h6>
       <h3 class="hny-title">Popular Destinations</h3>
     </div>
 
-    <div class="row ">
+    <div class="row " >
 
-      <div class="col-lg-4" *ngFor="let city of popularCity">
-        <a href="/city"><img src="assets/images/g1.jpg" class="img-fluid" alt="" (click)="gotoCity($event)"></a>
-        <h4>{{city.name}}</h4>
-        <p>{{city.id}}</p> 
+      <div class="col-lg-4 contai" *ngFor="let item of city">
+
+ 
+       <img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata" class="img-fluid img-city">
+       <div class="overlay">
+        <h4 class="hotel-city text"><a href="/city" class="text"> {{item.location.province.name}}</a></h4>
+       
+        <h4 class="hotel-id-name text" >{{item.id }}.{{ item.hotelName }}</h4>
+      </div>
+      <h4 class="name-city"> {{item.location.province.name}}</h4>
+        <p></p> 
     </div>
     
   </div>
   </div>
-
+</div>
 
   <!--//grids-->
   <!-- stats -->
@@ -34,36 +33,26 @@
     <div class="gallery-inner container py-lg-0 py-3">
       <div class="row stats-con pb-lg-3">
         <div class="col-lg-3 col-6 stats_info counter_grid">
-          <p class="counter">730</p>
-          <h4>Branches</h4>
+          <p class="counter">63</p>
+          <h4>City</h4>
         </div>
         <div class="col-lg-3 col-6 stats_info counter_grid1">
-          <p class="counter">1680</p>
+          <p class="counter">165</p>
           <h4>Travel Guides</h4>
         </div>
+        <div class="col-lg-3 col-6 stats_info counter_grid2 mt-lg-0 mt-5">
+          <p class="counter">163</p>
+          <h4>Hotel</h4>
+        </div>
         <div class="col-lg-3 col-6 stats_info counter_grid mt-lg-0 mt-5">
-          <p class="counter">812</p>
+          <p class="counter">412</p>
           <h4>Happy Customers</h4>
         </div>
-        <div class="col-lg-3 col-6 stats_info counter_grid2 mt-lg-0 mt-5">
-          <p class="counter">990</p>
-          <h4>Awards</h4>
-        </div>
+        
       </div>
     </div>
   </section>
-  <div class="container">
-    <div class="row">
-      <div class="col-sm-12" id="hochiminh">
-        <div>sdkljflakdjslfkasldkfjlkasdfjlsadkf</div>
-        <div>sdkljflakdjslfkasldkfjlkasdfjlsadkf</div>
-        <div>sdkljflakdjslfkasldkfjlkasdfjlsadkf</div>
-         <div>sdkljflakdjslfkasldkfjlkasdfjlsadkf</div>
-         <div>sdkljflakdjslfkasldkfjlkasdfjlsadkf</div>
-         
-      </div>
-    </div>
-  </div>
+  
   
   <!-- //stats -->
   <!--/-->

@@ -1,0 +1,48 @@
+.img-room{
+    margin-left:-5% ;
+    width: 107%;
+}
+.img-hotline{
+    width: 100px;
+    height: 100px;
+    border-radius: 50px;
+}
+.container-fluid{
+    background-color: #936BE80D;
+}
+.col4{
+    background-color: white;
+    border-radius: 1%;
+}
+.col8{
+    background-color: white;
+    border-radius: 1%;
+}
+.hotline{
+    color: rgb(30, 61, 241);
+    font-size:30px;
+    font-family: 'Times New Roman', Times, serif;
+    margin-left: 35%;
+ 
+}
+.HOT{
+    font-family: Arial, Helvetica, sans-serif, Times, serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 35%;
+    margin-top: -25%;
+}
+.img-city{
+    height: 200px;
+    max-width: 300px;
+    margin-top: 10px;
+}
+.text{
+    margin-top: 10px;
+}
+.lable{
+    border:solid 0.1px whitesmoke ;
+    border-radius:1%;
+    margin-left: 20px;
+    margin-top: 10px;
+}

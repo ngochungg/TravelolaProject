@@ -29,6 +29,8 @@ public class HotelBooking {
     private String bookingCode;
     @Column(name = "num_of_guest")
     private int numOfGuest;
+    @Column(name = "Qr_code")
+    private String qrCode;
     @Column(name = "status")
     private boolean status;
     @Column(name = "check_in_date")

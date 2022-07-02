@@ -28,5 +28,9 @@ export class UserService {
   showAllHotel(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/' + 'getAllHotel');
   }
+  // getIMG(id:string): Observable<any> {
+  //   return this.http.get('http://localhost:8080/api/auth/getImage/' +id);
+  // }
+
  
 }
