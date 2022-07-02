@@ -100,7 +100,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             elevation: 0,
                           ),
                           onPressed: () async {
-                            hotelDetails();
+                            var hotelList = jsonEncode(hotelData);
                             var response = await http.get(Uri.parse(
                                 getRoomOfHotel +
                                     hotelData[i]['id'].toString()));
@@ -108,33 +108,40 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                 .decode(response.body.toString().codeUnits));
                             var room = jsonEncode(utf);
                             var hotel = json.encode(hotelData[i]);
-                            var temps =
-                                json.encode({'room': room, 'hotel': hotel});
+                            var jsonFb = await http.get(Uri.parse(
+                                'http://localhost:8080/api/hotel/showFeedback/${hotelData[i]['id']}'));
+                            var feedback = json.decode(
+                                utf8.decode(jsonFb.body.toString().codeUnits));
+                            var jsonFbb = jsonEncode(feedback);
+                            var temps = json.encode({
+                              'room': room,
+                              'hotel': hotel,
+                              'feedback': jsonFbb,
+                              'hotelList': hotelList
+                            });
                             Navigator.of(context).pushNamed(
                                 HotelDetail.routeName,
                                 arguments: temps);
-
-                            // print(array);
                           },
                           child: Row(
                             children: [
-                              // ClipRRect(
-                              //   borderRadius: BorderRadius.circular(8.0),
-                              //   child: Image.network(
-                              //     "http://localhost:8080/api/auth/getImage/${hotelData[i]['images'][0]['imagePath']}",
-
-                              //     height: 180.0,
-                              // width: 100.0,
-                              //   ),
-                              // ),
                               ClipRRect(
                                 borderRadius: BorderRadius.circular(8.0),
-                                child: Image.asset(
-                                  "images/286696674.jpeg",
+                                child: Image.network(
+                                  "http://localhost:8080/api/auth/getImage/${hotelData[i]['images'][0]['imagePath']}",
                                   height: 180.0,
                                   width: 100.0,
+                                  fit: BoxFit.cover,
                                 ),
                               ),
+                              // ClipRRect(
+                              //   borderRadius: BorderRadius.circular(8.0),
+                              //   child: Image.asset(
+                              //     "images/286696674.jpeg",
+                              //     height: 180.0,
+                              //     width: 100.0,
+                              //   ),
+                              // ),
                               Column(
                                 children: [
                                   RichText(
@@ -185,7 +192,51 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                         ),
                                         WidgetSpan(
                                           child: SizedBox(
-                                            height: 100,
+                                            width: 10,
+                                          ),
+                                        ),
+                                        TextSpan(
+                                          children: [
+                                            if (hotelData[i]['hotelRating'] !=
+                                                null)
+                                              WidgetSpan(
+                                                child: Icon(
+                                                  Icons.star,
+                                                  size: 17,
+                                                  color: Colors.yellow[700],
+                                                ),
+                                              )
+                                            else
+                                              WidgetSpan(
+                                                child: SizedBox(
+                                                  height: 10,
+                                                ),
+                                              ),
+                                            if (hotelData[i]['hotelRating'] !=
+                                                null)
+                                              TextSpan(
+                                                text:
+                                                    '${hotelData[i]['hotelRating']}\n',
+                                                style: TextStyle(
+                                                    color: Colors.grey[600],
+                                                    fontSize: 13,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              )
+                                            else
+                                              TextSpan(
+                                                text: '\n',
+                                                style: TextStyle(
+                                                  color: Colors.grey[600],
+                                                  fontSize: 13,
+                                                  // fontWeight: FontWeight.w600),
+                                                ),
+                                              )
+                                          ],
+                                        ),
+                                        WidgetSpan(
+                                          child: SizedBox(
+                                            height: 90,
                                             width: 10,
                                           ),
                                         ),

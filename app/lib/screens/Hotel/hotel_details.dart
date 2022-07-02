@@ -6,6 +6,7 @@ import 'package:app/controller/apiController.dart';
 import 'package:app/screens/Hotel/room_details.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -31,13 +32,17 @@ class _HotelDetailState extends State<HotelDetail> {
     Map<String, dynamic> hotelData = json.decode(retriveString);
     var hotel = jsonDecode(hotelData['hotel']);
     var room = jsonDecode(hotelData['room']);
+    var feedback = jsonDecode(hotelData['feedback']);
+    var hotelList = jsonDecode(hotelData['hotelList']);
 
     final urlImages = [
       for (int i = 0; i < room.length; i++)
         "http://localhost:8080/api/auth/getImage/${room[i]['images'][0]['imagePath']}",
     ];
-
-    // print(urlImages);
+    final urlFeedback = [
+      for (int i = 0; i < feedback.length; i++) "${feedback[i]['feedback']}",
+    ];
+    print(urlFeedback);
 
     return Scaffold(
       appBar: AppBar(
@@ -54,15 +59,12 @@ class _HotelDetailState extends State<HotelDetail> {
               },
             ),
             // Text('${hotel['hotelName']}'),
-            Icon(
-              Icons.favorite_border,
-              color: Colors.white,
-            ),
           ],
         ),
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisSize: MainAxisSize.min,
           children: [
             Column(
               children: [
@@ -519,53 +521,151 @@ class _HotelDetailState extends State<HotelDetail> {
             Divider(
               color: Colors.grey[200],
             ),
-            Text('feedback'),
-            Divider(
-              color: Colors.grey[200],
-            ),
-            Row(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: RichText(
-                    text: TextSpan(
-                      style: TextStyle(
-                        fontSize: 20,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.black,
-                      ),
-                      children: [
-                        TextSpan(
-                          text: 'Description: \n\n',
-                          style: TextStyle(
-                            // fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                          ),
-                        ),
-                        TextSpan(
-                          text: '${hotel['description']}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w400,
-                            color: Colors.black,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-            Divider(
-              color: Colors.grey[200],
-            ),
-            Container(
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: [
-                  Text('another hotel'),
+                  Text('Feedback',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      )),
                 ],
               ),
+            ),
+            if (urlFeedback.length == 0)
+              SizedBox(
+                // you may want to use an aspect ratio here for tablet support
+                height: 100.0,
+                child: PageView.builder(
+                  itemCount: 1,
+                  controller: PageController(viewportFraction: 0.8),
+                  itemBuilder: (BuildContext context, int itemIndex) {
+                    return Container(
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Center(
+                        child: Text(
+                          'No feedback yet',
+                          style: TextStyle(
+                            fontSize: 18,
+                            // fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              )
+            else
+              SizedBox(
+                // you may want to use an aspect ratio here for tablet support
+                height: 100.0,
+                child: PageView.builder(
+                  itemCount: urlFeedback.length,
+                  controller: PageController(viewportFraction: 0.8),
+                  itemBuilder: (BuildContext context, int itemIndex) {
+                    return Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 4.0),
+                      child: Container(
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Column(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: Row(
+                                children: [
+                                  Icon(Icons.star, color: Colors.yellow[700]),
+                                  Text(
+                                    '${feedback[itemIndex]['rating']}',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '${feedback[itemIndex]['user']['username']}',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.only(left: 13),
+                              child: Row(
+                                children: [
+                                  Text(
+                                    '${feedback[itemIndex]['feedback']}',
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.w400,
+                                      color: Colors.black87,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            Divider(
+              color: Colors.grey[200],
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0),
+              child: Row(
+                children: [
+                  Text('Description',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.black,
+                      )),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Row(
+                children: [
+                  Flexible(
+                    child: Text(
+                      '${hotel['description']}',
+                      style: TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black87,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            Divider(
+              color: Colors.grey[200],
             ),
           ],
         ),

@@ -223,10 +223,6 @@ class _MyHomeState extends State<MyHome> {
                           iconData: Icons.directions,
                           text: 'Adventures',
                           press: () {}),
-                      IconCard(
-                          iconData: Icons.flight,
-                          text: 'Flights',
-                          press: () {}),
                     ],
                   ),
                   SizedBox(

@@ -34,10 +34,8 @@ class _BottomNavState extends State<BottomNav> {
       if (selectedIndex == 0) {
         return _myHome;
       } else if (selectedIndex == 1) {
-        return _mySaved;
-      } else if (selectedIndex == 2) {
         return _myBooking;
-      } else if (selectedIndex == 3) {
+      } else if (selectedIndex == 2) {
         return _myNoti;
       } else {
         return _myAccount;
@@ -63,11 +61,6 @@ class _BottomNavState extends State<BottomNav> {
             label: 'Home',
             icon: Icon(Icons.home_outlined),
             activeIcon: Icon(Icons.home),
-          ),
-          BottomNavigationBarItem(
-            label: 'Saved',
-            icon: Icon(Icons.favorite_border),
-            activeIcon: Icon(Icons.favorite),
           ),
           BottomNavigationBarItem(
             label: 'My Booking',

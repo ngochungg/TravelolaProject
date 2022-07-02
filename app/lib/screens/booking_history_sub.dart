@@ -471,6 +471,4 @@ class _HistorySub extends State<HistorySub> {
       ),
     );
   }
-
-  void _tripEditModalBottomSheet(BuildContext context) {}
 }
