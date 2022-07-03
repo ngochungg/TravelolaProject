@@ -127,3 +127,11 @@ label {
 .parent-item:hover > .child-item li a:hover{
     background-color: none;
 }
+.row{
+  width: 100%;
+  margin-left: 0%;
+}
+.required{
+  color: red;
+ 
+}

@@ -28,6 +28,12 @@ import { RegisterHotelComponent } from './register-hotel/register-hotel.componen
 import { CityComponent } from './city/city.component';
 
 import { UpImageComponent } from './up-image/up-image.component';
+import { NavHotelComponent } from './nav-hotel/nav-hotel.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { HotelsComponent } from './hotels/hotels.component';
+import { RoomHotelIDComponent } from './room-hotel-id/room-hotel-id.component';
+import { HotelServiceComponent } from './hotel-service/hotel-service.component';
+import { UserBookingHistoryComponent } from './user-booking-history/user-booking-history.component';
 
 
 
@@ -60,7 +66,12 @@ import { UpImageComponent } from './up-image/up-image.component';
     RegisterHotelComponent,
     CityComponent,
     UpImageComponent,
-    
+    NavHotelComponent,
+    RoomsComponent,
+    HotelsComponent,
+    RoomHotelIDComponent,
+    HotelServiceComponent,
+    UserBookingHistoryComponent
 
  
   ],

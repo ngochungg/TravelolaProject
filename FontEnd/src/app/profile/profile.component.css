@@ -177,3 +177,9 @@ body {
   color: white;
   border: blue;
 }
+.history{
+/* margin-top: 35%; */
+float: right;
+padding: 2%;
+color: none;
+}

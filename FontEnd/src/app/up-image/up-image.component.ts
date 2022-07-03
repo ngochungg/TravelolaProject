@@ -1,13 +1,7 @@
-import { HttpEvent } from '@angular/common/http';
-import { HttpRequest } from '@angular/common/http';
+
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/internal/Observable';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from '../app-routing.module';
 
 @Component({
   selector: 'app-up-image',

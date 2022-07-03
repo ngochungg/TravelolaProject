@@ -12,14 +12,19 @@ import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { AboutComponent } from './about/about.component';
 import { ContacComponent } from './contac/contac.component';
 import { UpdateComponent } from './update/update.component';
-import  { AllAdminComponent } from './all-admin/all-admin.component';
-import  { AllHotelComponent } from './all-hotel/all-hotel.component';
-import  { AllUserComponent }  from './all-user/all-user.component';
-import  { DashboardComponent } from './dashboard/dashboard.component'; 
-import  { CategoryComponent } from './category/category.component';
-import  { RegisterHotelComponent } from './register-hotel/register-hotel.component';
+import { AllAdminComponent } from './all-admin/all-admin.component';
+import { AllHotelComponent } from './all-hotel/all-hotel.component';
+import { AllUserComponent } from './all-user/all-user.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CategoryComponent } from './category/category.component';
+import { RegisterHotelComponent } from './register-hotel/register-hotel.component';
 import { CityComponent } from './city/city.component';
 import { UpImageComponent } from './up-image/up-image.component';
+import { RoomsComponent } from './rooms/rooms.component';
+import { HotelsComponent } from './hotels/hotels.component';
+import { RoomHotelIDComponent } from './room-hotel-id/room-hotel-id.component';
+import { HotelServiceComponent } from './hotel-service/hotel-service.component';
+import { UserBookingHistoryComponent } from './user-booking-history/user-booking-history.component';
 
 
 
@@ -40,8 +45,13 @@ const routes: Routes = [
   { path: 'dashboard', component: DashboardComponent },
   { path: 'category', component: CategoryComponent },
   { path: 'register-hotel', component: RegisterHotelComponent },
-  { path : 'city', component: CityComponent },
-  { path : 'upImage', component: UpImageComponent },
+  { path: 'city', component: CityComponent },
+  { path: 'upImage', component: UpImageComponent },
+  { path: 'rooms', component: RoomsComponent },
+  { path: 'hotels', component: HotelsComponent },
+  { path: 'room-hotelID', component: RoomHotelIDComponent },
+  { path: 'hotel-service', component: HotelServiceComponent },
+  { path: 'user-booking-history', component: UserBookingHistoryComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

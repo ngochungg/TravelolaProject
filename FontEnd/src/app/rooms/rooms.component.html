@@ -1,0 +1,57 @@
+<app-navbar></app-navbar>
+<div class="container">
+
+    <div class="row">
+        <form  enctype="multipart/form-data" style="width: 200%;">
+        <div class="col-md-7" style="margin-top:50px ; margin-left: 20%;">
+            <h1>Add new rooms</h1>
+            <div>
+                <label for="roomNumber">roomNumber</label>
+                <input type="number" class="form-control" name="roomNumber" [(ngModel)]="roomNumber"
+                    [ngModelOptions]="{standalone: true}" required minlength="0"  />
+                    
+            </div>
+
+            <div>
+                <label for="roomName">roomName</label>
+                <input type="text" class="form-control" name="roomName" [(ngModel)]="roomName"
+                    [ngModelOptions]="{standalone: true}" required  />
+            </div>
+
+            <div>
+                <label for="roomType">roomType</label>
+                <input type="text" class="form-control" name="roomType" [(ngModel)]="roomType"
+                    [ngModelOptions]="{standalone: true}" required  />
+            </div>
+
+            <div>
+                <label for="price">price</label>
+                <input type="number" class="form-control" name="price" [(ngModel)]="price"
+                    [ngModelOptions]="{standalone: true}" required/>
+            </div>
+
+            <div>
+                <label for="maxAdult">maxAdult</label>
+                <input type="number" class="form-control" name="maxAdult" [(ngModel)]="maxAdult"
+                    [ngModelOptions]="{standalone: true}" required  />
+            </div>
+
+            <div>
+                <label for="maxChildren">maxChildren</label>
+                <input type="number" class="form-control" name="maxChildren" [(ngModel)]="maxChildren"
+                    [ngModelOptions]="{standalone: true}" required />
+            </div>
+            <div class="form-group">
+                <label for="images">Image</label>
+                <input type="file" class="form-control" name="images" (change)="onFileSelected($event)" [(ngModel)]="images"
+                    [ngModelOptions]="{standalone: true}" required />
+    
+            </div>
+            <div class="form-group" style="width: 40%;">
+                <button class="btn btn-primary btn-block" type="submit" (click)="onUpload()">Submit</button>
+            </div>
+        </div>
+        </form>
+    </div>
+
+</div>

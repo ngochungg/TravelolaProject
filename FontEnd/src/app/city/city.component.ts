@@ -6,20 +6,20 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 
 
-interface hol{
-  id : string;
-  hotelName : string;
-  phone :string;
+interface hol {
+  id: string;
+  hotelName: string;
+  phone: string;
   description: string;
-  numberOfRoom : number;
-  wifi : boolean;
-  freeBreakfast : boolean;
-  freeParking : boolean;
+  numberOfRoom: number;
+  wifi: boolean;
+  freeBreakfast: boolean;
+  freeParking: boolean;
   petsAllowed: boolean;
-  hotTub : boolean;
+  hotTub: boolean;
   swimmingPool: boolean;
-  gym : boolean;
-  location :any[];
+  gym: boolean;
+  location: any[];
 
 }
 @Component({
@@ -39,11 +39,7 @@ export class CityComponent implements OnInit {
     this.userService.showAllHotel().subscribe({
       next: data => {
         this.city = data;
-        // console.log('allHotel', this.city)
         for (let i = 0; i < this.city.length; i++) {
-
-          // this.city.image = this.city[i].images[0].imagePath
-          // this.city.image = ('http://localhost:8080/api/auth/getImage/' + this.city.image)
           const citys = this.city[i]
           this.in4City.push(citys)
           console.log('in4City', this.in4City)
@@ -53,27 +49,6 @@ export class CityComponent implements OnInit {
 
     });
   }
-  // constructor(private authService: AuthService,private userService: UserService) { }
 
-  // hotel: any[] = [];
-  // hotels: hol[] = [];
-  // public hol:hol[] = [];
-  // ngOnInit(): void {
-
-  //   this.userService.showAllHotel().subscribe({
-  //     next:data => {
-  //       this.hotel = data;
-  //       // console.log('hotel',this.hotel)
-  //       for (let i = 0; i < this.hotel.length; i++) {
-  //         const hotels =this.hotel[i];
-  //         console.log('hotels',hotels);
-  //         this.hol.push(hotels);
-  //       }
-      
-  //       console.log('hol',this.hol)
-
-  //     }
-  //   });
-  // }
 
 }
