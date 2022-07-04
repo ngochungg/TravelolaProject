@@ -408,10 +408,10 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
             hotels = hotels.stream().filter(hotel -> hotel.getLocation().getWard().getId().equals(searchHotelRequest.getWardId())).collect(Collectors.toList());
         }
         //search hotel by check in date
-        if(searchHotelRequest.getCheckIn()!=null || searchHotelRequest.getCheckOut()!=null){
-           //get hotel have room status = false
-            hotels = hotels.stream().filter(hotel -> hotel.getRooms().stream().anyMatch(room -> room.getRoomStatus() == false)).collect(Collectors.toList());
-        }
+        // if(searchHotelRequest.getCheckIn()!=null || searchHotelRequest.getCheckOut()!=null){
+        //    //get hotel have room status = false
+        //     hotels = hotels.stream().filter(hotel -> hotel.getRooms().stream().anyMatch(room -> room.getRoomStatus() == false)).collect(Collectors.toList());
+        // }
         if(hotels.isEmpty()){
             //return body request not found
             return null;

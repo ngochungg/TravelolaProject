@@ -9,7 +9,7 @@ class ImageCard extends StatelessWidget {
   final String picture;
   final Place place;
 
-  ImageCard({
+  const ImageCard({
     required this.name,
     required this.days,
     required this.picture,
@@ -19,14 +19,14 @@ class ImageCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-        padding: EdgeInsets.all(4),
+        padding: const EdgeInsets.all(4),
         child: InkWell(
             onTap: () {
               Navigator.push(
                   context, MaterialPageRoute(builder: (_) => Details(place)));
             },
             child: Container(
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 boxShadow: [
                   BoxShadow(
                     color: Color.fromARGB(62, 168, 174, 201),
@@ -77,11 +77,11 @@ class ImageCard extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Padding(
-                          padding: EdgeInsets.only(left: 8.0),
+                          padding: const EdgeInsets.only(left: 8.0),
                           child: RichText(
                               text: TextSpan(children: [
                             TextSpan(
-                                text: '$name', style: TextStyle(fontSize: 22)),
+                                text: name, style: const TextStyle(fontSize: 22)),
                           ])),
                         ),
                       ),
@@ -92,19 +92,19 @@ class ImageCard extends StatelessWidget {
                       child: Align(
                         alignment: Alignment.bottomLeft,
                         child: Padding(
-                            padding: EdgeInsets.only(left: 8.0),
+                            padding: const EdgeInsets.only(left: 8.0),
                             child: Row(
                               children: <Widget>[
-                                Icon(
+                                const Icon(
                                   Icons.calendar_today,
                                   color: Colors.white,
                                   size: 14,
                                 ),
-                                SizedBox(
+                                const SizedBox(
                                   width: 5,
                                 ),
                                 Text('$days days',
-                                    style: TextStyle(color: Colors.white))
+                                    style: const TextStyle(color: Colors.white))
                               ],
                             )),
                       ),

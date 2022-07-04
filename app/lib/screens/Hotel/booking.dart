@@ -1,21 +1,19 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
-import 'package:app/screens/Hotel/room_details.dart';
-import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
-import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:app/widgets/nofitication.dart';
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class BookingCheck extends StatefulWidget {
-  static final routeName = '/booking_check';
+  static const routeName = '/booking_check';
   const BookingCheck({Key? key}) : super(key: key);
 
   @override
@@ -45,10 +43,53 @@ class _BookingCheckState extends State<BookingCheck> {
 
     String start = jsonData['startDate'];
     String end = jsonData['endDate'];
-    // start.substring(0, 10);
 
-    // print(start.substring(0, 10));
-    // print(payment);
+    final RoundedLoadingButtonController _btnController =
+        RoundedLoadingButtonController();
+    setState(() {
+      _btnController.reset();
+    });
+    void _doSomething() async {
+      Timer(Duration(seconds: 5), () {
+        _btnController.success();
+        _btnController.reset();
+      });
+      var body = jsonEncode({
+        "checkInDate": start.substring(0, 10),
+        "checkOutDate": end.substring(0, 10),
+        "numOfGuest": jsonData['guest'],
+        "paymentMethod": payment,
+        "totalPrice": jsonData['price'],
+        "roomId": jsonData['roomId'],
+        "userId": jsonData['userId'],
+      });
+      print(body.toString());
+      final response = await http.post(
+          Uri.parse("http://localhost:8080/api/hotel/hotelBooking"),
+          body: body,
+          headers: {
+            "Content-Type": "application/json",
+          });
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      final login = await http
+          .post(Uri.parse(urlSignin), body: prefs.getString('body'), headers: {
+        "Content-Type": "application/json",
+      });
+      print(response.statusCode);
+      if (response.statusCode == 200) {
+        Navigator.of(context)
+            .pushNamed(BottomNav.routeName, arguments: login.body);
+        notification(
+            title: "You have successfully booked a room in the hotel!!",
+            body: "Please check your booking history");
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          backgroundColor: Colors.red,
+          content: Text("The checkin date must be after today"),
+        ));
+      }
+    }
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -75,7 +116,7 @@ class _BookingCheckState extends State<BookingCheck> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("Check your booking",
                     style: TextStyle(
                         fontSize: 20,
@@ -313,81 +354,38 @@ class _BookingCheckState extends State<BookingCheck> {
                   child: Row(
                     children: [
                       Expanded(
-                          child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          primary: Colors.pinkAccent,
-                          elevation: 0,
+                        child: RoundedLoadingButton(
+                          color: Colors.pinkAccent,
+                          height: 40,
+                          width: 350,
+                          child: Text('Book now',
+                              style: TextStyle(color: Colors.white)),
+                          controller: _btnController,
+                          onPressed: _doSomething,
                         ),
-                        child: Text('Book now'),
-                        onPressed: () async {
-                          var body = jsonEncode({
-                            "checkInDate": start.substring(0, 10),
-                            "checkOutDate": end.substring(0, 10),
-                            "numOfGuest": jsonData['guest'],
-                            "paymentMethod": payment,
-                            "totalPrice": jsonData['price'],
-                            "roomId": jsonData['roomId'],
-                            "userId": jsonData['userId'],
-                          });
-                          print(body.toString());
-                          final response = await http.post(
-                              Uri.parse(
-                                  "http://localhost:8080/api/hotel/hotelBooking"),
-                              body: body,
-                              headers: {
-                                "Content-Type": "application/json",
-                              });
-                          SharedPreferences prefs =
-                              await SharedPreferences.getInstance();
-                          final login = await http.post(Uri.parse(urlSignin),
-                              body: prefs.getString('body'),
-                              headers: {
-                                "Content-Type": "application/json",
-                              });
-                          print(response.statusCode);
-                          if (response.statusCode == 200) {
-                            Navigator.of(context).pushNamed(BottomNav.routeName,
-                                arguments: login.body);
-                            notification(
-                                title:
-                                    "You have successfully booked a room in the hotel!!",
-                                body: "Please check your booking history");
-                          } else {
-                            ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                              backgroundColor: Colors.red,
-                              content:
-                                  Text("The checkin date must be after today"),
-                            ));
-                          }
-                        },
-                      ))
+                      )
                     ],
                   ),
                 ),
               )
             else
-              Container(
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    children: [
-                      Expanded(
-                          child: ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(25),
-                          ),
-                          primary: Colors.pinkAccent,
-                          elevation: 0,
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: <Widget>[
+                    Expanded(
+                        child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
                         ),
-                        child: Text('Book now'),
-                        onPressed: null,
-                      ))
-                    ],
-                  ),
+                        primary: Colors.pinkAccent,
+                        elevation: 0,
+                      ),
+                      child: Text('Book now'),
+                      onPressed: null,
+                    ))
+                  ],
                 ),
               )
           ],
@@ -398,43 +396,44 @@ class _BookingCheckState extends State<BookingCheck> {
 
   void _tripEditModalBottomSheet(BuildContext context) {
     showModalBottomSheet(
-        context: context,
-        builder: (BuildContext bc) {
-          return Container(
-            height: MediaQuery.of(context).size.height * 2,
-            child: Padding(
-              padding: const EdgeInsets.only(left: 15, top: 20),
-              child: Column(
-                children: [
-                  Row(
-                    children: [
-                      Text('Choose your payment method',
-                          style: TextStyle(
-                              fontSize: 18, fontWeight: FontWeight.w600)),
-                    ],
-                  ),
-                  ListView.builder(
-                    scrollDirection: Axis.vertical,
-                    shrinkWrap: true,
-                    itemCount: paymentList.length,
-                    itemBuilder: (context, index) {
-                      return Card(
-                        child: ListTile(
-                          title: Text(paymentList[index]),
-                          onTap: () {
-                            setState(() {
-                              payment = paymentList[index];
-                            });
-                            Navigator.pop(context);
-                          },
-                        ),
-                      );
-                    },
-                  )
-                ],
-              ),
+      context: context,
+      builder: (BuildContext bc) {
+        return SizedBox(
+          height: MediaQuery.of(context).size.height * 2,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 15, top: 20),
+            child: Column(
+              children: [
+                Row(
+                  children: const [
+                    Text('Choose your payment method',
+                        style: TextStyle(
+                            fontSize: 18, fontWeight: FontWeight.w600)),
+                  ],
+                ),
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  shrinkWrap: true,
+                  itemCount: paymentList.length,
+                  itemBuilder: (context, index) {
+                    return Card(
+                      child: ListTile(
+                        title: Text(paymentList[index]),
+                        onTap: () {
+                          setState(() {
+                            payment = paymentList[index];
+                          });
+                          Navigator.pop(context);
+                        },
+                      ),
+                    );
+                  },
+                )
+              ],
             ),
-          );
-        });
+          ),
+        );
+      },
+    );
   }
 }

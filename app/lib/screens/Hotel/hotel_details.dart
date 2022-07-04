@@ -2,18 +2,14 @@
 
 import 'dart:convert';
 
-import 'package:app/controller/apiController.dart';
 import 'package:app/screens/Hotel/room_details.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_rating_bar/flutter_rating_bar.dart';
-import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelDetail extends StatefulWidget {
   static const routeName = '/hotelDetail';
   // final int id;
-  HotelDetail({Key? key}) : super(key: key);
+  const HotelDetail({Key? key}) : super(key: key);
 
   @override
   State<HotelDetail> createState() => _HotelDetailState();
@@ -534,7 +530,7 @@ class _HotelDetailState extends State<HotelDetail> {
                 ],
               ),
             ),
-            if (urlFeedback.length == 0)
+            if (urlFeedback.isEmpty)
               SizedBox(
                 // you may want to use an aspect ratio here for tablet support
                 height: 100.0,

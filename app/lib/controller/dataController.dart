@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../model/user.dart';
@@ -8,7 +7,7 @@ import '../model/user.dart';
 void storeUserData(String data) async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
   //store the user entered data in user object
-  User user1 = new User.fromJson(jsonDecode(data));
+  User user1 = User.fromJson(jsonDecode(data));
   // encode / convert object into json string
   String user = jsonEncode(user1);
   // print(user);

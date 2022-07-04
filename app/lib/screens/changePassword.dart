@@ -6,10 +6,8 @@ import 'package:app/screens/home.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
 import '../controller/apiController.dart';
-import '../controller/dataController.dart';
 
 class ChangePassword extends StatelessWidget {
   static const routeName = '/changePassword';
@@ -146,6 +144,7 @@ class ChangePassword extends StatelessWidget {
                             if (val.length < 8) {
                               return "Password must be at least 8 characters";
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                               suffix: Icon(
@@ -176,6 +175,7 @@ class ChangePassword extends StatelessWidget {
                             if (val != _newPassword.text) {
                               return "Password does not match";
                             }
+                            return null;
                           },
                           decoration: InputDecoration(
                               suffix: Icon(

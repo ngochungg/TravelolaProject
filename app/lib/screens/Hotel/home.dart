@@ -3,10 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
-import 'package:app/model/user.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
-import 'package:flutter/cupertino.dart';
-import 'package:flutter_picker/flutter_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
@@ -14,7 +11,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class HotelHomePage extends StatefulWidget {
   static const routeName = '/hotelHome';
-  HotelHomePage({Key? key}) : super(key: key);
+  const HotelHomePage({Key? key}) : super(key: key);
 
   @override
   State<HotelHomePage> createState() => _HotelHomePageState();
@@ -30,13 +27,12 @@ class _HotelHomePageState extends State<HotelHomePage> {
     } else {
       retriveString = (data.arguments.toString());
     }
-    var hotelData = json.decode(utf8.decode(retriveString.codeUnits));
+    var data1 = json.decode(utf8.decode(retriveString.codeUnits));
 
-    void hotelDetails() async {
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('hotelData', jsonEncode(hotelData));
-    }
-
+    var hotelData = data1['dataHotel'];
+    var infor = data1['infor'];
+    var nights = data1['nights'];
+    var checkin = infor['checkIn'].substring(0, 10);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -60,8 +56,8 @@ class _HotelHomePageState extends State<HotelHomePage> {
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   TextSpan(
-                    text: '22 Jun 2022, 1 Night(s), 1 Room(s)',
-                    style: TextStyle(color: Colors.white, fontSize: 12),
+                    text: '$checkin, $nights Night(s)',
+                    style: TextStyle(color: Colors.white, fontSize: 13),
                   ),
                 ],
               ),
@@ -81,7 +77,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
                   height: 20,
                 ),
                 for (int i = 0; i < hotelData.length; i++)
-                  Container(
+                  SizedBox(
                     width: MediaQuery.of(context).size.width * 0.95,
                     height: 200,
                     // decoration: const BoxDecoration(

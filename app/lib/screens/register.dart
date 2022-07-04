@@ -1,9 +1,7 @@
 import 'dart:convert';
 
-import 'package:app/model/registerModel.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
 import 'package:email_validator/email_validator.dart';
 import 'package:lottie/lottie.dart';
@@ -12,7 +10,7 @@ import '../controller/apiController.dart';
 import 'login.dart';
 
 class Register extends StatefulWidget {
-  Register({Key? key}) : super(key: key);
+  const Register({Key? key}) : super(key: key);
 
   @override
   State<StatefulWidget> createState() => _LoginState();
@@ -43,13 +41,13 @@ class _LoginState extends State<Register> {
           'imageUrl': image
         }));
     if (res.statusCode == 200) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
         backgroundColor: Colors.green,
         content: Text("Sign Up succescfull"),
       ));
       Navigator.push(
         context,
-        MaterialPageRoute(builder: (context) => Login()),
+        MaterialPageRoute(builder: (context) => const Login()),
       );
     } else if (res.statusCode == 400) {
       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
@@ -136,7 +134,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 30,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -144,9 +142,10 @@ class _LoginState extends State<Register> {
                                 if (val!.isEmpty) {
                                   return "Please enter your first name";
                                 }
+                                return null;
                               },
                               controller: _firstnameController,
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     Icons.person,
                                     color: Colors.red,
@@ -161,7 +160,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -170,8 +169,9 @@ class _LoginState extends State<Register> {
                                 if (val!.isEmpty) {
                                   return "Please enter your last name";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     Icons.person,
                                     color: Colors.red,
@@ -186,7 +186,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -195,8 +195,9 @@ class _LoginState extends State<Register> {
                                 if (val!.isEmpty) {
                                   return "Please enter your username";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     Icons.person_outline,
                                     color: Colors.red,
@@ -211,7 +212,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -224,8 +225,9 @@ class _LoginState extends State<Register> {
                                 if (val.length < 8) {
                                   return "Password must be at least 8 characters";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     FontAwesomeIcons.eyeSlash,
                                     color: Colors.red,
@@ -240,7 +242,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -253,8 +255,9 @@ class _LoginState extends State<Register> {
                                 if (val != _passwordController.text) {
                                   return "Password does not match";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     FontAwesomeIcons.eyeSlash,
                                     color: Colors.red,
@@ -269,7 +272,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -278,8 +281,9 @@ class _LoginState extends State<Register> {
                                 if (val!.isEmpty) {
                                   return "Please enter your phone number";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     FontAwesomeIcons.phone,
                                     color: Colors.red,
@@ -294,7 +298,7 @@ class _LoginState extends State<Register> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -306,8 +310,9 @@ class _LoginState extends State<Register> {
                                 if (EmailValidator.validate(val) == false) {
                                   return "Please enter a valid email";
                                 }
+                                return null;
                               },
-                              decoration: InputDecoration(
+                              decoration: const InputDecoration(
                                   suffix: Icon(
                                     FontAwesomeIcons.envelope,
                                     color: Colors.red,
@@ -350,14 +355,14 @@ class _LoginState extends State<Register> {
                                         Color(0xFFF27121),
                                       ])),
                               child: Padding(
-                                padding: EdgeInsets.all(1),
+                                padding: const EdgeInsets.all(1),
                                 child: TextButton(
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
                                       save();
                                     }
                                   },
-                                  child: Text(
+                                  child: const Text(
                                     'Sign Up',
                                     style: TextStyle(
                                         color: Colors.white,

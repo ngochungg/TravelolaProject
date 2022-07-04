@@ -2,20 +2,14 @@
 
 import 'dart:convert';
 
-import 'package:app/controller/dataController.dart';
-import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/search_master.dart';
 
-import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/nofitication.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
-import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
-import 'package:shared_preferences/shared_preferences.dart';
 
-import '../../controller/apiController.dart';
 import '../../screens/login.dart';
 import '../../screens/register.dart';
 import '../app_bar.dart';
@@ -177,7 +171,7 @@ class _MyHomeState extends State<MyHome> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 8.0),
                         child: RichText(
-                          text: TextSpan(children: [
+                          text: TextSpan(children: const [
                             TextSpan(
                                 text: 'Hello, ',
                                 style: TextStyle(

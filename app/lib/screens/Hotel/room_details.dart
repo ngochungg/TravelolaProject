@@ -10,7 +10,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class RoomDetails extends StatefulWidget {
-  static final routeName = '/room_details';
+  static const routeName = '/room_details';
   const RoomDetails({Key? key}) : super(key: key);
 
   @override
@@ -273,23 +273,18 @@ class _RoomDetailsState extends State<RoomDetails> {
       builder: (BuildContext context, Widget ?child) {
       return Theme(
         data: ThemeData(
-          primarySwatch: Colors.grey,
           splashColor: Colors.black,
           textTheme: TextTheme(
             subtitle1: TextStyle(color: Colors.black),
             button: TextStyle(color: Colors.black),
           ),
-          accentColor: Colors.black,
-          colorScheme: ColorScheme.light(
+              dialogBackgroundColor: Colors.white, colorScheme: ColorScheme.light(
               primary: Colors.pinkAccent,
-              primaryVariant: Colors.black,
-              secondaryVariant: Colors.black,
-              onSecondary: Colors.black,
+              onSecondary: Colors.pinkAccent,
               onPrimary: Colors.white,
-              surface: Colors.black,
-              onSurface: Colors.black,
-              secondary: Colors.black),
-              dialogBackgroundColor: Colors.white,
+              surface: Colors.pinkAccent,
+              onSurface: Colors.pinkAccent,
+              secondary: Colors.pinkAccent)
         ),
         child: child ??Text(""),
       );

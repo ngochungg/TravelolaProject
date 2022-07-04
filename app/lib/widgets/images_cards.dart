@@ -18,7 +18,7 @@ class _ImageCardsState extends State<ImageCards> {
   ];
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 260,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,

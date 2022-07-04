@@ -7,7 +7,7 @@ import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
 
 class HistorySub extends StatefulWidget {
-  static final routeName = '/history_sub';
+  static const routeName = '/history_sub';
   const HistorySub({Key? key}) : super(key: key);
 
   @override
@@ -15,7 +15,7 @@ class HistorySub extends StatefulWidget {
 }
 
 class _HistorySub extends State<HistorySub> {
-  TextEditingController _feedbackController = TextEditingController();
+  final TextEditingController _feedbackController = TextEditingController();
   double? _rating;
 
   @override
@@ -54,7 +54,7 @@ class _HistorySub extends State<HistorySub> {
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: [
+              children: const [
                 Text("Your booking history",
                     style: TextStyle(
                         fontSize: 20,
@@ -332,7 +332,7 @@ class _HistorySub extends State<HistorySub> {
                             showModalBottomSheet(
                                 context: context,
                                 builder: (BuildContext bc) {
-                                  return Container(
+                                  return SizedBox(
                                     height:
                                         MediaQuery.of(context).size.height * 4,
                                     child: Padding(
@@ -365,10 +365,10 @@ class _HistorySub extends State<HistorySub> {
                                             ),
                                           ),
                                           Row(
-                                            children: [
+                                            children: const [
                                               Padding(
                                                 padding:
-                                                    const EdgeInsets.all(12.0),
+                                                    EdgeInsets.all(12.0),
                                                 child: Text('Your feedback',
                                                     style: TextStyle(
                                                         fontSize: 18,

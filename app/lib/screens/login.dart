@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:app/model/loginModel.dart';
 import 'package:app/screens/forgetPassword.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
@@ -67,7 +66,7 @@ class _LoginState extends State<Login> {
       var string = requestData["name"];
       final first = string!.split(' ').first;
       final last = string.split(' ').last;
-      var json = jsonEncode({
+      var jsons = json.encode({
         "id": requestData["id"],
         "firstName": first,
         "lastName": last,
@@ -77,7 +76,7 @@ class _LoginState extends State<Login> {
 
       SharedPreferences prefs = await SharedPreferences.getInstance();
       var response = await http.post(Uri.parse(fbUrl),
-          body: json, headers: {"Content-Type": "application/json"});
+          body: jsons, headers: {"Content-Type": "application/json"});
 
       var username = "Facebook" + requestData["id"];
       var body =
@@ -161,7 +160,7 @@ class _LoginState extends State<Login> {
                       child: BackButton(
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.of(context).pop();
+                          Navigator.of(context).pushNamed(BottomNav.routeName);
                         },
                       ),
                     ),
@@ -204,18 +203,18 @@ class _LoginState extends State<Login> {
                           const SizedBox(
                             height: 30,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
                               controller: _usernameController,
                               decoration: const InputDecoration(
-                                  suffix: const Icon(
+                                  suffix: Icon(
                                     FontAwesomeIcons.envelope,
                                     color: Colors.red,
                                   ),
                                   labelText: "Username",
-                                  border: const OutlineInputBorder(
+                                  border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)),
                                   )),
@@ -224,7 +223,7 @@ class _LoginState extends State<Login> {
                           const SizedBox(
                             height: 12,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -237,8 +236,8 @@ class _LoginState extends State<Login> {
                                   ),
                                   labelText: "Password",
                                   border: OutlineInputBorder(
-                                    borderRadius: const BorderRadius.all(
-                                        Radius.circular(8)),
+                                    borderRadius:
+                                        BorderRadius.all(Radius.circular(8)),
                                   )),
                             ),
                           ),
@@ -252,7 +251,7 @@ class _LoginState extends State<Login> {
                                     Navigator.of(context).push(
                                         MaterialPageRoute(
                                             builder: (context) =>
-                                                ForgetPassword()));
+                                                const ForgetPassword()));
                                   },
                                   child: const Text(
                                     "Forget Password",
@@ -288,7 +287,7 @@ class _LoginState extends State<Login> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content: const Text(
+                                        content: Text(
                                             "Please enter username and password"),
                                       ));
                                       return;
@@ -297,8 +296,7 @@ class _LoginState extends State<Login> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content:
-                                            const Text("Please enter username"),
+                                        content: Text("Please enter username"),
                                       ));
                                       return;
                                     }
@@ -306,8 +304,7 @@ class _LoginState extends State<Login> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(const SnackBar(
                                         backgroundColor: Colors.red,
-                                        content:
-                                            const Text("Please enter password"),
+                                        content: Text("Please enter password"),
                                       ));
                                       return;
                                     } else {

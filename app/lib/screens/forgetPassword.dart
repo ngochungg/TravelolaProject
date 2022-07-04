@@ -24,16 +24,16 @@ class ForgetPassword extends StatelessWidget {
       if (response.body.contains('User not found')) {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.red,
-          content: const Text("Your email is not registered"),
+          content: Text("Your email is not registered"),
         ));
         _emailController.clear();
       } else {
         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
           backgroundColor: Colors.green,
-          content: const Text("Your account password is sent to your email"),
+          content: Text("Your account password is sent to your email"),
         ));
         Navigator.of(context).push(MaterialPageRoute(
-          builder: (context) => Login(),
+          builder: (context) => const Login(),
         ));
       }
     }
@@ -110,7 +110,7 @@ class ForgetPassword extends StatelessWidget {
                           const SizedBox(
                             height: 30,
                           ),
-                          Container(
+                          SizedBox(
                             width: 260,
                             height: 60,
                             child: TextFormField(
@@ -121,15 +121,16 @@ class ForgetPassword extends StatelessWidget {
                                 if (EmailValidator.validate(val) == false) {
                                   return "Please enter a valid email";
                                 }
+                                return null;
                               },
                               controller: _emailController,
                               decoration: const InputDecoration(
-                                  suffix: const Icon(
+                                  suffix: Icon(
                                     FontAwesomeIcons.envelope,
                                     color: Colors.red,
                                   ),
                                   labelText: "Your email",
-                                  border: const OutlineInputBorder(
+                                  border: OutlineInputBorder(
                                     borderRadius:
                                         BorderRadius.all(Radius.circular(8)),
                                   )),

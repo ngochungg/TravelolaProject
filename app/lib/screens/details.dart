@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 class Details extends StatelessWidget {
   final Place place;
 
-  Details(this.place);
+  const Details(this.place);
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class Details extends StatelessWidget {
           children: <Widget>[
             Column(
               children: <Widget>[
-                Container(
+                SizedBox(
                   width: double.infinity,
                   height: 300,
                   child: ClipRRect(

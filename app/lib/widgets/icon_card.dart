@@ -14,7 +14,7 @@ class IconCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 80,
       child: Column(
         children: <Widget>[
@@ -32,7 +32,7 @@ class IconCard extends StatelessWidget {
               )),
           Text(
             text,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 10,
             ),
           ),

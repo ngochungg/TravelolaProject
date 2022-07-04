@@ -16,7 +16,6 @@ import 'package:app/widgets/bottomNav/my_account_bottom.dart';
 import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 
 void main() async {
   AwesomeNotifications().initialize(
@@ -40,20 +39,20 @@ void main() async {
       routes: {
         BottomNav.routeName: (context) => const BottomNav(),
         Login.routeName: (context) => const Login(),
-        Dashboard.routeName: (context) => Dashboard(),
+        Dashboard.routeName: (context) => const Dashboard(),
         MyAccount.routeName: (context) => MyAccount(),
         MyHome.routeName: (context) => MyHome(),
         Profile.routeName: (context) => const Profile(),
         Home.routeName: (context) => Home(),
         EditInfo.routeName: (context) => const EditInfo(),
         ChangePassword.routeName: (context) => const ChangePassword(),
-        HotelHomePage.routeName: (context) => HotelHomePage(),
-        HotelDetail.routeName: (context) => HotelDetail(),
+        HotelHomePage.routeName: (context) => const HotelHomePage(),
+        HotelDetail.routeName: (context) => const HotelDetail(),
         RoomDetails.routeName: (context) => const RoomDetails(),
         BookingCheck.routeName: (context) => const BookingCheck(),
         BookingsHistory.routeName: (context) => const BookingsHistory(),
         HistorySub.routeName: (context) => const HistorySub(),
-        SearchMater.routeName: (context) => SearchMater(),
+        SearchMater.routeName: (context) => const SearchMater(),
       },
     ),
   );

@@ -1,4 +1,3 @@
-import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
 import 'my_account_bottom.dart';
@@ -8,7 +7,7 @@ import 'my_noti_bottom.dart';
 import 'my_save_bottom.dart';
 
 class BottomNav extends StatefulWidget {
-  static final routeName = '/bottomNav';
+  static const routeName = '/bottomNav';
   const BottomNav({Key? key}) : super(key: key);
 
   @override
@@ -17,15 +16,15 @@ class BottomNav extends StatefulWidget {
 
 class _BottomNavState extends State<BottomNav> {
   int selectedIndex = 0;
-  Widget _myHome = MyHome();
-  Widget _mySaved = MySaved();
-  Widget _myBooking = MyBooking();
-  Widget _myNoti = MyNoti();
-  Widget _myAccount = MyAccount();
+  final Widget _myHome = MyHome();
+  final Widget _mySaved = MySaved();
+  final Widget _myBooking = MyBooking();
+  final Widget _myNoti = MyNoti();
+  final Widget _myAccount = MyAccount();
   @override
   Widget build(BuildContext context) {
     void onTapHandler(int index) {
-      this.setState(() {
+      setState(() {
         selectedIndex = index;
       });
     }
@@ -56,7 +55,7 @@ class _BottomNavState extends State<BottomNav> {
         onTap: (int index) {
           onTapHandler(index);
         },
-        items: [
+        items: const [
           BottomNavigationBarItem(
             label: 'Home',
             icon: Icon(Icons.home_outlined),

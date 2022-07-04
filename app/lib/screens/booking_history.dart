@@ -3,14 +3,13 @@
 import 'dart:convert';
 
 import 'package:app/screens/booking_history_sub.dart';
-import 'package:app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class BookingsHistory extends StatefulWidget {
-  static final routeName = '/bookingsHistory';
+  static const routeName = '/bookingsHistory';
   const BookingsHistory({Key? key}) : super(key: key);
 
   @override
@@ -18,7 +17,7 @@ class BookingsHistory extends StatefulWidget {
 }
 
 class _BookingsHistoryState extends State<BookingsHistory> {
-  TextEditingController _feedbackController = TextEditingController();
+  final TextEditingController _feedbackController = TextEditingController();
   double? _rating;
   @override
   Widget build(BuildContext context) {
@@ -239,7 +238,7 @@ class _BookingsHistoryState extends State<BookingsHistory> {
                                           showModalBottomSheet(
                                             context: context,
                                             builder: (BuildContext bc) {
-                                              return Container(
+                                              return SizedBox(
                                                 height: MediaQuery.of(context)
                                                         .size
                                                         .height *

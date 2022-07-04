@@ -1,8 +1,6 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:app/screens/profile.dart';
-import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/profile_menu.dart';
 import 'package:flutter/material.dart';
 
@@ -67,7 +65,7 @@ class MyAccount extends StatelessWidget {
                                 onPressed: () {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (_) => Login()));
+                                          builder: (_) => const Login()));
                                 },
                                 child: Text(
                                   '         Log In         ',
@@ -78,17 +76,17 @@ class MyAccount extends StatelessWidget {
                                 ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(5),
-                                  side: BorderSide(color: Colors.white),
+                                  side: const BorderSide(color: Colors.white),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 10,
                               ),
                               ElevatedButton(
                                 onPressed: () {
                                   Navigator.of(context).pushReplacement(
                                       MaterialPageRoute(
-                                          builder: (_) => Register()));
+                                          builder: (_) => const Register()));
                                 },
                                 child: Text(
                                   '       Register       ',
@@ -99,7 +97,7 @@ class MyAccount extends StatelessWidget {
                                 ),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.white,
-                                    side: BorderSide(color: Colors.white),
+                                    side: const BorderSide(color: Colors.white),
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(5),
                                     )),
@@ -112,7 +110,7 @@ class MyAccount extends StatelessWidget {
                   else
                     Column(
                       children: [
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         if (user["imageUrl"] != null)
@@ -120,8 +118,7 @@ class MyAccount extends StatelessWidget {
                             height: 115,
                             width: 115,
                             child: Stack(
-                              fit: StackFit.expand,
-                              overflow: Overflow.visible,
+                              clipBehavior: Clip.none, fit: StackFit.expand,
                               children: [
                                 if (user["imageUrl"].contains("https"))
                                   CircleAvatar(
@@ -142,9 +139,8 @@ class MyAccount extends StatelessWidget {
                             height: 115,
                             width: 115,
                             child: Stack(
-                              fit: StackFit.expand,
-                              overflow: Overflow.visible,
-                              children: [
+                              clipBehavior: Clip.none, fit: StackFit.expand,
+                              children: const [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
                                       "http://localhost:8080/api/auth/getImage/default.png"),
@@ -154,7 +150,7 @@ class MyAccount extends StatelessWidget {
                           )
                       ],
                     ),
-                  SizedBox(
+                  const SizedBox(
                     height: 30,
                   ),
                   if (user["accessToken"] != null)

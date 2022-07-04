@@ -3,11 +3,9 @@ import 'dart:convert';
 import 'package:app/controller/apiController.dart';
 import 'package:app/controller/dataController.dart';
 import 'package:app/screens/editInfo.dart';
-import 'package:app/widgets/bottomNav/my_account_bottom.dart';
 import 'package:app/widgets/profile_menu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
@@ -45,7 +43,7 @@ class _ProfileState extends State<Profile> {
       var length = await image.length();
       var uri =
           Uri.parse("http://localhost:8080/api/auth/uploadImage/${user['id']}");
-      var request = new http.MultipartRequest("POST", uri);
+      var request = http.MultipartRequest("POST", uri);
       var multipartFile =
           http.MultipartFile('file', stream, length, filename: 'image.jpg');
       request.files.add(multipartFile);
@@ -124,9 +122,9 @@ class _ProfileState extends State<Profile> {
                             child: FlatButton(
                               shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(50),
-                                side: BorderSide(color: Colors.white),
+                                side: const BorderSide(color: Colors.white),
                               ),
-                              color: Color(0xFFF5F6F9),
+                              color: const Color(0xFFF5F6F9),
                               child: SvgPicture.asset("images/Camera Icon.svg"),
                               onPressed: () {
                                 takePicture();
@@ -136,7 +134,7 @@ class _ProfileState extends State<Profile> {
                     ],
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: MediaQuery.of(context).size.width - 150,
                   child: Align(
                       alignment: Alignment.topLeft,

@@ -20,7 +20,7 @@ AppBar buildAppbar(BuildContext context, String text) {
                 fontWeight: FontWeight.w400,
                 color: Colors.white)),
         IconButton(
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.menu),
           color: Colors.white,
           onPressed: () {
             Navigator.of(context).pushReplacement(

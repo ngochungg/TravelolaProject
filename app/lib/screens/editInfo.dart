@@ -2,7 +2,6 @@
 
 import 'dart:convert';
 
-import 'package:app/screens/home.dart';
 import 'package:app/screens/profile.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';

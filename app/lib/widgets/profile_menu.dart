@@ -16,9 +16,9 @@ class ProfileMenu extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
       child: FlatButton(
-        padding: EdgeInsets.all(15),
+        padding: const EdgeInsets.all(15),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-        color: Color(0xFFF5F6F9),
+        color: const Color(0xFFF5F6F9),
         onPressed: press,
         child: Row(
           children: [
@@ -27,15 +27,15 @@ class ProfileMenu extends StatelessWidget {
               color: Colors.pinkAccent,
               width: 22,
             ),
-            SizedBox(
+            const SizedBox(
               width: 20,
             ),
             Expanded(
                 child: Text(
               text,
-              style: TextStyle(color: Colors.grey),
+              style: const TextStyle(color: Colors.grey),
             )),
-            Icon(
+            const Icon(
               Icons.arrow_forward_ios,
               color: Colors.pinkAccent,
             ),
