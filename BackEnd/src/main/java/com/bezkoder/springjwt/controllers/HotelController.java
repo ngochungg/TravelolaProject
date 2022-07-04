@@ -467,9 +467,9 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         System.out.println(namePdf);
         pdfGenerateService.generatePdfFile("rooms", pdfMap, namePdf);
 //        File file = new File(namePdf);
-        //return create file pdf success
         return namePdf;
     }
+
 
 
 }

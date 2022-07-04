@@ -10,7 +10,7 @@ public class ThymeleafConfiguration {
     @Bean
     public ClassLoaderTemplateResolver emailTemplateResolver() {
         ClassLoaderTemplateResolver pdfTemplateResolver = new ClassLoaderTemplateResolver();
-        pdfTemplateResolver.setPrefix("pdf-templates/");
+        pdfTemplateResolver.setPrefix("pdf/");
         pdfTemplateResolver.setSuffix(".html");
         pdfTemplateResolver.setTemplateMode("HTML5");
         pdfTemplateResolver.setCharacterEncoding("UTF-8");
