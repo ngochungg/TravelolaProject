@@ -10,11 +10,13 @@ import 'package:app/screens/editInfo.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login.dart';
 import 'package:app/screens/profile.dart';
+import 'package:app/screens/search_master.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/bottomNav/my_account_bottom.dart';
 import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
 
 void main() async {
   AwesomeNotifications().initialize(
@@ -30,26 +32,28 @@ void main() async {
       )
     ],
   );
+
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: Dashboard.routeName,
       routes: {
-        BottomNav.routeName: (context) => BottomNav(),
+        BottomNav.routeName: (context) => const BottomNav(),
         Login.routeName: (context) => const Login(),
         Dashboard.routeName: (context) => Dashboard(),
         MyAccount.routeName: (context) => MyAccount(),
         MyHome.routeName: (context) => MyHome(),
-        Profile.routeName: (context) => Profile(),
+        Profile.routeName: (context) => const Profile(),
         Home.routeName: (context) => Home(),
-        EditInfo.routeName: (context) => EditInfo(),
-        ChangePassword.routeName: (context) => ChangePassword(),
+        EditInfo.routeName: (context) => const EditInfo(),
+        ChangePassword.routeName: (context) => const ChangePassword(),
         HotelHomePage.routeName: (context) => HotelHomePage(),
         HotelDetail.routeName: (context) => HotelDetail(),
-        RoomDetails.routeName: (context) => RoomDetails(),
-        BookingCheck.routeName: (context) => BookingCheck(),
-        BookingsHistory.routeName: (context) => BookingsHistory(),
-        HistorySub.routeName: (context) => HistorySub(),
+        RoomDetails.routeName: (context) => const RoomDetails(),
+        BookingCheck.routeName: (context) => const BookingCheck(),
+        BookingsHistory.routeName: (context) => const BookingsHistory(),
+        HistorySub.routeName: (context) => const HistorySub(),
+        SearchMater.routeName: (context) => SearchMater(),
       },
     ),
   );

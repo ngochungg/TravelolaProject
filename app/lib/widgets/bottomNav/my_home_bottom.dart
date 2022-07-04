@@ -4,6 +4,7 @@ import 'dart:convert';
 
 import 'package:app/controller/dataController.dart';
 import 'package:app/screens/Hotel/home.dart';
+import 'package:app/screens/search_master.dart';
 
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/nofitication.dart';
@@ -202,15 +203,11 @@ class _MyHomeState extends State<MyHome> {
                         iconData: Icons.room_outlined,
                         text: 'Hotels',
                         press: () async {
-                          var hotel = await http.get(Uri.parse(
-                              'http://localhost:8080/api/hotel/getAllHotel'));
-                          var hotelData =
-                              json.decode(utf8.decode(hotel.bodyBytes));
-                          // print(hotelData[0]['images'][0]['imagePath']);
-
-                          Navigator.of(context).pushNamed(
-                              HotelHomePage.routeName,
-                              arguments: hotel.body);
+                          var city = await http.get(Uri.parse(
+                              'http://localhost:8080/api/hotel/find4ProvinceHaveMostHotel'));
+                          // print(city.body);
+                          Navigator.of(context).pushNamed(SearchMater.routeName,
+                              arguments: city.body);
                         },
                       ),
                       IconCard(

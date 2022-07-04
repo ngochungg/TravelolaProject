@@ -56,6 +56,8 @@ dependencies:
   firebase_messaging: ^11.4.2
   firebase_core: ^1.18.0
   awesome_notifications: ^0.6.21
+  geolocator: ^8.2.1
+  geocoding: ^2.0.4
   
 
 dev_dependencies:
