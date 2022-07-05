@@ -53,10 +53,6 @@ class _RoomDetailsState extends State<RoomDetails> {
                 Navigator.of(context).pop();
               },
             ),
-            Icon(
-              Icons.favorite_border,
-              color: Colors.white,
-            ),
           ],
         ),
       ),

@@ -29,7 +29,7 @@ class _BookingsHistoryState extends State<BookingsHistory> {
       retriveString = (data.arguments.toString());
     }
     var booking = json.decode(retriveString);
-    print(booking.length);
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -62,6 +62,7 @@ class _BookingsHistoryState extends State<BookingsHistory> {
               ListView.builder(
                 physics: const NeverScrollableScrollPhysics(),
                 shrinkWrap: true,
+                reverse: true,
                 itemCount: booking.length,
                 itemBuilder: (context, index) {
                   return Column(

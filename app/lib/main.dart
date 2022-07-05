@@ -7,6 +7,7 @@ import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/screens/changePassword.dart';
 import 'package:app/screens/dashboard.dart';
 import 'package:app/screens/editInfo.dart';
+import 'package:app/screens/feedback_history.dart';
 import 'package:app/screens/home.dart';
 import 'package:app/screens/login.dart';
 import 'package:app/screens/profile.dart';
@@ -53,6 +54,7 @@ void main() async {
         BookingsHistory.routeName: (context) => const BookingsHistory(),
         HistorySub.routeName: (context) => const HistorySub(),
         SearchMater.routeName: (context) => const SearchMater(),
+        FeedbackHistory.routeName: (context) => FeedbackHistory(),
       },
     ),
   );
