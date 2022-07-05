@@ -25,12 +25,13 @@ export class AllUserComponent implements OnInit {
 
   //array of users
   user: any[] = [];
+  _user: User[] = [];
   users: User[] = [];
   search: any[] = [];
   userID: any[] = [];
   searchKeyword: string | null = '';
 
-  _user: User[] = [];
+  
   constructor(
     private token: TokenStorageService,
     private authService: AuthService,

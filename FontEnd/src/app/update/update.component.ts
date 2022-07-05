@@ -3,7 +3,7 @@ import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-update',
@@ -27,8 +27,8 @@ export class UpdateComponent implements OnInit {
   timeStamp: any;
 
   constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService,
-     private router: Router) { }
-
+     private router: Router,private http: HttpClient) { }
+     
   ngOnInit(): void {
 
   }
@@ -44,11 +44,12 @@ export class UpdateComponent implements OnInit {
         });
       },
       error: err => {
-        this.errorMessage = err.error.message;
+        // this.errorMessage = err.error.message;
         console.log(err);
 
       }
     });
+    
   }
 
   reloadPage(): void {
@@ -73,13 +74,4 @@ export class UpdateComponent implements OnInit {
     });
   }
 
-  imageUpload(event : any){
-    var file= event.target.files[0];
-    console.log(file)
-    const formData:FormData = new FormData();
-    // quangh inh len
-    // convert image to Base64
-
-
-  }
 }

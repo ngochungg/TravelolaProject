@@ -29,10 +29,18 @@ export class UserService {
     return this.http.get('http://localhost:8080/api/hotel/' + 'getAllHotel');
   }
   allHotelRooms(): Observable<any> {
-    return this.http.get('http://localhost:8080/api/hotel/getAllRoom');
+    return this.http.get('http://localhost:8080/api/hotel/getAllHotel');
   }
   allRooms(id : string): Observable<any> {
+    // return this.http.get('http://localhost:8080/api/hotel/getRoom/16');
     return this.http.get('http://localhost:8080/api/hotel/getRoom/' +id);
+  }
+  hotelService(paymentAtTheHotel: string,wifi : string): Observable<any> {
+    return this.http.post('http://localhost:8080/api/hotel/addServices/1', {
+      paymentAtTheHotel,
+      wifi,
+
+    });
   }
 
 

@@ -10,19 +10,16 @@
                 <table>
                     <thead>
                         <tr class="Col-space">
-                            <th>Name</th>
-                            <th>FirstName</th>
-                            <th>LastName</th>
+                            <th>id</th>
+                            <th>username</th>
                             <th>Email</th>
                             <th>Phone</th>
-                            <th>roles</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of users">
-                            <td >{{user.username}}</td>
-                            <td>{{ user.firstName }}</td>
-                            <td>{{user.lastName}}</td>
+                        <tr *ngFor="let user of hotel">
+                            <td>{{user.id}}</td>
+                            <td >{{user.hotelName}}</td>
                             <td id="form-in4" onclick="myFunction()">{{ user.email }}</td>
                             <td>{{ user.phone }}</td>
                             <!-- get role to users -->
@@ -31,10 +28,13 @@
                                     {{ role.name }}
                                 </span>
                             </td>
-                            <td>
-                                <button class="btn btn-success btn-in4"
-                                    onclick="morein4()">More</button>
-                                <button class="btn btn-danger btn-in4">More</button>
+                            <!--Bảo--- thêm 1 field account_id cho api findAllHotel -->
+                            <td *ngIf="user.status == true" >
+                                <button *ngIf="user.status == true" class="btn btn-success btn-in4" (click)="Look(user)">Look</button>
+                                <button *ngIf="user.status == false" class="btn btn-danger btn-in4" (click)="UnLook(user)">Unlook</button>
+                            </td>
+                            <td *ngIf="user.status == false" > 
+                                <button class="btn btn-danger btn-in4" (click)="no(user)">No Accepted</button>
                             </td>
                         </tr>
                     </tbody>
