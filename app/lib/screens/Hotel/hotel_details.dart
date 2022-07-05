@@ -96,7 +96,7 @@ class _HotelDetailState extends State<HotelDetail> {
                       width: 2,
                     ),
                     Text(
-                      '5.0',
+                      '${hotel['hotelRating']}',
                       style: TextStyle(
                         // color: Colors.pinkAccent,
                         fontSize: 16,
@@ -106,7 +106,7 @@ class _HotelDetailState extends State<HotelDetail> {
                     SizedBox(
                       width: 5,
                     ),
-                    Text('(100 feedbacks)',
+                    Text('(${feedback.length} feedback(s))',
                         style: TextStyle(
                           fontSize: 15,
                           color: Colors.grey,

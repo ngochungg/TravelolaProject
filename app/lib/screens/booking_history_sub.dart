@@ -299,6 +299,18 @@ class _HistorySub extends State<HistorySub> {
                 thickness: 1,
               ),
             ),
+            Image.network(
+              "http://localhost:8080/api/auth/getImage/${jsonData['qrCode']}",
+              height: 250.0,
+              width: 250.0,
+              fit: BoxFit.cover,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 12.0, right: 12.0),
+              child: Divider(
+                thickness: 1,
+              ),
+            ),
             if (jsonData['status'] == true)
               Container(
                 decoration: BoxDecoration(
@@ -367,8 +379,7 @@ class _HistorySub extends State<HistorySub> {
                                           Row(
                                             children: const [
                                               Padding(
-                                                padding:
-                                                    EdgeInsets.all(12.0),
+                                                padding: EdgeInsets.all(12.0),
                                                 child: Text('Your feedback',
                                                     style: TextStyle(
                                                         fontSize: 18,

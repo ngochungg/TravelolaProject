@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/screens/booking_history.dart';
+import 'package:app/screens/feedback_history.dart';
 import 'package:app/screens/login.dart';
 import 'package:app/screens/register.dart';
 import 'package:app/widgets/app_bar.dart';
@@ -171,7 +172,63 @@ class MyBooking extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                height: 20,
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 15, right: 15),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(5),
+                          ),
+                          primary: Colors.grey[100],
+                          elevation: 0,
+                        ),
+                        onPressed: () async {
+                          if (user['id'] != null) {
+                            final response = await http.get(Uri.parse(
+                                "http://localhost:8080/api/auth/showFeedback/" +
+                                    user["id"].toString()));
+                            Navigator.of(context).pushNamed(
+                                FeedbackHistory.routeName,
+                                arguments: response.body);
+                          } else {
+                            ScaffoldMessenger.of(context)
+                                .showSnackBar(const SnackBar(
+                              backgroundColor: Colors.red,
+                              content: Text("You need to login first"),
+                            ));
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(builder: (_) => Login()));
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(Icons.star_border, color: Colors.pinkAccent),
+                            Text(
+                              'View your feeedback history',
+                              style: TextStyle(color: Colors.grey),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              color: Colors.pinkAccent,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(
+                height: 20,
+              ),
             ],
           ),
         ),
