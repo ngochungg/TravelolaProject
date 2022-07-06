@@ -1,9 +1,8 @@
-
+<app-navbar></app-navbar>
+<div class="container">
 <form enctype="multipart/form-data" >
-    
-    name<input type="text" [(ngModel)]="username"[ngModelOptions]="{standalone: true}" ><br>
-    email<input type="text" [(ngModel)]="email "  [ngModelOptions]="{standalone: true}"><br>
-    phone<input type="text" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}"  ><br>
-    <input type="file" (change)="onFileSelected($event)"><br>
+
+    <input type="file" (change)="onFileSelected($event)" class="form-img"><br>
+    <!-- <img [src]="'http://localhost:8080/api/auth/getImage/'+this.selectedFile.name" alt=""> -->
 <button type="button" (click)="onUpload()">Upload</button>
-</form>
+</form></div>

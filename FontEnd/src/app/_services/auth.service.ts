@@ -102,5 +102,25 @@ export class AuthService {
     return this.http.post(AUTH_API + 'unlockUser/' + id, {
     }, httpOptions);
   }
-
+  service(paymentAtTheHotel: string, wifi: string,freeBreakfast: string,freeParking: string,petsAllowed: string,hotTub: string,swimmingPool: string,gym:string): Observable<any> {
+    this.currentUser = this.token.getUser();
+    return this.http.post('http://localhost:8080/api/hotel/addServices/'+this.currentUser.id , {
+      paymentAtTheHotel,
+      wifi,
+      freeBreakfast,
+      freeParking,
+      petsAllowed,
+      hotTub,
+      swimmingPool,
+      gym
+    },httpOptions);
+  }
+  confirmHotel(id: string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/hotel/confirmHotel/' + id, {
+    });
+  }
+  refuseHotel(id: string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/hotel/refuseHotel/' + id, {
+    });
+  }
 }

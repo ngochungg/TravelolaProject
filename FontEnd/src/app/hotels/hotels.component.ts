@@ -1,4 +1,6 @@
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 interface Rooms{
   roomName :string,
@@ -15,9 +17,10 @@ interface Rooms{
   templateUrl: './hotels.component.html',
   styleUrls: ['./hotels.component.css']
 })
+
 export class HotelsComponent implements OnInit {
-  constructor(private userService: UserService) { }
-  
+  constructor(private userService: UserService,private token: TokenStorageService,private http: HttpClient) { }
+  currentUser:any;
   hotelRooms :any[] =[];
   room : Rooms[] = [];
   dataRooms:Rooms[] = [];
@@ -54,8 +57,33 @@ export class HotelsComponent implements OnInit {
       }
     }
   }
+  public checkInDate ='';
+  public checkOutDate ='';
+  public numOfGuest ='';
+  public paymentMethod ='';
+  public totalPrice ='';
+  public roomId ='';
+  public userId ='';
 
   bookrooms(){
-    
+    this.currentUser=this.token.getUser();
+    console.log('currentUser', this.currentUser);
+ 
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const filedata =new FormData();
+
+    filedata.append('checkInDate', this.checkInDate);
+    filedata.append('checkOutDate',  this.checkOutDate);
+    filedata.append('numOfGuest',  this.numOfGuest);
+    filedata.append('paymentMethod',  this.paymentMethod); 
+    filedata.append('totalPrice',  this.totalPrice);
+    filedata.append('roomId',  this.roomId);
+    filedata.append('userId',  this.userId);
+
+
+    this.http.post('http://localhost:8080/api/hotel/hotelBooking', filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+  
+
   }
 }

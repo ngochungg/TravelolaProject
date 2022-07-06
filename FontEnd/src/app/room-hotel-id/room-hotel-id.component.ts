@@ -11,20 +11,36 @@ import { UserService } from '../_services/user.service';
 })
 export class RoomHotelIDComponent implements OnInit {
 
-  constructor(private authService: AuthService, private http: HttpClient, private token: TokenStorageService,private userService: UserService) { }
+  constructor(private authService: AuthService, private http: HttpClient, private token: TokenStorageService, private userService: UserService) { }
   roomHotel: any;
-  rooms:any;
+  rooms: any;
   errorMessage = '';
-  
+  id: any;
   selectedFile!: File;
 
   ngOnInit(): void {
     this.roomHotel = this.token.getUser();
-    this.authService.reloadPro().subscribe({
+    console.log(this.roomHotel)
+
+    this.userService.showAllHotel().subscribe({
       next: data => {
-        // console.log(data);
-        this.roomHotel.id = data.id;
-        console.log('id', this.roomHotel.id);
+        console.log('data', data)
+        for (let i = 0; i < data.length; i++) {
+          if (data[i].phone === this.roomHotel.phone) {
+            this.id = data[i].id
+          }
+        }
+        this.userService.allRooms(this.id).subscribe({
+          next: data => {
+            this.rooms = data;
+            console.log('allrooms', this.rooms);
+
+          }
+
+        })
+        console.log('idHotel', this.id)
+        // console.log(data)
+        // console.log('id', this.roomHotel.id);
 
       },
       error: err => {
@@ -32,14 +48,8 @@ export class RoomHotelIDComponent implements OnInit {
       }
     });
 
-   
-    this.userService.allRooms(this.roomHotel.id ).subscribe({
-      next: data => {
-        this.rooms = data;
-        console.log('allrooms', this.rooms);
-      }
 
-    })
+
 
 
   }

@@ -34,6 +34,8 @@ import { HotelsComponent } from './hotels/hotels.component';
 import { RoomHotelIDComponent } from './room-hotel-id/room-hotel-id.component';
 import { HotelServiceComponent } from './hotel-service/hotel-service.component';
 import { UserBookingHistoryComponent } from './user-booking-history/user-booking-history.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+
 
 
 
@@ -71,7 +73,9 @@ import { UserBookingHistoryComponent } from './user-booking-history/user-booking
     HotelsComponent,
     RoomHotelIDComponent,
     HotelServiceComponent,
-    UserBookingHistoryComponent
+    UserBookingHistoryComponent,
+    ForgotPasswordComponent,
+
 
  
   ],

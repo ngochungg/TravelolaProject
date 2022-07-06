@@ -1,0 +1,9 @@
+tr td {
+    text-align: center;
+
+}
+
+tr td button {
+   border :none;
+   height: 200%;
+}

@@ -1,38 +1,42 @@
-<app-navbar></app-navbar>
-<div class="container">
-    <div class="row">
-        <div class="col-sm-10">
-            <h1 class="account-header">Your Service</h1>
-            <table >
-              <thead >
-                <tr >
-                    <th>image</th>
-                  <th>id</th>
-                  <th>roomName</th>
-                  <th>roomNumber</th>
-                  <th>roomType</th>
-                  <th>price</th>
-                  <th>maxAdult</th>
-                  <th>maxChildren</th>
-                </tr>
-              </thead>
-              <tbody>
-                <!-- <tr *ngFor="let item of rooms">
-                    <td><img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata" class="img-fluid img-rooms"></td>
-                  <td>{{ item.id }}</td>
-                  <td>{{item.roomName}}</td>
-                  <td>{{ item.roomNumber }}</td>
-                  <td>{{ item.roomType }}</td>
-                  <td>{{ item.price }}</td>
-                  <td>{{ item.maxAdult }}</td>
-                  <td>{{ item.maxChildren }}</td>
-                  <td>
-                    <button class="btn btn-success btn-in4">Update</button> 
-                    <button class="btn btn-danger btn-in4">Delete</button>
-                </td>
-                </tr> -->
-              </tbody>
-            </table>
+<div class="row">
+    <app-navbar></app-navbar>   
+    <div class="col-sm-8 board-main">
+        <div class="form-group">
+            <div class="col-sm-12">
+                <h1 class="account-header"> All Service in your hotel</h1>
+                <!-- <div  class="search">
+                    <input class="form-control search" type="text"  placeholder="Search User" name="username" (keyup)="searchUser($event)">
+                  </div> -->
+                <table>
+                    <thead>
+                        <tr class="Col-space">
+                            <th>paymentAtTheHotel</th>
+                            <th>wifi</th>
+                            <th>freeBreakfast</th>
+                            <th>freeParking</th>
+                            <th>petsAllowed</th>
+                            <th>hotTub</th>
+                            <th>swimmingPool</th>
+                            <th>gym</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of rooms">
+                            <td *ngIf="user.paymentAtTheHotel ==true"> <button (click)="change($event)" value="{{user.paymentAtTheHotel}}"  class=" fa fa-check btn-in4" ></button></td>
+                            <td  *ngIf="user.paymentAtTheHotel  == false">   <button (click)="change($event)" value="{{user.paymentAtTheHotel}}"  class=" fa fa-times btn-in4" ></button></td>
+                            <td *ngIf="user.wifi ==true"> <button (click)="change($event)" value="{{user.wifi}}"  class=" fa fa-check btn-in4" ></button></td>
+                            <td  *ngIf="user.wifi  == false">   <button (click)="change($event)" value="{{user.wifi}}" class=" fa fa-times btn-in4" ></button></td>
+                           
+                            <td >{{user.freeBreakfast}}</td>
+                            <td >{{user.freeParking}}</td>
+                            <td >{{user.petsAllowed}}</td>
+                            <td >{{user.hotTub}}</td>
+                            <td >{{user.swimmingPool}}</td>
+                            <td >{{user.gym}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

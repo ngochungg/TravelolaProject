@@ -31,4 +31,8 @@ export class HomeComponent implements OnInit {
   }
 
 
+  // Location(event:any):void{
+  //   const ev =event.target.value
+  //   console.log('ev',ev)
+  // }
 }

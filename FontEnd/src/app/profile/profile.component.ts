@@ -24,7 +24,10 @@ export class ProfileComponent implements OnInit {
         this.currentUser.lastName = data.lastName;
         this.currentUser.email = data.email;
         this.currentUser.phone = data.phone;
+        data.imageUrl=this.currentUser.imageUrl
+        console.log('imageUrl',this.currentUser.imageUrl);
         console.log(this.currentUser);
+        console.log('data',data);
         // this.reloadPage();
       },
       error: err => {
@@ -35,9 +38,7 @@ export class ProfileComponent implements OnInit {
     if(this.currentUser.imageUrl == null){
      
       this.currentUser.imageUrl = 'http://localhost:8080/api/auth/' + 'getImage/' + 'default.png';
-      
-    }else if((this.currentUser.imageUrl).substring(0,8) == "https://"){
-      this.currentUser.imageUrl = this.currentUser.imageUrl;
+
     }
     else{
       this.currentUser.imageUrl = 'http://localhost:8080/api/auth/' + 'getImage/' + this.currentUser.imageUrl;

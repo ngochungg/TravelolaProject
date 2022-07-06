@@ -2,6 +2,9 @@
 import { HttpHeaders } from '@angular/common/http';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthService } from '../_services/auth.service';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 @Component({
   selector: 'app-up-image',
@@ -10,34 +13,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UpImageComponent implements OnInit {
   
-  constructor(private http: HttpClient, ) {}
+  constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService,private http: HttpClient,private router:Router ) {}
   selectedFile!: File;
+  currentUser: any;
   ngOnInit(): void {
+    this.currentUser = this.token.getUser();
+    console.log('currentUser', this.currentUser);
   }
 
   onFileSelected(event: any){
     this.selectedFile=<File>event.target.files[0];
+    console.log(this.selectedFile.name)
   }
-  public email ='';
-  public username ='';
-  public phone ='';
+
   onUpload(){
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const filedata =new FormData();
-    filedata.append('images', this.selectedFile, this.selectedFile.name);
-    filedata.append('hotelName', 'aloola');
-    filedata.append('email', this.email);
-    filedata.append('phone', this.phone);
-    filedata.append('username', this.username); 
-    filedata.append('password', '12345678');
-    filedata.append('contactName', 'meo3ss2422vn');
-    filedata.append('decription', 'aloalo123456');
-    filedata.append('street', '111 - le loi 1');
-    filedata.append('ward', '1');
-    filedata.append('district', '1');
-    filedata.append('province', '1');
-
-    this.http.post('http://localhost:8080/api/hotel/addHotel', filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+    filedata.append('file', this.selectedFile, this.selectedFile.name);
+    console.log('filedata', this.selectedFile, this.selectedFile.name)
+    this.router.navigate(['/profile'])
+    this.http.post('http://localhost:8080/api/auth/uploadImage/'+this.currentUser.id, filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
   }
 }
