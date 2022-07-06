@@ -300,9 +300,9 @@ public class HotelController {
             return ResponseEntity.badRequest().body("Check in date must be before check out date");
         }
         //check check in date after today
-        if(hotelBookingRequest.getCheckInDate().before(new Date())){
-            return ResponseEntity.badRequest().body("Check in date must be after today");
-        }
+        // if(hotelBookingRequest.getCheckInDate().before(new Date())){
+        //     return ResponseEntity.badRequest().body("Check in date must be after today");
+        // }
         //check Number of people in room
         int people = room.getMaxChildren()+room.getMaxAdult();
         System.out.println(people);

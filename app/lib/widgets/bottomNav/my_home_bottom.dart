@@ -2,6 +2,7 @@
 
 import 'dart:convert';
 
+import 'package:app/screens/Payments/makePaypal.dart';
 import 'package:app/screens/search_master.dart';
 
 import 'package:app/widgets/nofitication.dart';
@@ -213,7 +214,10 @@ class _MyHomeState extends State<MyHome> {
                       IconCard(
                           iconData: Icons.directions,
                           text: 'Adventures',
-                          press: () {}),
+                          press: () {
+                            Navigator.of(context).push(MaterialPageRoute(
+                                builder: (_) => makePayment()));
+                          }),
                     ],
                   ),
                   SizedBox(
