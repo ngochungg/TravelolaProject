@@ -507,6 +507,29 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
 //        File file = new File(namePdf);
         return namePdf;
     }
+    //report all booking hotel by hotel id
+//    @GetMapping(value = "/reportallBooking/{id}")
+//    public String reportAllBooking(@PathVariable("id") Long id) throws IOException {
+//        //find hotel by id
+//        Hotel hotel = hotelRepository.findById(id).get();
+//        //list all booking by room id in hotel
+//        for (Room room : hotel.getRooms()) {
+//            List<HotelBooking> hotelBookings = hotelBookingRepository.findByRoomId(room.getId());
+//        }
+//        String address = hotel.getLocation().getDistrict().getName() + ", " + hotel.getLocation().getProvince().getName();
+//        Map<String, Object> pdfMap = new HashMap<>();
+//        pdfMap.put("hotelBookings", hotelBookings);
+//        pdfMap.put("hotel", hotel);
+//        pdfMap.put("address", address);
+//        String namePdf = hotel.getHotelName() + "_allBooking_" + LocalDate.now() + ".pdf";
+//        System.out.println(namePdf);
+//        pdfGenerateService.generatePdfFile("bookings", pdfMap, namePdf);
+////        File file = new File(namePdf);
+//        return namePdf;
+//    }
+
+
+
 
 
 
