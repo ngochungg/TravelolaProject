@@ -443,14 +443,52 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
     @PutMapping(value = "/confirmedHotelBooking/{id}")
     public ResponseEntity<HotelBooking> confirmedHotelBooking(@PathVariable("id") Long id){
         HotelBooking hotelBooking = hotelBookingRepository.findById(id).get();
-        hotelBooking.setStatus(true);
+        hotelBooking.setRetired(true);
+        HotelBooking result = hotelBookingRepository.save(hotelBooking);
+        Room room = roomRepository.findById(result.getRoom().getId()).get();
+        //hotel name
+        String hotelname = room.getHotel().getHotelName();
+        room.setRoomStatus(false);
+        //booking code
+        String bookingCode = result.getBookingCode();
+        //first name
+        String firstName = result.getUser().getFirstName();
+
+        roomRepository.save(room);
+        Map<String, Object> emailMap = new HashMap<>();
+        emailMap.put("hotelname", hotelname);
+        emailMap.put("bookingCode", bookingCode);
+        emailMap.put("firstName", firstName);
+        String templateHtml = emailSenderService.templateResolve("confirmedBooking", emailMap);
+        emailSenderService.sendTemplateMessage(result.getUser().getEmail(), "Confirmed Booking", "confirmedBooking", templateHtml);
+        return ResponseEntity.ok().body(result);
+    }
+    //refuse hotel booking
+    @PutMapping(value = "/refuseHotelBooking/{id}")
+    public ResponseEntity<HotelBooking> refuseHotelBooking(@PathVariable("id") Long id){
+        HotelBooking hotelBooking = hotelBookingRepository.findById(id).get();
+        hotelBooking.setRetired(false);
         HotelBooking result = hotelBookingRepository.save(hotelBooking);
         Room room = roomRepository.findById(result.getRoom().getId()).get();
         room.setRoomStatus(false);
         roomRepository.save(room);
+        //send email
+        Map<String, Object> emailMap = new HashMap<>();
+        emailMap.put("hotelname", room.getHotel().getHotelName());
+        emailMap.put("bookingCode", result.getBookingCode());
+        emailMap.put("firstName", result.getUser().getFirstName());
+        String templateHtml = emailSenderService.templateResolve("refuseBooking", emailMap);
+        emailSenderService.sendTemplateMessage(result.getUser().getEmail(), "Refuse Booking", "refuseBooking", templateHtml);
+        User user = userRepository.findById(result.getUser().getId()).get();
         return ResponseEntity.ok().body(result);
     }
 
+
+
+
+
+
+    //PDF report
     //report file pdf allRoom
     @GetMapping(value = "/reportallRoom/{id}")
     public String reportAllRoom(@PathVariable("id") Long id) throws IOException {
@@ -469,6 +507,7 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
 //        File file = new File(namePdf);
         return namePdf;
     }
+
 
 
 
