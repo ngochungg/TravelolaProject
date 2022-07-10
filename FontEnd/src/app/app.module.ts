@@ -35,14 +35,10 @@ import { RoomHotelIDComponent } from './room-hotel-id/room-hotel-id.component';
 import { HotelServiceComponent } from './hotel-service/hotel-service.component';
 import { UserBookingHistoryComponent } from './user-booking-history/user-booking-history.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
+import { AllroominhotelComponent } from './allroominhotel/allroominhotel.component';
+import { BookingComponent } from './booking/booking.component';
 
 
-
-
-
-// import {MatButtonModule} from '@angular/material/button';
-// import {MatIconModule} from '@angular/material/icon';
-// import {MatToolbarModule} from '@angular/material/toolbar';
 
 
 @NgModule({
@@ -75,6 +71,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     HotelServiceComponent,
     UserBookingHistoryComponent,
     ForgotPasswordComponent,
+    AllroominhotelComponent,
+    BookingComponent,
 
 
  

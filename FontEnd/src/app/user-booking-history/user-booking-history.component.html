@@ -1,1 +1,5 @@
 <p>user-booking-history works!</p>
+<div *ngFor="let item of dtUser">
+    <div> {{item.bookingCode}}</div>
+    <img [src]="'http://localhost:8080/api/auth/getImage/'+item.qrCode"alt="avata" class="img-qrCode">
+</div>

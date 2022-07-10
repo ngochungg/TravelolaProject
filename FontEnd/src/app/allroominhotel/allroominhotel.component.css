@@ -1,0 +1,163 @@
+.search{
+    float: right;
+    width: 60%;
+}
+.img-city{
+    width: 200px ;
+    height:200px ;
+}
+.col7{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.lable{
+    padding: 16px;
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    margin-top: 3%;
+    width: 100%;
+}
+.img{
+    position: relative;
+    float: left;
+}
+.in4{
+    position: relative;
+   padding-left: 32%;
+}
+.btn-book{
+    float: right;
+    top: 100%;
+    overflow:auto;
+}
+.lable button{
+    top: 50%;
+    left: 100%;
+}
+.des {
+    width: 240px; 
+    border: 1px solid ;
+    }
+.description{
+    display: block;
+    word-break: break-word;
+}
+.services h5{
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-left: 5%;
+}
+.div-col-8{
+    margin-top: 5%;
+    margin-bottom: 5%;
+}
+.hotel{
+    font-size: 16px;
+    font-weight: 300;
+    font-family: Arial, Helvetica, sans-serif;
+    display: block;
+    border: none;
+    background-color: none;
+   
+}
+.hotels{
+    width: 300px;
+    text-overflow: ellipsis;
+}
+
+.success{
+    margin-top: 100px;
+    border-radius: 3%;
+    border: solid 0.5px rgb(209, 183, 183);
+    box-shadow: 5px 5px 20px gray;
+    height:250px;
+    width: 500px;
+    text-align: center;
+    margin-bottom: 200px;
+
+}
+.icon{
+   
+    border: none;
+    color: green;
+    font-size: 80px;
+}
+.suc{
+  margin-top: 15%;
+  font-size: 40px;
+    
+}
+#form{
+    margin-top: 100px;
+    margin-bottom: 150px;
+    border-radius: 3%;
+    border: solid 0.5px rgb(209, 183, 183);
+    box-shadow: 10px 10px 20px gray;
+    width: 60%;
+}
+.infomation{
+    padding-top: 3%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.btn-block{
+    width: 50%;
+    margin-bottom: 5%;
+    margin-top: 5%;
+}
+.loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Loader circles */
+  .loader > span {
+    background: #FAD000;
+    border-radius: 50%;
+    margin: 5rem 0.5rem;
+    animation: bouncingLoader 0.6s infinite alternate;
+  }
+  
+  .loader > span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .loader > span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  /* Define the animation called bouncingLoader. */
+  @keyframes bouncingLoader {
+    from {
+      width: 0.1rem;
+      height: 0.1rem;
+      opacity: 1;
+      transform: translate3d(0);
+    }
+    to {
+      width: 1rem;
+      height: 1rem;
+      opacity: 0.1;
+      transform: translate3d(0, -1rem, 0);
+    }
+  }
+  
+  /* OPTIONAL: Styles for the demo. */
+  body {
+    background: #aca9ca;
+    padding: 2rem;
+  }
+  
+  p {
+    font: 1rem/1.45 "Operator Mono";
+    color: #A599E9;
+    text-align: center;
+  }
+  .formloader{
+    margin-left: 100px;
+    margin-top: 200px;
+    margin-bottom: 200px;
+    font-size: 20px;
+    min-height: 400px;
+  }

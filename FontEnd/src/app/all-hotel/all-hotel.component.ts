@@ -3,7 +3,8 @@ import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { Router } from '@angular/router';
 import { UserService } from '../_services/user.service';
-
+import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 interface User {
   id: string;
   username: string;
@@ -12,6 +13,7 @@ interface User {
   email: string;
   phone: string;
   roles: any[];
+
 }
 @Component({
   selector: 'app-all-hotel',
@@ -28,23 +30,27 @@ export class AllHotelComponent implements OnInit {
 
 
   constructor(private token: TokenStorageService, private authService: AuthService, private tokenStorage: TokenStorageService,
-    private router: Router, private userService: UserService) { }
+    private router: Router, private userService: UserService,private http:HttpClient) { }
   hotel: any;
-  id: any;
+  id: any[]=[];
   phone:any;
+  dtUser:any;
   ngOnInit(): void {
-
+    this.authService.getAllUsers().subscribe({
+      next: data=>{
+        this.dtUser = data;
+        console.log('dtUser',this.dtUser)
+      }
+    })
     this.userService.showAllHotel().subscribe({
       next: data => {
         this.hotel = data;
         console.log('hotel',  this.hotel)
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].phone === this.hotel.phone) {
-            this.id = data[i].id
-            this.phone =data[i].phone
-          }
+        for (let i = 0; i < this.hotel.length; i++) {
+          const ID = this.hotel[i].account.id;
+          this.id.push(ID);
         }
-
+        
         console.log('idHotel', this.id)
       },
       error: err => {
@@ -55,18 +61,22 @@ export class AllHotelComponent implements OnInit {
     
   }
 
-  accept(user: any): void {
+  no(user: any): void {
+    this.reloadPage();
     this.authService.refuseHotel(user.id).subscribe({
       next: (data) => {
-        this.reloadPage();
+      
       }
     });
   }
 
-  no(user: User): void {
+  yes(user: User): void {
+   
+    this.reloadPage();
     this.authService.confirmHotel(user.id).subscribe({
       next: (data) => {
-        this.reloadPage();
+       
+         
       }
     });
   }
@@ -80,38 +90,20 @@ export class AllHotelComponent implements OnInit {
     });
   }
 
-  hotelID :any;
-  Look(user: User): void {
-    console.log('id',this.id)
-    this.authService.lockUser(user.id).subscribe({
-      next: (data) => {
-        this.reloadPage();
-      }
-    });
+  hotelID :any;  
 
-    // this.authService.getAllUsers().subscribe({
-    //   next: (data) => {
-    //     this.users = data;
-    //     console.log('users', this.users)
-        
-    //     for (let i = 0; i < this.users.length; i++) {
-    //       if(this.phone== this.users[i].phone){
-    //         this.hotelID=this.user[i].id;
-    //       }
-    //       console.log('lock/unlock:ID',this.hotelID)
-    //     } 
-    //   },
-    //   error: (err) => {
-    //     throw Error('Error');
-    //   },
-    // });
-
-  
+  Look(event: any): void {
+    
+    const userID=event.target.value;
+    console.log('userID',userID)
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
  
+    this.http.post('http://localhost:8080/api/auth/lockUser/'+userID, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+   
   }
 
-  reloadPage(): void {
-    
+  reloadPage(){
     window.location.reload();
   }
 }

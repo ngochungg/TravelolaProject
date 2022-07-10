@@ -26,7 +26,8 @@ import { RoomHotelIDComponent } from './room-hotel-id/room-hotel-id.component';
 import { HotelServiceComponent } from './hotel-service/hotel-service.component';
 import { UserBookingHistoryComponent } from './user-booking-history/user-booking-history.component';
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
-
+import { AllroominhotelComponent } from './allroominhotel/allroominhotel.component';
+import { BookingComponent } from './booking/booking.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -53,6 +54,8 @@ const routes: Routes = [
   { path: 'hotel-service', component: HotelServiceComponent },
   { path: 'user-booking-history', component: UserBookingHistoryComponent},
   { path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'allRoom',component: AllroominhotelComponent},
+  { path: 'booking',component: BookingComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

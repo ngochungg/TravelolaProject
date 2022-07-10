@@ -1,0 +1,18 @@
+.form{
+    border: solid 0.5px rgb(161, 153, 153);
+    box-shadow: 5px 10px 20px rgb(163, 155, 155);
+    margin-top: 100px;
+    margin-bottom: 100px;
+    border-radius: 3%;
+    width: 100%;
+    padding-top: 2%;
+}
+.col6{
+    width: 50%;
+}
+.container{
+    margin-top: 20px;
+}
+.nex{
+    padding-top: 3%;
+}

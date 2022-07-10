@@ -12,6 +12,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
   styleUrls: ['./up-image.component.css']
 })
 export class UpImageComponent implements OnInit {
+  img :any;
   
   constructor(private token: TokenStorageService,private authService: AuthService, private tokenStorage: TokenStorageService,private http: HttpClient,private router:Router ) {}
   selectedFile!: File;
@@ -23,6 +24,7 @@ export class UpImageComponent implements OnInit {
 
   onFileSelected(event: any){
     this.selectedFile=<File>event.target.files[0];
+    this.img =this.selectedFile.name;
     console.log(this.selectedFile.name)
   }
 

@@ -33,3 +33,11 @@ div {
     max-height: 150px;
     max-width: 150px;
 }
+.formm{
+  margin-top: 100px;
+  margin-bottom: 100px;
+  width: 40%;
+}
+.form-group{
+  padding-top: 0%;
+}
