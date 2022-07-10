@@ -1,5 +1,6 @@
 package com.bezkoder.springjwt.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Getter;
 import lombok.Setter;
@@ -40,9 +41,10 @@ public class Post {
     @Column(name = "description", columnDefinition = "text")
     private String description;
     //foreign key user
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    @JsonIgnoreProperties(value = {"posts"})
+    @ManyToOne
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    //skip password on json response
+    @JsonIgnoreProperties(value = {"password"})
     private User user;
 
 }

@@ -4,14 +4,14 @@ import com.bezkoder.springjwt.models.Post;
 import com.bezkoder.springjwt.payload.request.PostRequest;
 import com.bezkoder.springjwt.payload.response.MessageResponse;
 import com.bezkoder.springjwt.repository.PostRepository;
+import com.bezkoder.springjwt.repository.UserRepository;
 import com.bezkoder.springjwt.security.services.IStorageService;
 import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -24,6 +24,8 @@ public class PostController {
 
     @Autowired
     EmailSenderService emailSenderService;
+    @Autowired
+    private UserRepository userRepository;
 
     // add post
     @PostMapping("/add")
@@ -46,6 +48,16 @@ public class PostController {
         return ResponseEntity.ok(new MessageResponse("Post added successfully!"));
     }
 
+    // get all posts
+    @GetMapping("/all")
+    public List<Post> getAllPosts() {
+        return postRepository.findAll();
+    }
+    // get post by id
+    @GetMapping("/{id}")
+    public Post getPostById(@PathVariable long id) {
+        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+    }
 
 
 }
