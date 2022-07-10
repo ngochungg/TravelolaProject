@@ -54,7 +54,7 @@
 .text {
   color: white;
   font-size: 20px;
-  position: absolute;
+
   top: 40%;
   left:50%;
   -webkit-transform: translate(-50%, -50%);
@@ -78,4 +78,8 @@
 }
 .bckcolor{
   background-color: #936BE80D;
+}
+.text button{
+  background-color: #20a9d6;
+  border: none;
 }

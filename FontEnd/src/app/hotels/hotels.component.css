@@ -2,3 +2,48 @@
     float: right;
     width: 60%;
 }
+.img-city{
+    width: 200px ;
+    height:200px ;
+}
+.col7{
+    font-size: 16px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.lable{
+    padding: 16px;
+    border-radius: 3px;
+    border: 1px solid #e6e6e6;
+    margin-top: 3%;
+    width: 100%;
+}
+.img{
+    position: relative;
+    float: left;
+}
+.in4{
+    position: relative;
+   padding-left: 32%;
+}
+.btn-book{
+    float: right;
+    top: 100%;
+    overflow:auto;
+}
+.lable button{
+    top: 50%;
+    left: 100%;
+}
+.des {
+    width: 240px; 
+    border: 1px solid ;
+    }
+.description{
+    display: block;
+    word-break: break-word;
+}
+.services h5{
+    font-size: 14px;
+    text-transform: capitalize;
+    margin-left: 5%;
+}

@@ -21,18 +21,18 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let user of rooms">
-                            <td *ngIf="user.paymentAtTheHotel ==true"> <button (click)="change($event)" value="{{user.paymentAtTheHotel}}"  class=" fa fa-check btn-in4" ></button></td>
-                            <td  *ngIf="user.paymentAtTheHotel  == false">   <button (click)="change($event)" value="{{user.paymentAtTheHotel}}"  class=" fa fa-times btn-in4" ></button></td>
-                            <td *ngIf="user.wifi ==true"> <button (click)="change($event)" value="{{user.wifi}}"  class=" fa fa-check btn-in4" ></button></td>
-                            <td  *ngIf="user.wifi  == false">   <button (click)="change($event)" value="{{user.wifi}}" class=" fa fa-times btn-in4" ></button></td>
+                        <tr *ngIf="rooms">
+                            <td *ngIf="rooms.paymentAtTheHotel ==true"> <button (click)="change($event)" value="{{rooms.paymentAtTheHotel}}"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.paymentAtTheHotel  == false">   <button (click)="change($event)" value="{{rooms.paymentAtTheHotel}}"  class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.wifi ==true"> <button (click)="change($event)" value="{{rooms.wifi}}"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.wifi  == false">   <button (click)="change($event)" value="{{rooms.wifi}}" class=" fa fa-times n" ></button></td>
                            
-                            <td >{{user.freeBreakfast}}</td>
-                            <td >{{user.freeParking}}</td>
-                            <td >{{user.petsAllowed}}</td>
-                            <td >{{user.hotTub}}</td>
-                            <td >{{user.swimmingPool}}</td>
-                            <td >{{user.gym}}</td>
+                            <td >{{rooms.freeBreakfast}}</td>
+                            <td >{{rooms.freeParking}}</td>
+                            <td >{{rooms.petsAllowed}}</td>
+                            <td >{{rooms.hotTub}}</td>
+                            <td >{{rooms.swimmingPool}}</td>
+                            <td >{{rooms.gym}}</td>
                         </tr>
                     </tbody>
                 </table>

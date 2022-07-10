@@ -1,0 +1,131 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-8 div-col-8" *ngIf="display==true">
+            <label class="lable" *ngFor="let item of room">
+                <div>
+                    <p class="img">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[0].imagePath"
+                            alt="avata" class="img-city">
+                        <!-- <h4> Image{{item.images[0].imagePath}}</h4> -->
+                    </p>
+                    <div class="in4">
+                        <h4> Hotel: {{item.images[0].hotel.hotelName}}</h4>
+                        <hr>
+                        <h5>Room Name: {{item.roomName}}</h5>
+                        <h5>Room Typy: {{item.roomType}}</h5>
+                        <h5>Room Number{{item.roomNumber}}</h5>
+                        <h5>{{item.price}}</h5>
+                        <h5>{{item.maxAdult}}</h5>
+                        <h5>{{item.maxChildren}}</h5>
+
+                        <!-- <h4 class="des"><h4 class="description"> {{item.description}}</h4></h4> -->
+                        <button class="btn btn-primary btn-book"
+                            value="{{item.id}}" (click)="toggle($event)"
+                            id="#form">Booking</button>
+                    </div>
+                </div>
+
+            </label>
+
+        </div>
+
+
+        <!-- form in4 -->
+        <div *ngIf="displayForm==true" id="form">
+            <form name="form" (ngSubmit)="f.form.valid && bookingRoom($event)"
+                #f="ngForm"
+                novalidate>
+                <!-- checkInDate -->
+                <div class="form-group infomation">
+                    <label for="username">checkInDate</label>
+                    <input type="text" class="form-control" name="checkInDate"
+                        [(ngModel)]="form.checkInDate" required
+                        minlength="3" maxlength="20" #checkInDate="ngModel" />
+                </div>
+                <!-- checkOutDate -->
+                <div class="form-group infomation">
+                    <label for="firstName">checkOutDate</label>
+                    <input type="text" class="form-control" name="checkOutDate"
+                        [(ngModel)]="form.checkOutDate"
+                        required minlength="1" maxlength="20"
+                        #checkOutDate="ngModel" />
+
+                </div>
+                <!-- numOfGuest -->
+                <div class="form-group infomation">
+                    <label for="lastName">numOfGuest</label>
+                    <input type="text" class="form-control" name="numOfGuest"
+                        [(ngModel)]="form.numOfGuest" required
+                        minlength="1" maxlength="20" #numOfGuest="ngModel" />
+                </div>
+                <!-- paymentMethod -->
+                <div class="form-group infomation">
+                    <label for="phone">paymentMethod</label>
+                    <input type="text" class="form-control" name="paymentMethod"
+                        [(ngModel)]="form.paymentMethod" required
+                        minlength="8" maxlength="20" #paymentMethod="ngModel" />
+                </div>
+                <!-- totalPrice -->
+                <div class="form-group infomation">
+                    <label for="email">totalPrice</label>
+                    <input type="email" class="form-control" name="totalPrice"
+                        [(ngModel)]="form.totalPrice" required
+                        #totalPrice="ngModel" />
+
+                </div>
+
+                <!-- roomId -->
+                <div class="form-group infomation" *ngIf="display==true"
+                    style="display: none;">
+                    <label for="email">roomId</label>
+                    <input type="email" class="form-control" name="roomId"
+                        [(ngModel)]="form.roomId" [(ngModel)]="IDr" required
+                        value="{{IDr}}" placeholder="{{IDr}}" />
+
+                </div>
+
+                <!-- userId -->
+                <div class="form-group infomation" *ngIf="user" style="display:
+                    none;">
+                    <label for="email">userId</label>
+                    <input type="email" class="form-control" name="userId"
+                        [(ngModel)]="form.userId" [(ngModel)]="IDu" required
+                        value="{{IDu}}" placeholder="{{IDu}}"
+                        #userId="ngModel" />
+
+                </div>
+
+
+                <div class="form-group" style="margin-left: 33%;">
+                    <button class="btn btn-primary btn-block" type="submit"
+                        (click)="bookingRoom($event)">ok</button>
+                    
+                </div>
+                
+            </form>
+        </div>
+        <div *ngIf="loader ==true" class="formloader">
+            <p>Please wait a few seconds, your request is being processed</p>
+
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+
+        <!-- form success -->
+        <div *ngIf="displaySuccess==true" class="success">
+
+            <div class="suc"><button class="fa fa-check icon"></button>
+                Successfull</div>
+            <div style="margin-top: 10px;" title="click here to return
+                homepage">Return <a href="/home"> HomePage</a></div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

@@ -116,11 +116,14 @@ export class AuthService {
     },httpOptions);
   }
   confirmHotel(id: string): Observable<any> {
-    return this.http.get('http://localhost:8080/api/hotel/confirmHotel/' + id, {
-    });
+    return this.http.get('http://localhost:8080/api/hotel/confirmHotel/' + id,{});
   }
   refuseHotel(id: string): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/refuseHotel/' + id, {
+    });
+  }
+  getBooking(id: string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/auth/getBooking/' + id, {
     });
   }
 }

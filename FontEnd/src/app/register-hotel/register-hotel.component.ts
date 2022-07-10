@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../_services/auth.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
-import { AppRoutingModule } from '../app-routing.module';
+
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register-hotel',
   templateUrl: './register-hotel.component.html',
@@ -43,7 +41,7 @@ export class RegisterHotelComponent implements OnInit {
   dist: any[] = [];
   d: any[] = [];
 
-  constructor(private authService: AuthService, private http: HttpClient) { }
+  constructor(private authService: AuthService, private http: HttpClient,private router: Router) { }
   selectedFile!: File;
   ngOnInit(): void {
     this.authService.getProvince().subscribe({
@@ -69,7 +67,7 @@ export class RegisterHotelComponent implements OnInit {
   public username ='';
   public password ='';
   public contactName ='';
-  public decription ='';
+  public description ='';
   public street ='';
   public ward ='';
   public district ='';
@@ -86,7 +84,7 @@ export class RegisterHotelComponent implements OnInit {
     filedata.append('username',  this.username); 
     filedata.append('password',  this.password);
     filedata.append('contactName',  this.contactName);
-    filedata.append('decription',  this.decription);
+    filedata.append('description',  this.description);
     filedata.append('street', this.street);
     filedata.append('ward',  this.ward);
     filedata.append('district',  this.district);
@@ -94,6 +92,10 @@ export class RegisterHotelComponent implements OnInit {
     // console.log('form',)
 
     this.http.post('http://localhost:8080/api/hotel/addHotel', filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+    this.router.navigate(['/login'])
+    .then(() => {
+      this.reloadPage();
+    });
   }
 
 
@@ -124,5 +126,8 @@ export class RegisterHotelComponent implements OnInit {
       }
     });
 
+  }
+  reloadPage(){
+    window.location.reload();
   }
 }

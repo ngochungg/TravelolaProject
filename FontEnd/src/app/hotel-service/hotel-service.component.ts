@@ -17,7 +17,8 @@ export class HotelServiceComponent implements OnInit {
   room: any;
   service: any;
   errorMessage = '';
-  id: any;
+  idHotel: any;
+  display=false;
   form: any = {
 
     paymentAtTheHotel: null,
@@ -43,17 +44,15 @@ export class HotelServiceComponent implements OnInit {
     this.hotel = this.token.getUser();
     this.userService.showAllHotel().subscribe({
       next: data => {
-        this.rooms = data;
-       
-        console.log('allrooms', this.rooms);
+
         for (let i = 0; i < data.length; i++) {
-          if (data[i].phone === this.hotel.phone) {
-            this.id = data[i].id
-       
+          if (data[i].phone == this.hotel.phone) {
+            this.rooms = data[i]
+            console.log('idHotel', this.rooms)
           }
         }
 
-        console.log('idHotel', this.id)
+       
       },
       error: err => {
         this.errorMessage = err.error.message;

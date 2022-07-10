@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Observable } from 'rxjs';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 interface Rooms{
-  roomName :string,
-  roomNumber :number,
+  hotelName :string,
+  location :number,
   roomType :string,
   price :number,
   maxAdult :number,
@@ -19,44 +21,41 @@ interface Rooms{
 })
 
 export class HotelsComponent implements OnInit {
-  constructor(private userService: UserService,private token: TokenStorageService,private http: HttpClient) { }
+  constructor(private userService: UserService,private token: TokenStorageService,private http: HttpClient,private router: Router, private route: ActivatedRoute) { }
   currentUser:any;
   hotelRooms :any[] =[];
-  room : Rooms[] = [];
+  room : any[] = [];
   dataRooms:Rooms[] = [];
   searchKeyword: string | null = '';
+  Obj! :any;
+  oj:any;
   ngOnInit(): void {
+    // this.Obj = JSON.parse(this.route.snapshot.paramMap.get('my_object'));
+     this.Obj = this.route.snapshot.paramMap.get('name');
+     this.oj =JSON.parse(this.Obj)
+     console.log('Obj',this.Obj)
+     console.log('oj',this.oj)
     this.userService.allHotelRooms().subscribe({
       next : data => {
         this.hotelRooms = data;
-        console.log('hotelRooms',  this.hotelRooms)
+        // console.log('hotelRooms',  this.hotelRooms)
         for (let i = 0; i < this.hotelRooms.length; i++) {
-          
-          
+          if(this.hotelRooms[i].location.province.id ==this.oj){
             this.room.push(this.hotelRooms[i]);
+          }
+         
+           
+            
           
         }
         console.log('room', this.room)
-        this.dataRooms=[...this.room]
-        console.log('dataRooms', this.dataRooms)
+        // this.dataRooms=[...this.room]
+        // console.log('dataRooms', this.dataRooms)
       }
+      
     });
   }
 
-  searchRooms(event: any) {
-    this.searchKeyword = event.target.value;
-    if (this.searchKeyword===null || this.searchKeyword==='') {
-      this.room = this.dataRooms;
-    } else {
-      if(this.searchKeyword.length>0){
-        console.log(this.searchKeyword);
-        const userFilted = this.dataRooms.filter((use) =>
-          use.roomName.toLowerCase().includes(this.searchKeyword!=null ? this.searchKeyword.toLowerCase() : '')
-        );
-        this.room = userFilted;
-      }
-    }
-  }
   public checkInDate ='';
   public checkOutDate ='';
   public numOfGuest ='';
@@ -65,25 +64,9 @@ export class HotelsComponent implements OnInit {
   public roomId ='';
   public userId ='';
 
-  bookrooms(){
-    this.currentUser=this.token.getUser();
-    console.log('currentUser', this.currentUser);
- 
-    let headers = new HttpHeaders();
-    headers.append('Content-Type', 'multipart/form-data');
-    const filedata =new FormData();
-
-    filedata.append('checkInDate', this.checkInDate);
-    filedata.append('checkOutDate',  this.checkOutDate);
-    filedata.append('numOfGuest',  this.numOfGuest);
-    filedata.append('paymentMethod',  this.paymentMethod); 
-    filedata.append('totalPrice',  this.totalPrice);
-    filedata.append('roomId',  this.roomId);
-    filedata.append('userId',  this.userId);
-
-
-    this.http.post('http://localhost:8080/api/hotel/hotelBooking', filedata, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
-  
+  bookrooms(event :any):void{
+    const e =event.target.value;
+    this.router.navigate(['/allRoom', {hotel: JSON.stringify(e)}]);
 
   }
 }

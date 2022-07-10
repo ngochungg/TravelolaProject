@@ -1,31 +1,52 @@
 <body>
-<img src="assets/images/background.jpg" alt="">
+  <img src="assets/images/background.jpg" alt="">
 
-<div class="container-fluid bckcolor">
-  <div class="container " style="min-height: 500px;">
-    <div class="title-content text-left mb-lg-5 mb-4"><br>
-      <h6 class="sub-title">Visit</h6>
-      <h3 class="hny-title">Popular Destinations</h3>
-    </div>
-
-    <div class="row " >
-
-      <div class="col-lg-4 contai" *ngFor="let item of city">
-
- 
-       <img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata"   class="img-fluid img-city">
-       <div class="overlay">
-        <h4 class="hotel-city text"><a href="/hotels" class="text" > {{item.location.province.name}}</a></h4>
-        <!-- <button (change)="Location($event)" value="{{item.location.province.name}}"> </button> -->
-        <h4 class="hotel-id-name text" >{{item.id }}.{{ item.hotelName }}</h4>
+  <div class="container-fluid bckcolor">
+    <div class="container"style="min-height: 500px;">
+      <div class="title-content text-left mb-lg-5 mb-4"><br>
+        <h6 class="sub-title">Visit</h6>
+        <h3 class="hny-title">Popular Destinations</h3>
       </div>
-      <h4 class="name-city"> {{item.location.province.name}}</h4>
-        <p></p> 
+
+      <div class="row">
+
+        <div class="col-lg-4 contai" *ngFor="let item of city" style="margin-top: 5%;">
+
+          <div *ngIf="item.name=='Đồng Nai'">
+            <img src="assets/images/dongnai.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div *ngIf="item.name=='Hồ Chí Minh'">
+            <img src="assets/images/hochiminh.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div *ngIf="item.name=='Hà Nội'">
+            <img src="assets/images/hanoi.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div *ngIf="item.name=='Đà Nẵng'">
+            <img src="assets/images/danang.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div *ngIf="item.name=='Thừa Thiên Huế'">
+            <img src="assets/images/hue.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div *ngIf="item.name=='Lâm Đồng'">
+            <img src="assets/images/lamdong.jpg" alt="avata" class="img-fluid
+              img-city">
+          </div>
+          <div class="overlay"> 
+            <h4 class="hotel-city text"  ><button value="{{item.id}}" (click)="ev($event)" style="color: white;" title="click here to go {{item.name}}">
+            -->> {{ item.name}}</button></h4>
+          </div>
+          <h4 class="name-city" > {{item.name}}</h4>
+          <p></p>
+        </div>
+
+      </div>
     </div>
-    
   </div>
-  </div>
-</div>
 
   <!--//grids-->
   <!-- stats -->
@@ -48,12 +69,12 @@
           <p class="counter">412</p>
           <h4>Happy Customers</h4>
         </div>
-        
+
       </div>
     </div>
   </section>
-  
-  
+
+
   <!-- //stats -->
   <!--/-->
   <div class="best-rooms py-5">
@@ -63,7 +84,7 @@
         <div class="maghny-gd-1 col-lg-6">
           <!-- <a href="/contac"> -->
           <div class="maghny-grid">
-            <figure class="effect-lily border-radius  m-0">
+            <figure class="effect-lily border-radius m-0">
 
               <img class="img-fluid" src="assets/images/g10.jpg" alt="" />
               <figcaption>
@@ -149,11 +170,15 @@
         <div class="col-lg-9 col-md-10 ml-auto">
           <div class="bottom-info ml-auto">
             <div class="header-section text-left">
-              <h3 class="hny-title two">Traveling makes a man wiser, but less happy.</h3>
-              <p class="mt-3 pr-lg-5">Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
+              <h3 class="hny-title two">Traveling makes a man wiser, but less
+                happy.</h3>
+              <p class="mt-3 pr-lg-5">Lorem ipsum dolor sit amet consectetur
+                adipisicing elit. Velit beatae laudantium
+                voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer
+                sit amet .Lorem ipsum dolor sit
                 amet adipisicing elit.</p>
-              <a href="/about" class="btn btn-style btn-secondary mt-5">Read More</a>
+              <a href="/about" class="btn btn-style btn-secondary mt-5">Read
+                More</a>
             </div>
 
 
@@ -176,12 +201,16 @@
               <div class="testimonial">
                 <blockquote>
                   <span class="fa fa-quote-left" aria-hidden="true"></span>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                  voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-                  amet adipisicing elit. Laborum dolor facere ipsum adipisicingelit.
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit
+                  beatae laudantium
+                  voluptate rem ullam dolore nisi voluptatibus esse quasi.
+                  Integer sit amet .Lorem ipsum dolor sit
+                  amet adipisicing elit. Laborum dolor facere ipsum
+                  adipisicingelit.
                 </blockquote>
                 <div class="testi-des">
-                  <div class="test-img"><img src="assets/images/c1.jpg" class="img-fluid" alt="client-img">
+                  <div class="test-img"><img src="assets/images/c1.jpg"
+                      class="img-fluid" alt="client-img">
                   </div>
                   <div class="peopl align-self">
                     <h3>Rohit Paul</h3>
@@ -202,12 +231,16 @@
                 <div class="testimonial">
                   <blockquote>
                     <span class="fa fa-quote-left" aria-hidden="true"></span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                    voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-                    amet adipisicing elit. Laborum dolor facere ipsum adipisicingelit.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Velit beatae laudantium
+                    voluptate rem ullam dolore nisi voluptatibus esse quasi.
+                    Integer sit amet .Lorem ipsum dolor sit
+                    amet adipisicing elit. Laborum dolor facere ipsum
+                    adipisicingelit.
                   </blockquote>
                   <div class="testi-des">
-                    <div class="test-img"><img src="assets/images/c1.jpg" class="img-fluid" alt="client-img">
+                    <div class="test-img"><img src="assets/images/c1.jpg"
+                        class="img-fluid" alt="client-img">
                     </div>
                     <div class="peopl align-self">
                       <h3>Rohit Paul</h3>
@@ -222,12 +255,16 @@
                 <div class="testimonial">
                   <blockquote>
                     <span class="fa fa-quote-left" aria-hidden="true"></span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                    voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-                    amet adipisicing elit. Laborum dolor facere ipsum adipisicingelit.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Velit beatae laudantium
+                    voluptate rem ullam dolore nisi voluptatibus esse quasi.
+                    Integer sit amet .Lorem ipsum dolor sit
+                    amet adipisicing elit. Laborum dolor facere ipsum
+                    adipisicingelit.
                   </blockquote>
                   <div class="testi-des">
-                    <div class="test-img"><img src="assets/images/c2.jpg" class="img-fluid" alt="client-img">
+                    <div class="test-img"><img src="assets/images/c2.jpg"
+                        class="img-fluid" alt="client-img">
                     </div>
                     <div class="peopl align-self">
                       <h3>Shveta</h3>
@@ -242,12 +279,16 @@
                 <div class="testimonial">
                   <blockquote>
                     <span class="fa fa-quote-left" aria-hidden="true"></span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                    voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-                    amet adipisicing elit. Laborum dolor facere ipsum adipisicingelit.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Velit beatae laudantium
+                    voluptate rem ullam dolore nisi voluptatibus esse quasi.
+                    Integer sit amet .Lorem ipsum dolor sit
+                    amet adipisicing elit. Laborum dolor facere ipsum
+                    adipisicingelit.
                   </blockquote>
                   <div class="testi-des">
-                    <div class="test-img"><img src="assets/images/c3.jpg" class="img-fluid" alt="client-img">
+                    <div class="test-img"><img src="assets/images/c3.jpg"
+                        class="img-fluid" alt="client-img">
                     </div>
                     <div class="peopl align-self">
                       <h3>Roy Linderson</h3>
@@ -262,12 +303,16 @@
                 <div class="testimonial">
                   <blockquote>
                     <span class="fa fa-quote-left" aria-hidden="true"></span>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Velit beatae laudantium
-                    voluptate rem ullam dolore nisi voluptatibus esse quasi. Integer sit amet .Lorem ipsum dolor sit
-                    amet adipisicing elit. Laborum dolor facere ipsum adipisicingelit.
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Velit beatae laudantium
+                    voluptate rem ullam dolore nisi voluptatibus esse quasi.
+                    Integer sit amet .Lorem ipsum dolor sit
+                    amet adipisicing elit. Laborum dolor facere ipsum
+                    adipisicingelit.
                   </blockquote>
                   <div class="testi-des">
-                    <div class="test-img"><img src="assets/images/c4.jpg" class="img-fluid" alt="client-img">
+                    <div class="test-img"><img src="assets/images/c4.jpg"
+                        class="img-fluid" alt="client-img">
                     </div>
                     <div class="peopl align-self">
                       <h3>Mike Thyson</h3>
