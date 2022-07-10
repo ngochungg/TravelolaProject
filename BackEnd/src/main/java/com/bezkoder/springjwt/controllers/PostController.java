@@ -56,8 +56,74 @@ public class PostController {
     // get post by id
     @GetMapping("/{id}")
     public Post getPostById(@PathVariable long id) {
-        return postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        //increase view count
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setViewCount(post.getViewCount() + 1);
+        postRepository.save(post);
+        return post;
+    }
+    //edit post
+        @PutMapping("/edit/{id}")
+    public ResponseEntity<?> editPost(@PathVariable long id, PostRequest postRequest) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        //if image not null
+        if (postRequest.getImageUrl() != null) {
+            //upload image
+            String imageUrl = storageService.storeFile(postRequest.getImageUrl());
+            post.setImageUrl(imageUrl);
+        }
+        //if title not null
+        if (postRequest.getTitle() != null) {
+            if (postRepository.existsByTitle(postRequest.getTitle())) {
+                return ResponseEntity
+                        .badRequest()
+                        .body(new MessageResponse("Error: Title is already in use!"));
+            }
+            post.setTitle(postRequest.getTitle());
+        }
+        //if content not null
+        if (postRequest.getContent() != null) {
+            post.setContent(postRequest.getContent());
+        }
+        //if description not null
+        if (postRequest.getDescription() != null) {
+            post.setDescription(postRequest.getDescription());
+        }
+        postRepository.save(post);
+        return ResponseEntity.ok(new MessageResponse("Post updated successfully!"));
     }
 
+    //like post
+    @PutMapping("/like/{id}")
+    public ResponseEntity<?> likePost(@PathVariable long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setLikeCount(post.getLikeCount() + 1);
+        postRepository.save(post);
+        return ResponseEntity.ok(new MessageResponse("Post liked successfully!"));
+    }
+    //unlike post
+    @PutMapping("/unlike/{id}")
+    public ResponseEntity<?> unlikePost(@PathVariable long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setDislikeCount(post.getDislikeCount() + 1);
+        postRepository.save(post);
+        return ResponseEntity.ok(new MessageResponse("Post unliked successfully!"));
+    }
+    //lock post
+    @PutMapping("/lock/{id}")
+    public ResponseEntity<?> lockPost(@PathVariable long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setStatus(true);
+        postRepository.save(post);
+        return ResponseEntity.ok(new MessageResponse("Post locked successfully!"));
+    }
+    //unlock post
+    @PutMapping("/unlock/{id}")
+    public ResponseEntity<?> unlockPost(@PathVariable long id) {
+        Post post = postRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Invalid post Id:" + id));
+        post.setStatus(false);
+        postRepository.save(post);
+        return ResponseEntity.ok(new MessageResponse("Post unlocked successfully!"));
+    }
 
 }
