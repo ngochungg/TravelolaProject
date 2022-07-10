@@ -44,4 +44,5 @@ public class Post {
     @JoinColumn(name = "user_id")
     @JsonIgnoreProperties(value = {"posts"})
     private User user;
+
 }

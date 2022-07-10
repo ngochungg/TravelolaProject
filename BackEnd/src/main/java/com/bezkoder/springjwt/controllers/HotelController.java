@@ -485,9 +485,6 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
 
 
 
-
-
-
     //PDF report
     //report file pdf allRoom
     @GetMapping(value = "/reportallRoom/{id}")
