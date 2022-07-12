@@ -15,6 +15,11 @@ class BottomNav extends StatefulWidget {
 }
 
 class _BottomNavState extends State<BottomNav> {
+  @override
+  void initState() {
+    super.initState();
+  }
+
   int selectedIndex = 0;
   final Widget _myHome = MyHome();
   final Widget _mySaved = MySaved();
@@ -26,6 +31,7 @@ class _BottomNavState extends State<BottomNav> {
     void onTapHandler(int index) {
       setState(() {
         selectedIndex = index;
+        _myAccount;
       });
     }
 

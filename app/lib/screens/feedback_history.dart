@@ -102,6 +102,10 @@ class _FeedbackHistoryState extends State<FeedbackHistory> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
+                                Icon(
+                                  Icons.star,
+                                  color: Colors.yellow,
+                                ),
                                 Text(
                                   "${feedback[index]['rating']}",
                                   style: TextStyle(
@@ -117,73 +121,6 @@ class _FeedbackHistoryState extends State<FeedbackHistory> {
                                 ),
                                 SizedBox(width: 10),
                               ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(
-                                  "alo",
-                                  style: TextStyle(
-                                      color: Colors.grey[700],
-                                      fontWeight: FontWeight.w300),
-                                ),
-                                const SizedBox(width: 67),
-                                SizedBox(width: 10),
-                              ],
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                SizedBox(width: 115),
-                                Expanded(
-                                  child: RichText(
-                                    text: TextSpan(
-                                      children: [
-                                        WidgetSpan(
-                                          child: Icon(
-                                              Icons.attach_money_outlined,
-                                              color: Colors.grey[700]),
-                                        ),
-                                        TextSpan(
-                                          text: 'alo',
-                                          style: TextStyle(
-                                              color: Colors.grey[700],
-                                              fontWeight: FontWeight.w300),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(width: 10),
-                              ],
-                            ),
-                            Container(
-                              child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: ElevatedButton(
-                                        style: ElevatedButton.styleFrom(
-                                          side: BorderSide(color: Colors.grey),
-                                          shape: RoundedRectangleBorder(
-                                            borderRadius:
-                                                BorderRadius.circular(25),
-                                          ),
-                                          primary: Colors.white,
-                                          elevation: 0,
-                                        ),
-                                        child: Text('Feedback this hotel',
-                                            style: TextStyle(
-                                                color: Colors.black,
-                                                fontWeight: FontWeight.w400,
-                                                fontSize: 15)),
-                                        onPressed: () async {},
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
                             ),
                           ],
                         ),

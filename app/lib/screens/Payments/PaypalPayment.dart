@@ -1,10 +1,13 @@
 import 'dart:core';
 import 'package:app/controller/PaypalServices.dart';
+import 'package:app/controller/apiController.dart';
 import 'package:app/screens/login.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
+import 'package:app/widgets/nofitication.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:http/http.dart' as http;
 
 class PaypalPayment extends StatefulWidget {
   final Function onFinish;
@@ -41,7 +44,6 @@ class PaypalPaymentState extends State<PaypalPayment> {
   @override
   void initState() {
     super.initState();
-
     Future.delayed(Duration.zero, () async {
       try {
         accessToken = await services.getAccessToken();
@@ -172,6 +174,9 @@ class PaypalPaymentState extends State<PaypalPayment> {
                 Navigator.of(context).pop();
               }
               Navigator.of(context).pushNamed(BottomNav.routeName);
+              notification(
+                  title: "Booking sucessfull!!",
+                  body: "Check your My booking to see more details");
             }
             if (request.url.contains(cancelURL)) {
               Navigator.of(context).pop();

@@ -5,9 +5,11 @@ import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
+import 'package:app/screens/Payments/PaypalPayment.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/nofitication.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/scheduler.dart';
 import 'package:http/http.dart' as http;
 import 'package:rounded_loading_button/rounded_loading_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -21,11 +23,10 @@ class BookingCheck extends StatefulWidget {
 }
 
 class _BookingCheckState extends State<BookingCheck> {
+  final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
   static List<String> paymentList = [
     'At the hotel',
-    'Momo',
     'Paypal',
-    'ZaloPay',
   ];
 
   String? payment;
@@ -63,6 +64,11 @@ class _BookingCheckState extends State<BookingCheck> {
         "roomId": jsonData['roomId'],
         "userId": jsonData['userId'],
       });
+      var booking = jsonEncode({
+        "roomName": jsonData['roomName'],
+        "totalPrice": jsonData['price'],
+        "username": jsonData['username'],
+      });
       print(body.toString());
       final response = await http.post(
           Uri.parse("http://localhost:8080/api/hotel/hotelBooking"),
@@ -71,17 +77,22 @@ class _BookingCheckState extends State<BookingCheck> {
             "Content-Type": "application/json",
           });
       SharedPreferences prefs = await SharedPreferences.getInstance();
-      final login = await http
-          .post(Uri.parse(urlSignin), body: prefs.getString('body'), headers: {
-        "Content-Type": "application/json",
-      });
-      print(response.statusCode);
+      prefs.setString('booking', booking);
+      print(payment);
       if (response.statusCode == 200) {
-        Navigator.of(context)
-            .pushNamed(BottomNav.routeName, arguments: login.body);
-        notification(
-            title: "You have successfully booked a room in the hotel!!",
-            body: "Please check your booking history");
+        if (payment == "Paypal") {
+          Navigator.of(context).push(
+            MaterialPageRoute(
+              builder: (BuildContext context) => PaypalPayment(
+                onFinish: (number) async {
+                  // payment done
+                  print(number);
+                },
+              ),
+            ),
+          );
+        }
+        Navigator.of(context).pushNamed(BottomNav.routeName);
       } else {
         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
           backgroundColor: Colors.red,
@@ -91,6 +102,7 @@ class _BookingCheckState extends State<BookingCheck> {
     }
 
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
         elevation: 0,

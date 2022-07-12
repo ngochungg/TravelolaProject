@@ -3,6 +3,7 @@
 import 'dart:convert';
 
 import 'package:app/screens/Payments/makePaypal.dart';
+import 'package:app/screens/Post/hotel_post.dart';
 import 'package:app/screens/search_master.dart';
 
 import 'package:app/widgets/nofitication.dart';
@@ -10,6 +11,7 @@ import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../screens/login.dart';
 import '../../screens/register.dart';
@@ -25,9 +27,12 @@ class MyHome extends StatefulWidget {
 }
 
 class _MyHomeState extends State<MyHome> {
+  dynamic isLoggedIn;
+  late SharedPreferences prefs;
   @override
   void initState() {
     super.initState();
+    checkLogin();
     AwesomeNotifications().isNotificationAllowed().then(
       (isAllowed) {
         if (!isAllowed) {
@@ -67,6 +72,13 @@ class _MyHomeState extends State<MyHome> {
     );
   }
 
+  void checkLogin() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      isLoggedIn = prefs.getBool('isLoggedIn') ?? false;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -77,6 +89,8 @@ class _MyHomeState extends State<MyHome> {
       retriveString = (data.arguments.toString());
     }
     var user = jsonDecode(retriveString);
+
+    print(isLoggedIn);
 
     return WillPopScope(
       onWillPop: () async {
@@ -93,7 +107,7 @@ class _MyHomeState extends State<MyHome> {
               color: Colors.white,
               child: Column(
                 children: <Widget>[
-                  if (user["id"] == null)
+                  if (isLoggedIn == false)
                     Column(
                       children: <Widget>[
                         Container(
@@ -209,7 +223,10 @@ class _MyHomeState extends State<MyHome> {
                           iconData: Icons.directions_bike,
                           text: 'Experiences',
                           press: () async {
-                            notification(title: "Alo", body: "alo");
+                            final response = await http.get(Uri.parse(
+                                'http://localhost:8080/api/posts/all'));
+                            Navigator.of(context).pushNamed(HotelPost.routeName,
+                                arguments: response.body);
                           }),
                       IconCard(
                           iconData: Icons.directions,

@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:app/controller/apiController.dart';
 import 'package:app/screens/profile.dart';
 import 'package:app/widgets/profile_menu.dart';
 import 'package:flutter/material.dart';
@@ -11,9 +12,35 @@ import '../../screens/home.dart';
 import '../../screens/login.dart';
 import '../../screens/register.dart';
 import '../app_bar.dart';
+import 'package:http/http.dart' as http;
 
-class MyAccount extends StatelessWidget {
+class MyAccount extends StatefulWidget {
   static const routeName = '/myAccount';
+
+  @override
+  State<MyAccount> createState() => _MyAccountState();
+}
+
+class _MyAccountState extends State<MyAccount> {
+  var _id;
+  var _image;
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkLogin();
+  }
+
+  void checkLogin() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _id = prefs.getInt('userId');
+      _image = prefs.getString('image');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -23,7 +50,6 @@ class MyAccount extends StatelessWidget {
     } else {
       retriveString = (data.arguments.toString());
     }
-
     var user = jsonDecode(retriveString);
 
     return WillPopScope(
@@ -36,7 +62,7 @@ class MyAccount extends StatelessWidget {
               color: Colors.white,
               child: Column(
                 children: <Widget>[
-                  if (user["id"] == null)
+                  if (_id == null)
                     Column(
                       children: <Widget>[
                         Container(
@@ -113,23 +139,23 @@ class MyAccount extends StatelessWidget {
                         const SizedBox(
                           height: 20,
                         ),
-                        if (user["imageUrl"] != null)
+                        if (_image != null)
                           SizedBox(
                             height: 115,
                             width: 115,
                             child: Stack(
-                              clipBehavior: Clip.none, fit: StackFit.expand,
+                              clipBehavior: Clip.none,
+                              fit: StackFit.expand,
                               children: [
-                                if (user["imageUrl"].contains("https"))
+                                if (_image.contains("https"))
                                   CircleAvatar(
-                                    backgroundImage:
-                                        NetworkImage(user['imageUrl']),
+                                    backgroundImage: NetworkImage(_image),
                                   )
                                 else
                                   CircleAvatar(
                                     backgroundImage: NetworkImage(
                                         "http://localhost:8080/api/auth/getImage/" +
-                                            user['imageUrl']),
+                                            _image),
                                   ),
                               ],
                             ),
@@ -139,7 +165,8 @@ class MyAccount extends StatelessWidget {
                             height: 115,
                             width: 115,
                             child: Stack(
-                              clipBehavior: Clip.none, fit: StackFit.expand,
+                              clipBehavior: Clip.none,
+                              fit: StackFit.expand,
                               children: const [
                                 CircleAvatar(
                                   backgroundImage: NetworkImage(
@@ -153,33 +180,25 @@ class MyAccount extends StatelessWidget {
                   const SizedBox(
                     height: 30,
                   ),
-                  if (user["accessToken"] != null)
+                  if (_id != null)
                     Column(
                       children: [
                         ProfileMenu(
                           icon: "images/User Icon.svg",
                           text: "View My Profile",
-                          press: () {
+                          press: () async {
+                            SharedPreferences prefs =
+                                await SharedPreferences.getInstance();
+                            final response = await http.post(
+                                Uri.parse(urlSignin),
+                                body: prefs.getString('body'),
+                                headers: {
+                                  "Content-Type": "application/json",
+                                });
+                            print(response.body);
                             Navigator.of(context).pushNamed(Profile.routeName,
-                                arguments: jsonEncode(user));
+                                arguments: response.body);
                           },
-                        ),
-                        ProfileMenu(
-                          icon: "images/Bell.svg",
-                          text: "Nofitications",
-                          press: () {
-                            print(user);
-                          },
-                        ),
-                        ProfileMenu(
-                          icon: "images/Question mark.svg",
-                          text: "Settings",
-                          press: () {},
-                        ),
-                        ProfileMenu(
-                          icon: "images/User Icon.svg",
-                          text: "Help Center",
-                          press: () {},
                         ),
                         ProfileMenu(
                           icon: "images/Log out.svg",
@@ -198,14 +217,13 @@ class MyAccount extends StatelessWidget {
                     Column(
                       children: [
                         ProfileMenu(
-                          icon: "images/Question mark.svg",
-                          text: "Settings",
-                          press: () {},
-                        ),
-                        ProfileMenu(
                           icon: "images/User Icon.svg",
-                          text: "Help Center",
-                          press: () {},
+                          text: "Login for more benefits",
+                          press: () {
+                            Navigator.of(context).pushReplacement(
+                                MaterialPageRoute(
+                                    builder: (_) => const Login()));
+                          },
                         ),
                       ],
                     )
