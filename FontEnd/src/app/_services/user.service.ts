@@ -27,13 +27,13 @@ export class UserService {
   getAdminBoard(): Observable<any> {
     return this.http.get(API_URL + 'admin', { responseType: 'text' });
   }
-  showAllHotel(): Observable<any> {
+   showAllHotel(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/' + 'getAllHotel');
   }
   find4ProvinceHaveMostHotel(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/find4ProvinceHaveMostHotel');
   }
-  allHotelRooms(): Observable<any> {
+  allHotel(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/getAllHotel');
   }
   allRooms(id : string): Observable<any> {
@@ -43,10 +43,9 @@ export class UserService {
   getAllRoom(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/getAllRoom' );
   }
-  hotelService(paymentAtTheHotel: string,wifi : string): Observable<any> {
-    return this.http.post('http://localhost:8080/api/hotel/addServices/1', {
-      paymentAtTheHotel,
-      wifi,
+  hotelService(id :string): Observable<any> {
+    return this.http.post('http://localhost:8080/api/hotel/addServices/'+id, {
+   
 
     });
     

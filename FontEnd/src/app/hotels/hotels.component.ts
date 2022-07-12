@@ -35,13 +35,16 @@ export class HotelsComponent implements OnInit {
      this.oj =JSON.parse(this.Obj)
      console.log('Obj',this.Obj)
      console.log('oj',this.oj)
-    this.userService.allHotelRooms().subscribe({
+    this.userService.allHotel().subscribe({
       next : data => {
         this.hotelRooms = data;
         // console.log('hotelRooms',  this.hotelRooms)
         for (let i = 0; i < this.hotelRooms.length; i++) {
           if(this.hotelRooms[i].location.province.id ==this.oj){
-            this.room.push(this.hotelRooms[i]);
+            if(this.hotelRooms[i].status==true){
+              this.room.push(this.hotelRooms[i]);
+            }
+           
           }
          
            

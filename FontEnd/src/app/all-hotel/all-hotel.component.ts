@@ -27,7 +27,8 @@ export class AllHotelComponent implements OnInit {
   _user: User[] = [];
   errorMessage = '';
   users: any[] = [];
-
+  display= true ;
+  undis=false
 
   constructor(private token: TokenStorageService, private authService: AuthService, private tokenStorage: TokenStorageService,
     private router: Router, private userService: UserService,private http:HttpClient) { }
@@ -35,11 +36,12 @@ export class AllHotelComponent implements OnInit {
   id: any[]=[];
   phone:any;
   dtUser:any;
+  
   ngOnInit(): void {
     this.authService.getAllUsers().subscribe({
       next: data=>{
         this.dtUser = data;
-        console.log('dtUser',this.dtUser)
+
       }
     })
     this.userService.showAllHotel().subscribe({
@@ -50,11 +52,7 @@ export class AllHotelComponent implements OnInit {
           const ID = this.hotel[i].account.id;
           this.id.push(ID);
         }
-        
-        console.log('idHotel', this.id)
-      },
-      error: err => {
-        this.errorMessage = err.error.message;
+
       }
     });
 
@@ -62,45 +60,61 @@ export class AllHotelComponent implements OnInit {
   }
 
   no(user: any): void {
-    this.reloadPage();
+    const index = this.hotel.findIndex((hotel: { id: string; }) => hotel.id === user.id);
+    // remove index from hotel list
+    this.hotel.splice(index, 1);
+
     this.authService.refuseHotel(user.id).subscribe({
       next: (data) => {
       
       }
+      ,
+      error: (err) => {
+        
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+      
+      },
     });
   }
 
   yes(user: User): void {
-   
-    this.reloadPage();
+    const index = this.hotel.findIndex((hotel: { id: string; }) => hotel.id === user.id);
+    this.hotel[index] ={...this.hotel[index],status:true}
+    // this.reloadPage();
     this.authService.confirmHotel(user.id).subscribe({
       next: (data) => {
        
          
       }
+      
     });
   }
 
-  UnLook(user: User): void {
+ 
+  unLook(event: any): void {
+    
+    const userID=event.target.value;
 
-    this.authService.unlockUser(user.id).subscribe({
-      next: (data) => {
-        this.reloadPage();
-      }
-    });
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+ 
+    this.http.post('http://localhost:8080/api/auth/unlockUser/'+userID, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
+    this.reloadPage();
   }
-
   hotelID :any;  
 
   Look(event: any): void {
     
     const userID=event.target.value;
-    console.log('userID',userID)
+
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
  
     this.http.post('http://localhost:8080/api/auth/lockUser/'+userID, {headers: headers, responseType: 'text'} ).subscribe(res =>{console.log(res)});
-   
+    this.reloadPage();
   }
 
   reloadPage(){

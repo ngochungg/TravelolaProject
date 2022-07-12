@@ -11,25 +11,6 @@ import { Router } from '@angular/router';
 })
 export class RegisterHotelComponent implements OnInit {
   imageSrc: string | undefined;
-
-
-
-
-  // form: any = {
-  //   hotelName: null,
-  //   email: null,
-  //   phone: null,
-  //   username: null,
-  //   password:null,
-  //   contactName: null,
-  //   decription: null,
-  //   street: null,
-  //   ward: null,
-  //   district: null,
-  //   province: null,
-  //   images: null
-  // };
-
   isSuccessful = false;
   isSignUpFailed = false;
   errorMessage = '';

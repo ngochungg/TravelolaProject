@@ -48,15 +48,19 @@ export class AllAdminComponent implements OnInit {
         }
         console.log(this.users);
       },
-      error: err => {
-        this.errorMessage = err.error.message;
-        console.log(err);
-      }
+      error: (err) => {
+        
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+      
+      },
     });
   }
 
-  // reloadPage(): void {
-  //   window.location.reload();
-  // }
+  reloadPage(): void {
+    window.location.reload();
+  }
 
 }

@@ -62,6 +62,7 @@
   transform: translate(-50%, -50%);
   text-align: center;
 }
+
 .text:hover{
   color:aquamarine
 }
@@ -83,3 +84,109 @@
   background-color: #20a9d6;
   border: none;
 }
+.post{
+  /* margin-top: 50px; */
+  margin-bottom: 100px;
+  border: solid 0.1px #ddd;
+  border-radius: 20px;
+  margin-left:100px;
+  margin-top:80px;
+}
+.img-post{
+  margin-top: 00px;
+  height: 350px;
+  width: auto;
+  max-width: 300px;
+  padding-left: 3%;
+  position: relative;
+}
+.img-post:hover{
+  height: 400px;
+  right: 10;
+  bottom: 10;
+  width: auto;
+  position: absolute;
+}
+.user{
+  font-size: 20px;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-left: 0px;
+  margin-top: 10px;
+
+}
+.icon-user{
+  background-color: white;
+  cursor: pointer;
+  border: solid 0.1px #ddd;
+  font-size:25px;
+  margin-left: 10px;
+}
+.like{
+  border: solid 0.1px #ddd;
+  font-size:25px;
+  margin-left: 3%;
+  margin-top: 5%;
+  margin-bottom: 10%;
+  color: #13baf1;
+}
+.like:hover{
+  position: absolute;
+  font-size: 200%;
+  color: #20a9d6;
+}
+.title{
+  margin-left: 50px;
+  color: #777777;
+  margin-top: 10px;
+  width: 350px;
+  /* word-wrap: break-word; */
+  overflow: hidden;
+  inline-size: 200px; 
+
+}
+.form-post{
+  cursor: pointer;
+}
+.row-post{
+  background-color: #936BE80D;
+  /* margin-top: 20px; */
+  margin-bottom: 20px;
+}
+/* .form-post:hover{
+  height: 120%;
+  width: 120%;
+  position: absolute;
+} */
+.post-title{
+  margin-top: 20px;
+  text-transform: capitalize;
+  font-weight: 500;
+  margin-left: 20px;
+  margin-bottom: -50px;
+}
+.btn-title{
+  height: 50px;
+  width: auto;
+  background-color: rgb(213, 248, 237);
+  border: darkgray;
+  border-radius: 10px;
+}
+.btn-title:hover{
+  background-color:greenyellow;
+  border: darkgray;
+  border-radius: 10px;
+}
+.hover {
+  color: #0000;
+  background: 
+    linear-gradient(90deg,#1095c1 50%,#000 0) 
+    var(--_p,100%)/200% no-repeat;
+  -webkit-background-clip: text;
+          background-clip: text;
+  transition: .4s;
+}
+.hover:hover {
+  --_p: 0%;
+}
+

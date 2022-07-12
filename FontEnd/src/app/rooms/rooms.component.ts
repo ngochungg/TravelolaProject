@@ -16,6 +16,8 @@ export class RoomsComponent implements OnInit {
   errorMessage = '';
   id: any;
   selectedFile!: File;
+  display=false;
+  form=true;
 
   ngOnInit(): void {
     this.roomHotel = this.token.getUser();
@@ -61,6 +63,9 @@ export class RoomsComponent implements OnInit {
   public maxChildren = '';
   public images = '';
   onUpload() {
+    this.form=!this.form;
+    this.display=!this.display;
+
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const filedata = new FormData();
