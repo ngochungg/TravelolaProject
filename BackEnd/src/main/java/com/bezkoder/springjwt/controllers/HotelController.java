@@ -193,15 +193,30 @@ public class HotelController {
         //find Hotel by id
         Hotel hotel = hotelRepository.findById(id).get();
         //add services
-        hotel.setPaymentAtTheHotel(servicesRequest.getPaymentAtTheHotel());
-        hotel.setWifi(servicesRequest.getWifi());
-        hotel.setFreeParking(servicesRequest.getFreeParking());
-        hotel.setFreeBreakfast(servicesRequest.getFreeBreakfast());
-        hotel.setPetsAllowed(servicesRequest.getPetsAllowed());
-        hotel.setHotTub(servicesRequest.getHotTub());
-        hotel.setSwimmingPool(servicesRequest.getSwimmingPool());
-        hotel.setGym(servicesRequest.getGym());
-
+        if(servicesRequest.getPaymentAtTheHotel() != null){
+            hotel.setPaymentAtTheHotel(servicesRequest.getPaymentAtTheHotel());
+        }
+        if(servicesRequest.getWifi() != null){
+            hotel.setWifi(servicesRequest.getWifi());
+        }
+        if(servicesRequest.getFreeParking() != null){
+            hotel.setFreeParking(servicesRequest.getFreeParking());
+        }
+        if(servicesRequest.getFreeBreakfast() != null){
+            hotel.setFreeBreakfast(servicesRequest.getFreeBreakfast());
+        }
+        if(servicesRequest.getPetsAllowed() != null){
+            hotel.setPetsAllowed(servicesRequest.getPetsAllowed());
+        }
+         if(servicesRequest.getHotTub() != null){
+                hotel.setHotTub(servicesRequest.getHotTub());
+          }
+        if(servicesRequest.getSwimmingPool() != null){
+            hotel.setSwimmingPool(servicesRequest.getSwimmingPool());
+        }
+        if(servicesRequest.getGym() != null){
+            hotel.setGym(servicesRequest.getGym());
+        }
         hotelRepository.save(hotel);
         return ResponseEntity.ok().body("Services registration successfully");
     }
