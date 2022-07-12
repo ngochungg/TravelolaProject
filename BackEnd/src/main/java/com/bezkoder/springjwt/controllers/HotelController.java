@@ -542,6 +542,7 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         }
         //get last 10 booking hotel new to old
         List<HotelBooking> result = new ArrayList<>();
+        float total = 0;
         for (int i = hotelBookings.size()-1; i >= 0; i--) {
             //in month of year
             //get year of booking
@@ -558,6 +559,7 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
             //if year and month is same with current year and month
             if(yearCheckOut == LocalDate.now().getYear() && monthCheckOut == LocalDate.now().getMonthValue()){
                 result.add(hotelBookings.get(i));
+                total += hotelBookings.get(i).getTotalPrice();
             }
         }
 
@@ -568,17 +570,27 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         pdfMap.put("result", result);
         pdfMap.put("hotel", hotel);
         pdfMap.put("address", address);
+        pdfMap.put("total", total);
         String namePdf = hotel.getHotelName()+"_BookingHotelInMonth_"+LocalDate.now()+".pdf";
         System.out.println(namePdf);
         pdfGenerateService.generatePdfFile("hotelBookings", pdfMap, namePdf);
         File file = new File(namePdf);
         return namePdf;
     }
-
-
-
-
-
-
-
+    //report booking of user by user id
+    @GetMapping(value = "/reportBookingUser/{id}")
+    public String reportBookingUser(@PathVariable("id") Long id) throws IOException {
+        //list Booking by user id
+        List<HotelBooking> result = hotelBookingRepository.findByUserId(id);
+        //find user by id
+        User user = userRepository.findById(id).get();
+        Map<String, Object> pdfMap = new HashMap<>();
+        pdfMap.put("result", result);
+        pdfMap.put("user", user);
+        String namePdf = user.getFirstName() + "_BookingUser_" + LocalDate.now() + ".pdf";
+        System.out.println(namePdf);
+        pdfGenerateService.generatePdfFile("userBookings", pdfMap, namePdf);
+        File file = new File(namePdf);
+        return namePdf;
+    }
 }

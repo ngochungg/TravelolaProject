@@ -25,19 +25,14 @@
         <th>Hotel</th>
     </tr>
     <tr>
-        <td th:text="'Hotel Name: ' + ${hotel.getHotelName()}"></td>
+        <td th:text="'First Name: ' + ${user.getFirstName()} + ' ' + ${user.getLastName()}"></td>
+    </tr>
+
+    <tr>
+        <td th:text="'Email: ' + ${user.getEmail()}"></td>
     </tr>
     <tr>
-        <td th:text="'Contact Name: ' + ${hotel.getContactName()}"></td>
-    </tr>
-    <tr>
-        <td th:text="'Address: ' + ${address}"></td>
-    </tr>
-    <tr>
-        <td th:text="'Email: ' + ${hotel.getEmail()}"></td>
-    </tr>
-    <tr>
-        <td th:text="'Phone: ' + ${hotel.getPhone()}"></td>
+        <td th:text="'Phone: ' + ${user.getPhone()}"></td>
     </tr>
 </table>
 <br />
@@ -58,9 +53,9 @@
         <td th:text="${item.NumOfGuest}"></td>
         <td th:text="${item.TotalPrice}"></td>
     </tr>
-    <tr>
-        <td colspan="6" th:text="'Total: ' + ${total}"></td>
-    </tr>
+<!--    <tr>-->
+<!--        <td colspan="6" th:text="'Total: ' + ${total}"></td>-->
+<!--    </tr>-->
 </table>
 </body>
 </html>
