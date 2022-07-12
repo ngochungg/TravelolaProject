@@ -239,7 +239,6 @@ public class AuthController {
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUser() {
         List<User> users = userRepository.findAll();
-
         return ResponseEntity.ok(users);
     }
     //Forgot password

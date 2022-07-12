@@ -125,5 +125,14 @@ public class PostController {
         postRepository.save(post);
         return ResponseEntity.ok(new MessageResponse("Post unlocked successfully!"));
     }
+    //search post by title
+    @GetMapping("/search/{title}")
+    public List<Post> searchPostByTitle(@PathVariable String title) {
+        List<Post> posts = postRepository.findAll();
+        //filter posts by title
+        posts = posts.stream().filter(post -> post.getTitle().toLowerCase().contains(title.toLowerCase())).collect(
+                java.util.stream.Collectors.toList());
+        return posts;
+    }
 
 }
