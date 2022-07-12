@@ -99,14 +99,9 @@
   max-width: 300px;
   padding-left: 3%;
   position: relative;
+  margin-bottom: 30px;
 }
-.img-post:hover{
-  height: 400px;
-  right: 10;
-  bottom: 10;
-  width: auto;
-  position: absolute;
-}
+
 .user{
   font-size: 20px;
   text-transform: capitalize;
