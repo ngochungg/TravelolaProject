@@ -5,7 +5,7 @@ import '../screens/details.dart';
 
 class ImageCard extends StatelessWidget {
   final String name;
-  final int days;
+  final String days;
   final String picture;
   final Place place;
 
@@ -39,8 +39,8 @@ class ImageCard extends StatelessWidget {
                 borderRadius: BorderRadius.circular(10),
                 child: Stack(
                   children: <Widget>[
-                    Image.asset(
-                      "images/$picture",
+                    Image.network(
+                      "http://localhost:8080/api/auth/getImage/$picture",
                       height: 260,
                       width: 200,
                       fit: BoxFit.cover,
@@ -81,7 +81,8 @@ class ImageCard extends StatelessWidget {
                           child: RichText(
                               text: TextSpan(children: [
                             TextSpan(
-                                text: name, style: const TextStyle(fontSize: 22)),
+                                text: name,
+                                style: const TextStyle(fontSize: 22)),
                           ])),
                         ),
                       ),

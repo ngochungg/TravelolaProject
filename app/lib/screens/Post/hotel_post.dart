@@ -1,10 +1,11 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'dart:convert';
-import 'dart:math';
 
+import 'package:app/screens/Post/post_detail.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+
+import 'package:http/http.dart' as http;
 
 class HotelPost extends StatefulWidget {
   static final routeName = '/hotel-post';
@@ -55,32 +56,6 @@ class _HotelPostState extends State<HotelPost> {
             SizedBox(
               height: 20,
             ),
-            GestureDetector(
-              onTap: () {},
-              child: Container(
-                height: 50,
-                width: 300,
-                alignment: Alignment.centerLeft,
-                padding: EdgeInsets.only(left: 12),
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  borderRadius: BorderRadius.circular(34),
-                  border: Border.all(
-                    color: Colors.pinkAccent,
-                    width: 1.5,
-                  ),
-                ),
-                child: Text(
-                  "what's on your mind ?",
-                  style: TextStyle(
-                    color: Colors.black,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(
-              height: 20,
-            ),
             for (int i = 0; i < post.length; i++)
               if (nlist[i]['user']['roles'][0]['id'] == 2)
                 SizedBox(
@@ -97,7 +72,13 @@ class _HotelPostState extends State<HotelPost> {
                             primary: Colors.white,
                             elevation: 0,
                           ),
-                          onPressed: () async {},
+                          onPressed: () async {
+                            final reponse = await http.get(Uri.parse(
+                                'http://localhost:8080/api/posts/${nlist[i]['id']}'));
+                            Navigator.of(context).pushNamed(
+                                PostDetails.routeName,
+                                arguments: reponse.body);
+                          },
                           child: Column(
                             children: [
                               SizedBox(
