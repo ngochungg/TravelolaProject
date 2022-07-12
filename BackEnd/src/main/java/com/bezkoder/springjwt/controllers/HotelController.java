@@ -497,6 +497,16 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         User user = userRepository.findById(result.getUser().getId()).get();
         return ResponseEntity.ok().body(result);
     }
+    //get all booking retired true
+    @GetMapping(value = "/getAllBookingRetiredTrue")
+    public List<HotelBooking> getAllBookingRetiredTrue(){
+        return hotelBookingRepository.findByRetired(true);
+    }
+    //get all booking retired false
+    @GetMapping(value = "/getAllBookingRetiredFalse")
+    public List<HotelBooking> getAllBookingRetiredFalse(){
+        return hotelBookingRepository.findByRetired(false);
+    }
 
 
 
