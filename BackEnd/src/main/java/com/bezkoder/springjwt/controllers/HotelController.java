@@ -26,6 +26,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Path;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
@@ -193,15 +194,30 @@ public class HotelController {
         //find Hotel by id
         Hotel hotel = hotelRepository.findById(id).get();
         //add services
-        hotel.setPaymentAtTheHotel(servicesRequest.getPaymentAtTheHotel());
-        hotel.setWifi(servicesRequest.getWifi());
-        hotel.setFreeParking(servicesRequest.getFreeParking());
-        hotel.setFreeBreakfast(servicesRequest.getFreeBreakfast());
-        hotel.setPetsAllowed(servicesRequest.getPetsAllowed());
-        hotel.setHotTub(servicesRequest.getHotTub());
-        hotel.setSwimmingPool(servicesRequest.getSwimmingPool());
-        hotel.setGym(servicesRequest.getGym());
-
+        if(servicesRequest.getPaymentAtTheHotel() != null){
+            hotel.setPaymentAtTheHotel(servicesRequest.getPaymentAtTheHotel());
+        }
+        if(servicesRequest.getWifi() != null){
+            hotel.setWifi(servicesRequest.getWifi());
+        }
+        if(servicesRequest.getFreeParking() != null){
+            hotel.setFreeParking(servicesRequest.getFreeParking());
+        }
+        if(servicesRequest.getFreeBreakfast() != null){
+            hotel.setFreeBreakfast(servicesRequest.getFreeBreakfast());
+        }
+        if(servicesRequest.getPetsAllowed() != null){
+            hotel.setPetsAllowed(servicesRequest.getPetsAllowed());
+        }
+         if(servicesRequest.getHotTub() != null){
+                hotel.setHotTub(servicesRequest.getHotTub());
+          }
+        if(servicesRequest.getSwimmingPool() != null){
+            hotel.setSwimmingPool(servicesRequest.getSwimmingPool());
+        }
+        if(servicesRequest.getGym() != null){
+            hotel.setGym(servicesRequest.getGym());
+        }
         hotelRepository.save(hotel);
         return ResponseEntity.ok().body("Services registration successfully");
     }
@@ -482,6 +498,16 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         User user = userRepository.findById(result.getUser().getId()).get();
         return ResponseEntity.ok().body(result);
     }
+    //get all booking retired true
+    @GetMapping(value = "/getAllBookingRetiredTrue")
+    public List<HotelBooking> getAllBookingRetiredTrue(){
+        return hotelBookingRepository.findByRetired(true);
+    }
+    //get all booking retired false
+    @GetMapping(value = "/getAllBookingRetiredFalse")
+    public List<HotelBooking> getAllBookingRetiredFalse(){
+        return hotelBookingRepository.findByRetired(false);
+    }
 
 
 
@@ -504,26 +530,50 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
 //        File file = new File(namePdf);
         return namePdf;
     }
-    //report all booking hotel by hotel id
-//    @GetMapping(value = "/reportallBooking/{id}")
-//    public String reportAllBooking(@PathVariable("id") Long id) throws IOException {
-//        //find hotel by id
-//        Hotel hotel = hotelRepository.findById(id).get();
-//        //list all booking by room id in hotel
-//        for (Room room : hotel.getRooms()) {
-//            List<HotelBooking> hotelBookings = hotelBookingRepository.findByRoomId(room.getId());
-//        }
-//        String address = hotel.getLocation().getDistrict().getName() + ", " + hotel.getLocation().getProvince().getName();
-//        Map<String, Object> pdfMap = new HashMap<>();
-//        pdfMap.put("hotelBookings", hotelBookings);
-//        pdfMap.put("hotel", hotel);
-//        pdfMap.put("address", address);
-//        String namePdf = hotel.getHotelName() + "_allBooking_" + LocalDate.now() + ".pdf";
-//        System.out.println(namePdf);
-//        pdfGenerateService.generatePdfFile("bookings", pdfMap, namePdf);
-////        File file = new File(namePdf);
-//        return namePdf;
-//    }
+    //report 10 booking hotel by hotel id
+    @GetMapping(value = "/reportBookingHotelInMonth/{id}")
+    public String reportBookingHotelInMonth(@PathVariable("id") Long id) throws IOException {
+        //list all room by hotel id
+        List<Room> rooms = roomRepository.findByHotelId(id);
+        //List all booking by list room
+        List<HotelBooking> hotelBookings = new ArrayList<>();
+        for (Room room : rooms) {
+            hotelBookings.addAll(hotelBookingRepository.findByRoomId(room.getId()));
+        }
+        //get last 10 booking hotel new to old
+        List<HotelBooking> result = new ArrayList<>();
+        for (int i = hotelBookings.size()-1; i >= 0; i--) {
+            //in month of year
+            //get year of booking
+            Date date = new Date();
+            //set date is yyyy-MM-dd
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+            //get date check out
+            Date dateCheckOut = hotelBookings.get(i).getCheckOutDate();
+            //get year of check out
+            int yearCheckOut = dateCheckOut.getYear() + 1900;
+            //get month of check out
+            int monthCheckOut = dateCheckOut.getMonth() + 1;
+
+            //if year and month is same with current year and month
+            if(yearCheckOut == LocalDate.now().getYear() && monthCheckOut == LocalDate.now().getMonthValue()){
+                result.add(hotelBookings.get(i));
+            }
+        }
+
+        //find hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        String address = rooms.get(0).getPrice()+", "+hotel.getLocation().getDistrict().getName()+", "+hotel.getLocation().getProvince().getName();
+        Map<String, Object> pdfMap = new HashMap<>();
+        pdfMap.put("result", result);
+        pdfMap.put("hotel", hotel);
+        pdfMap.put("address", address);
+        String namePdf = hotel.getHotelName()+"_BookingHotelInMonth_"+LocalDate.now()+".pdf";
+        System.out.println(namePdf);
+        pdfGenerateService.generatePdfFile("hotelBookings", pdfMap, namePdf);
+        File file = new File(namePdf);
+        return namePdf;
+    }
 
 
 

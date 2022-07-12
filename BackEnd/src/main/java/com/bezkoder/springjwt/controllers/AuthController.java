@@ -14,6 +14,7 @@ import com.bezkoder.springjwt.services.EmailSenderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -235,9 +236,9 @@ public class AuthController {
     }
     //get all user
     @GetMapping("/getAllUser")
+    @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUser() {
         List<User> users = userRepository.findAll();
-
         return ResponseEntity.ok(users);
     }
     //Forgot password
