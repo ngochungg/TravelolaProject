@@ -2,6 +2,7 @@ import 'package:app/screens/Hotel/booking.dart';
 import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Hotel/room_details.dart';
+import 'package:app/screens/Post/hotel_post.dart';
 import 'package:app/screens/booking_history.dart';
 import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/screens/changePassword.dart';
@@ -18,7 +19,7 @@ import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 
-void main() async {
+Future main() async {
   AwesomeNotifications().initialize(
     'resource://drawable/res_notification_app_icon',
     [
@@ -32,7 +33,6 @@ void main() async {
       )
     ],
   );
-
   runApp(
     MaterialApp(
       debugShowCheckedModeBanner: false,
@@ -55,6 +55,7 @@ void main() async {
         HistorySub.routeName: (context) => const HistorySub(),
         SearchMater.routeName: (context) => const SearchMater(),
         FeedbackHistory.routeName: (context) => FeedbackHistory(),
+        HotelPost.routeName: (context) => HotelPost(),
       },
     ),
   );

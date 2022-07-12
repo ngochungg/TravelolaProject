@@ -408,39 +408,51 @@ class _HistorySub extends State<HistorySub> {
                                               children: [
                                                 Expanded(
                                                     child: ElevatedButton(
-                                                  style:
-                                                      ElevatedButton.styleFrom(
-                                                    shape:
-                                                        RoundedRectangleBorder(
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              25),
-                                                    ),
-                                                    primary: Colors.pinkAccent,
-                                                    elevation: 0,
-                                                  ),
-                                                  child: Text('Continue'),
-                                                  onPressed: () async {
-                                                    var body = jsonEncode({
-                                                      "feedback":
-                                                          _feedbackController
-                                                              .text,
-                                                      "rating": _rating,
-                                                      "hotel_booking_id":
-                                                          jsonData['id']
-                                                    });
-                                                    final response = await http
-                                                        .post(
-                                                            Uri.parse(
-                                                                "http://localhost:8080/api/auth/feedback"),
-                                                            body: body,
-                                                            headers: {
-                                                          "Content-Type":
-                                                              "application/json"
-                                                        });
-                                                    Navigator.of(context).pop();
-                                                  },
-                                                ))
+                                                        style: ElevatedButton
+                                                            .styleFrom(
+                                                          shape:
+                                                              RoundedRectangleBorder(
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        25),
+                                                          ),
+                                                          primary:
+                                                              Colors.pinkAccent,
+                                                          elevation: 0,
+                                                        ),
+                                                        child: Text('Continue'),
+                                                        onPressed: () async {
+                                                          var body =
+                                                              jsonEncode({
+                                                            "feedback":
+                                                                _feedbackController
+                                                                    .text,
+                                                            "rating": _rating,
+                                                            "hotel_booking_id":
+                                                                jsonData['id']
+                                                          });
+                                                          final response =
+                                                              await http.post(
+                                                                  Uri.parse(
+                                                                      "http://localhost:8080/api/auth/feedback"),
+                                                                  body: body,
+                                                                  headers: {
+                                                                "Content-Type":
+                                                                    "application/json"
+                                                              });
+                                                          ScaffoldMessenger.of(
+                                                                  context)
+                                                              .showSnackBar(
+                                                                  const SnackBar(
+                                                            backgroundColor:
+                                                                Colors.green,
+                                                            content: Text(
+                                                                "Your feedback has been sent"),
+                                                          ));
+                                                          Navigator.of(context)
+                                                              .pop();
+                                                        }))
                                               ],
                                             ),
                                           ),

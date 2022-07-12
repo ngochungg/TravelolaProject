@@ -378,7 +378,7 @@ class _BookingsHistoryState extends State<BookingsHistory> {
                                                                         const SnackBar(
                                                                   backgroundColor:
                                                                       Colors
-                                                                          .red,
+                                                                          .green,
                                                                   content: Text(
                                                                       "Your feedback has been sent"),
                                                                 ));

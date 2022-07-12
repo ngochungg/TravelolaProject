@@ -10,8 +10,31 @@ import 'package:app/widgets/app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
-class MyBooking extends StatelessWidget {
+class MyBooking extends StatefulWidget {
+  @override
+  State<MyBooking> createState() => _MyBookingState();
+}
+
+class _MyBookingState extends State<MyBooking> {
+  var _id;
+  late SharedPreferences prefs;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    checkLogin();
+  }
+
+  void checkLogin() async {
+    prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _id = prefs.getInt('userId');
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final data = ModalRoute.of(context)!.settings;
@@ -29,7 +52,7 @@ class MyBooking extends StatelessWidget {
           color: Colors.white,
           child: Column(
             children: <Widget>[
-              if (user["id"] == null)
+              if (_id == null)
                 Column(
                   children: <Widget>[
                     Container(
@@ -136,10 +159,10 @@ class MyBooking extends StatelessWidget {
                           elevation: 0,
                         ),
                         onPressed: () async {
-                          if (user['id'] != null) {
+                          if (_id != null) {
                             final response = await http.get(Uri.parse(
                                 "http://localhost:8080/api/auth/getBooking/" +
-                                    user["id"].toString()));
+                                    _id.toString()));
                             Navigator.of(context).pushNamed(
                                 BookingsHistory.routeName,
                                 arguments: response.body);
@@ -190,10 +213,10 @@ class MyBooking extends StatelessWidget {
                           elevation: 0,
                         ),
                         onPressed: () async {
-                          if (user['id'] != null) {
+                          if (_id != null) {
                             final response = await http.get(Uri.parse(
                                 "http://localhost:8080/api/auth/showFeedback/" +
-                                    user["id"].toString()));
+                                    _id.toString()));
                             Navigator.of(context).pushNamed(
                                 FeedbackHistory.routeName,
                                 arguments: response.body);

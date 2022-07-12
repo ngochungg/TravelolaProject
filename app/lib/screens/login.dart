@@ -48,10 +48,12 @@ class _LoginState extends State<Login> {
       var response = await http.post(Uri.parse(googleUrl),
           body: json, headers: {"Content-Type": "application/json"});
       var array = jsonDecode(response.body);
+      prefs.setBool("isLoggedIn", true);
       prefs.setString("body", body);
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);
+      prefs.setString('image', array['imageUrl']);
       storeUserData(response.body);
       Navigator.pushNamed(context, Home.routeName, arguments: response.body);
     } else {
@@ -82,10 +84,12 @@ class _LoginState extends State<Login> {
       var body =
           jsonEncode({"username": username, "password": requestData["id"]});
       var array = jsonDecode(response.body);
+      prefs.setBool("isLoggedIn", true);
       prefs.setString("body", body);
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);
+      prefs.setString('image', array['imageUrl']);
       storeUserData(response.body);
       Navigator.pushNamed(context, Home.routeName, arguments: response.body);
     } else {
@@ -113,11 +117,15 @@ class _LoginState extends State<Login> {
       ));
       final String user = response.body;
       var array = jsonDecode(user);
+      prefs.setBool("isLoggedIn", true);
+      prefs.setString("body", body);
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);
-      prefs.setBool("isLoggedIn", true);
+      prefs.setString('image', array['imageUrl']);
       storeUserData(user);
+      print(prefs.getBool('isLoggedIn'));
+      print(user);
       Navigator.pushNamed(context, Home.routeName, arguments: user);
     }
     if (response.statusCode == 401) {
@@ -160,7 +168,7 @@ class _LoginState extends State<Login> {
                       child: BackButton(
                         color: Colors.white,
                         onPressed: () {
-                          Navigator.of(context).pushNamed(BottomNav.routeName);
+                          Navigator.of(context).pop();
                         },
                       ),
                     ),
