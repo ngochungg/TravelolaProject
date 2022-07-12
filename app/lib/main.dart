@@ -1,4 +1,3 @@
-import 'package:app/l10n/l10n.dart';
 import 'package:app/screens/Hotel/booking.dart';
 import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
@@ -37,7 +36,6 @@ Future main() async {
   );
   runApp(
     MaterialApp(
-      supportedLocales: L10n.all,
       debugShowCheckedModeBanner: false,
       initialRoute: Dashboard.routeName,
       routes: {

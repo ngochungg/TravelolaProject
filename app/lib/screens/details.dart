@@ -11,131 +11,88 @@ class Details extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: Stack(
+      appBar: AppBar(
+        backgroundColor: Colors.pinkAccent,
+        elevation: 0,
+        automaticallyImplyLeading: false,
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: <Widget>[
-            Column(
-              children: <Widget>[
-                SizedBox(
-                  width: double.infinity,
-                  height: 300,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(30),
-                      bottomRight: Radius.circular(30),
-                    ),
-                    child: Image.asset(
-                      'images/${place.image}',
-                      height: 400,
-                      width: double.infinity,
-                      fit: BoxFit.fill,
-                    ),
-                  ),
-                ),
-                Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: Row(
-                      children: <Widget>[
-                        Icon(
-                          Icons.calendar_today,
-                          color: Colors.grey,
-                          size: 20,
-                        ),
-                        SizedBox(
-                          width: 5,
-                        ),
-                        Text('${place.days} days',
-                            style: TextStyle(color: Colors.grey))
-                      ],
-                    )),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RichText(
-                      text: TextSpan(
-                          children: [
-                            TextSpan(
-                                text: '${place.place} \n',
-                                style: TextStyle(
-                                    fontSize: 22,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black)),
-                            TextSpan(
-                                text:
-                                    'Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type')
-                          ],
-                          style: TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.w500,
-                              color: Colors.grey)),
-                    ),
-                  ),
-                ),
-                Align(
-                  alignment: Alignment.bottomCenter,
-                  child: Container(
-                    height: 80,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(30),
-                          topRight: Radius.circular(30)),
-                      color: Colors.pink[400],
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        Padding(
-                          padding: const EdgeInsets.only(left: 20),
-                          child: RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: 'Price\n',
-                                  style: TextStyle(fontSize: 18)),
-                              TextSpan(
-                                  text: '\$300',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      fontWeight: FontWeight.bold))
-                            ]),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.only(right: 20.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              borderRadius: BorderRadius.circular(10),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(8.0),
-                              child: Text(
-                                'Book a tour',
-                                style:
-                                    TextStyle(color: Colors.pink, fontSize: 18),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )
-              ],
+            BackButton(
+              color: Colors.white,
+              onPressed: () async {
+                Navigator.of(context).pop();
+              },
             ),
-            Positioned(
-              top: 20,
-              left: 10,
-              child: GestureDetector(
-                onTap: () {
-                  Navigator.pop(context);
-                },
-                child: Align(
-                  alignment: Alignment.topLeft,
-                  child: Icon(Icons.arrow_back_ios),
+            SizedBox(
+              width: 45,
+            ),
+          ],
+        ),
+      ),
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: <Widget>[
+              SizedBox(
+                width: double.infinity,
+                height: 300,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30),
+                  ),
+                  child: Image.network(
+                    "http://localhost:8080/api/auth/getImage/${place.image}",
+                    height: 400,
+                    width: double.infinity,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
-            )
-          ],
+              Padding(
+                  padding: const EdgeInsets.all(14.0),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(
+                        Icons.calendar_today,
+                        color: Colors.grey,
+                        size: 20,
+                      ),
+                      SizedBox(
+                        width: 5,
+                      ),
+                      Text('${place.days} days',
+                          style: TextStyle(color: Colors.grey))
+                    ],
+                  )),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Text(
+                      '${place.place}',
+                      style: TextStyle(
+                          fontSize: 22,
+                          fontWeight: FontWeight.w700,
+                          color: Colors.black),
+                    ),
+                  ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Row(
+                  children: [
+                    Flexible(
+                      child: Text("${place.content}",
+                          style: TextStyle(color: Colors.black)),
+                    )
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

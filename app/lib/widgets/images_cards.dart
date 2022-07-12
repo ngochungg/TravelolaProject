@@ -40,7 +40,8 @@ class _ImageCardsState extends State<ImageCards> {
         Place(
             place: '${data[i]['title']}',
             image: '${data[i]['imageUrl']}',
-            days: '${data[i]['createdAt']}'),
+            days: '${data[i]['createdAt']}',
+            content: '${data[i]['content']}'),
       // Place(place: 'alo', image: '1.jpeg', days: '7'),
     ];
 
