@@ -428,8 +428,6 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
              //filter hotel have room status = false
                 hotels = hotels.stream().filter(hotel -> hotel.getRooms().stream().anyMatch(room -> room.getRoomStatus() == false)).collect(Collectors.toList());
          }
-         
-
         //return list hotel after search
         return hotels;
     }
@@ -608,6 +606,25 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         String namePdf = user.getFirstName() + "_BookingUser_" + LocalDate.now() + ".pdf";
         System.out.println(namePdf);
         pdfGenerateService.generatePdfFile("userBookings", pdfMap, namePdf);
+        File file = new File(namePdf);
+        return namePdf;
+    }
+    //report booking
+    @GetMapping(value = "/reportBooking/{id}")
+    public String reportBooking(@PathVariable("id") Long id) throws IOException {
+        //list Booking by id
+        HotelBooking result = hotelBookingRepository.findById(id).get();
+        //find user by booking id
+        User user = userRepository.findById(result.getUser().getId()).get();
+        //find room by booking id
+        Room room = roomRepository.findById(result.getRoom().getId()).get();
+        Map<String, Object> pdfMap = new HashMap<>();
+        pdfMap.put("result", result);
+        pdfMap.put("user", user);
+        pdfMap.put("room", room);
+        String namePdf = user.getFirstName() + "_Booking_" + LocalDate.now() + ".pdf";
+        System.out.println(namePdf);
+        pdfGenerateService.generatePdfFile("Booking", pdfMap, namePdf);
         File file = new File(namePdf);
         return namePdf;
     }
