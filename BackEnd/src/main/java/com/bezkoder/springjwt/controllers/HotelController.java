@@ -509,7 +509,11 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         return hotelBookingRepository.findByRetired(false);
     }
 
-
+    //show all Booking
+    @GetMapping(value = "/showAllBooking")
+    public List<HotelBooking> showAllBooking(){
+        return hotelBookingRepository.findAll();
+    }
 
     //PDF report
     //report file pdf allRoom
