@@ -11,6 +11,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { BoardAdminComponent } from './board-admin/board-admin.component';
 import { BoardModeratorComponent } from './board-moderator/board-moderator.component';
 import { BoardUserComponent } from './board-user/board-user.component';
+import { SwiperModule } from 'swiper/angular';
 
 import { authInterceptorProviders } from './_helpers/auth.interceptor';
 import { FacebookLoginProvider, GoogleLoginProvider, SocialAuthServiceConfig, SocialLoginModule } from '@abacritt/angularx-social-login';
@@ -37,6 +38,11 @@ import { UserBookingHistoryComponent } from './user-booking-history/user-booking
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 import { AllroominhotelComponent } from './allroominhotel/allroominhotel.component';
 import { BookingComponent } from './booking/booking.component';
+import { SlideComponent } from './slide/slide.component';
+import { PostComponent } from './post/post.component';
+import { AddpostComponent } from './addpost/addpost.component';
+
+
 
 
 
@@ -73,19 +79,24 @@ import { BookingComponent } from './booking/booking.component';
     ForgotPasswordComponent,
     AllroominhotelComponent,
     BookingComponent,
+    SlideComponent,
+    PostComponent,
+    AddpostComponent,
 
 
- 
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
+    SwiperModule,
     HttpClientModule,
     SocialLoginModule,
     ReactiveFormsModule,
-   
-  
+
+
+
   ],
   providers:
   [[authInterceptorProviders],[

@@ -90,7 +90,7 @@ class _MyHomeState extends State<MyHome> {
     }
     var user = jsonDecode(retriveString);
 
-    print(isLoggedIn);
+    // print(isLoggedIn);
 
     return WillPopScope(
       onWillPop: () async {
@@ -231,10 +231,7 @@ class _MyHomeState extends State<MyHome> {
                       IconCard(
                           iconData: Icons.directions,
                           text: 'Adventures',
-                          press: () {
-                            Navigator.of(context).push(MaterialPageRoute(
-                                builder: (_) => makePayment()));
-                          }),
+                          press: () {}),
                     ],
                   ),
                   SizedBox(

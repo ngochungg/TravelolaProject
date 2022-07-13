@@ -35,8 +35,8 @@
          
                             <td *ngIf="user.status == true"  >
                                 
-                                <button  class="btn btn-success btn-in4" (click)="Look($event)" value=" {{user.account.id}}">Look</button>
-                                <button  class="btn btn-danger btn-in4" (click)="UnLook(user)">Unlook</button>
+                                <button *ngIf="user.account.status==true" class="btn btn-success btn-in4" (click)="Look($event)" value=" {{user.account.id}}">Look</button>
+                                <button *ngIf="user.account.status==false" class="btn btn-danger btn-in4" (click)="unLook($event)" value=" {{user.account.id}}">UnLook</button>
                             </td>
                             <td *ngIf="user.status == false" > 
                                 <button class="btn btn-danger btn-in4" (click)="no(user)">No Accepted</button>

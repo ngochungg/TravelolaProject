@@ -22,17 +22,26 @@
                     </thead>
                     <tbody>
                         <tr *ngIf="rooms">
-                            <td *ngIf="rooms.paymentAtTheHotel ==true"> <button (click)="change($event)" value="{{rooms.paymentAtTheHotel}}"  class=" fa fa-check y" ></button></td>
-                            <td  *ngIf="rooms.paymentAtTheHotel  == false">   <button (click)="change($event)" value="{{rooms.paymentAtTheHotel}}"  class=" fa fa-times n" ></button></td>
-                            <td *ngIf="rooms.wifi ==true"> <button (click)="change($event)" value="{{rooms.wifi}}"  class=" fa fa-check y" ></button></td>
-                            <td  *ngIf="rooms.wifi  == false">   <button (click)="change($event)" value="{{rooms.wifi}}" class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.paymentAtTheHotel ==true"> <button (click)="change($event)" value="paymentAtTheHotel"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.paymentAtTheHotel  == false">   <button (click)="change($event)" value="paymentAtTheHotel"  class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.wifi ==true"> <button (click)="change($event)" value="wifi"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.wifi  == false">   <button (click)="change($event)" value="wifi" class=" fa fa-times n" ></button></td>
                            
-                            <td >{{rooms.freeBreakfast}}</td>
-                            <td >{{rooms.freeParking}}</td>
-                            <td >{{rooms.petsAllowed}}</td>
-                            <td >{{rooms.hotTub}}</td>
-                            <td >{{rooms.swimmingPool}}</td>
-                            <td >{{rooms.gym}}</td>
+                            <td *ngIf="rooms.freeBreakfast ==true"> <button (click)="change($event)" value="freeBreakfast"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.freeBreakfast  == false">   <button (click)="change($event)" value="freeBreakfast"  class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.freeParking ==true"> <button (click)="change($event)" value="freeParking"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.freeParking  == false">   <button (click)="change($event)" value="freeParking" class=" fa fa-times n" ></button></td>
+                           
+                            <td *ngIf="rooms.petsAllowed ==true"> <button (click)="change($event)" value="petsAllowed"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.petsAllowed  == false">   <button (click)="change($event)" value="petsAllowed"  class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.hotTub ==true"> <button (click)="change($event)" value="hotTub"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.hotTub  == false">   <button (click)="change($event)" value="hotTub" class=" fa fa-times n" ></button></td>
+                           
+                            <td *ngIf="rooms.swimmingPool ==true"> <button (click)="change($event)" value="swimmingPool"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.swimmingPool  == false">   <button (click)="change($event)" value="swimmingPool"  class=" fa fa-times n" ></button></td>
+                            <td *ngIf="rooms.gym ==true"> <button (click)="change($event)" value="gym"  class=" fa fa-check y" ></button></td>
+                            <td  *ngIf="rooms.gym  == false">   <button (click)="change($event)" value="gym" class=" fa fa-times n" ></button></td>
+                           
                         </tr>
                     </tbody>
                 </table>

@@ -18,7 +18,10 @@
               </thead>
               <tbody>
                 <tr *ngFor="let item of rooms">
-                    <td><img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata" class="img-fluid img-rooms"></td>
+                    <td>
+                      <img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata" class="img-fluid img-rooms">
+                      
+                    </td>
                   <td>{{ item.id }}</td>
                   <td>{{item.roomName}}</td>
                   <td>{{ item.roomNumber }}</td>

@@ -2,7 +2,7 @@
 <div class="container " >
 <div class="row ">
     <div class="col-sm-3"></div>
-            <form  enctype="multipart/form-data" style="width: 200%;" class="">
+            <form  enctype="multipart/form-data" style="width: 200%;" class="" *ngIf="form==true">
             <div class="col-md-7 form" style="margin-top:50px ; margin-left: 20%;">
                 <h1>Add new rooms</h1>
                 <div class="nex">
@@ -52,6 +52,13 @@
                 </div>
             </div>
             </form>
+            <div *ngIf="display==true" class="success">
+
+                <div class="suc"><button class="fa fa-check icon"></button>
+                    Successfull</div>
+                <div style="margin-top: 10px;" title="click here to return
+                    homepage">Return <a href="/rooms"> Add Room</a></div>
+            </div>
         </div>
     </div>
 

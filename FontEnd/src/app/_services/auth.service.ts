@@ -102,7 +102,7 @@ export class AuthService {
     return this.http.post(AUTH_API + 'unlockUser/' + id, {
     }, httpOptions);
   }
-  service(paymentAtTheHotel: string, wifi: string,freeBreakfast: string,freeParking: string,petsAllowed: string,hotTub: string,swimmingPool: string,gym:string): Observable<any> {
+  service(paymentAtTheHotel: boolean, wifi: boolean,freeBreakfast: boolean,freeParking: boolean,petsAllowed: boolean,hotTub: boolean,swimmingPool: boolean,gym:boolean): Observable<any> {
     this.currentUser = this.token.getUser();
     return this.http.post('http://localhost:8080/api/hotel/addServices/'+this.currentUser.id , {
       paymentAtTheHotel,
@@ -113,7 +113,7 @@ export class AuthService {
       hotTub,
       swimmingPool,
       gym
-    },httpOptions);
+    },{responseType: 'text'});
   }
   confirmHotel(id: string): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/confirmHotel/' + id,{});
@@ -126,4 +126,16 @@ export class AuthService {
     return this.http.get('http://localhost:8080/api/auth/getBooking/' + id, {
     });
   }
+  postAll(): Observable<any> {
+    return this.http.get('http://localhost:8080/api/posts/all');
+  } 
+  getPost(id: string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/posts/' + id, {
+    });
+  }
+  like(id: string): Observable<any> {
+    return this.http.put('http://localhost:8080/api/posts/like/' + id, {
+    });
+  }
+  
 }

@@ -53,7 +53,12 @@ export class AllUserComponent implements OnInit {
         this._user = [...this.user];
       },
       error: (err) => {
-        throw Error('Error');
+        
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+      
       },
     });
   }

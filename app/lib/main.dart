@@ -3,6 +3,7 @@ import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Hotel/room_details.dart';
 import 'package:app/screens/Post/hotel_post.dart';
+import 'package:app/screens/Post/post_detail.dart';
 import 'package:app/screens/booking_history.dart';
 import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/screens/changePassword.dart';
@@ -56,6 +57,7 @@ Future main() async {
         SearchMater.routeName: (context) => const SearchMater(),
         FeedbackHistory.routeName: (context) => FeedbackHistory(),
         HotelPost.routeName: (context) => HotelPost(),
+        PostDetails.routeName: (context) => PostDetails(),
       },
     ),
   );
