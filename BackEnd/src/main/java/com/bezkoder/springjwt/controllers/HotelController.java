@@ -515,6 +515,22 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         return hotelBookingRepository.findAll();
     }
 
+    //show hotel booking by hotel id
+    @GetMapping(value = "/showHotelBookingByHotelId/{id}")
+    public List<HotelBooking> showHotelBookingByHotelId(@PathVariable("id") Long id){
+        //get hotel by id
+        Hotel hotel = hotelRepository.findById(id).get();
+        //get list room of hotel
+        List<Room> rooms = roomRepository.findByHotelId(id);
+        //get list hotel booking by room id
+        List<HotelBooking> hotelBookings = new ArrayList<>();
+        for (Room room : rooms) {
+            List<HotelBooking> hotelBookings1 = hotelBookingRepository.findByRoomId(room.getId());
+            hotelBookings.addAll(hotelBookings1);
+        }
+        return hotelBookings;
+    }
+
     //PDF report
     //report file pdf allRoom
     @GetMapping(value = "/reportallRoom/{id}")
