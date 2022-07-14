@@ -4,6 +4,8 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-room-hotel-id',
   templateUrl: './room-hotel-id.component.html',
@@ -11,7 +13,7 @@ import { UserService } from '../_services/user.service';
 })
 export class RoomHotelIDComponent implements OnInit {
 
-  constructor(private authService: AuthService, private http: HttpClient, private token: TokenStorageService, private userService: UserService) { }
+  constructor(private router: Router,private authService: AuthService, private http: HttpClient, private token: TokenStorageService, private userService: UserService) { }
   roomHotel: any;
   rooms: any;
   errorMessage = '';
@@ -43,9 +45,14 @@ export class RoomHotelIDComponent implements OnInit {
         // console.log('id', this.roomHotel.id);
 
       },
-      error: err => {
-        this.errorMessage = err.error.message;
-      }
+      error: (err) => {
+        
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+      
+      },
     });
 
 
@@ -53,6 +60,15 @@ export class RoomHotelIDComponent implements OnInit {
 
 
   }
+  rp:any;
+  rpAllRoom(){
+    console.log('id',this.id)
+    this.http.get('http://localhost:8080/api/hotel/reportallRoom/'+this.id).subscribe({ next: data => { this.rp = data; console.log('rp', this.rp); } });
+    
 
+  }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
 }

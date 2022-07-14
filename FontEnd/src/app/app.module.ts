@@ -41,6 +41,8 @@ import { BookingComponent } from './booking/booking.component';
 import { SlideComponent } from './slide/slide.component';
 import { PostComponent } from './post/post.component';
 import { AddpostComponent } from './addpost/addpost.component';
+import { GuestBookingComponent } from './guest-booking/guest-booking.component';
+import { GuestedComponent } from './guested/guested.component';
 
 
 
@@ -82,6 +84,8 @@ import { AddpostComponent } from './addpost/addpost.component';
     SlideComponent,
     PostComponent,
     AddpostComponent,
+    GuestBookingComponent,
+    GuestedComponent,
 
 
 

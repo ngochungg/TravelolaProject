@@ -16994,5 +16994,7 @@ table tr th{
   color: #CC333F;
   transition: .3s, -webkit-mask-size .3s .3s;
 }
-
+input[type="checkbox"]{
+  display: block;
+}
 /*# sourceMappingURL=style-freedom.css.map */

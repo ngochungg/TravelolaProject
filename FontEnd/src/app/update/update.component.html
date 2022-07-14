@@ -1,4 +1,19 @@
-<div class="container formm">
+<div class="container choose-event" *ngIf="chooseEvent==true">
+  <div class="row row-chose" >
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col6-choose">
+      <div class="choose-change">
+        <button class="btn-change  hover-4" (click)="information()" title="click here to update information">Update Information</button>
+        <button class="btn-change hover-4" (click)="avatar()"  title="click here to change avata">Change Avatar</button>
+        <button class="btn-change hover-4" (click)="password()"  title="click here to change password">Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- information -->
+<div class="container formm" *ngIf="updateInformation==true">
 
 
   <h3 style="text-align:center ;">Update information</h3>
@@ -79,4 +94,33 @@
   </form>
   <hr>
 </div>
+
+<!-- avatar -->
+<div class="container" *ngIf="updateAvatar==true">
+  <div class="row" style="background-color:none">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-5 col5" >
+          <form enctype="multipart/form-data"  class="form">
+
+              <input type="file" (change)="onFileSelected($event)" class="form-img"><br>
+              <!-- <img [src]="'http://localhost:8080/api/auth/uploadImage/'+this.img" alt=""> -->
+             
+          <button type="button" style="margin-top: 5%; margin-left: -50%" (click)="onUpload()">Upload</button>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- change password -->
+<div class="row " >
+  <div class="col-sm-4"> </div>
+  <div class="col-sm-4 row-pass">
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate enctype="multipart/form-data" class="form-pass" *ngIf="changePassword==true">
+      <input type="text"  [(ngModel)]="pass.oldpass" [ngModelOptions]="{standalone: true}"  class="form-img" placeholder="old password">
+      <input type="text" [(ngModel)]="pass.newpass" [ngModelOptions]="{standalone: true}" class="form-img" placeholder="new password"><br>
+      <input type="submit" (click)="changPassword()" value="Change Password" class="btn btn-danger btn-change" style="width:30%;margin-top: 40px;">
+    </form>
+  </div>
+</div>
+
 <app-footer></app-footer>

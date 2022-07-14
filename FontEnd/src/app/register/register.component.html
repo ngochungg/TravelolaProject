@@ -74,15 +74,15 @@
                         <!-- phone -->
                         <div class="form-group">
                             <label for="phone">Phone</label>
-                            <input type="text" class="form-control" name="phone" [(ngModel)]="form.phone" required
+                            <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required
                                 minlength="8" maxlength="20" #phone="ngModel" />
                             <div class="div-errors" *ngIf="phone.errors && f.submitted">
                                 <div *ngIf="phone.errors['required']">*Phone is required</div>
                                 <div *ngIf="phone.errors['minlength']">
-                                    *Phone must be at least 8 characters
+                                    *Phone must be at least 9 number
                                 </div>
                                 <div *ngIf="phone.errors['maxlength']">
-                                    *Phone must be at most 20 characters
+                                    *Phone must be at most 11 number
                                 </div>
                             </div>
                         </div>

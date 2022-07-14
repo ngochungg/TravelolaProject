@@ -70,11 +70,8 @@ public class AuthController {
 
     @Autowired
     private HotelRepository hotelRepository;
-    
 
-
-
-    //login
+    // login
     @PostMapping("/signin")
     public ResponseEntity<?> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 
@@ -88,7 +85,7 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        if(userDetails.getIsActive() == false) {
+        if (userDetails.getIsActive() == false) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username disabled!"));
@@ -105,7 +102,8 @@ public class AuthController {
                 userDetails.getIsActive(),
                 roles));
     }
-    //Register
+
+    // Register
     @PostMapping("/signup")
     public ResponseEntity<?> registerUser(@Valid @RequestBody SignupRequest signUpRequest) {
         if (userRepository.existsByUsername(signUpRequest.getUsername())) {
@@ -125,7 +123,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 encoder.encode(signUpRequest.getPassword()),
                 signUpRequest.getFirstName(), signUpRequest.getLastName(),
-                signUpRequest.getPhone(), signUpRequest.getImageUrl(),signUpRequest.isActive());
+                signUpRequest.getPhone(), signUpRequest.getImageUrl(), signUpRequest.isActive());
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -162,16 +160,19 @@ public class AuthController {
 
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
-    //upload image
+
+    // upload image
     @PostMapping("/uploadImage/{id}")
     public ResponseEntity<?> uploadFile(@RequestParam("file") MultipartFile file, @PathVariable Long id) {
-            String generatedFileName = storageService.storeFile(file);
-            User updateImage = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
-            updateImage.setImageUrl(generatedFileName);
-            userRepository.save(updateImage);
-            return ResponseEntity.ok(new MessageResponse("User updated image successfully!"));
+        String generatedFileName = storageService.storeFile(file);
+        User updateImage = userRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Error: User not found."));
+        updateImage.setImageUrl(generatedFileName);
+        userRepository.save(updateImage);
+        return ResponseEntity.ok(new MessageResponse("User updated image successfully!"));
     }
-    //get image's url
+
+    // get image's url
     @GetMapping("/getImage/{fileName:.+}")
     public ResponseEntity<byte[]> readDetailFile(@PathVariable String fileName) {
         try {
@@ -180,11 +181,12 @@ public class AuthController {
                     .ok()
                     .contentType(MediaType.IMAGE_JPEG)
                     .body(bytes);
-        }catch (Exception exception) {
+        } catch (Exception exception) {
             return ResponseEntity.noContent().build();
         }
     }
-    //Change password
+
+    // Change password
     @PostMapping("/updatePassword/{id}")
     public ResponseEntity<?> updatePassword(@RequestBody PasswordRequest passwordRequest, @PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
@@ -195,7 +197,8 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("Password updated successfully!"));
     }
-    //update user
+
+    // update user
     @PostMapping("/updateUser/{id}")
     public ResponseEntity<?> updateUser(@RequestBody UpdateRequest UpdateRequest, @PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
@@ -211,7 +214,8 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User updated successfully!"));
     }
-    //lock user
+
+    // lock user
     @PostMapping("/lockUser/{id}")
     public ResponseEntity<?> lockUser(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
@@ -219,7 +223,8 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User locked successfully!"));
     }
-    //unlock user
+
+    // unlock user
     @PostMapping("/unlockUser/{id}")
     public ResponseEntity<?> unlockUser(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
@@ -227,21 +232,24 @@ public class AuthController {
         userRepository.save(user);
         return ResponseEntity.ok(new MessageResponse("User unlocked successfully!"));
     }
-    //delete user
+
+    // delete user
     @DeleteMapping("/deleteUser/{id}")
     public ResponseEntity<?> deleteUser(@PathVariable Long id) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("Error: User not found."));
         userRepository.delete(user);
         return ResponseEntity.ok(new MessageResponse("User deleted successfully!"));
     }
-    //get all user
+
+    // get all user
     @GetMapping("/getAllUser")
     @PreAuthorize("hasRole('ADMIN')")
     public ResponseEntity<?> getAllUser() {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
-    //Forgot password
+
+    // Forgot password
     @PostMapping("/forgotPassword/{email}")
     public ResponseEntity<?> forgotPassword(@PathVariable String email) {
         User user = userRepository.findByEmail(email);
@@ -253,18 +261,19 @@ public class AuthController {
         userRepository.save(user);
         Map<String, Object> emailMap = new HashMap<>();
         emailMap.put("newPassword", newPassword);
-        emailMap.put("name", user.getFirstName()+" "+user.getLastName());
+        emailMap.put("name", user.getFirstName() + " " + user.getLastName());
         String templateHtml = emailSenderService.templateResolve("NewPassword", emailMap);
         emailSenderService.sendTemplateMessage(email, null, "New Password", templateHtml);
 
         return ResponseEntity.ok(new MessageResponse("New password sent to your email!"));
     }
-    //login facebook
+
+    // login facebook
     @PostMapping("/loginFacebook")
-    public ResponseEntity<?> loginFacebook( @RequestBody LoginSocialRequest loginSocialRequest) {
+    public ResponseEntity<?> loginFacebook(@RequestBody LoginSocialRequest loginSocialRequest) {
         User user = userRepository.findByEmail(loginSocialRequest.getEmail());
         if (user == null) {
-            //create new user
+            // create new user
             user = new User();
             user.setEmail(loginSocialRequest.getEmail());
             user.setFirstName(loginSocialRequest.getFirstName());
@@ -272,7 +281,7 @@ public class AuthController {
             user.setPassword(encoder.encode(loginSocialRequest.getId()));
             user.setImageUrl(loginSocialRequest.getPhotoUrl());
             user.setStatus(true);
-            user.setUsername("Facebook"+ loginSocialRequest.getId());
+            user.setUsername("Facebook" + loginSocialRequest.getId());
             user.setPhone("Null");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -280,9 +289,9 @@ public class AuthController {
             userRepository.save(user);
         }
         String Username = user.getUsername();
-        //cut 8 characters first of username
+        // cut 8 characters first of username
         String Password = Username.substring(8);
-        //login
+        // login
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(Username, Password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -291,7 +300,7 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        if(userDetails.getIsActive() == false) {
+        if (userDetails.getIsActive() == false) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username disabled!"));
@@ -308,12 +317,12 @@ public class AuthController {
                 roles));
     }
 
-    //login google
+    // login google
     @PostMapping("/loginGoogle")
-    public ResponseEntity<?> loginGoogle( @RequestBody LoginSocialRequest loginSocialRequest) {
-    User user = userRepository.findByEmail(loginSocialRequest.getEmail());
+    public ResponseEntity<?> loginGoogle(@RequestBody LoginSocialRequest loginSocialRequest) {
+        User user = userRepository.findByEmail(loginSocialRequest.getEmail());
         if (user == null) {
-            //create new user
+            // create new user
             user = new User();
             user.setEmail(loginSocialRequest.getEmail());
             user.setFirstName(loginSocialRequest.getFirstName());
@@ -321,7 +330,7 @@ public class AuthController {
             user.setPassword(encoder.encode(loginSocialRequest.getId()));
             user.setImageUrl(loginSocialRequest.getPhotoUrl());
             user.setStatus(true);
-            user.setUsername("Google"+ loginSocialRequest.getId());
+            user.setUsername("Google" + loginSocialRequest.getId());
             user.setPhone("Null");
             Role userRole = roleRepository.findByName(ERole.ROLE_USER)
                     .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
@@ -329,9 +338,9 @@ public class AuthController {
             userRepository.save(user);
         }
         String Username = user.getUsername();
-        //cut 8 characters first of username
+        // cut 8 characters first of username
         String Password = Username.substring(6);
-        //login
+        // login
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(Username, Password));
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -340,7 +349,7 @@ public class AuthController {
         List<String> roles = userDetails.getAuthorities().stream()
                 .map(item -> item.getAuthority())
                 .collect(Collectors.toList());
-        if(userDetails.getIsActive() == false) {
+        if (userDetails.getIsActive() == false) {
             return ResponseEntity
                     .badRequest()
                     .body(new MessageResponse("Error: Username disabled!"));
@@ -356,7 +365,7 @@ public class AuthController {
                 userDetails.getIsActive(),
                 roles));
     }
-    //view profile by id
+    // view profile by id
 
     @GetMapping("/viewProfile/{id}")
     public ResponseEntity<?> viewProfile(@PathVariable Long id) {
@@ -369,7 +378,8 @@ public class AuthController {
         List<User> users = userRepository.findAll();
         return ResponseEntity.ok(users);
     }
-    //get booking by user id
+
+    // get booking by user id
     @GetMapping("/getBooking/{id}")
     public ResponseEntity<?> getBooking(@PathVariable Long id) {
         List<HotelBooking> bookings = hotelBookingRepository.findByUserId(id);
@@ -382,57 +392,61 @@ public class AuthController {
         List<Ward> wards = wardRepository.findByDistrictId(id);
         return ResponseEntity.ok(wards);
     }
+
     // get all district by Province id
     @GetMapping("/getAllDistrict/{id}")
     public ResponseEntity<?> getAllDistrict(@PathVariable Long id) {
         List<District> districts = districtRepository.findByProvinceId(id);
         return ResponseEntity.ok(districts);
     }
+
     // get all province
     @GetMapping("/getAllProvince")
     public ResponseEntity<?> getAllProvince() {
         List<Province> provinces = provinceRepository.findAll();
         return ResponseEntity.ok(provinces);
     }
-    //feedback by booking
+
+    // feedback by booking
     @PostMapping("/feedback")
     public ResponseEntity<?> feedback(@RequestBody FeedbackRequest feedbackRequest) {
-            HotelBooking hotelBooking = hotelBookingRepository.findById(feedbackRequest.getHotel_booking_id()).get();
-            Hotel hotel = hotelRepository.findById(hotelBooking.getRoom().getHotel().getId()).get();
-            if(hotelBooking.isStatus() == false) {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: Booking is not confirmed!"));
+        HotelBooking hotelBooking = hotelBookingRepository.findById(feedbackRequest.getHotel_booking_id()).get();
+        Hotel hotel = hotelRepository.findById(hotelBooking.getRoom().getHotel().getId()).get();
+        if (hotelBooking.isStatus() == false) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: Booking is not confirmed!"));
+        }
+        // check user check out date
+        if (hotelBooking.getCheckOutDate().before(new Date())) {
+            return ResponseEntity
+                    .badRequest()
+                    .body(new MessageResponse("Error: User check out date is before today!"));
+        }
+        HotelFeedBack hotelFeedBack = new HotelFeedBack();
+        hotelFeedBack.setFeedback(feedbackRequest.getFeedback());
+        hotelFeedBack.setRating(feedbackRequest.getRating());
+        hotelFeedBack.setHotel(hotelBooking.getRoom().getHotel());
+        hotelFeedBack.setUser(hotelBooking.getUser());
+        hotelFeedBack.setRetired(true);
+        hotelFeedBackRepository.save(hotelFeedBack);
+        // rating hotel
+        // calculate rating
+        double rating = 0;
+        // get list rating hotel
+        List<HotelFeedBack> hotelFeedBacks = hotelFeedBackRepository.findByHotelId(hotel.getId());
+        if (hotelFeedBacks.size() > 0) {
+            for (HotelFeedBack hotelFeedBack1 : hotelFeedBacks) {
+                rating += hotelFeedBack1.getRating();
             }
-            //check user check out date
-            if(hotelBooking.getCheckOutDate().before(new Date())) {
-                return ResponseEntity
-                        .badRequest()
-                        .body(new MessageResponse("Error: User check out date is before today!"));
-            }
-            HotelFeedBack hotelFeedBack = new HotelFeedBack();
-            hotelFeedBack.setFeedback(feedbackRequest.getFeedback());
-            hotelFeedBack.setRating(feedbackRequest.getRating());
-            hotelFeedBack.setHotel(hotelBooking.getRoom().getHotel());
-            hotelFeedBack.setUser(hotelBooking.getUser());
-            hotelFeedBack.setRetired(true);
-            hotelFeedBackRepository.save(hotelFeedBack);
-            //rating hotel
-            //calculate rating
-            double rating = 0;
-            //get list rating hotel
-            List<HotelFeedBack> hotelFeedBacks = hotelFeedBackRepository.findByHotelId(hotel.getId());
-            if (hotelFeedBacks.size() > 0) {
-                for (HotelFeedBack hotelFeedBack1 : hotelFeedBacks) {
-                    rating += hotelFeedBack1.getRating();
-                }
-                rating = rating / hotelFeedBacks.size();
-            }
-            hotel.setHotelRating((float) rating);
-            hotelRepository.save(hotel);
-            return ResponseEntity.ok(new MessageResponse("Feedback success!"));
+            rating = rating / hotelFeedBacks.size();
+        }
+        hotel.setHotelRating((float) rating);
+        hotelRepository.save(hotel);
+        return ResponseEntity.ok(new MessageResponse("Feedback success!"));
     }
-    //show feedback of user
+
+    // show feedback of user
     @GetMapping("/showFeedback/{id}")
     public ResponseEntity<?> showFeedback(@PathVariable Long id) {
         List<HotelFeedBack> hotelFeedBacks = hotelFeedBackRepository.findByUserId(id);

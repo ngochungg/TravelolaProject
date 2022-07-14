@@ -37,7 +37,7 @@ export class UserService {
     return this.http.get('http://localhost:8080/api/hotel/getAllHotel');
   }
   allRooms(id : string): Observable<any> {
-    // return this.http.get('http://localhost:8080/api/hotel/getRoom/16');
+
     return this.http.get('http://localhost:8080/api/hotel/getRoom/' +id);
   }
   getAllRoom(): Observable<any> {
@@ -63,7 +63,19 @@ export class UserService {
     },httpOptions);
   }
 
+  showHotelBookingByHotelId(id :string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/hotel/showHotelBookingByHotelId/'+id );
+  }
 
+  confirmBooking(id: string): Observable<any> {
+    return this.http.post('http://localhost:8080/api/hotel/confirmedHotelBooking/' + id,{});
+  }
 
- 
+  refuseBooking(id: string): Observable<any> {
+    return this.http.post('http://localhost:8080/api/hotel/refuseHotelBooking/' + id,{});
+  }
+  getAllBookingRetiredTrue(): Observable<any> {
+    return this.http.get('http://localhost:8080/api/hotel/getAllBookingRetiredTrue');
+  }
+
 }

@@ -29,6 +29,7 @@ export class HotelsComponent implements OnInit {
   searchKeyword: string | null = '';
   Obj! :any;
   oj:any;
+ 
   ngOnInit(): void {
     // this.Obj = JSON.parse(this.route.snapshot.paramMap.get('my_object'));
      this.Obj = this.route.snapshot.paramMap.get('name');
@@ -57,6 +58,7 @@ export class HotelsComponent implements OnInit {
       }
       
     });
+   
   }
 
   public checkInDate ='';
@@ -71,5 +73,14 @@ export class HotelsComponent implements OnInit {
     const e =event.target.value;
     this.router.navigate(['/allRoom', {hotel: JSON.stringify(e)}]);
 
+  }
+  rooms:any;
+  search(event:any):void{
+    const e =event.target.value;
+    
+
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    this.http.post('http://localhost:8080/api/hotel/searchHotel/',{"hotelName":this.hotelRooms[e]},{headers: headers, responseType: 'text'}).subscribe({ next: (data) => {console.log(data)}  , error: (err) => { console.log('err', err); } });
   }
 }

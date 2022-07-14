@@ -81,10 +81,10 @@
           <p class="counter" *ngIf="room">{{room.length}}</p>
           <h4>Room</h4>
         </div>
-        <div class="col-lg-3 col-6 stats_info counter_grid2 mt-lg-0 mt-5">
+        <!-- <div class="col-lg-3 col-6 stats_info counter_grid2 mt-lg-0 mt-5">
           <p class="counter" *ngIf="user">{{user.length}}</p>
           <h4>Customer</h4>
-        </div>
+        </div> -->
       </div>
     </div>
   </section>
@@ -190,7 +190,7 @@
           {{item.user.username}}</div>
         <div class="title">{{item.title}}...</div>
         <img src='http://localhost:8080/api/auth/getImage/{{item.imageUrl}}'
-          alt="img" class="img-post">
+          alt="img" class="img-post"> 
 
       </form>
       <!-- <div><button class="fa fa-thumbs-up like" aria-hidden="true"

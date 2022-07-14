@@ -1,7 +1,7 @@
 
 <div class="container-fluid">
     <app-slide></app-slide>
-    <div class="container">
+    <div class="container" >
         <div class="row">
             <div class="col-md-12">
                 <div
@@ -88,7 +88,7 @@
             <div class="col-sm-8 col8" style="margin-left:2%">
                 <div class="search">
                     <input class="form-control search" type="text"
-                        placeholder="Search Rooms" name="username">
+                        placeholder="Search Rooms" (keyup)="search($event)">
                 </div>
                 <label class="lable" *ngFor="let item of room">
                     <div >
@@ -134,5 +134,7 @@
 
         </div>
     </div>
+
+   
 </div>
 <app-footer></app-footer>

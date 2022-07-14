@@ -34,7 +34,7 @@
 
 
         <!-- form in4 -->
-        <div *ngIf="displayForm==true" id="form">
+        <div *ngIf="displayForm==true && isLogin==true" id="form">
             <form name="form" (ngSubmit)="f.form.valid && bookingRoom($event)"
                 #f="ngForm"
                 novalidate>
@@ -106,6 +106,10 @@
                 </div>
                 
             </form>
+        </div>
+        <div *ngIf="isLogin ==false" class="loginFalse"> 
+            <div>You need to login before booking</div>
+            <div>--> Return for <a href="/login"> Login </a></div>
         </div>
         <div *ngIf="loader ==true" class="formloader">
             <p>Please wait a few seconds, your request is being processed</p>

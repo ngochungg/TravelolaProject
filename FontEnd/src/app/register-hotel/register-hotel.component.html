@@ -39,126 +39,132 @@
                             
                             <div class="col-md-6 text-right required">
                                 <div *ngIf="!hotelName " >*</div>
-                                <div *ngIf="hotelName.length < 3 && hotelName.length >1">*At least 3 characters</div>
-                                <div *ngIf="hotelName.length >=20"> *Max 20 characters </div>
+                                <div *ngIf="hotelName.length < 3 && hotelName.length >0">*At least 3 characters</div>
+                                <div *ngIf="hotelName.length >=40"> *Max 40 characters </div>
                             </div>
-                            <input type="text" class="form-control" name="hotelName"  [(ngModel)]="hotelName" [ngModelOptions]="{standalone: true}" required minlength="3" maxlength="20"  />
-                            <!-- <div class="div-errors" *ngIf="hotelName.errors &&
-                                f.submitted">
-                              
-                                <div *ngIf="hotelName.errors['minlength']">
-                                    *HotelName must be at least 3 characters
-                                </div>
-                                <div *ngIf="hotelName.errors['maxlength']">
-                                    *HotelName must be at most 20 characters
-                                </div>
-                            </div> -->
-                           
+                            <input type="text" class="form-control" name="hotelName"   [(ngModel)]="hotelName" [ngModelOptions]="{standalone: true}" required minlength="3" maxlength="40"  />
                         </div>
 
                         <!-- username -->
-                        <div class="form-group">
-                            <label for="username">UserName</label>
-
-                            <input type="text" class="form-control" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required minlength="3" maxlength="20"  />
-                            <!-- <div class="div-errors" *ngIf="username.errors &&
-                                f.submitted">
-                                <div *ngIf="username.errors['required']">*UserName is required</div>
-                                <div *ngIf="username.errors['minlength']">
-                                    *UserName must be at least 3 characters
-                                </div>
-                                <div *ngIf="username.errors['maxlength']">
-                                    *UserName must be at most 20 characters
-                                </div>
-                            </div> -->
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                                <label for="username">UserName</label>
+                            </div>
+                            
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!username " >*</div>
+                                <div *ngIf="username.length < 3 && username.length >0">*At least 3 characters</div>
+                                <div *ngIf="username.length >=40"> *Max 40 characters </div>
+                            </div>
+                           
+                           
+                            
+                            <input type="text" class="form-control" name="username" [(ngModel)]="username" [ngModelOptions]="{standalone: true}" required minlength="3" maxlength="40"  />
                         </div>
                         <!-- password -->
-                        <div class="form-group">
-                            <label for="password">Password</label>
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                               <label for="password">Password</label> 
+                            </div>
+                            
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!password " >*</div>
+                                <div *ngIf="password.length < 3 && password.length >0">*Password At least 3 characters</div>
+                                <div *ngIf="password.length >=20"> * Password Max 20 characters </div>
+                            </div>
                             <input type="password" class="form-control" name="password" [(ngModel)]="password" [ngModelOptions]="{standalone: true}" required minlength="8"  />
-                            <!-- <div class="div-errors" *ngIf="password.errors &&
-                                f.submitted">
-                                <div *ngIf="password.errors['required']">*Password is required</div>
-                                <div *ngIf="password.errors['minlength']">
-                                    *Password must be at least 8 characters
-                                </div>
-                            </div> -->
+              
+                            
                         </div>
+                        
+                            
+                           
+                       
                         <!-- email -->
-                        <div class="form-group">
-                            <label for="email">Email</label>
-                            <input type="email" class="form-control" name="email" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required   />
-                            <!-- <div class="div-errors" *ngIf="email.errors &&
-                                                        f.submitted">
-                                <div *ngIf="email.errors['required']">*Email is required
-                                </div>
-                                <div *ngIf="email.errors['email']">
-                                    *Email must be a valid email address
-                                </div>
-                            </div> -->
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                               <label for="email">Email</label>
+                            </div>
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!email " >*</div>
+                                <div *ngIf="email.length < 8 && email.length >0">* At least 3 characters</div>
+                             
+                            </div>
+
+                            <input type="email" class="form-control" name="email" email [(ngModel)]="email" [ngModelOptions]="{standalone: true}" required   />
                         </div>
+                     
                         <!-- phone -->
-                        <div class="form-group">
-                            <label for="phone">Phone</label>
-                            <input type="text" class="form-control" name="phone" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" required minlength="8" maxlength="20" />
-                            <!-- <div class="div-errors" *ngIf="phone.errors &&
-                                f.submitted">
-                                <div *ngIf="phone.errors['required']">*Phone is required
-                                </div>
-                                <div *ngIf="phone.errors['minlength']">
-                                    *Phone must be at least 8 characters
-                                </div>
-                                <div *ngIf="phone.errors['maxlength']">
-                                    *Phone must be at most 20 characters
-                                </div>
-                            </div> -->
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                               <label for="phone">Phone</label>
+                            </div>
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!phone " >*</div>
+                                <div *ngIf="phone.length < 8 && phone.length >0">*Phone at least 8 characters</div>
+                                <div *ngIf="phone.length >=12"> * Phone max 12 characters </div>
+                            </div>
+                            <input type="number" class="form-control" name="phone" [(ngModel)]="phone" [ngModelOptions]="{standalone: true}" required minlength="8" maxlength="12" />
                         </div>
+                        
                         <!-- contactName -->
-                        <div class="form-group">
-                            <label for="contactName">ContactName</label>
-                            <input type="text" class="form-control" name="contactName" [(ngModel)]="contactName" [ngModelOptions]="{standalone: true}" required  />
-                            <!-- <div class="div-errors" *ngIf="contactName.errors &&
-                                f.submitted">
-                                <div *ngIf="contactName.errors['required']">*ContactName is required</div>
-                                <div *ngIf="contactName.errors['minlength']">
-                                    *ContactName must be at least 3 characters
-                                </div>
-                                <div *ngIf="contactName.errors['maxlength']">
-                                    *ContactName must be at most 20 characters
-                                </div>
-                            </div> -->
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                              <label for="contactName">ContactName</label>
+                            </div>
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!contactName " >*</div>
+                                <div *ngIf="contactName.length < 2 && contactName.length >0">*Contact Name at least 2 characters</div>
+                                <div *ngIf="contactName.length >=40"> * Contact Name max 40 characters </div>
+                            </div>
+                            <input type="text" class="form-control" name="contactName" [(ngModel)]="contactName" [ngModelOptions]="{standalone: true}" required minlength="2" maxlength="40"  />
                         </div>
+                       
 
                         <!-- description -->
-                        <div class="form-group">
-                            <label for="description">Description</label>
-                            <input type="text" class="form-control" name="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" required  />
-                            <!-- <div class="div-errors" *ngIf="decription.errors &&
-                                f.submitted">
-                                <div *ngIf="decription.errors['required']">*Description is required</div>
-                                <div *ngIf="decription.errors['minlength']">
-                                    *Description must be at least 3 characters
-                                </div>
-                                <div *ngIf="decription.errors['maxlength']">
-                                    *Description must be at most 20 characters
-                                </div>
-                            </div> -->
-                        </div>
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                             <label for="description">Description</label>
+                            </div>
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!description " >*</div>
+                                <div *ngIf="description.length < 2 && description.length >0">*Description at least 2 characters</div>
+                                <div *ngIf="description.length >=40"> * Description max 40 characters </div>
+                            </div>
+                            <input type="text" class="form-control" name="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" required   minlength="2" maxlength="40" />
+                            </div>
+                       
 
                         <!-- province -->
-                        <div class="form-group">
-                            <label for="Province">Province</label>
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                              <label for="Province">Province</label>
+                            </div>
+                            <div class="col-md-6 text-right required">
+                            <div *ngIf="!province " >*</div>
+                            </div>
                             <select name="province" id="Province" (change)="changeDistrict($event)" [(ngModel)]="province" [ngModelOptions]="{standalone: true}" class="form-control" required>
                                     <option value="">--Province--</option>
                                     <option *ngFor="let pro of provin"  value={{pro.id}}  >
                                         {{ pro.name }}
                                     </option>
                                 </select>
-                        </div>
+                       </div>   
 
                         <!-- district -->
-                        <div class="form-group">
-                            <label for="district">District</label>
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                              <label for="district">District</label>
+                            </div>
+                            <div class="col-md-6 text-right required">
+                            <div *ngIf="!district " >*</div>
+                            </div>
                             <select name="district" id="Districts" class="form-control" (change)="changeWard($event)" [(ngModel)]="district" [ngModelOptions]="{standalone: true}" required>
                                 <option value="">--District--</option>
                                 <option *ngFor="let d of dis" value="{{d.id}}" >
@@ -174,9 +180,14 @@
                         </div>
 
                         <!-- ward -->
-                        <div class="form-group">
-                            <label for="ward">Ward</label>
-
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                               <label for="ward">Ward</label>
+                            </div>
+                            <div class="col-md-6 text-right required">
+                           
+                            <div *ngIf="!ward " >*</div>
+                            </div>
                             <select name="ward" id="Ward" class="form-control" required [(ngModel)]="ward" [ngModelOptions]="{standalone: true}">
                                 <option value="">--Ward--</option>
                                 <option *ngFor="let c of d" value="{{c.id}}" >
@@ -191,24 +202,27 @@
 
                         </div>
                         <!-- street -->
-                        <div class="form-group">
-                            <label for="ward">Street</label>
-                            <input type="text" class="form-control" name="street" [(ngModel)]="street" [ngModelOptions]="{standalone: true}" required />
-                            <!-- <div class="div-errors" *ngIf="street.errors &&
-                                f.submitted">
-                                <div *ngIf="street.errors['required']">*Street is required</div>
-                                <div *ngIf="street.errors['minlength']">
-                                    *street must be at least 3 characters
-                                </div>
-                                <div *ngIf="street.errors['maxlength']">
-                                    *street must be at most 20 characters
-                                </div>
-                            </div> -->
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                               <label for="ward">Street</label>
+                            </div>
+                            
+                            <div class="col-md-6 text-right required">
+                                <div *ngIf="!street " >*</div>
+                                <div *ngIf="street.length < 2 && street.length >0">*Street at least 2 characters</div>
+                                <div *ngIf="street.length >=40"> * Street max 40 characters </div>
+                            </div>
+                            <input type="text" class="form-control" name="street" [(ngModel)]="street" [ngModelOptions]="{standalone: true}" required minlength="2" maxlength="40"/>
                         </div>
 
                         <!-- imgHotel -->
-                        <div class="form-group">
-                            <label for="images">Image</label>
+                        <div class="form-group row" >
+                            <div class="col-md-6">
+                                <label for="images">Image</label>
+                            </div>
+                            <div class="col-md-6 text-right required">
+                            <div *ngIf="!images " >*</div>
+                            </div>
                             <input type="file" class="form-control" name="images"  (change)="onFileSelected($event)" [(ngModel)]="images" [ngModelOptions]="{standalone: true}" required  />
                        
                         </div>

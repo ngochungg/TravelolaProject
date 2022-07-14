@@ -25,11 +25,18 @@ export class AllroominhotelComponent implements OnInit {
   loader=false
   IDr:any;
   IDu:any;
+  isLogin=false;
 
   constructor(private userService: UserService,private route: ActivatedRoute,private http: HttpClient,private token: TokenStorageService) { }
 
   ngOnInit(): void {
     this.user =this.token.getUser();
+   
+    if(this.user==null){
+      this.isLogin=false;
+    }else if(this.user.id >0){
+      this.isLogin=true;
+    }
     this.IDu=this.user.id;
     this.Obj = this.route.snapshot.paramMap.get('hotel');
     this.oj =JSON.parse(this.Obj)
@@ -44,6 +51,8 @@ export class AllroominhotelComponent implements OnInit {
         }
       }
     });
+  
+    
   }
 
   toggle(event:any){

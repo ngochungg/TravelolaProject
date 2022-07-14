@@ -30,6 +30,8 @@ import { AllroominhotelComponent } from './allroominhotel/allroominhotel.compone
 import { BookingComponent } from './booking/booking.component';
 import { PostComponent } from './post/post.component';
 import { AddpostComponent } from './addpost/addpost.component';
+import { GuestBookingComponent } from './guest-booking/guest-booking.component';
+import { GuestedComponent } from './guested/guested.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -60,6 +62,8 @@ const routes: Routes = [
   { path: 'booking',component: BookingComponent},
   { path: 'post',component: PostComponent},
   { path: 'addpost',component: AddpostComponent},
+  { path: 'guest-booking',component: GuestBookingComponent},
+  { path: 'guested',component: GuestedComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

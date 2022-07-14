@@ -5,6 +5,8 @@ import { HttpHeaders } from '@angular/common/http';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 import next from 'node_modules(old)/ajv/dist/vocabularies/next';
+import { Router } from '@angular/router';
+
 @Component({
   selector: 'app-hotel-service',
   templateUrl: './hotel-service.component.html',
@@ -15,7 +17,8 @@ export class HotelServiceComponent implements OnInit {
     private authService: AuthService,
     private http: HttpClient,
     private token: TokenStorageService,
-    private userService: UserService
+    private userService: UserService,
+    private router: Router
   ) { }
   hotel: any;
   rooms: any;
@@ -59,11 +62,19 @@ export class HotelServiceComponent implements OnInit {
         }
       },
       error: (err) => {
-        this.errorMessage = err.error.message;
+        
+        this.router.navigate(['/home'])
+        .then(() => {
+          this.reloadPage();
+        });
+      
       },
     });
   }
 
+  reloadPage(): void {
+    window.location.reload();
+  }
   ev:any;
   check:any;
 
