@@ -43,6 +43,7 @@ import { PostComponent } from './post/post.component';
 import { AddpostComponent } from './addpost/addpost.component';
 import { GuestBookingComponent } from './guest-booking/guest-booking.component';
 import { GuestedComponent } from './guested/guested.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 
@@ -98,6 +99,7 @@ import { GuestedComponent } from './guested/guested.component';
     HttpClientModule,
     SocialLoginModule,
     ReactiveFormsModule,
+    NgbModule,
 
 
 
