@@ -1,6 +1,7 @@
 import 'dart:core';
 import 'package:app/controller/PaypalServices.dart';
 import 'package:app/controller/apiController.dart';
+
 import 'package:app/screens/login.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
 import 'package:app/widgets/nofitication.dart';
@@ -11,8 +12,15 @@ import 'package:http/http.dart' as http;
 
 class PaypalPayment extends StatefulWidget {
   final Function onFinish;
+  final String username, roomName, totalPrice;
 
-  PaypalPayment({required this.onFinish});
+  const PaypalPayment(
+      {Key? key,
+      required this.onFinish,
+      required this.username,
+      required this.roomName,
+      required this.totalPrice})
+      : super(key: key);
 
   @override
   State<StatefulWidget> createState() {
@@ -80,18 +88,19 @@ class PaypalPaymentState extends State<PaypalPayment> {
   int quantity = 1;
 
   Map<String, dynamic> getOrderParams() {
+    // print();
     List items = [
       {
-        "name": itemName,
+        "name": widget.roomName,
         "quantity": quantity,
-        "price": itemPrice,
+        "price": widget.totalPrice,
         "currency": defaultCurrency["currency"]
       }
     ];
 
     // checkout invoice details
-    String totalAmount = '1.99';
-    String subTotalAmount = '1.99';
+    String totalAmount = widget.totalPrice;
+    String subTotalAmount = widget.totalPrice;
     String shippingCost = '0';
     int shippingDiscountCost = 0;
     String userFirstName = 'Gulshan';

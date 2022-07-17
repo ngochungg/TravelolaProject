@@ -32,12 +32,13 @@ class _RoomDetailsState extends State<RoomDetails> {
     var room = jsonDecode(retriveString);
 
     final urlImages = [
-      "http://localhost:8080/api/auth/getImage/${room['images'][0]['imagePath']}",
+      for(int i = 0; i<room['images'].length; i++)
+      "http://localhost:8080/api/auth/getImage/${room['images'][i]['imagePath']}",
     ];
 
     final start = dateRange.start;
     final end = dateRange.end;
-    // print(room['maxAdult']);
+    // print(urlImages);R
 
     return Scaffold(
       appBar: AppBar(

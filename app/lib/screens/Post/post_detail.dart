@@ -93,7 +93,7 @@ class PostDetails extends StatelessWidget {
               child: Row(
                 children: [
                   Flexible(
-                    child: Text("${jsonData['content']}",
+                    child: Text("${jsonData['description']}",
                         style: TextStyle(color: Colors.black)),
                   )
                 ],

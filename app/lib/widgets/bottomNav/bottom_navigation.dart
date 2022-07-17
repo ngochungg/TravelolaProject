@@ -22,9 +22,8 @@ class _BottomNavState extends State<BottomNav> {
 
   int selectedIndex = 0;
   final Widget _myHome = MyHome();
-  final Widget _mySaved = MySaved();
   final Widget _myBooking = MyBooking();
-  final Widget _myNoti = MyNoti();
+  final Widget _myPost = MyPost();
   final Widget _myAccount = MyAccount();
   @override
   Widget build(BuildContext context) {
@@ -41,7 +40,7 @@ class _BottomNavState extends State<BottomNav> {
       } else if (selectedIndex == 1) {
         return _myBooking;
       } else if (selectedIndex == 2) {
-        return _myNoti;
+        return _myPost;
       } else {
         return _myAccount;
       }
@@ -73,9 +72,9 @@ class _BottomNavState extends State<BottomNav> {
             activeIcon: Icon(Icons.library_books),
           ),
           BottomNavigationBarItem(
-            label: 'Notifications',
-            icon: Icon(Icons.notifications_outlined),
-            activeIcon: Icon(Icons.notifications),
+            label: 'My Post',
+            icon: Icon(Icons.podcasts_outlined),
+            activeIcon: Icon(Icons.podcasts),
           ),
           BottomNavigationBarItem(
             label: 'My Account',

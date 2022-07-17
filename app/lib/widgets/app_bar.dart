@@ -11,22 +11,13 @@ AppBar buildAppbar(BuildContext context, String text) {
     title: Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: <Widget>[
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.12,
-        ),
         Text(text,
             style: GoogleFonts.lato(
                 fontSize: 21,
                 fontWeight: FontWeight.w400,
                 color: Colors.white)),
-        IconButton(
-          icon: const Icon(Icons.menu),
-          color: Colors.white,
-          onPressed: () {
-            Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (_) => Home()),
-            );
-          },
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.12,
         ),
       ],
     ),

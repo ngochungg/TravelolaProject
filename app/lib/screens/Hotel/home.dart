@@ -33,6 +33,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
     var infor = data1['infor'];
     var nights = data1['nights'];
     var checkin = infor['checkIn'].substring(0, 10);
+    // print(hotelData[0]['images'][1]['room']['price']);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.pinkAccent,
@@ -96,7 +97,6 @@ class _HotelHomePageState extends State<HotelHomePage> {
                             elevation: 0,
                           ),
                           onPressed: () async {
-                            var hotelList = jsonEncode(hotelData);
                             var response = await http.get(Uri.parse(
                                 getRoomOfHotel +
                                     hotelData[i]['id'].toString()));
@@ -113,8 +113,8 @@ class _HotelHomePageState extends State<HotelHomePage> {
                               'room': room,
                               'hotel': hotel,
                               'feedback': jsonFbb,
-                              'hotelList': hotelList
                             });
+                            // print(temps);
                             Navigator.of(context).pushNamed(
                                 HotelDetail.routeName,
                                 arguments: temps);
@@ -130,14 +130,6 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                   fit: BoxFit.cover,
                                 ),
                               ),
-                              // ClipRRect(
-                              //   borderRadius: BorderRadius.circular(8.0),
-                              //   child: Image.asset(
-                              //     "images/286696674.jpeg",
-                              //     height: 180.0,
-                              //     width: 100.0,
-                              //   ),
-                              // ),
                               Column(
                                 children: [
                                   RichText(
