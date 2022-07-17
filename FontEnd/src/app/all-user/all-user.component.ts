@@ -64,7 +64,7 @@ export class AllUserComponent implements OnInit {
   }
 
 
-  UnLook(use: User): void {
+  UnLock(use: User): void {
 
     this.authService.unlockUser(use.id).subscribe({
       next: (data) => {
@@ -73,7 +73,7 @@ export class AllUserComponent implements OnInit {
     });
   }
 
-  Look(use: User): void {
+  Lock(use: User): void {
     this.authService.lockUser(use.id).subscribe({
       next: (data) => {
         this.reloadPage();

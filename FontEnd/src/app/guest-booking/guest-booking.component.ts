@@ -28,7 +28,7 @@ export class GuestBookingComponent implements OnInit {
     this.userService.showAllHotel().subscribe({
       next: (data) => {
         for (let i = 0; i < data.length; i++) {
-          if (data[i].phone == this.user.phone) {
+          if (data[i].account.username== this.user.username) {
             this.id = data[i].account.id;
            
             console.log('users', this.id);
@@ -80,7 +80,7 @@ export class GuestBookingComponent implements OnInit {
       let headers = new HttpHeaders();
       
       headers.append('Content-Type', 'multipart/form-data');
-      this.http.get('http://localhost:8080/api/hotel/confirmHotelBookingStatus/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
+      this.http.get('http://localhost:8080/api/hotel/setHotelBookingStatusTrue/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
       this.status=!this.status;
     }
     report(){

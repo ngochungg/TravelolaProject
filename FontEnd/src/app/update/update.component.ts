@@ -38,6 +38,7 @@ export class UpdateComponent implements OnInit {
      
   ngOnInit(): void {
     this.currentUser = this.token.getUser();
+    console.log(this.currentUser)
  
   }
   onUpdate(): void {
@@ -124,13 +125,13 @@ export class UpdateComponent implements OnInit {
   changPassword(){
    
 
-    // let headers = new HttpHeaders();
-    // headers.append('Content-Type', 'multipart/form-data');
-    // const filedata =new FormData();
-    // filedata.append('oldPassword', this.pass.oldpass);
-    // filedata.append('newPassword', this.pass.newpass);
+    let headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    const filedata =new FormData();
+    filedata.append('oldPassword', this.pass.oldpass);
+    filedata.append('newPassword', this.pass.newpass);
 
-    // this.http.post('http://localhost:8080/api/auth/updatePassword/'+this.currentUser.id,filedata,{headers: headers, responseType: 'text'}).subscribe(res =>{console.log(res)});
+    this.http.post('http://localhost:8080/api/auth/updatePassword/'+this.currentUser.id,filedata,{headers: headers, responseType: 'text'}).subscribe(res =>{console.log(res)});
   }
 
  

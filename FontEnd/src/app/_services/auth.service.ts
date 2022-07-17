@@ -37,6 +37,15 @@ export class AuthService {
 
     }, httpOptions);
   }
+  feedback( feedback: string,rating:number,hotel_booking_id:string): Observable<any> {
+
+    return this.http.post('http://localhost:8080/api/auth/feedback', {
+      feedback,
+      rating,
+      hotel_booking_id
+
+  });
+}
 
   reloadPro(): Observable<any> {
     this.currentUser = this.token.getUser();

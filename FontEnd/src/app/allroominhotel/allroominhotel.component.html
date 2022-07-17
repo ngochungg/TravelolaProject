@@ -45,27 +45,23 @@
             <form name="form" (ngSubmit)="f.form.valid && bookingRoom($event)"
                 #f="ngForm"
                 novalidate>
+               
+                    <!-- <input matInput [min]="minDate" [max]="maxDate" [matDatepicker]="picker">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker> -->
+                    <input type="date" [(ngModel)]="minDate" >
                 <!-- checkInDate -->
                 <div class="form-group infomation">
                     <label for="username">checkInDate</label>
-                    <input type="text" class="form-control" name="checkInDate"
+                    <input type="date" class="form-control" name="checkInDate"
                         [(ngModel)]="form.checkInDate" required
                         minlength="3" maxlength="20" #checkInDate="ngModel" />
-                          <div class="div-errors" *ngIf="checkInDate.errors &&
-                                f.submitted">
-                              
-                                <div *ngIf="checkInDate.errors['minlength']">
-                                    *HotelName must be at least 3 characters
-                                </div>
-                                <div *ngIf="checkInDate.errors['maxlength']">
-                                    *HotelName must be at most 20 characters
-                                </div>
-                            </div>
+                        
                 </div>
                 <!-- checkOutDate -->
                 <div class="form-group infomation">
                     <label for="firstName">checkOutDate</label>
-                    <input type="text" class="form-control" name="checkOutDate"
+                    <input type="date" class="form-control" name="checkOutDate"
                         [(ngModel)]="form.checkOutDate"
                         required minlength="1" maxlength="20"
                         #checkOutDate="ngModel" />

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit ,ViewChild} from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { UserService } from '../_services/user.service';
 import { HttpHeaders } from '@angular/common/http';
@@ -11,7 +11,8 @@ import { TokenStorageService } from '../_services/token-storage.service';
   
 })
 export class AllroominhotelComponent implements OnInit {
-  
+  date: Date  = new Date();
+  minDate: string;
   rooms:any;
   room:any[]=[];
   Obj :any;
@@ -26,10 +27,21 @@ export class AllroominhotelComponent implements OnInit {
   IDr:any;
   IDu:any;
   isLogin=false;
+  // input date
 
-  constructor(private userService: UserService,private route: ActivatedRoute,private http: HttpClient,private token: TokenStorageService) { }
+  constructor(private userService: UserService,private route: ActivatedRoute,private http: HttpClient,private token: TokenStorageService) {
+
+    let dd = String(this.date.getDate()).padStart(2, '0');
+    let mm = String(this.date.getMonth() + 1).padStart(2, '0'); //January is 0!
+    let yyyy = this.date.getFullYear();
+
+    this.minDate =( yyyy + '-' + mm + '-' + dd) as string;
+    console.log(this.minDate)
+   }
 
   ngOnInit(): void {
+    
+
     this.user =this.token.getUser();
    
     if(this.user==null){
@@ -65,11 +77,11 @@ export class AllroominhotelComponent implements OnInit {
   }
 
   form:any={
-    checkInDate: '2022-7-11',
-    checkOutDate:'2022-7-12',
-    numOfGuest : '2',
-    paymentMethod: 'card',
-    totalPrice: 500,
+    checkInDate: '',
+    checkOutDate:'',
+    numOfGuest : '',
+    paymentMethod: '',
+    totalPrice: '',
     roomId:'',
     userId :'',
   }
@@ -84,7 +96,7 @@ export class AllroominhotelComponent implements OnInit {
     // console.log('IDu',this.IDu)
     // console.log('form',this.form)
     const {checkInDate,checkOutDate,numOfGuest,paymentMethod,totalPrice,roomId,userId}=this.form;
-   this.userService.hotelBooking(checkInDate,checkOutDate,numOfGuest,paymentMethod,totalPrice,this.IDr,this.IDu).subscribe({
+   this.userService.hotelBooking(this.minDate,checkOutDate,numOfGuest,paymentMethod,totalPrice,this.IDr,this.IDu).subscribe({
    
     next: data => {
       

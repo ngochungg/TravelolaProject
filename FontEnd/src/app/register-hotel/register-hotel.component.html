@@ -135,9 +135,9 @@
                             <div class="col-md-6 text-right required">
                                 <div *ngIf="!description " >*</div>
                                 <div *ngIf="description.length < 2 && description.length >0">*Description at least 2 characters</div>
-                                <div *ngIf="description.length >=40"> * Description max 40 characters </div>
+                  
                             </div>
-                            <input type="text" class="form-control" name="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" required   minlength="2" maxlength="40" />
+                            <input type="text" class="form-control" name="description" [(ngModel)]="description" [ngModelOptions]="{standalone: true}" required  minlength="2"/>
                             </div>
                        
 

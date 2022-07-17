@@ -44,13 +44,15 @@ import { AddpostComponent } from './addpost/addpost.component';
 import { GuestBookingComponent } from './guest-booking/guest-booking.component';
 import { GuestedComponent } from './guested/guested.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 
 
 
 @NgModule({
+  
   declarations: [
     AppComponent,
     LoginComponent,
@@ -87,6 +89,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     AddpostComponent,
     GuestBookingComponent,
     GuestedComponent,
+    FeedbackComponent,
 
 
 
@@ -100,8 +103,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SocialLoginModule,
     ReactiveFormsModule,
     NgbModule,
-
-
+    BrowserAnimationsModule,
 
   ],
   providers:

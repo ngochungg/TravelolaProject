@@ -50,7 +50,7 @@ export class UserService {
     });
     
   }
-  hotelBooking(checkInDate: Date, checkOutDate: Date, numOfGuest: number, paymentMethod: string, totalPrice: number,roomId:number,userId: number): Observable<any> {
+  hotelBooking(checkInDate: string, checkOutDate: string, numOfGuest: number, paymentMethod: string, totalPrice: number,roomId:number,userId: number): Observable<any> {
     return this.http.post('http://localhost:8080/api/hotel/hotelBooking', {
     checkInDate,
     checkOutDate,

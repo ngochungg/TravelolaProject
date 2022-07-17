@@ -29,7 +29,9 @@ export class HotelsComponent implements OnInit {
   searchKeyword: string | null = '';
   Obj! :any;
   oj:any;
- 
+  sao:any;
+  i=0;
+  rating:any[]=[];
   ngOnInit(): void {
     // this.Obj = JSON.parse(this.route.snapshot.paramMap.get('my_object'));
      this.Obj = this.route.snapshot.paramMap.get('name');
@@ -53,8 +55,22 @@ export class HotelsComponent implements OnInit {
           
         }
         console.log('room', this.room)
-        // this.dataRooms=[...this.room]
-        // console.log('dataRooms', this.dataRooms)
+        for(this.i=0;this.i<this.room.length;this.i++){
+          if(this.room[this.i].hotelFeedBacks.length==0){
+            this.sao=0;
+            console.log('0')
+          }else if(this.room[this.i].hotelFeedBacks.length>0){
+            const _sao=this.room[this.i].hotelFeedBacks;
+            for(let j=0;j<_sao.length;j++){
+              let sum =_sao[j].rating;
+              console.log('sum',sum)
+            }
+            
+            console.log('sao',this.sao)
+          }
+        }
+
+       
       }
       
     });

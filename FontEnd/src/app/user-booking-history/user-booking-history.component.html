@@ -1,7 +1,7 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-12">
+        <div class="col-sm-10">
             <table >
               <thead >
                 <tr >
@@ -15,7 +15,8 @@
                   <th>Payment</th>
                   <th>BookingCode</th>
                   <th>qrCode</th>
-                  <th>Status</th>
+                  <th>Accept</th>
+                  <th>Feedback</th>
                 </tr>
               </thead>
               <tbody>
@@ -34,10 +35,20 @@
                     
                   </td>
                   <td *ngIf="item.retired ==true"> <button  class=" fa fa-check y"  title="The request has been approved"></button></td>
-                  <td *ngIf="item.retired ==false"> <button  class=" fa fa-ellipsis-h x"  title="please wait the hotel accept"></button></td>        
+                  <td *ngIf="item.retired ==false"> <button  class=" fa fa-ellipsis-h x"  title="please wait the hotel accept"></button></td>  
+                  <td *ngIf="item.status==true"><button (click)="openFeedback($event)" value="{{item.id}}"> Feedback</button></td> 
+                  
+                  <td></td>
                 </tr>
               </tbody>
             </table>
+        </div>
+        <div class="col-sm-2" *ngIf="done==true" id="feed">
+          <ngb-rating [(rate)]="sao" [max]="5" style="font-size:30px ;"> </ngb-rating>
+              <input type="text" [(ngModel)]="form.feedback" placeholder="feedback to hotel" class="input-fb">             
+             
+              <button (click)="sendFeedback($event)">Send</button>
+         
         </div>
     </div>
 </div>

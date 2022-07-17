@@ -42,8 +42,8 @@
                       </span>
                         </td>
                         <td>
-                            <button *ngIf="use.status == true" class="btn btn-success btn-in4" (click)="Look(use)">Look</button>
-                            <button *ngIf="use.status == false" class="btn btn-danger btn-in4" (click)="UnLook(use)">Unlook</button>
+                            <button *ngIf="use.status == true" class="btn btn-success btn-in4" (click)="Lock(use)">Lock</button>
+                            <button *ngIf="use.status == false" class="btn btn-danger btn-in4" (click)="UnLock(use)">Unlock</button>
                         </td>
                     </tr>
                 </tbody>

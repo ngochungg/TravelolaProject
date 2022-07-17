@@ -94,7 +94,7 @@ export class AllHotelComponent implements OnInit {
   }
 
  
-  unLook(event: any): void {
+  unLock(event: any): void {
     
     const userID=event.target.value;
 
@@ -106,7 +106,7 @@ export class AllHotelComponent implements OnInit {
   }
   hotelID :any;  
 
-  Look(event: any): void {
+  Lock(event: any): void {
     
     const userID=event.target.value;
 
