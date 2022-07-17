@@ -70,12 +70,12 @@ export class RoomsComponent implements OnInit {
     // this.imgsrc=this.selectedFile;
     // console.log('imgSRC',this.imgsrc)
   }
-  public roomNumber = '6';
-  public roomName = '6';
-  public roomType = '6';
-  public price = '6';
-  public maxAdult = '2';
-  public maxChildren = '2';
+  public roomNumber = '';
+  public roomName = '';
+  public roomType = '';
+  public price = '';
+  public maxAdult = '';
+  public maxChildren = '';
   public images = '';
   i:number=0;
   onUpload() {
@@ -98,7 +98,7 @@ export class RoomsComponent implements OnInit {
     filedata.append('roomType', this.roomType);
     filedata.append('price', this.price);
     filedata.append('maxAdult', this.maxAdult);
-    filedata.append('maxChildred', this.maxChildren);
+    filedata.append('maxChildren', this.maxChildren);
 
 
     console.log('filedata', filedata);

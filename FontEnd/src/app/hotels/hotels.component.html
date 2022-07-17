@@ -101,7 +101,7 @@
                         </p>
                         <div class="in4">
                             <h4> {{item.hotelName}}</h4>
-                            <div *ngIf="sao">{{sao}}</div>
+                            <div *ngIf="_rating">{{_rating}}</div>
                             
                             <h4 class="fa fa-map-marker"> Hotel location:
                                 {{item.location.district.name}},

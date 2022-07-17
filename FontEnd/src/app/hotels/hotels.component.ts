@@ -29,9 +29,10 @@ export class HotelsComponent implements OnInit {
   searchKeyword: string | null = '';
   Obj! :any;
   oj:any;
-  sao:any;
+  sao:number=0;
   i=0;
-  rating:any[]=[];
+  rating:number=0;
+  _rating:number=0;
   ngOnInit(): void {
     // this.Obj = JSON.parse(this.route.snapshot.paramMap.get('my_object'));
      this.Obj = this.route.snapshot.paramMap.get('name');
@@ -46,29 +47,25 @@ export class HotelsComponent implements OnInit {
           if(this.hotelRooms[i].location.province.id ==this.oj){
             if(this.hotelRooms[i].status==true){
               this.room.push(this.hotelRooms[i]);
-            }
-           
+            }       
           }
-         
-           
-            
-          
         }
         console.log('room', this.room)
-        for(this.i=0;this.i<this.room.length;this.i++){
-          if(this.room[this.i].hotelFeedBacks.length==0){
-            this.sao=0;
-            console.log('0')
-          }else if(this.room[this.i].hotelFeedBacks.length>0){
-            const _sao=this.room[this.i].hotelFeedBacks;
-            for(let j=0;j<_sao.length;j++){
-              let sum =_sao[j].rating;
-              console.log('sum',sum)
-            }
+          // for(this.i=0;this.i<this.room.length;this.i++){
+          //   if(this.room[this.i].hotelFeedBacks.length=0){
+          //     this.rating=0;
+          //   }else if(this.room[this.i].hotelFeedBacks.length>0){
+          //     const _sao=this.room[this.i].hotelFeedBacks;
+          //     for(let j=0;j<_sao.length;j++){
+          //       this.rating +=_sao[j].rating;
+              
+          //     } 
+          //     this._rating=this.rating/this.room[this.i].hotelFeedBacks.length;
+
+          //     console.log('sum',this._rating)
             
-            console.log('sao',this.sao)
-          }
-        }
+          //   }
+          // }
 
        
       }
