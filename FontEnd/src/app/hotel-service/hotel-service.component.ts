@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
-import next from 'node_modules(old)/ajv/dist/vocabularies/next';
+// import next from 'node_modules(old)/ajv/dist/vocabularies/next';
 import { Router } from '@angular/router';
 
 @Component({
@@ -55,7 +55,7 @@ export class HotelServiceComponent implements OnInit {
     this.userService.showAllHotel().subscribe({
       next: (data) => {
         for (let i = 0; i < data.length; i++) {
-          if (data[i].phone == this.hotel.phone) {
+          if (data[i].account.username === this.hotel.username) {
             this.rooms = data[i];
             console.log('idHotel', this.rooms);
           }

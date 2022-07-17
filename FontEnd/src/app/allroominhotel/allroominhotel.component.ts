@@ -47,6 +47,7 @@ export class AllroominhotelComponent implements OnInit {
           if(this.rooms[i].images[0].hotel.id == this.oj)
           {
             this.room.push(this.rooms[i]);
+            console.log(this.room)
           }
         }
       }
