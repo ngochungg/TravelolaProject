@@ -4,11 +4,11 @@
         <div class="col-sm-3"></div>
         <div class="col-sm-5 col5" >
             <form enctype="multipart/form-data"  class="form">
-
+                <button type="button" style="margin-top: 5%; margin-left: -50%" (click)="onUpload()">Upload</button>
                 <input type="file" (change)="onFileSelected($event)" class="form-img"><br>
                 <!-- <img [src]="'http://localhost:8080/api/auth/uploadImage/'+this.img" alt=""> -->
                
-            <button type="button" style="margin-top: 5%; margin-left: -50%" (click)="onUpload()">Upload</button>
+            
             </form>
         </div>
     </div>

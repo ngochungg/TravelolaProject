@@ -38,18 +38,31 @@ input[type=submit]:hover {
   margin-top: 100px;
   margin-bottom: 100px;
   width: 40%;
+  box-shadow: 5px 5px 20px gray;
+  height: 600px;
+  border-radius: 30px;
 }
-.form-group{
+.form-group{ 
   padding-top: 0%;
 }
 .form-img{
   margin-top: 5%;
-  margin-bottom: 50%;
+  margin-bottom: 5%;
+}
+.btn-upload-avt{
+  border: gray;
+  background-color: rgb(30, 184, 30);
+  border-radius: 3%;
+}
+.form-upload-avt{
+  margin-top: 30px;
+  margin-left: 20px;
 }
 .col5{
-  height: 150px;
+  height: 180px;
+  font-size: 18px;
   margin-top: 200px;
-
+  width: 350px;
   box-shadow: 5px 5px 20px gray;
   border-radius: 3%;
   margin-bottom: 200px;
@@ -63,16 +76,19 @@ input[type=submit]:hover {
   margin-top: 20%;
 }
 .row-pass{
-  width: 100%;
-  height: auto;
+ 
+  height: 400px;
   margin-top: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 5%;  
   box-shadow: 5px 5px 20px gray;
   border-radius: 3%;
 }
+.form-input{
+ 
+}
 .choose-event{
   margin-top: 150px;
-  margin-bottom: 200px;
+  margin-bottom: 100px;
 
   box-shadow: 5px 5px 20px gray;
   border-radius: 3%;
@@ -87,11 +103,21 @@ input[type=submit]:hover {
 margin-left: 5%;
   border-radius: 2%;
   text-transform: capitalize;
-  text-decoration: ;
-  color: rgb(235, 111, 111);
+  float: right;
+  margin-right: 50px;
+  margin-top: 50px;
+  color: rgb(250, 250, 250);
   font-size: 20px;
 }
-
+.btn-choose{
+  margin-left: 5%;
+  border-radius: 2%;
+  text-transform: capitalize;
+  float: right;
+  margin-right: 50px;
+  
+  font-size: 20px;
+}
 .hover-4 {
   border: 8px solid;
   border-image: repeating-linear-gradient(135deg,#F8CA00 0 10px,#E97F02 0 20px,#BD1550 0 30px) 8;

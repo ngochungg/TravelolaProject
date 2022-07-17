@@ -11,6 +11,13 @@
                             alt="avata" class="img-city">
                         <!-- <h4> Image{{item.images[0].imagePath}}</h4> -->
                     </p>
+                    <p class="img" *ngIf="item.images[2]">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[1].imagePath"
+                            alt="avata" class="img-city">
+                        <!-- <h4> Image{{item.images[0].imagePath}}</h4> -->
+                    </p>
                     <div class="in4">
                         <h4> Hotel: {{item.images[0].hotel.hotelName}}</h4>
                         <hr>
@@ -44,6 +51,16 @@
                     <input type="text" class="form-control" name="checkInDate"
                         [(ngModel)]="form.checkInDate" required
                         minlength="3" maxlength="20" #checkInDate="ngModel" />
+                          <div class="div-errors" *ngIf="checkInDate.errors &&
+                                f.submitted">
+                              
+                                <div *ngIf="checkInDate.errors['minlength']">
+                                    *HotelName must be at least 3 characters
+                                </div>
+                                <div *ngIf="checkInDate.errors['maxlength']">
+                                    *HotelName must be at most 20 characters
+                                </div>
+                            </div>
                 </div>
                 <!-- checkOutDate -->
                 <div class="form-group infomation">

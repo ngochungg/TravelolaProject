@@ -16,7 +16,7 @@ export class RoomsComponent implements OnInit {
   rooms: any;
   errorMessage = '';
   id: any;
-  selectedFile!: File[];
+
   display=false;
   form=true;
 
@@ -26,7 +26,7 @@ export class RoomsComponent implements OnInit {
       next: data => {
         console.log('data', data)
         for (let i = 0; i < data.length; i++) {
-          if (data[i].phone === this.roomHotel.phone) {
+          if  (data[i].account.username === this.roomHotel.username) {
             this.id = data[i].id
           }
         }
@@ -56,25 +56,28 @@ export class RoomsComponent implements OnInit {
   reloadPage(): void {
     window.location.reload();
   }
+  selectedFile!: File[];
   img:File[]=[];
   imgsrc:any;
   onFileSelected(event: any) {
     this.selectedFile = event.target.files;
     for(let file of this.selectedFile) {
       this.img.push(file);
+      console.log('this.img',this.img);
     }
 
-    // this.imgsrc=new FileReader().readAsDataURL(this.img[0]);
-    // console.log('event', this.imgsrc)
-    // console.log('imageName', this.selectedFile.name)
+    // this.imgsrc=new FileReader().readAsDataURL(this.selectedFile[0]);
+    // this.imgsrc=this.selectedFile;
+    // console.log('imgSRC',this.imgsrc)
   }
-  public roomNumber = '';
-  public roomName = '';
-  public roomType = '';
-  public price = '';
-  public maxAdult = '';
-  public maxChildren = '';
+  public roomNumber = '6';
+  public roomName = '6';
+  public roomType = '6';
+  public price = '6';
+  public maxAdult = '2';
+  public maxChildren = '2';
   public images = '';
+  i:number=0;
   onUpload() {
     this.form=!this.form;
     this.display=!this.display;
@@ -83,10 +86,13 @@ export class RoomsComponent implements OnInit {
     headers.append('Content-Type', 'multipart/form-data');
     const filedata = new FormData();
 
-    filedata.append('images',this.img[0]);
-    this.img.map(img => {
-      filedata.append('images',img);
-    })
+  
+    for(this.i=0;this.i<this.img.length;this.i++) {
+      filedata.append('images', this.img[this.i]);
+      console.log('imgsrc',this.img)
+    }
+      // filedata.append('images',img);
+
     filedata.append('roomNumber', this.roomNumber);
     filedata.append('roomName', this.roomName);
     filedata.append('roomType', this.roomType);

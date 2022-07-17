@@ -12,47 +12,42 @@
 
           <div class="row">
 
-          <div class="col-lg-4 contai" *ngFor="let item of city"  style="margin-top: 5%;">
+          <div class="col-sm-4 contai" *ngFor="let item of city"  >
            
-              <div *ngIf="item.name=='Đồng Nai'">
-                <img src="assets/images/dongnai.jpg" alt="avata"
+              <div *ngIf="item.name=='Đồng Nai'" class="img-hover-zoom">
+                <img src="assets/images/dongnai.jpg" alt="avata" title="click name below to go to {{item.name}}"
+                  class="img-fluid img-city">
+              </div>
+              <div *ngIf="item.name=='Hồ Chí Minh'" class="img-hover-zoom">
+                <img src="assets/images/hochiminh.jpg" alt="avata" title="click name below to go to {{item.name}}"
                   class="img-fluid
                   img-city">
               </div>
-              <div *ngIf="item.name=='Hồ Chí Minh'">
-                <img src="assets/images/hochiminh.jpg" alt="avata"
-                  class="img-fluid
-                  img-city">
-              </div>
-              <div *ngIf="item.name=='Hà Nội'">
+              <div *ngIf="item.name=='Hà Nội'" class="img-hover-zoom">
                 <img src="assets/images/hanoi.jpg" alt="avata" class="img-fluid
-                  img-city">
+                  img-city"  title="click name below to go to {{item.name}}">
               </div>
-              <div *ngIf="item.name=='Đà Nẵng'">
+              <div *ngIf="item.name=='Đà Nẵng'" class="img-hover-zoom">
                 <img src="assets/images/danang.jpg" alt="avata" class="img-fluid
-                  img-city">
+                  img-city"  title="click name below to go to {{item.name}}">
               </div>
-              <div *ngIf="item.name=='Thừa Thiên Huế'">
+              <div *ngIf="item.name=='Thừa Thiên Huế'" class="img-hover-zoom">
                 <img src="assets/images/hue.jpg" alt="avata" class="img-fluid
-                  img-city">
+                  img-city"  title="click name below to go to {{item.name}}">
               </div>
-              <div *ngIf="item.name=='Lâm Đồng'">
+              <div *ngIf="item.name=='Lâm Đồng'" class="img-hover-zoom">
                 <img src="assets/images/lamdong.jpg" alt="avata"
                   class="img-fluid
-                  img-city">
+                  img-city"  title="click name below to go to {{item.name}}">
               </div>
-              <div *ngIf="item.name=='Bình Dương'">
-                <img src="assets/images/binhduong.jpg" alt="avata"
+              <div *ngIf="item.name=='Bình Dương'" class="img-hover-zoom" >
+                <img src="assets/images/binhduong.jpg" alt="avata" 
                   class="img-fluid
-                  img-city">
+                  img-city"  title="click name below to go to {{item.name}}">
               </div>
-              <div class="overlay">
-                <h4 class="hotel-city text"><button value="{{item.id}}"
-                    (click)="ev($event)" style="color: white;" title="click here
-                    to go {{item.name}}" class="hover">
-                    -->> {{ item.name}}</button></h4>
-              </div>
-              <h4 class="name-city"> {{item.name}}</h4>
+              <h4 class="name-city"> <button value="{{item.id}}"
+                (click)="ev($event)"  title="click here to go {{item.name}}" class="btn-city-link">
+                {{ item.name}}</button></h4>
 
           
 

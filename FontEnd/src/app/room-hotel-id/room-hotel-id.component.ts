@@ -22,14 +22,15 @@ export class RoomHotelIDComponent implements OnInit {
 
   ngOnInit(): void {
     this.roomHotel = this.token.getUser();
-    console.log(this.roomHotel)
+    console.log(this.roomHotel);
 
     this.userService.showAllHotel().subscribe({
       next: data => {
         console.log('data', data)
         for (let i = 0; i < data.length; i++) {
-          if (data[i].phone === this.roomHotel.phone) {
+          if (data[i].account.username === this.roomHotel.username) {
             this.id = data[i].id
+            console.log('this.id', this.id)
           }
         }
         this.userService.allRooms(this.id).subscribe({
