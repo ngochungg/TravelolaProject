@@ -512,7 +512,19 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
     public List<HotelBooking> getAllBookingRetiredFalse(){
         return hotelBookingRepository.findByRetired(false);
     }
-
+    //set hotel booking status to true
+    @PutMapping(value = "/setHotelBookingStatusTrue/{id}")
+    public ResponseEntity<HotelBooking> setHotelBookingStatusTrue(@PathVariable("id") Long id){
+        HotelBooking hotelBooking = hotelBookingRepository.findById(id).get();
+        hotelBooking.setStatus(true);
+        HotelBooking result = hotelBookingRepository.save(hotelBooking);
+        return ResponseEntity.ok().body(result);
+    }
+    //get all booking status true
+    @GetMapping(value = "/getAllBookingStatusTrue")
+    public List<HotelBooking> getAllBookingStatusTrue(){
+        return hotelBookingRepository.findByStatus(true);
+    }
     //show all Booking
     @GetMapping(value = "/showAllBooking")
     public List<HotelBooking> showAllBooking(){

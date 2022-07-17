@@ -16,6 +16,8 @@ public interface BookingRepository extends JpaRepository<HotelBooking, Long> {
     List<HotelBooking> findByRoomId(Long roomId);
     //get list booking retired
     List<HotelBooking> findByRetired(Boolean retired);
+    //get list status booking
+    List<HotelBooking> findByStatus(Boolean status);
 
 }
 
