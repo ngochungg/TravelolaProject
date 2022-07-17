@@ -1,7 +1,10 @@
+import 'dart:math';
+
 import 'package:http/http.dart' as http;
 import 'dart:async';
 import 'dart:convert' as convert;
 import 'package:http_auth/http_auth.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class PaypalServices {
   String domain = "https://api.sandbox.paypal.com"; // for sandbox mode
@@ -77,7 +80,15 @@ class PaypalServices {
             "content-type": "application/json",
             'Authorization': 'Bearer ' + accessToken
           });
-
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      var booking = prefs.getString('booking');
+      final bookAPI = await http.post(
+          Uri.parse("http://localhost:8080/api/hotel/hotelBooking"),
+          body: booking,
+          headers: {
+            "Content-Type": "application/json",
+          });
+      // print(booking);
       final body = convert.jsonDecode(response.body);
       if (response.statusCode == 200) {
         return body["id"];

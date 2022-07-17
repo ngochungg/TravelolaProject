@@ -2,8 +2,12 @@ import 'package:app/screens/Hotel/booking.dart';
 import 'package:app/screens/Hotel/home.dart';
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Hotel/room_details.dart';
+import 'package:app/screens/Post/edit_post.dart';
 import 'package:app/screens/Post/hotel_post.dart';
+import 'package:app/screens/Post/my_post.dart';
 import 'package:app/screens/Post/post_detail.dart';
+import 'package:app/screens/Post/posting.dart';
+import 'package:app/screens/Post/user_post.dart';
 import 'package:app/screens/booking_history.dart';
 import 'package:app/screens/booking_history_sub.dart';
 import 'package:app/screens/changePassword.dart';
@@ -58,6 +62,10 @@ Future main() async {
         FeedbackHistory.routeName: (context) => FeedbackHistory(),
         HotelPost.routeName: (context) => HotelPost(),
         PostDetails.routeName: (context) => PostDetails(),
+        UserPost.routeName: (context) => UserPost(),
+        Posting.routeName: (context) => Posting(),
+        MyPosting.routeName: (context) => MyPosting(),
+        EditPost.routeName: (context) => EditPost(),
       },
     ),
   );

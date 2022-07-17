@@ -1,10 +1,15 @@
 // ignore_for_file: prefer_const_constructors, curly_braces_in_flow_control_structures
 
+import 'dart:async';
 import 'dart:convert';
 
+import 'package:app/screens/home.dart';
+import 'package:app/widgets/bottomNav/bottom_navigation.dart';
+import 'package:app/widgets/bottomNav/my_home_bottom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:http/http.dart' as http;
+import 'package:rounded_loading_button/rounded_loading_button.dart';
 
 class HistorySub extends StatefulWidget {
   static const routeName = '/history_sub';
@@ -28,6 +33,19 @@ class _HistorySub extends State<HistorySub> {
       retriveString = (data.arguments.toString());
     }
     var jsonData = json.decode(utf8.decode(retriveString.toString().codeUnits));
+    // print(jsonData);
+    final RoundedLoadingButtonController _btnController =
+        RoundedLoadingButtonController();
+    void _doSomething() async {
+      Timer(Duration(seconds: 5), () {
+        _btnController.success();
+        _btnController.reset();
+      });
+      var response = await http.put(Uri.parse(
+          'http://localhost:8080/api/hotel/refuseHotelBooking/${jsonData['id']}'));
+      int count = 0;
+      Navigator.of(context).popUntil((_) => count++ >= 2);
+    }
 
     return Scaffold(
       appBar: AppBar(
@@ -468,6 +486,25 @@ class _HistorySub extends State<HistorySub> {
                   ),
                 ),
               )
+            else if (jsonData['retired'] != false)
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: RoundedLoadingButton(
+                        color: Colors.pinkAccent,
+                        height: 40,
+                        width: 350,
+                        child: Text('Cancel booking',
+                            style: TextStyle(color: Colors.white)),
+                        controller: _btnController,
+                        onPressed: _doSomething,
+                      ),
+                    )
+                  ],
+                ),
+              )
             else
               Padding(
                 padding: const EdgeInsets.all(20.0),
@@ -482,7 +519,7 @@ class _HistorySub extends State<HistorySub> {
                           primary: Colors.pinkAccent,
                           elevation: 0,
                         ),
-                        child: Text('Feedback this hotel'),
+                        child: Text('Cancel your booking'),
                         onPressed: null,
                       ),
                     )

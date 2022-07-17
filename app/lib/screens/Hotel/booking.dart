@@ -4,6 +4,7 @@ import 'dart:async';
 import 'dart:convert';
 
 import 'package:app/controller/apiController.dart';
+
 import 'package:app/screens/Hotel/hotel_details.dart';
 import 'package:app/screens/Payments/PaypalPayment.dart';
 import 'package:app/widgets/bottomNav/bottom_navigation.dart';
@@ -64,40 +65,48 @@ class _BookingCheckState extends State<BookingCheck> {
         "roomId": jsonData['roomId'],
         "userId": jsonData['userId'],
       });
-      var booking = jsonEncode({
-        "roomName": jsonData['roomName'],
-        "totalPrice": jsonData['price'],
-        "username": jsonData['username'],
-      });
-      print(body.toString());
-      final response = await http.post(
-          Uri.parse("http://localhost:8080/api/hotel/hotelBooking"),
-          body: body,
-          headers: {
-            "Content-Type": "application/json",
-          });
-      SharedPreferences prefs = await SharedPreferences.getInstance();
-      prefs.setString('booking', booking);
-      print(payment);
-      if (response.statusCode == 200) {
-        if (payment == "Paypal") {
-          Navigator.of(context).push(
-            MaterialPageRoute(
-              builder: (BuildContext context) => PaypalPayment(
-                onFinish: (number) async {
-                  // payment done
-                  print(number);
-                },
-              ),
+      var roomName = jsonData['roomName'];
+      String totalPrice = jsonData['price'].toString();
+      var username = jsonData['username'];
+      if (payment == "Paypal") {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('booking', body);
+        Navigator.of(context).push(
+          MaterialPageRoute(
+            builder: (BuildContext context) => PaypalPayment(
+              onFinish: (number) async {
+                // payment done
+                print(number);
+              },
+              username: username,
+              roomName: roomName,
+              totalPrice: totalPrice,
             ),
-          );
+          ),
+        );
+      }
+      if (payment == "At the hotel") {
+        print(body.toString());
+        final response = await http.post(
+            Uri.parse("http://localhost:8080/api/hotel/hotelBooking"),
+            body: body,
+            headers: {
+              "Content-Type": "application/json",
+            });
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('booking', body);
+        print(payment);
+        if (response.statusCode == 200) {
+          Navigator.of(context).pushNamed(BottomNav.routeName);
+          notification(
+              title: "Booking sucessfull!!",
+              body: "Check your My booking to see more details");
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.red,
+            content: Text("The checkin date must be after today"),
+          ));
         }
-        Navigator.of(context).pushNamed(BottomNav.routeName);
-      } else {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          backgroundColor: Colors.red,
-          content: Text("The checkin date must be after today"),
-        ));
       }
     }
 

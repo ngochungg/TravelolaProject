@@ -54,13 +54,28 @@ class _HotelPostState extends State<HotelPost> {
         child: Column(
           children: [
             SizedBox(
-              height: 20,
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0),
+              child: Row(
+                children: [
+                  Text("What's new?",
+                      style: TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.pink)),
+                ],
+              ),
+            ),
+            SizedBox(
+              height: 10,
             ),
             for (int i = 0; i < post.length; i++)
               if (nlist[i]['user']['roles'][0]['id'] == 2)
                 SizedBox(
                     width: MediaQuery.of(context).size.width * 2,
-                    height: 350,
+                    height: 370,
                     child: Column(
                       // mainAxisAlignment: MainAxisAlignment.center,
                       children: [
@@ -129,6 +144,23 @@ class _HotelPostState extends State<HotelPost> {
                               ),
                               SizedBox(
                                 height: 20,
+                              ),
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.remove_red_eye_outlined,
+                                    color: Colors.black,
+                                    // size: 18,
+                                  ),
+                                  SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text('${nlist[i]['viewCount']}',
+                                      style: TextStyle(color: Colors.black)),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 5,
                               ),
                             ],
                           ),
