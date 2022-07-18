@@ -32,6 +32,7 @@ import { PostComponent } from './post/post.component';
 import { AddpostComponent } from './addpost/addpost.component';
 import { GuestBookingComponent } from './guest-booking/guest-booking.component';
 import { GuestedComponent } from './guested/guested.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
@@ -64,6 +65,7 @@ const routes: Routes = [
   { path: 'addpost',component: AddpostComponent},
   { path: 'guest-booking',component: GuestBookingComponent},
   { path: 'guested',component: GuestedComponent},
+  { path: 'paypal',component: PaypalComponent},
   { path: '', redirectTo: 'home', pathMatch: 'full' }
 ];
 

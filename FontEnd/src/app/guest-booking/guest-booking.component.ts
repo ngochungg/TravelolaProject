@@ -80,8 +80,8 @@ export class GuestBookingComponent implements OnInit {
       let headers = new HttpHeaders();
       
       headers.append('Content-Type', 'multipart/form-data');
-      this.http.get('http://localhost:8080/api/hotel/setHotelBookingStatusTrue/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
-      this.status=!this.status;
+      this.http.put('http://localhost:8080/api/hotel/setHotelBookingStatusTrue/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
+      this.reloadPage();
     }
     report(){
 

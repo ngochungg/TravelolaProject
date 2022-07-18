@@ -116,8 +116,8 @@
   <div class="col-sm-4"> </div>
   <div class="col-sm-4 row-pass">
     <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate enctype="multipart/form-data" class="form-pass" *ngIf="changePassword==true">
-      <input type="text"  [(ngModel)]="pass.oldpass" [ngModelOptions]="{standalone: true}"  class="form-input" placeholder="old password">
-      <input type="text" [(ngModel)]="pass.newpass" [ngModelOptions]="{standalone: true}" class="form-input" placeholder="new password"><br>
+      <input type="text"  [(ngModel)]="oldpas" [ngModelOptions]="{standalone: true}"  class="form-input" placeholder="old password">
+      <input type="text" [(ngModel)]="newpas" [ngModelOptions]="{standalone: true}" class="form-input" placeholder="new password"><br>
       <input type="submit" (click)="changPassword()" value="Change Password" class="btn btn-danger " style="width:30%;margin-top: 40px;">
     </form>
   </div>

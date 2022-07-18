@@ -117,19 +117,16 @@ export class UpdateComponent implements OnInit {
     this.chooseEvent=false;
   }
 
-  pass:any={
-    oldpass:'',
-    newpass:'',
-  }
-
+public oldpas:any;
+public newpas:any;
   changPassword(){
    
 
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     const filedata =new FormData();
-    filedata.append('oldPassword', this.pass.oldpass);
-    filedata.append('newPassword', this.pass.newpass);
+    filedata.append('oldPassword', this.oldpas);
+    filedata.append('newPassword', this.newpas);
 
     this.http.post('http://localhost:8080/api/auth/updatePassword/'+this.currentUser.id,filedata,{headers: headers, responseType: 'text'}).subscribe(res =>{console.log(res)});
   }

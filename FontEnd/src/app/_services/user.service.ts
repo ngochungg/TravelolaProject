@@ -43,6 +43,9 @@ export class UserService {
   getAllRoom(): Observable<any> {
     return this.http.get('http://localhost:8080/api/hotel/getAllRoom' );
   }
+  getAllFeedBack(id :string): Observable<any> {
+    return this.http.get('http://localhost:8080/api/hotel/showFeedback/'+id);
+  }
   hotelService(id :string): Observable<any> {
     return this.http.post('http://localhost:8080/api/hotel/addServices/'+id, {
    

@@ -46,6 +46,7 @@ import { GuestedComponent } from './guested/guested.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { PaypalComponent } from './paypal/paypal.component';
 
 
 
@@ -90,6 +91,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
     GuestBookingComponent,
     GuestedComponent,
     FeedbackComponent,
+    PaypalComponent,
 
 
 
