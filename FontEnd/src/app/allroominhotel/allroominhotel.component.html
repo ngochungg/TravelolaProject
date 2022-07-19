@@ -196,12 +196,9 @@
                             [(ngModel)]="form.paymentMethod" required
                             minlength="8" maxlength="20"
                             #paymentMethod="ngModel" /> 
-                    </div>
+                    </div>               
 
-                    
-
-                                <button value="tienmat">tienmat</button>
-                                <button value="{{total}}" (click)="changepaymentMethod($event)">paypal</button> 
+                                <button value="{{total}}" (click)="changepaymentMethod($event)" class="form-label" style="margin-left: 50px;">paypal</button> 
                
 
                     <!-- totalPrice -->
