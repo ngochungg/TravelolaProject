@@ -2,9 +2,49 @@
     float: right;
     width: 60%;
 }
-.img-city{
-    width: 200px ;
-    height:200px ;
+.img-big{
+  position:relative;
+  object-fit: cover;
+    width: 300px ;
+    height:300px ;
+}
+.img-big-only{
+  position:relative;
+  object-fit: cover;
+    width: 400px ;
+    height:400px ;
+}
+.img-small{
+  /* position: absolute; */
+  object-fit: cover;
+    width: 140px ;
+    height:140px ;
+    
+    margin-top: 2%;
+    margin-left: 10px;
+}
+.img-small2{
+  /* position: absolute; */
+  filter: brightness(50%);
+  object-fit: cover;
+  width: 142px ;
+  height:142px ;
+  margin-top: 1%;
+  margin-left: 10px;
+  margin-top: 110%;
+  margin-left: -197%;
+}
+.img-more{
+  filter: brightness(200%);
+  position: absolute;
+  color: white;
+  font-size: 40px;
+  margin-top: 140%;
+  margin-left: -60%;
+}
+.all-img{
+  width: 400px;
+  margin-right: 5%;
 }
 .col7{
     font-size: 16px;
@@ -21,9 +61,11 @@
     position: relative;
     float: left;
 }
+
 .in4{
-    position: relative;
-   padding-left: 32%;
+  margin-left:68%;
+    /* position: relative; */
+   
 }
 .btn-book{
     float: right;
@@ -48,7 +90,7 @@
     margin-left: 5%;
 }
 .div-col-8{
-    margin-top: 5%;
+    margin-top: 2%;
     margin-bottom: 5%;
 }
 .hotel{
@@ -66,11 +108,12 @@
 }
 
 .success{
+  margin-left: 35%;
     margin-top: 100px;
     border-radius: 3%;
     border: solid 0.5px rgb(209, 183, 183);
     box-shadow: 5px 5px 20px gray;
-    height:250px;
+    height:350px;
     width: 500px;
     text-align: center;
     margin-bottom: 200px;
@@ -83,8 +126,8 @@
     font-size: 80px;
 }
 .suc{
-  margin-top: 15%;
-  font-size: 40px;
+  /* margin-top: 15%; */
+  font-size: 30px;
     
 }
 #form{
@@ -167,4 +210,111 @@
    
     font-size: 20px;
     color:rosybrown
+}
+.feedBck{
+  margin-top:50px;
+  margin-left: 2%;
+  width: 500px;
+}
+.fb-g{
+  margin-top: 50px;
+  margin-left: 10%; 
+  margin-right: 2%;
+}
+.userFb{
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: bold;
+}
+.hotelName{
+  text-transform: capitalize;
+  font-size: 18px;
+  font-weight: bold;
+}
+.label-img{
+  margin-top: 10px;
+}
+.view-img-big{
+  object-fit: cover;
+  margin-bottom: 30px;
+  /* margin-top: 30px; */
+  height: 600px;
+  width: 1000px;
+}
+.view-img-nomal{
+  object-fit: cover;
+  margin-bottom: 30px;
+  margin-top: -108%;
+  margin-left: 101%;
+  height: 200px;
+  width: 400px;
+}
+.view-img-small2{
+  object-fit: cover;
+  margin-bottom: 30px;
+  /* margin-top: 30px; */
+  height: 200px;
+  width: 200px;
+}
+
+@import "swiper/swiper-bundle.css";
+
+.swiper {
+  width: 100%;
+  height: 100%;
+}
+
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.img-slide{
+  width: 100%;
+  height: 500px;
+  object-fit: contain;
+  margin-bottom: 50px;
+  margin-top: 10px;
+}
+.in4-viewRoom{
+  margin-left: 20%;
+  width: 60%;
+  background-color: #999BE80D;
+  margin-bottom:100px;
+}
+.form-submit{
+  margin-left: 30%;
+}
+.price-total{
+  font-size: 18px;
+  font-weight: bold;
+}
+.row{
+  width: 100%;
+  margin-left: 0%;
+}
+.validate-form{
+  color: red;
+  font-size: 20px;
 }

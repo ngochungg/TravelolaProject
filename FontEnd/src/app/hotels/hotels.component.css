@@ -1,10 +1,14 @@
 .search{
-    float: right;
-    width: 60%;
+    /* float: right;*/
+    width: 80%; 
+    margin-top: 20px;
+    margin-bottom: 50px;
+    margin-left: 10%;
 }
 .img-city{
-    width: 200px ;
-    height:200px ;
+    object-fit: cover;
+    width: 230px ;
+    height:300px ;
 }
 .col7{
     font-size: 16px;

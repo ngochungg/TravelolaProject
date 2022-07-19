@@ -36,7 +36,7 @@
                   <td>
                     <button *ngIf="item.retired ==false"  class="btn btn-primary btn-in4" (click)="confirm($event)" value="{{ item.id }}">Confirm</button> 
                     <button *ngIf="item.retired ==false" class="btn btn-danger btn-in4" (click)="refuse($event)" value="{{ item.id }}">Refuse</button>
-                    <button *ngIf="item.retired ==true  && status ==false" class="btn btn-success btn-in4" (click)="done($event)"value="{{ item.id }}">Done</button>
+                    <button *ngIf="item.retired ==true  && item.status ==false" class="btn btn-success btn-in4" (click)="done($event)"value="{{ item.id }}">Done</button>
                     <button *ngIf="item.retired ==true" class="btn btn-warning btn-in4" (click)="report()"value="{{ item.id }}">Report</button>
                 </td>
                 </tr>
