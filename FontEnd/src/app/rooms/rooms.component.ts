@@ -108,4 +108,8 @@ export class RoomsComponent implements OnInit {
     this.http.post('http://localhost:8080/api/hotel/addRoom/'+this.id  , filedata).subscribe(res =>{console.log(res)});
 
   }
+  erro=false;
+  erroUpload(){
+    this.erro=true;
+  }
 }

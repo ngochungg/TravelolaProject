@@ -5,17 +5,6 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../_services/auth.service';
 import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
-interface Rooms {
-  hotelName: string,
-  location: string,
-  roomType: string,
-  price: number,
-  maxAdult: number,
-  maxChildren: number,
-  images: any[],
-  province:string,
-
-}
 @Component({
   selector: 'app-hotels',
   templateUrl: './hotels.component.html',
@@ -27,7 +16,7 @@ export class HotelsComponent implements OnInit {
   currentUser: any;
   hotelRooms: any[] = [];
   room: any[] = [];
-  dataRooms: Rooms[] = [];
+ 
   searchKeyword: string | null = '';
   Obj!: any;
   oj: any;

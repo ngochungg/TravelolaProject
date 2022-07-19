@@ -3,11 +3,16 @@
     <div class="row">
         <div class="col-sm-12">
             <h1 class="account-header">All Rooms in yours hotel</h1>
+            <input class="form-control search" type="number" placeholder="Search by Guest Phone"  [min]="0"
+            (keyup)="searchUser($event)">
+        <hr style="width: 100%;"><br><br>
             <table >
               <thead >
                 <tr >
                     <!-- <th>image</th> -->
                   <th>id</th>
+                  <th>Guest</th>
+                  <th>Phone</th>
                   <th>checkInDate</th>
                   <th>checkOutDate</th>
                   
@@ -22,6 +27,8 @@
                 <tr *ngFor="let item of usersID">
                     
                   <td>{{ item.id }}</td>
+                  <td>{{ item.user.firstName }} {{ item.user.lastName }}</td>
+                  <td>  {{item.user.phone}}</td>
                   <td>{{item.checkInDate}}</td>
                   <td>{{ item.checkOutDate }}</td>
                   

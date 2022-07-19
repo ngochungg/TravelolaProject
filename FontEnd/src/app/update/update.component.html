@@ -22,7 +22,8 @@
 
     <!-- firstname -->
     <div class="form-group">
-      <label for="firstName">First Name</label>
+      <label for="firstName">First Name <i
+        *ngIf="!form.firstName" class="validate-form">*</i></label>
       <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required minlength="1"
         maxlength="20" #firstName="ngModel" />
       <div class=" div-errors" *ngIf="firstName.errors && f.submitted">
@@ -37,7 +38,9 @@
     </div>
     <!-- lastname -->
     <div class="form-group">
-      <label for="lastName">Last Name</label>
+    
+      <label for="lastName">Last Name <i
+        *ngIf="!form.lastName" class="validate-form">*</i></label>
       <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required minlength="1"
         maxlength="20" #lastName="ngModel" />
       <div class=" div-errors" *ngIf="lastName.errors && f.submitted">
@@ -53,7 +56,8 @@
 
     <!-- email -->
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Email <i
+        *ngIf="!form.email" class="validate-form">*</i></label>
       <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
       <div class="div-errors" *ngIf="email.errors && f.submitted">
         <div *ngIf="email.errors['required']">*Email is required</div>
@@ -64,8 +68,9 @@
     </div>
     <!-- phone -->
     <div class="form-group">
-      <label for="phone">Phone</label>
-      <input type="text" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="8" maxlength="20"
+      <label for="phone">Phone<i
+        *ngIf="!form.phone" class="validate-form">*</i> </label>
+      <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="8" maxlength="20"
         #phone="ngModel" />
       <div class="div-errors" *ngIf="phone.errors && f.submitted">
         <div *ngIf="phone.errors['required']">*Phone is required</div>
@@ -79,8 +84,15 @@
     </div>
 
     <div class="form-group">
-      <div class="position" ><button class="btn btn-danger btn-change" (click)="onUpdate()">Update</button></div>
+      <div class="position"*ngIf="!form.firstName || !form.lastName
+      || !form.email || !form.phone" style="text-align: center;" >
+        <button class="btn btn-danger btn-change" (click)="erroUpdate()" style="margin-right: 45%;">Update</button>
       
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="position"*ngIf="form.firstName&& form.lastName
+      &&form.email && form.phone" style="text-align: center;" ><button class="btn btn-danger btn-change" (click)="onUpdate()" style="margin-right: 45%;">Update</button></div>
     </div>
 
    

@@ -6,11 +6,7 @@ import { TokenStorageService } from '../_services/token-storage.service';
 import { UserService } from '../_services/user.service';
 import { HttpClient } from '@angular/common/http';
 import { HttpHeaders } from '@angular/common/http';
-interface room {
-  id:string,
-  retired:false,
 
-}
 @Component({
   selector: 'app-guest-booking',
   templateUrl: './guest-booking.component.html',
@@ -20,8 +16,10 @@ export class GuestBookingComponent implements OnInit {
 
   constructor(private token: TokenStorageService,private userService: UserService, private http: HttpClient,private router: Router,private authService: AuthService) { }
   user:any;
+ 
   id:any;
   usersID:any;
+  _usersID:any[]=[];
   ngOnInit(): void {
     this.user=this.token.getUser();
     console.log('user',this.user);
@@ -37,8 +35,11 @@ export class GuestBookingComponent implements OnInit {
               next: (data) => {
                 this.usersID=data;
                 console.log('data', this.usersID);
+
+                this._usersID=[...this.usersID]
               }
             });
+          
           }
         }
 
@@ -56,8 +57,6 @@ export class GuestBookingComponent implements OnInit {
     confirm(event :any){
    
       const ev=event.target.value;
-      // const index = this.usersID.findIndex((usersID: { id: string; }) => usersID.id === ev);
-      // this.usersID[index] ={...this.usersID[index],status:true}
       let headers = new HttpHeaders();
       headers.append('Content-Type', 'multipart/form-data');
       this.http.put('http://localhost:8080/api/hotel/confirmedHotelBooking/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
@@ -82,6 +81,23 @@ export class GuestBookingComponent implements OnInit {
       headers.append('Content-Type', 'multipart/form-data');
       this.http.put('http://localhost:8080/api/hotel/setHotelBookingStatusTrue/'+ev,{headers: headers, responseType: 'text'}  ).subscribe(res =>{console.log(res)});
       this.reloadPage();
+    }
+
+    public searchKeyword:any;
+    searchUser(even:any){
+      this.searchKeyword = even.target.value;
+   
+      if (this.searchKeyword === null || this.searchKeyword === '') {
+        this.usersID = this._usersID;
+      } else {
+        if (this.searchKeyword.length > 0) {
+          console.log(this.searchKeyword);
+          const userFilted = this._usersID.filter((use) =>
+           use.user.phone.includes(this.searchKeyword != null ? this.searchKeyword : '')
+          );
+          this.usersID = userFilted;
+        }
+      }
     }
     report(){
 
