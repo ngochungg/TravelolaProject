@@ -196,12 +196,9 @@
                             [(ngModel)]="form.paymentMethod" required
                             minlength="8" maxlength="20"
                             #paymentMethod="ngModel" /> 
-                    </div>
+                    </div>               
 
-                    
-
-                                <!-- <button value="tienmat">tienmat</button>
-                                <button value="{{total}}" (click)="changepaymentMethod($event)">paypal</button> -->
+                                <button value="{{total}}" (click)="changepaymentMethod($event)" class="form-label" style="margin-left: 50px;">paypal</button> 
                
 
                     <!-- totalPrice -->
@@ -259,7 +256,7 @@
                 </form>
             </div>
         </div>
-        <div *ngIf="isLogin ==false" class="loginFalse">
+        <div *ngIf="isLogin ==false && showErroLogin==true " class="loginFalse">
             <div>You need to login before booking</div>
             <div>--> Return for <a href="/login"> Login </a></div>
         </div>

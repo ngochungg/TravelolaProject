@@ -18,6 +18,7 @@ export class UpdateComponent implements OnInit {
   currentUser: any;
   imageUrl :any;
   img :any;
+  showerro=false
   form: any = {
 
     firstName: null,
@@ -59,6 +60,9 @@ export class UpdateComponent implements OnInit {
       }
     });
     
+  }
+  erroUpdate(){
+    this.showerro=true;
   }
 
   reloadPage(): void {

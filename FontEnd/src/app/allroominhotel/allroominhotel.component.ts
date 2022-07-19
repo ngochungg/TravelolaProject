@@ -52,6 +52,7 @@ export class AllroominhotelComponent implements OnInit {
   IDu:any;
   isLogin=false;
   ttPrice:any;
+  showErroLogin=false;
   // input date
   allFeedBackOfHotelID:any;
   total:any;
@@ -125,12 +126,14 @@ export class AllroominhotelComponent implements OnInit {
 
     this.display=!this.display;
     this.fbk=!this.fbk;
+    
 
   }
   booking(event:any){
     const id=event.target.value;
     this.IDr=id;
     this.viewRoom =!this.viewRoom;
+    this.showErroLogin=true;
     this.displayForm=!this.displayForm;
     
   }
