@@ -168,7 +168,7 @@
   <!-- post -->
 
   <div class="row row-post">
-    <div class="col-sm-12 post-title"><button (click)="addPost()" class="btn-title" title="Click here to Add a new post">Add your new post</button></div>
+    <div class="col-sm-12 post-title" *ngIf="to.username!=null"><button (click)="addPost()" class="btn-title" title="Click here to Add a new post">Add your new post</button></div>
     <div *ngFor="let item of posts" class="col-sm-2 post">
       <form action="{{item.id}}" (click)="gotopost(item.id)" class="form-post">
         <div class="user"><button class="fa fa-user icon-user"></button>

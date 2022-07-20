@@ -33,6 +33,7 @@ export class GuestBookingComponent implements OnInit {
  
             this.userService.showHotelBookingByHotelId(this.id).subscribe({
               next: (data) => {
+                console.log('data', data);
                 this.usersID=data;
                 console.log('data', this.usersID);
 

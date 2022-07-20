@@ -195,10 +195,10 @@
                             name="paymentMethod"
                             [(ngModel)]="form.paymentMethod" required
                             minlength="8" maxlength="20"
-                            #paymentMethod="ngModel" /> 
+                            #paymentMethod="ngModel" placeholder="cash/paypal" /> 
                     </div>               
 
-                                <button value="{{total}}" (click)="changepaymentMethod($event)" class="form-label" style="margin-left: 50px;">paypal</button> 
+                                <!-- <button value="{{total}}" (click)="changepaymentMethod($event)" class="form-label" style="margin-left: 50px;">paypal</button>  -->
                
 
                     <!-- totalPrice -->
@@ -273,7 +273,7 @@
 
         <!-- form success -->
         <div *ngIf="displaySuccess==true" class="success">
-            <i><img src="assets/images/tungtung.gif" alt=""></i>
+            <!-- <i><img src="assets/images/tungtung.gif" alt=""></i> -->
             <div class="suc"><button class="fa fa-check icon"></button>
                 Successfull</div>
             <div style="margin-top: 10px;" title="click here to return

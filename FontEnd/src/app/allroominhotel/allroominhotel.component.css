@@ -51,6 +51,7 @@
     font-family: Arial, Helvetica, sans-serif;
 }
 .lable{
+  position: relative;
     padding: 16px;
     border-radius: 3px;
     border: 1px solid #e6e6e6;
@@ -63,8 +64,9 @@
 }
 
 .in4{
-  margin-left:68%;
-    /* position: relative; */
+  margin-left:70%;
+    position: absolute;
+
    
 }
 .btn-book{

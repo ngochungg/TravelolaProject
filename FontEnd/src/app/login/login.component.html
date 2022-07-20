@@ -56,10 +56,10 @@
             Don'have an account? <a href="/register">Sign Up</a>
         </div>
         <div class="return-sigup">
-            <a href="/forgot-password">Forgot Password</a>
+            <a href="/forgot-password" style="text-decoratio:none">Forgot Password</a>
         </div>
 
-        <div class="container login-bot">
+        <div class="container login-bot" style="margin-top:30px">
             <button class="btn btn-outline-danger btn-lg btn-block css-btn-login-gg" (click)="signInWithGoogle()"
                 *ngIf="isLoggedIn == false">
                 <i class="fa fa-google-plus"></i> Login with Google</button>

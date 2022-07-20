@@ -122,7 +122,7 @@ class _LoginState extends State<Login> {
       prefs.setInt('userId', array['id']);
       prefs.setString('username', array['username']);
       prefs.setString('phone', array['phone']);
-      prefs.setString('image', array['imageUrl']);
+      // prefs.setString('image', array['imageUrl']);
       storeUserData(user);
       print(prefs.getBool('isLoggedIn'));
       print(user);

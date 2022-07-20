@@ -3,6 +3,7 @@ import { UserService } from '../_services/user.service';
 import { AuthService } from '../_services/auth.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { TokenStorageService } from '../_services/token-storage.service';
 
 
 
@@ -22,9 +23,12 @@ export class HomeComponent implements OnInit {
   hotel: any;
   user:any;
   room:any;
-  constructor(private userService: UserService, private http: HttpClient,private router: Router,private authService: AuthService) { }
+  to:any;
+  constructor(private token: TokenStorageService ,private userService: UserService, private http: HttpClient,private router: Router,private authService: AuthService) { }
   public province = '';
   ngOnInit(): void {
+    this.to=this.token.getUser();
+    console.log('to',this.to)
     this.userService.find4ProvinceHaveMostHotel().subscribe({
       next: data => {
         this.city = data;
