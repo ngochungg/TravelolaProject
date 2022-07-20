@@ -95,14 +95,24 @@ class _HotelDetailState extends State<HotelDetail> {
                     SizedBox(
                       width: 2,
                     ),
-                    Text(
-                      '${hotel['hotelRating']}',
-                      style: TextStyle(
-                        // color: Colors.pinkAccent,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
+                    if (hotel['hotelRating'] != null)
+                      Text(
+                        '${hotel['hotelRating']}',
+                        style: TextStyle(
+                          // color: Colors.pinkAccent,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      )
+                    else
+                      Text(
+                        '0',
+                        style: TextStyle(
+                          // color: Colors.pinkAccent,
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
-                    ),
                     SizedBox(
                       width: 5,
                     ),

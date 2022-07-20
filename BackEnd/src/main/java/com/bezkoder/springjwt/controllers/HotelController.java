@@ -444,7 +444,7 @@ public static void generateQRCodeImage(String text, int width, int height, Strin
         List<Province> result = new ArrayList<>();
         for (Province province : provinces) {
             List<Hotel> hotels = hotelRepository.findByLocation_Province_Id(province.getId());
-            if(hotels.size()>=2){
+            if(hotels.size()>=1){
                 result.add(province);
             }
         }

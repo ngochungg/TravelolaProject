@@ -79,7 +79,7 @@ class _HotelHomePageState extends State<HotelHomePage> {
                 ),
                 for (int i = 0; i < hotelData.length; i++)
                   SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.95,
+                    width: MediaQuery.of(context).size.width * 1,
                     height: 200,
                     // decoration: const BoxDecoration(
                     //   color: Colors.white,
@@ -140,13 +140,23 @@ class _HotelHomePageState extends State<HotelHomePage> {
                                             width: 10,
                                           ),
                                         ),
-                                        TextSpan(
-                                          text:
-                                              '${hotelData[i]['hotelName']}\n',
-                                          style: TextStyle(
-                                              color: Colors.black,
-                                              fontSize: 18),
-                                        ),
+                                        if (hotelData[i]['hotelName'].length >
+                                            18)
+                                          TextSpan(
+                                            text:
+                                                '${hotelData[i]['hotelName'].toString().substring(0, 18)}\n',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          )
+                                        else
+                                          TextSpan(
+                                            text:
+                                                '${hotelData[i]['hotelName']}\n',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontSize: 18),
+                                          ),
                                         WidgetSpan(
                                           child: SizedBox(
                                             width: 10,
