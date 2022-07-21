@@ -45,13 +45,15 @@ export class UserBookingHistoryComponent implements OnInit {
     rating:null,
     hotel_booking_id: null,
   };
+  sendfb=false;
   sendFeedback(event:any){
     const { feedback, rating, hotel_booking_id} = this.form;
     this.authService.feedback(feedback, this.sao,this.ev).subscribe({
       next: data => {
         console.log(data);
- 
+        this.sendfb=!this.sendfb;
       }
+      
     });
 
   }

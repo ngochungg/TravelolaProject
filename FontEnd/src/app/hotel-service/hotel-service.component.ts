@@ -80,11 +80,12 @@ export class HotelServiceComponent implements OnInit {
 
   change(event: any): void {
     this.ev=event.target.value;
+    console.log('ev',this.ev);
    this.rooms[this.ev]=!this.rooms[this.ev];
     let headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
 
-    if(this.ev=='paymentAtTheHotel'){
+    if(this.ev=="paymentAtTheHotel"){
        this.http.post('http://localhost:8080/api/hotel/addServices/'+this.hotel.id ,{"paymentAtTheHotel":this.rooms[this.ev]},{headers: headers, responseType: 'text'}).subscribe({ next: (data) => {console.log(data)}  , error: (err) => { console.log('err', err); } });
     }else if(this.ev=='wifi'){
       this.http.post('http://localhost:8080/api/hotel/addServices/'+this.hotel.id ,{"wifi":this.rooms[this.ev]},{headers: headers, responseType: 'text'}).subscribe({ next: (data) => {console.log(data)}  , error: (err) => { console.log('err', err); } });

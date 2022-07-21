@@ -25,8 +25,9 @@ export class GuestBookingComponent implements OnInit {
     console.log('user',this.user);
     this.userService.showAllHotel().subscribe({
       next: (data) => {
+        console.log('data',data);
         for (let i = 0; i < data.length; i++) {
-          if (data[i].account.username== this.user.username) {
+          if (data[i].account.username= this.user.username) {
             this.id = data[i].account.id;
            
             console.log('users', this.id);

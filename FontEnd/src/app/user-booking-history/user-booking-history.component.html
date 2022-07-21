@@ -43,11 +43,11 @@
               </tbody>
             </table>
         </div>
-        <div class="col-sm-2" *ngIf="done==true" id="feed">
+        <div class="col-sm-2" *ngIf="done==true && sendfb===false" id="feed" >
           <ngb-rating [(rate)]="sao" [max]="5" style="font-size:30px ;"> </ngb-rating>
               <input type="text" [(ngModel)]="form.feedback" placeholder="feedback to hotel" class="input-fb">             
              
-              <button (click)="sendFeedback($event)">Send</button>
+              <button (click)="sendFeedback($event)" >Send</button>
          
         </div>
     </div>
