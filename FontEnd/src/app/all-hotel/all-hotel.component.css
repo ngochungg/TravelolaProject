@@ -1,0 +1,21 @@
+.resiz{
+    width:200px
+}.ko-co{
+    display: none;
+}
+.search{
+    float: right;
+    width: 50%;
+}
+table{
+    margin-left: 5%;
+}
+table tr td{
+    padding-top: 2%;
+}
+/* table tr{
+    margin-left: 20%;
+} */
+.hotel-row{
+    margin-left: 15%;
+}

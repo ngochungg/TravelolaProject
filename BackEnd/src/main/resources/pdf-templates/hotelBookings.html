@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Report Booking Hotel In Month </h1>
+<table>
+    <tr>
+        <th>Hotel</th>
+    </tr>
+    <tr>
+        <td th:text="'Hotel Name: ' + ${hotel.getHotelName()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Contact Name: ' + ${hotel.getContactName()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Address: ' + ${address}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Email: ' + ${hotel.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Phone: ' + ${hotel.getPhone()}"></td>
+    </tr>
+</table>
+<br />
+<table class="quotation">
+    <tr>
+        <th>Item #</th>
+        <th>Booking Code</th>
+        <th>Check In</th>
+        <th>Check Out</th>
+        <th>Number Guest</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="item, iterStat: ${result}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${item.getBookingCode()}"></td>
+        <td th:text="${item.getCheckInDate()}"></td>
+        <td th:text="${item.getCheckOutDate}"></td>
+        <td th:text="${item.NumOfGuest}"></td>
+        <td th:text="${item.TotalPrice}"></td>
+    </tr>
+    <tr>
+        <td colspan="6" th:text="'Total: ' + ${total}"></td>
+    </tr>
+</table>
+</body>
+</html>

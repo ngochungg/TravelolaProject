@@ -1,0 +1,57 @@
+<div class="container">
+<div class="row hotel-row">
+    <app-navbar></app-navbar>   
+    
+        <div class="form-group">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-10">
+                <h1 class="account-header"> All Hotel in TRAVELOLA</h1>
+                <!-- <div  class="search">
+                    <input class="form-control search" type="text"  placeholder="Search User" name="username" (keyup)="searchUser($event)">
+                  </div> -->
+                <table>
+                    <thead>
+                        <tr class="Col-space">
+                         
+                            <th>id</th>
+                            <th>HotelName</th>
+                            <th>Location</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let user of hotel">
+                           
+                            <td>{{user.id}} </td>
+                            <td >{{user.hotelName}}</td>
+                            <td>{{user.location.province.name}}</td>
+                            <td id="form-in4" onclick="myFunction()">{{ user.email }}</td>
+                            <td>{{ user.phone }}</td>
+                            <!-- get role to users -->
+                            <td>
+                                <span *ngFor="let role of user.roles">
+                                    {{ role.name }}
+                                </span>
+                            </td>
+         
+                            <td *ngIf="user.status == true"  >
+                                
+                                <button *ngIf="user.account.status==true" class="btn btn-success btn-in4" (click)="Lock($event)" value=" {{user.account.id}}">Lock</button>
+                                <button *ngIf="user.account.status==false" class="btn btn-danger btn-in4" (click)="unLock($event)" value=" {{user.account.id}}">UnLock</button>
+                            </td>
+                            <td *ngIf="user.status == false" > 
+                                <button class="btn btn-danger btn-in4" (click)="no(user)">No Accepted</button>
+                                
+                            </td>
+                            <td *ngIf="user.status == false" > 
+                                <button class="btn btn-primary btn-in4" (click)="yes(user)">Accepted</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+           
+        </div>
+    </div>
+</div>
+</div>

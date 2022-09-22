@@ -1,0 +1,77 @@
+<app-navbar></app-navbar>
+<div class="container " >
+<div class="row ">
+    <div class="col-sm-3"></div>
+            <form  enctype="multipart/form-data" style="width: 200%;" class="" *ngIf="form==true">
+            <div class="col-md-7 form" style="margin-top:50px ; margin-left: 20%;">
+                <h1>Add new rooms</h1>
+                <div class="nex">
+                    <label for="roomNumber">roomNumber<i
+                        *ngIf="!roomNumber" class="validate-form">*</i></label>
+                    <input type="number" class="form-control" name="roomNumber" [(ngModel)]="roomNumber"
+                        [ngModelOptions]="{standalone: true}" required minlength="0"  />
+
+                </div>
+
+                <div class="nex">
+                    <label for="roomName">roomName<i
+                        *ngIf="!roomName" class="validate-form">*</i></label>
+                    <input type="text" class="form-control" name="roomName" [(ngModel)]="roomName"
+                        [ngModelOptions]="{standalone: true}" required  />
+                </div>
+
+                <div class="nex">
+                    <label for="roomType">roomType<i
+                        *ngIf="!roomType" class="validate-form">*</i></label>
+                    <input type="text" class="form-control" name="roomType" [(ngModel)]="roomType"
+                        [ngModelOptions]="{standalone: true}" required  />
+                </div>
+
+                <div class="nex">
+                    <label for="price">price<i
+                        *ngIf="!price" class="validate-form">*</i></label>
+                    <input type="number" class="form-control" name="price" [(ngModel)]="price"
+                        [ngModelOptions]="{standalone: true}" required/>
+                </div>
+
+                <div class="nex">
+                    <label for="maxAdult">maxAdult<i
+                        *ngIf="!maxAdult" class="validate-form">*</i></label>
+                    <input type="number" class="form-control" name="maxAdult" [(ngModel)]="maxAdult"
+                        [ngModelOptions]="{standalone: true}" required  />
+                </div>
+
+                <div class="nex">
+                    <label for="maxChildren">maxChildren<i
+                        *ngIf="!maxChildren" class="validate-form">*</i></label>
+                    <input type="number" class="form-control" name="maxChildren" [(ngModel)]="maxChildren"
+                        [ngModelOptions]="{standalone: true}" required />
+                </div>
+                <div class="nex ">
+                    <label for="images">Image<i
+                        *ngIf="!images" class="validate-form">*</i></label>
+                    <input type="file" class="form-control" name="images" (change)="onFileSelected($event)" [(ngModel)]="images"
+                        [ngModelOptions]="{standalone: true}" required multiple/>
+                    <!-- <img src="{{images}}" alt="nothing"/> -->
+
+                </div>
+                <div class="form-group nex" style="width: 40%;margin-left: 33%;" *ngIf=" !images || !maxChildren || !maxAdult || !price || !roomNumber || !roomName || !roomType">
+                    <button class="btn btn-primary btn-block" type="submit" (click)="erroUpload()">Submit</button>
+                    <h3 *ngIf="erro==true" style="color:red">Please fill all information</h3>
+                </div>
+                <div class="form-group nex" style="width: 40%;margin-left: 33%;" *ngIf=" images && maxChildren && maxAdult && price && roomNumber && roomName && roomType">
+                    <button class="btn btn-primary btn-block" type="submit" (click)="onUpload()">Submit</button>
+                </div>
+            </div>
+            </form>
+            <div *ngIf="display==true" class="success">
+
+                <div class="suc"><button class="fa fa-check icon"></button>
+                    Successfull</div>
+                <div style="margin-top: 10px;" title="click here to return
+                    homepage">Return <a href="/rooms"> Add Room</a></div>
+            </div>
+        </div>
+    </div>
+
+

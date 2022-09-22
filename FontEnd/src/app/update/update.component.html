@@ -1,0 +1,138 @@
+<div class="container choose-event" *ngIf="chooseEvent==true">
+  <div class="row row-chose" >
+    <div class="col-md-2"></div>
+    <div class="col-md-8 col6-choose">
+      <div class="choose-change">
+        <button class="btn-choose  hover-4" (click)="information()" title="click here to update information">Update Information</button>
+        <button class="btn-choose hover-4" (click)="avatar()"  title="click here to change avata">Change Avatar</button>
+        <button class="btn-choose hover-4" (click)="password()"  title="click here to change password">Change Password</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- information -->
+<div class="container formm" *ngIf="updateInformation==true">
+
+
+  <h3 style="text-align:center ;">Update information</h3>
+  <form name="form" (ngSubmit)="f.form.valid && onUpdate()" #f="ngForm" novalidate>
+
+
+    <!-- firstname -->
+    <div class="form-group">
+      <label for="firstName">First Name <i
+        *ngIf="!form.firstName" class="validate-form">*</i></label>
+      <input type="text" class="form-control" name="firstName" [(ngModel)]="form.firstName" required minlength="1"
+        maxlength="20" #firstName="ngModel" />
+      <div class=" div-errors" *ngIf="firstName.errors && f.submitted">
+        <div *ngIf="firstName.errors['required']">*First Name is required</div>
+        <div *ngIf="firstName.errors['minlength']">
+          *First Name must be at least 1 characters
+        </div>
+        <div *ngIf="firstName.errors['maxlength']">
+          *First Name must be at most 20 characters
+        </div>
+      </div>
+    </div>
+    <!-- lastname -->
+    <div class="form-group">
+    
+      <label for="lastName">Last Name <i
+        *ngIf="!form.lastName" class="validate-form">*</i></label>
+      <input type="text" class="form-control" name="lastName" [(ngModel)]="form.lastName" required minlength="1"
+        maxlength="20" #lastName="ngModel" />
+      <div class=" div-errors" *ngIf="lastName.errors && f.submitted">
+        <div *ngIf="lastName.errors['required']">*Last Name is required</div>
+        <div *ngIf="lastName.errors['minlength']">
+          *Last Name must be at least 1 characters
+        </div>
+        <div *ngIf="lastName.errors['maxlength']">
+          *LastName must be at most 20 characters
+        </div>
+      </div>
+    </div>
+
+    <!-- email -->
+    <div class="form-group">
+      <label for="email">Email <i
+        *ngIf="!form.email" class="validate-form">*</i></label>
+      <input type="email" class="form-control" name="email" [(ngModel)]="form.email" required email #email="ngModel" />
+      <div class="div-errors" *ngIf="email.errors && f.submitted">
+        <div *ngIf="email.errors['required']">*Email is required</div>
+        <div *ngIf="email.errors['email']">
+          *Email must be a valid email address
+        </div>
+      </div>
+    </div>
+    <!-- phone -->
+    <div class="form-group">
+      <label for="phone">Phone<i
+        *ngIf="!form.phone" class="validate-form">*</i> </label>
+      <input type="number" class="form-control" name="phone" [(ngModel)]="form.phone" required minlength="8" maxlength="20"
+        #phone="ngModel" />
+      <div class="div-errors" *ngIf="phone.errors && f.submitted">
+        <div *ngIf="phone.errors['required']">*Phone is required</div>
+        <div *ngIf="phone.errors['minlength']">
+          *Phone must be at least 8 characters
+        </div>
+        <div *ngIf="phone.errors['maxlength']">
+          *Phone must be at most 20 characters
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <div class="position"*ngIf="!form.firstName || !form.lastName
+      || !form.email || !form.phone" style="text-align: center;" >
+        <button class="btn btn-danger btn-change" (click)="erroUpdate()" style="margin-right: 45%;">Update</button>
+      
+      </div>
+    </div>
+    <div class="form-group">
+      <div class="position"*ngIf="form.firstName&& form.lastName
+      &&form.email && form.phone" style="text-align: center;" ><button class="btn btn-danger btn-change" (click)="onUpdate()" style="margin-right: 45%;">Update</button></div>
+    </div>
+
+   
+    <!-- <img [src]="getLinkPicture()" alt="profile photo" width="150px" height="150px"> -->
+
+    <div class="alert alert-warning" *ngIf="f.submitted ">
+      Update failed!<br />
+
+    </div>
+    <div *ngIf="isSuccessful ==true"></div>
+  </form>
+
+</div>
+
+<!-- avatar -->
+<div class="container" *ngIf="updateAvatar==true">
+  <div class="row" style="background-color:none">
+      <div class="col-sm-3"></div>
+      <div class="col-sm-5 col5" >
+          <form enctype="multipart/form-data"  class="form-upload-avt">
+
+              <input type="file" (change)="onFileSelected($event)" class="form-img"> <br>
+              <!-- <img [src]="'http://localhost:8080/api/auth/uploadImage/'+this.img" alt=""> -->
+             
+          <button type="button" (click)="onUpload()" class="btn-upload-avt">Upload</button>
+          </form>
+      </div>
+  </div>
+</div>
+
+<!-- change password -->
+<div class="row " *ngIf="changePassword==true">
+  <div class="col-sm-4"> </div>
+  <div class="col-sm-4 row-pass">
+    <form name="form" (ngSubmit)="f.form.valid" #f="ngForm" novalidate enctype="multipart/form-data" class="form-pass" *ngIf="changePassword==true">
+      <input type="text"  [(ngModel)]="oldpas" [ngModelOptions]="{standalone: true}"  class="form-input" placeholder="old password">
+      <input type="text" [(ngModel)]="newpas" [ngModelOptions]="{standalone: true}" class="form-input" placeholder="new password"><br>
+      <input type="submit" (click)="changPassword()" value="Change Password" class="btn btn-danger " style="width:30%;margin-top: 40px;">
+    </form>
+  </div>
+</div>
+
+<app-footer></app-footer>

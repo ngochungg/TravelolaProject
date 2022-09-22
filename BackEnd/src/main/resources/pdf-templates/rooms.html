@@ -1,0 +1,61 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Room Report</h1>
+<table>
+    <tr>
+        <th>Hotel</th>
+    </tr>
+    <tr>
+        <td th:text="'Hotel Name: ' + ${hotel.getHotelName()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Contact Name: ' + ${hotel.getContactName()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Address: ' + ${address}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Email: ' + ${hotel.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Phone: ' + ${hotel.getPhone()}"></td>
+    </tr>
+</table>
+<br />
+<table class="quotation">
+    <tr>
+        <th>Item #</th>
+        <th>Room Name</th>
+        <th>Room Type</th>
+        <th>Room Number</th>
+        <th>Price</th>
+    </tr>
+    <tr th:each="item, iterStat: ${rooms}">
+        <td th:text="${iterStat.index + 1}"></td>
+        <td th:text="${item.getRoomName()}"></td>
+        <td th:text="${item.getRoomType()}"></td>
+        <td th:text="${item.getRoomNumber}"></td>
+        <td th:text="${item.getPrice}"></td>
+    </tr>
+</table>
+</body>
+</html>

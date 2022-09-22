@@ -1,0 +1,43 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row">
+      <div class="col-sm-2"></div>
+        <div class="col-sm-10">
+            <h1 class="account-header">All Rooms in yours hotel <button (click)="rpAllRoom()">report all room </button></h1>
+            <div *ngIf="rp">{{rp}} </div>
+            <table >
+              <thead >
+                <tr >
+                    <th>image</th>
+                  <th>id</th>
+                  <th>roomName</th>
+                  <th>roomNumber</th>
+                  <th>roomType</th>
+                  <th>price</th>
+                  <th>maxAdult</th>
+                  <th>maxChildren</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of rooms">
+                    <td>
+                      <img [src]="'http://localhost:8080/api/auth/getImage/'+item.images[0].imagePath" alt="avata" class="img-fluid img-rooms">
+                      
+                    </td>
+                  <td>{{ item.id }}</td>
+                  <td>{{item.roomName}}</td>
+                  <td>{{ item.roomNumber }}</td>
+                  <td>{{ item.roomType }}</td>
+                  <td>{{ item.price }}</td>
+                  <td>{{ item.maxAdult }}</td>
+                  <td>{{ item.maxChildren }}</td>
+                  <td>
+                    <button class="btn btn-success btn-in4">Update</button> 
+                    <button class="btn btn-danger btn-in4">Delete</button>
+                </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>

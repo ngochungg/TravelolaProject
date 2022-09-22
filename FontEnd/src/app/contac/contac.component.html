@@ -1,0 +1,88 @@
+
+<div class="container-fluid full-contac"></div>
+  <section class="w3l-about-breadcrumb text-left" style="width:171.7%;margin-left: -36%; margin-top: 10px;">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4  " >
+      <div class="container py-2">
+        <h2 class="title">Contact Us</h2>
+        <ul class="breadcrumbs-custom-path mt-2">
+          <li><a href="#url">Home</a></li>
+          <li class="active"><span class="fa fa-arrow-right mx-2" aria-hidden="true"></span> Contact </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- //about breadcrumb -->
+<!-- contact-form -->
+<div class="w3l-contact" id="contact">
+  <div class="contact-infubd py-5">
+    <div class="container py-lg-3">
+      <div class="contact-grids row">
+        <div class="col-lg-6 contact-left">
+          <div class="partners">
+            <div class="cont-details">
+              <h5>Get in touch</h5>
+              <p class="mt-3 mb-4">Hi there, We are available 24/7 by fax, e-mail or by phone. Drop us line so we can talk
+                futher about that.</p>
+            </div>
+            <div class="hours">
+              <h6 class="mt-4">Email:</h6>
+              <p> <a href="mailto:mail@traversal.com">
+                mail@traversal.com</a></p>
+              <h6 class="mt-4">Visit Us:</h6>
+              <p> 590 CMT8, District 3,HCM city</p>
+              <h6 class="mt-4">Contact:</h6>
+              <p class="margin-top"><a href="tel:+44-255-366-88">+44-255-366-88</a></p>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+          <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.3252475922027!2d106.66410831531634!3d10.786382261958146!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752ed23c80767d%3A0x5a981a5efee9fd7d!2zNTkwIMSQLiBDw6FjaCBN4bqhbmcgVGjDoW5nIDgsIFBoxrDhu51uZyAxMSwgUXXhuq1uIDMsIFRow6BuaCBwaOG7kSBI4buTIENow60gTWluaCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1654688474112!5m2!1svi!2s" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </div>
+
+      </div>
+      <div class="map mt-5 pt-md-5">
+        <h5>Map</h5>
+        
+      </div>
+    </div>
+  </div>
+  <app-footer></app-footer>
+<!-- /contact-form -->
+
+  <!--/w3l-footer-29-main-->
+  <!-- Template JavaScript -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
+        }
+      });
+    });
+  </script>
+  <!--//MENU-JS-->
+
+  <script src="assets/js/bootstrap.min.js"></script>
+

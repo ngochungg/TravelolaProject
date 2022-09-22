@@ -1,0 +1,284 @@
+<div class="container-fluid">
+    <div class="row">
+
+        <!-- feedback -->
+        <div class="col-sm-6 feedBck" *ngIf="fbk==true">
+            <h1>Feedback of guest</h1>
+            <div *ngFor="let feed of allFeedBackOfHotelID" class="fb-g">
+                <div *ngIf="feed.feedback!=null"><i class="userFb">
+                        {{feed.user.username}}</i> : {{feed.feedback}}</div>
+            </div>
+        </div>
+
+        <!-- allRoom -->
+        <div class="col-sm-6 div-col-8" *ngIf="display==true">
+            <label class="lable" *ngFor="let item of room">
+                <div>
+
+                    <!-- <p class="img" *ngIf="item.images.length ==1">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[0].imagePath"
+                            alt="avata" class="img-big-only">
+                       
+                    </p> -->
+                    <p class="img" *ngIf="item.images[0]">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[0].imagePath"
+                            alt="avata" class="img-big">
+
+                    </p>
+                    <p class="img" *ngIf="item.images[1]">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[1].imagePath"
+                            alt="avata" class="img-small">
+
+                    </p>
+                    <p class="img" *ngIf="item.images[2]">
+                        <img
+                            [src]="'http://localhost:8080/api/auth/getImage/'+
+                            item.images[1].imagePath"
+                            alt="avata" class="img-small2">
+                        <i class="img-more">...</i>
+                        <!-- <h4> Image{{item.images[0].imagePath}}</h4> -->
+                    </p>
+                    <div class="in4">
+                        <h4><i class="hotelName">Hotel: </i>
+                            {{item.images[0].hotel.hotelName}}</h4>
+                        <hr>
+                        <h5>Room Name: {{item.roomName}}</h5>
+                        <h5>Room Typy: {{item.roomType}}</h5>
+                        <h5>Room Number: {{item.roomNumber}}</h5>
+                        <h5>Price: {{item.price}}</h5>
+                        <h5>Max Adult: {{item.maxAdult}}</h5>
+                        <h5>Max Children: {{item.maxChildren}}</h5>
+
+                        <!-- <h4 class="des"><h4 class="description"> {{item.description}}</h4></h4> -->
+                        <button class="btn btn-primary btn-book"
+                            value="{{item.id}}" (click)="view($event)">View Room
+                        </button>
+                    </div>
+                </div>
+
+            </label>
+
+        </div>
+
+        <!-- viewRoom -->
+        <div *ngIf="viewRoom==true">
+            <div class="container-fluid" *ngIf="viewRoomID">
+                <div class="row">
+                    <div class="col-md-12">
+                        <swiper [pagination]="pagination" class="mySwiper"
+                            [autoplay]="{
+                            delay: 3000,
+                            disableOnInteraction: false
+                            }" [centeredSlides]="true">
+                            [slidesPerView]="1"
+                            [spaceBetween]="30"
+                            [loop]="true"
+                            [effect]="'fade'"
+                            [navigation]="true"
+
+                            class="mySwiper"
+
+                            <ng-template swiperSlide
+                                *ngIf="viewRoomID.images[0]"><img
+                                    [src]="'http://localhost:8080/api/auth/getImage/'+
+                                    viewRoomID.images[0].imagePath"
+                                    alt="avata" class="img-slide">
+                            </ng-template>
+                            <ng-template swiperSlide
+                                *ngIf="viewRoomID.images[1]"><img
+                                    [src]="'http://localhost:8080/api/auth/getImage/'+
+                                    viewRoomID.images[1].imagePath"
+                                    alt="avata" class="img-slide">
+                            </ng-template>
+                            <ng-template swiperSlide
+                                *ngIf="viewRoomID.images[2]"><img
+                                    [src]="'http://localhost:8080/api/auth/getImage/'+
+                                    viewRoomID.images[2].imagePath"
+                                    alt="avata" class="img-slide">
+                            </ng-template>
+                            <ng-template swiperSlide
+                                *ngIf="viewRoomID.images[3]"><img
+                                    [src]="'http://localhost:8080/api/auth/getImage/'+
+                                    viewRoomID.images[3].imagePath"
+                                    alt="avata" class="img-slide">
+                            </ng-template>
+                            <ng-template swiperSlide
+                                *ngIf="viewRoomID.images[4]"><img
+                                    [src]="'http://localhost:8080/api/auth/getImage/'+
+                                    viewRoomID.images[4].imagePath"
+                                    alt="avata" class="img-slide">
+                            </ng-template>
+
+                        </swiper>
+                    </div>
+
+                    <div class="col-md-12 in4-viewRoom">
+                        <h4><i class="hotelName">Hotel: </i>
+                            {{viewRoomID.images[0].hotel.hotelName}}</h4>
+                        <hr>
+                        <h5>Room Name: {{viewRoomID.roomName}}</h5>
+                        <h5>Room Typy: {{viewRoomID.roomType}}</h5>
+                        <h5>Room Number: {{viewRoomID.roomNumber}}</h5>
+                        <h5>Price: {{viewRoomID.price}}</h5>
+                        <h5>Max Adult: {{viewRoomID.maxAdult}}</h5>
+                        <h5>Max Children: {{viewRoomID.maxChildren}}</h5>
+                        <button class="btn btn-primary btn-book"
+                            (click)="booking($event)" value="{{viewRoomID.id}}"
+                            id="#form" style="margin-bottom: 20px;
+                            margin-right: 20px;">Booking</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- booking -->
+        <div class="col-sm-2"></div>
+        <div class="col-sm-9 form-submit">
+            <div *ngIf="displayForm==true && isLogin==true" id="form">
+                <form name="form" (ngSubmit)="f.form.valid &&
+                    bookingRoom($event)"
+                    #f="ngForm"
+                    validate>
+
+                    <!-- checkInDate -->
+                    <div class="form-group infomation row">
+                        <div class="col-md-6">
+                            <label for="username">checkInDate <i
+                                    *ngIf="!form.checkInDate"
+                                    class="validate-form">*</i></label>
+                        </div>
+
+                        <input type="date" class="form-control"
+                            name="checkInDate"
+                            [(ngModel)]="form.checkInDate" required
+                            minlength="3" maxlength="20" #checkInDate="ngModel"
+                            [min]="minDate" (change)="checkin($event)" />
+                    </div>
+                    <!-- checkOutDate -->
+                    <div class="form-group infomation">
+                        <label for="firstName">checkOutDate <i
+                                *ngIf="!form.checkOutDate"
+                                class="validate-form">*</i></label>
+                        <input type="date" class="form-control"
+                            name="checkOutDate"
+                            [(ngModel)]="form.checkOutDate"
+                            required minlength="1" maxlength="20"
+                            #checkOutDate="ngModel" [min]="maxDate"
+                            (change)="checkout($event)" />
+
+                    </div>
+                    <!-- numOfGuest -->
+                    <div class="form-group infomation">
+                        <label for="lastName">numOfGuest <i
+                                *ngIf="!form.numOfGuest" class="validate-form">*</i></label>
+                        <input type="text" class="form-control"
+                            name="numOfGuest"
+                            [(ngModel)]="form.numOfGuest" required
+                            minlength="1" maxlength="20" #numOfGuest="ngModel"
+                            />
+                    </div>
+                    <!-- paymentMethod -->
+                    <div class="form-group infomation">
+                        <label for="payment">paymentMethod <i
+                                *ngIf="!form.paymentMethod"
+                                class="validate-form">*</i></label>
+
+                        <input type="text" class="form-control"
+                            name="paymentMethod"
+                            [(ngModel)]="form.paymentMethod" required
+                            minlength="8" maxlength="20"
+                            #paymentMethod="ngModel" placeholder="cash/paypal" /> 
+                    </div>               
+
+                                <!-- <button value="{{total}}" (click)="changepaymentMethod($event)" class="form-label" style="margin-left: 50px;">paypal</button>  -->
+               
+
+                    <!-- totalPrice -->
+                    <div class="form-group infomation" style="font-size: 20px;"><i
+                            class="price-total"> Price: </i>{{total}}</div>
+
+                    <div class="form-group infomation" style="display: none;">
+                        <label for="price">totalPrice</label>
+                        <input type="text" class="form-control"
+                            name="totalPrice"
+                            [(ngModel)]="form.totalPrice"
+                            [(ngModel)]="total" placeholder="{{total}}" />
+                    </div>
+
+                    <!-- roomId -->
+                    <div class="form-group infomation"
+                        style="display: none;">
+                        <label for="roomid">roomId</label>
+                        <input type="email" class="form-control" name="roomId"
+                            [(ngModel)]="form.roomId" [(ngModel)]="IDr" required
+                            value="{{IDr}}" placeholder="{{IDr}}" />
+
+                    </div>
+
+                    <!-- userId -->
+                    <div class="form-group infomation" *ngIf="user"
+                        style="display: none;">
+                        <label for="userid">userId</label>
+                        <input type="email" class="form-control" name="userId"
+                            [(ngModel)]="form.userId" [(ngModel)]="IDu" required
+                            value="{{IDu}}" placeholder="{{IDu}}"
+                            #userId="ngModel" />
+
+                    </div>
+
+
+                    <div class="form-group" style="margin-left: 33%;"
+                        *ngIf="!form.checkInDate || !form.checkOutDate
+                        ||!form.numOfGuest || !form.paymentMethod">
+                        <button class="btn btn-primary btn-block" type="submit"
+                            (click)="submit()">Submit</button>
+                        <div *ngIf="sub==true" style="color: red; font-size:
+                            18px;">Please complete all information </div>
+
+                    </div>
+                    <div class="form-group" style="margin-left: 33%;"
+                        *ngIf="form.checkInDate && form.checkOutDate
+                        &&form.numOfGuest && form.paymentMethod">
+
+                        <button class="btn btn-primary btn-block" type="submit"
+                            (click)="bookingRoom($event)">Submit</button>
+
+                    </div>
+
+                </form>
+            </div>
+        </div>
+        <div *ngIf="isLogin ==false && showErroLogin==true " class="loginFalse">
+            <div>You need to login before booking</div>
+            <div>--> Return for <a href="/login"> Login </a></div>
+        </div>
+        <div *ngIf="loader ==true" class="formloader">
+            <p>Please wait a few seconds, your request is being processed</p>
+            
+            <div class="loader">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+
+
+        <!-- form success -->
+        <div *ngIf="displaySuccess==true" class="success">
+            <!-- <i><img src="assets/images/tungtung.gif" alt=""></i> -->
+            <div class="suc"><button class="fa fa-check icon"></button>
+                Successfull</div>
+            <div style="margin-top: 10px;" title="click here to return
+                homepage">Return <a href="/home"> HomePage</a></div>
+        </div>
+    </div>
+</div>
+<app-footer></app-footer>

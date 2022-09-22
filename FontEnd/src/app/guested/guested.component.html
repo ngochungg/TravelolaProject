@@ -1,0 +1,45 @@
+<app-navbar></app-navbar>
+<div class="container">
+    <div class="row" style="margin-left: 15%;">
+        <div class="col-sm-12">
+            <h1 class="account-header">All guest</h1>
+            <table >
+              <thead >
+                <tr >
+                    <!-- <th>image</th> -->
+                  <th>id</th>
+                  <th>User</th>
+                  <th>Phone</th>
+                  <th>checkInDate</th>
+                  <th>checkOutDate</th>
+                  
+                  
+                  <th>totalPrice</th>
+                  <th>paymentMethod</th>
+                  <th>bookingCode</th>
+                  <th>qrCode</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let item of usersID">
+                    
+                  <td>{{ item.id }}</td>
+                  <td>{{ item.user.username }}</td>
+                  <td>{{ item.user.phone }}</td>
+                  <td>{{item.checkInDate}}</td>
+                  <td>{{ item.checkOutDate }}</td>
+                  
+                  
+                  <td>{{ item.totalPrice }}</td>
+                  <td>{{ item.paymentMethod }}</td>
+                  <td>{{ item.bookingCode }}</td>
+                  <td>
+                    <img [src]="'http://localhost:8080/api/auth/getImage/'+item.qrCode" alt="avata" class="img-fluid img-qrCode">
+                    
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+        </div>
+    </div>
+</div>

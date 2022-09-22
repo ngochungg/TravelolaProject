@@ -1,0 +1,92 @@
+<div class="container-fluid">
+    <app-slide></app-slide>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div style="font-weight: 400;text-align: center;font-size: 30px;
+                    font-family:Arial, Helvetica, sans-serif;margin-top: 50px;" *ngIf="room">
+                    All hotel in {{room[0].location.province.name}}</div>
+            </div>
+
+            <div class="col-sm-3 col4">
+                <img src="assets/images/avatar_hotline.png" alt="" class="img-hotline">
+
+                <div class="HOT">HOTLINE</div>
+                <div class="hotline">1900 6886</div>
+                <hr style="width: 100%;"><br><br>
+
+                <!-- search hotelName -->
+                <h4>Search by HotelName</h4>
+                <input class="form-control search" type="text" placeholder="Search HotelName" name="username"
+                    (keyup)="searchHotelName($event)">
+                <hr style="width: 100%;"><br><br>
+
+                <!-- search location -->
+                <h4>Search By District</h4>
+                <div class="form-group search">
+                    <select name="district" id="Districts" class="form-control" (change)="getLocation($event)"
+                        [(ngModel)]="district" [ngModelOptions]="{standalone: true}" required>
+                        <option value="">--District--</option>
+                        <option *ngFor="let d of provin" value="{{d.name}}">
+                            {{d.name}}
+                        </option>
+                    </select>
+
+                </div>
+                <hr style="width: 100%;"><br><br>
+
+
+
+
+            </div>
+
+
+            <div class="col-sm-8 col8" style="margin-left:2%">
+
+                <label class="lable" *ngFor="let item of room">
+                    <div>
+                        <p class="img">
+                            <img [src]="'http://localhost:8080/api/auth/getImage/'+
+                                item.images[0].imagePath" alt="avata" class="img-city">
+                            <!-- <h4> Image{{item.images[0].imagePath}}</h4> -->
+                        </p>
+                        <div class="in4">
+                        
+                            <h4> {{item.hotelName}}</h4>
+                            <h4 class="fa fa-map-marker"> Hotel location:
+                                {{item.location.district.name}},
+                                {{item.location.province.name}}</h4>
+                            <hr style="">
+                            <h4 class="services">Services:
+                                <h5 *ngIf="item.wifi ===true" class="services">.wifi</h5>
+                                <h5 *ngIf="item.freeParking ===true">.freeParking</h5>
+                                <h5 *ngIf="item.freeBreakfast ===true">.FreeBreakfast</h5>
+                                <h5 *ngIf="item.petsAllowed ===true">.petsAllowed</h5>
+                                <h5 *ngIf="item.hotTub ===true">.hotTub</h5>
+                                <h5 *ngIf="item.swimmingPool ===true">.swimmingPool</h5>
+                                <h5 *ngIf="item.gym ===true">.gym</h5>
+
+                            </h4>
+                            <!-- <h4 class="des"><h4 class="description"> {{item.description}}</h4></h4> -->
+                            <button class="btn btn-primary btn-book" (click)="bookrooms($event)"
+                                value="{{item.id}}">View
+                                Hotel</button>
+                        </div>
+                    </div>
+                </label>
+
+
+
+
+
+
+
+
+            </div>
+
+        </div>
+    </div>
+
+
+</div>
+<app-footer></app-footer>

@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        h1{
+            color: brown;
+        }
+        .quotation {
+            width: 100%;
+        }
+        .quotation, .quotation th, .quotation td {
+            border: 1px solid brown;
+            border-collapse: collapse;
+        }
+        .quotation th {
+            background-color: brown;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+<h1>Order Details</h1>
+<table>
+    <tr>
+        <th>User</th>
+    </tr>
+    <tr>
+        <td th:text="'First Name: ' + ${user.getFirstName()} + ' ' + ${user.getLastName()}"></td>
+    </tr>
+
+    <tr>
+        <td th:text="'Email: ' + ${user.getEmail()}"></td>
+    </tr>
+    <tr>
+        <td th:text="'Phone: ' + ${user.getPhone()}"></td>
+    </tr>
+</table>
+<br />
+<table class="quotation">
+    <tr>
+        <td>Booking Code</td>
+        <td th:text="${result.getBookingCode()}"></td>
+    </tr>
+    <tr>
+        <td>Check In</td>
+        <td th:text="${result.getCheckInDate()}"></td>
+    </tr>
+    <tr>
+        <td>Check Out</td>
+        <td th:text="${result.getCheckOutDate()}"></td>
+    </tr>
+    <tr>
+        <td>Num of Guest</td>
+        <td th:text="${result.getNumOfGuest()}"></td>
+    </tr>
+    <tr>
+        <td>Room Type</td>
+        <td th:text="${room.getRoomType()}"></td>
+    </tr>
+    <tr>
+        <td>Room Number</td>
+        <td th:text="${room.getRoomNumber()}"></td>
+    </tr>
+    <tr>
+        <td>Total Price</td>
+        <td th:text="${result.getTotalPrice()}"></td>
+    </tr>
+<!--    <tr>-->
+<!--        <td colspan="6" th:text="'Total: ' + ${total}"></td>-->
+<!--    </tr>-->
+</table>
+</body>
+</html>
